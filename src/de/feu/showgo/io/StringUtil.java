@@ -1,0 +1,25 @@
+package de.feu.showgo.io;
+
+public class StringUtil {
+
+	public static int countOccurrences(String haystack, char needle) {
+		int count = 0;
+		for (int i = 0; i < haystack.length(); i++) {
+			if (haystack.charAt(i) == needle) {
+				count++;
+			}
+		}
+		return count;
+	}
+	
+	/**
+	 * This method removes all HTML-tags and trims the string.
+	 * @return
+	 */
+	public static String sanitizeText(String input){
+		input = input.replaceAll("<.*?>", "");
+		input = input.trim();
+		return input;
+	}
+
+}
