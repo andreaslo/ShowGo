@@ -2,7 +2,9 @@ package de.feu.showgo.io;
 
 import java.util.ArrayList;
 import java.util.EmptyStackException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -208,15 +210,26 @@ public class PlayParser {
 			throw new ParsingException("Root element is not of type 'stueck'. Element: " + rootElement);
 		}
 		
+		Map<String, Role> roles = new HashMap<String, Role>();
+		
 		play.setName(rootElement.getText().trim());
 		for(ParseElement child : rootElement.getChildren()){
-			play.addAct(parseAct(child));
+			play.addAct(parseAct(child, roles));
 		}
+		
+		List<Role> rolesList;
+		if (roles.values() instanceof List){
+			rolesList = (List<Role>) roles.values();
+		}else{
+			rolesList = new ArrayList<Role>(roles.values());
+		}
+		play.setRoles(rolesList);
+		
 		
 		return play;
 	}
 	
-	private Act parseAct(ParseElement actElement) throws ParsingException{
+	private Act parseAct(ParseElement actElement, Map<String, Role> roles) throws ParsingException{
 		Act act = new Act();
 		
 		if(!"aufzug".equals(actElement.getTagName())){
@@ -226,14 +239,14 @@ public class PlayParser {
 		act.setName(StringUtil.sanitizeText(actElement.getText()));
 
 		for(ParseElement child : actElement.getChildren()){
-			act.addScene(parseScene(child));
+			act.addScene(parseScene(child, roles));
 		}
 		
 		
 		return act;
 	}
 	
-	private Scene parseScene(ParseElement sceneElement) throws ParsingException{
+	private Scene parseScene(ParseElement sceneElement, Map<String, Role> roles) throws ParsingException{
 		Scene scene = new Scene();
 		
 		if(!"szene".equals(sceneElement.getTagName())){
@@ -243,7 +256,7 @@ public class PlayParser {
 		scene.setName(StringUtil.sanitizeText(sceneElement.getText()));
 		Role lastRole = null; // A paragraph might not contain a role if it is not the first one, see discussion in newsgroup
 		for(ParseElement child : sceneElement.getChildren()){
-			Paragraph paragraph = parseParagraph(child, lastRole);
+			Paragraph paragraph = parseParagraph(child, lastRole, roles);
 			
 			if(paragraph instanceof Passage){
 				lastRole = ((Passage) paragraph).getRole();
@@ -255,7 +268,7 @@ public class PlayParser {
 		return scene;
 	}
 	
-	private Paragraph parseParagraph(ParseElement paragraphElement, Role lastRole) throws ParsingException{
+	private Paragraph parseParagraph(ParseElement paragraphElement, Role lastRole, Map<String, Role> roles) throws ParsingException{
 		if(!"regie".equals(paragraphElement.getTagName()) && !"passage".equals(paragraphElement.getTagName())){
 			throw new ParsingException("Paragraph element is not defined by a 'passage' or 'regie' tag name. Element: " + paragraphElement);
 		}
@@ -263,7 +276,7 @@ public class PlayParser {
 		if("regie".equals(paragraphElement.getTagName())){
 			return parseStageDirection(paragraphElement);
 		}else if("passage".equals(paragraphElement.getTagName())){
-			return parsePassage(paragraphElement, lastRole);
+			return parsePassage(paragraphElement, lastRole, roles);
 		}else{
 			// should definitely not happen
 			return null;
@@ -282,7 +295,7 @@ public class PlayParser {
 		return stageDirection;
 	}
 	
-	private Passage parsePassage(ParseElement passageElement, Role lastRole) throws ParsingException{
+	private Passage parsePassage(ParseElement passageElement, Role lastRole, Map<String, Role> roles) throws ParsingException{
 		Passage passage = new Passage();
 		if(!"passage".equals(passageElement.getTagName())){
 			throw new ParsingException("Passage element is not defined by a 'passage' tag name. Element: " + passageElement);
@@ -299,12 +312,19 @@ public class PlayParser {
 			
 			passage.setRole(lastRole);
 		}else{
-			passage.setRole(parseRole(passageElement.getChildren().get(0)));			
+			Role newRole = parseRole(passageElement.getChildren().get(0));
+			
+			if(!roles.containsKey(newRole.getName())){
+				roles.put(newRole.getName(), newRole);
+			}
+			
+			passage.setRole(roles.get(newRole.getName()));
 		}
 		
 		
 		return passage;
 	}
+	
 	
 	private Role parseRole(ParseElement roleElement) throws ParsingException{
 		Role role = new Role();
@@ -312,7 +332,9 @@ public class PlayParser {
 			throw new ParsingException("Role element is not defined by a 'rolle' tag name. Element: " + roleElement);
 		}
 		
-		role.setName(roleElement.getText());
+		String roleName = StringUtil.sanitizeRoleName(roleElement.getText());
+		
+		role.setName(roleName);
 		
 		return role;
 	}

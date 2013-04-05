@@ -22,4 +22,12 @@ public class StringUtil {
 		return input;
 	}
 
+	public static String sanitizeRoleName(String text) {
+		text = text.trim();
+		if(text.endsWith(".")){
+			return text.substring(0, text.length()-1);
+		}
+		return text;
+	}
+
 }

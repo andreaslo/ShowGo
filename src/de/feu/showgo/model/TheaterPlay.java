@@ -6,6 +6,7 @@ import java.util.List;
 public class TheaterPlay {
 
 	private String name;
+	private List<Role> roles;
 	private List<Act> acts = new ArrayList<Act>();
 	
 	public String getName() {
@@ -22,9 +23,20 @@ public class TheaterPlay {
 	}
 	
 	
+
 	@Override
 	public String toString() {
-		return "TheaterPlay [name=" + name + ", acts=" + acts + "]";
+		return "TheaterPlay [name=" + name + ", roles=" + roles + ", acts="
+				+ acts + "]";
 	}
+	
+	public List<Role> getRoles() {
+		return roles;
+	}
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+	
+	
 	
 }
