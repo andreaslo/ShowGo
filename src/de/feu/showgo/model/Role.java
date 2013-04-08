@@ -1,10 +1,18 @@
 package de.feu.showgo.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlID;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Role {
 
+	@XmlAttribute
+    @XmlID
 	private String name;
 	
-
+	
 	public String getName() {
 		return name;
 	}

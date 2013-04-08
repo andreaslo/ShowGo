@@ -3,9 +3,22 @@ package de.feu.showgo.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlElements;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Scene {
 
+	@XmlElement(name="name")
 	private String name;
+
+	@XmlElementWrapper( name = "paragraph" )
+	@XmlElements( { 
+	@XmlElement( name="stageDirection", type = StageDirection.class ),
+	@XmlElement( name="passage", type = Passage.class) } )
 	private List<Paragraph> paragraphs = new ArrayList<Paragraph>();
 	
 	
