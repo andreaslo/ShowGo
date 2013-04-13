@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.feu.showgo.ShowGo;
+import de.feu.showgo.Main;
 import de.feu.showgo.model.ParseResult;
 
 public class PlayParserValidationTest {

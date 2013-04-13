@@ -47,30 +47,30 @@ public class PlayParserGenerationTest {
 
 	}
 	
-//	@Test
-//	public void testMacBeth(){
-//
-//		String testData;
-//		try {
-//			testData = FileUtil.readFile(new File("testData" + System.getProperty("file.separator") + "Macbeth.html"));
-//			ParseElement root = parser.parse(testData);
-//			TheaterPlay play = parser.generatePlay(root);
-//			
-//			log.debug("done parsing");
-//			log.debug(play.toString());
-//			log.debug("done printing");
-//			
-//			assertEquals(play.getName(), "Macbeth");
-//			assertEquals(play.getActs().size(), 5);
-//			
-//		} catch (IOException e) {
-//			log.error("",e);
-//			fail();
-//		} catch (ParsingException e) {
-//			log.error("",e);
-//			fail();
-//		}
-//
-//	}
+	@Test
+	public void testMacBeth(){
+
+		String testData;
+		try {
+			testData = FileUtil.readFile(new File("testData" + System.getProperty("file.separator") + "Macbeth.html"));
+			ParseElement root = parser.parse(testData);
+			TheaterPlay play = parser.generatePlay(root);
+			
+			log.debug("done parsing");
+			log.debug(play.toString());
+			log.debug("done printing");
+			
+			assertEquals(play.getName(), "Macbeth");
+			assertEquals(play.getActs().size(), 5);
+			
+		} catch (IOException e) {
+			log.error("",e);
+			fail();
+		} catch (ParsingException e) {
+			log.error("",e);
+			fail();
+		}
+
+	}
 	
 }

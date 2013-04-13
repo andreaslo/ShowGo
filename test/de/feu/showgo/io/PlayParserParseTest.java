@@ -31,17 +31,24 @@ public class PlayParserParseTest {
 			log.debug(result.toString());
 		} catch (IOException e) {
 			log.error("",e);
+		} catch (ParsingException e) {
+			e.printStackTrace();
 		}
 	}
 	
 	@Test
 	public void simpleParsingTest(){
 		String testData = 	"<!--passage-->erster text <!--rolle-->1. HEXE.<!--rolle-->2. HEXE.<!--/rolle--><!--/rolle-->weiterer text <!--rolle-->1. HEXE.<!--/rolle--> letzer text in passage<!--/passage-->";
-		ParseElement result = parser.parse(testData);
+		ParseElement result;
+		try {
+			result = parser.parse(testData);
+			log.debug(result.toString());
+		} catch (ParsingException e) {
+			e.printStackTrace();
+		}
 		
-		log.debug(result.toString());
 		
-		fail();
+		
 	
 	}
 

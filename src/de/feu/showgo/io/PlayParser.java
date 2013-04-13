@@ -1,5 +1,7 @@
 package de.feu.showgo.io;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.HashMap;
@@ -97,10 +99,11 @@ public class PlayParser {
 		return result;
 	}
 
-	public ParseElement parse(String play) {
-		//TODO: validate
-		
-		//log.trace("parsing " + play);
+	public ParseElement parse(String play) throws ParsingException {
+		ParseResult parseResult = validate(play);
+		if(!parseResult.isValid()){
+			throw new ParsingException(parseResult.toString());
+		}
 		
 		ParseElement thisElement = new ParseElement();
 		Pattern elementPattern = Pattern.compile("<!--(.*?)-->(.*)<!--/\\1-->", Pattern.DOTALL);
@@ -201,6 +204,11 @@ public class PlayParser {
 		}
 		
 		return output;
+	}
+	
+	public TheaterPlay generatePlay(File inputFile) throws IOException, ParsingException{
+		String input = FileUtil.readFile(inputFile);
+		return generatePlay(parse(input));
 	}
 	
 	public TheaterPlay generatePlay(ParseElement rootElement) throws ParsingException{

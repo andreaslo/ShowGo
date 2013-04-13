@@ -31,8 +31,6 @@ public class TheaterPlay {
 	public void addAct(Act act) {
 		acts.add(act);
 	}
-	
-	
 
 	@Override
 	public String toString() {
@@ -46,7 +44,41 @@ public class TheaterPlay {
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
-	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((acts == null) ? 0 : acts.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((roles == null) ? 0 : roles.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TheaterPlay other = (TheaterPlay) obj;
+		if (acts == null) {
+			if (other.acts != null)
+				return false;
+		} else if (!acts.equals(other.acts))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (roles == null) {
+			if (other.roles != null)
+				return false;
+		} else if (!roles.equals(other.roles))
+			return false;
+		return true;
+	}	
 	
 	
 }

@@ -32,6 +32,34 @@ public class Act {
 	public String toString() {
 		return "Act [name=" + name + ", scenes=" + scenes + "]\n";
 	}
-	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((scenes == null) ? 0 : scenes.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Act other = (Act) obj;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (scenes == null) {
+			if (other.scenes != null)
+				return false;
+		} else if (!scenes.equals(other.scenes))
+			return false;
+		return true;
+	}	
 	
 }
