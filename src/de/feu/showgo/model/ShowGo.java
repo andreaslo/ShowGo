@@ -14,6 +14,8 @@ public class ShowGo {
 
 	public void addPerson(Person person) {
 		persons.add(person);
+		
+		System.out.println("person added, list length: " + persons.size());
 	}
 	
 	

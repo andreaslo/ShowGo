@@ -14,7 +14,6 @@ import de.feu.showgo.ui.MainWindow;
 public class Main {
 
 	private static final Logger log = Logger.getLogger(Main.class);
-	private static ShowGo showGo = new ShowGo();
 	
 	public static void main(String[] args) {
 
@@ -26,14 +25,6 @@ public class Main {
 
 		MainWindow window = new MainWindow();
 		window.init();
-	}
-
-	public static ShowGo getShowGo() {
-		return showGo;
-	}
-
-	public static void setShowGo(ShowGo showGo) {
-		Main.showGo = showGo;
 	}
 
 	
