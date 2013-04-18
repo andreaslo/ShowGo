@@ -19,7 +19,7 @@ public class NavTree {
 
 	private JTree tree;
 	private MainWindow mainWindow;
-	private PersonTreeNode personTreeNode;
+	private PersonManagementTreeNode personTreeNode;
 	
 	public NavTree(MainWindow mainWindow){
 		this.mainWindow = mainWindow;
@@ -31,7 +31,7 @@ public class NavTree {
 		
 		DefaultMutableTreeNode coreData = new DefaultMutableTreeNode("Stammdaten");
 		DefaultMutableTreeNode plays = new PlayTreeNode("Stücke", mainWindow);
-		personTreeNode = new PersonTreeNode("Personen", mainWindow);
+		personTreeNode = new PersonManagementTreeNode("Personen", mainWindow);
 		coreData.add(plays);
 		coreData.add(personTreeNode);
 		root.add(coreData);
@@ -77,6 +77,7 @@ public class NavTree {
 		};
 		
 		tree.addMouseListener(ma);
+		tree.expandRow(0);
 		
 		return tree;
 	}
@@ -97,7 +98,7 @@ public class NavTree {
 		
 		personTreeNode.removeAllChildren();
 		for(Person person : persons){
-			personTreeNode.add(new DefaultMutableTreeNode(person));
+			personTreeNode.add(new PersonNode(person, mainWindow));
 			System.out.println("Adding node, childs: " + personTreeNode.getChildCount());
 		}
 		

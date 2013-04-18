@@ -25,7 +25,7 @@ import de.feu.showgo.model.Person;
 import de.feu.showgo.ui.MainWindow;
 import de.feu.showgo.ui.WindowColors;
 
-public class CreatePersonView extends JPanel implements ActionListener {
+public class PersonManagementView extends JPanel implements ActionListener {
 
 	private JTextField nameInput;
 	private JTextField wordRetentionInput;
@@ -35,18 +35,41 @@ public class CreatePersonView extends JPanel implements ActionListener {
 	private JButton saveButton;
 	private JButton createAnotherButton;
 	private JLabel currentMessage;
+	private Person model;
 	
-	private final static Logger log = Logger.getLogger(CreatePersonView.class);
+	private final static Logger log = Logger.getLogger(PersonManagementView.class);
 	
-	public CreatePersonView(MainWindow mainWindow) {
-		log.debug("showing createPerson View");
+	public PersonManagementView(MainWindow mainWindow) {
+		log.debug("showing create person view");
 		this.mainWindow = mainWindow;
+		this.setName("Person anlegen");
+		this.model = null;
 		createComponent();
 	}
 	
-	private void createComponent(){
-		this.setName("Person anlegen");
+	public PersonManagementView(MainWindow mainWindow, Person person) {
+		log.debug("showing edit person view");
+		this.mainWindow = mainWindow;
+		this.setName(person.getName() + " bearbeiten");
+		this.model = person;
+		createComponent();
 		
+		nameInput.setText(person.getName());
+		birthdayInput.setDate(person.getBirthday());
+		if(person.getGender() == Person.Gender.MALE){
+			log.debug("male");
+			genderSelect.setSelectedIndex(0);
+		}else if(person.getGender() == Person.Gender.FEMALE){
+			log.debug("female");
+			genderSelect.setSelectedIndex(1);
+		}else{
+			log.error("unknown gender");
+		}
+		wordRetentionInput.setText(person.getWordsRetention()+"");
+		
+	}
+
+	private void createComponent(){		
 	    double size[][] = {{20,150,20,TableLayout.FILL,20},
 	             		{20,30,10,TableLayout.PREFERRED,10,30,10,30,10,30,10,30}};
 	    this.setLayout (new TableLayout(size));
@@ -129,36 +152,59 @@ public class CreatePersonView extends JPanel implements ActionListener {
 
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
+	private boolean valid(){
 		if("".equals(nameInput.getText())){
 			log.debug("no username");
 			nameInput.setBackground(WindowColors.ERROR);
 			showMessage("Bitte geben Sie einen Namen an.", WindowColors.ERROR);
-			return;
+			return false;
 		}
 		if("".equals(wordRetentionInput.getText())){
 			log.debug("no word retention");
 			wordRetentionInput.setBackground(WindowColors.ERROR);
 			showMessage("Bitte geben Sie an, wie viele Wörter sich die Person merken kann.", WindowColors.ERROR);
-			return;
+			return false;
 		}
 
-		int words = 0;
 		try{
-			words = Integer.parseInt(wordRetentionInput.getText());
+			int words = Integer.parseInt(wordRetentionInput.getText());
 		}catch(NumberFormatException notUsed){
 			log.debug("word input not a number");
 			wordRetentionInput.setBackground(WindowColors.ERROR);
 			showMessage("Bitte geben Sie als Zahl an, wie viele Wörter sich die Person merken kann.", WindowColors.ERROR);
+			return false;
+		}
+		
+		return true;
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(!valid()){
 			return;
 		}
 		
+		if(model == null){
+			log.debug("creating new user");
+			model = new Person();
+			ShowGoDAO.getShowGo().addPerson(model);
+			fillPerson(model);
+			disableInput();
+			this.add(createAnotherButton, "3,9,l,c");
+			showMessage("Der Benutzer " + model.getName() + " wurde erfolgreich angelegt.", WindowColors.SUCCESS);
+		}else{
+			log.debug("modifying user");
+			fillPerson(model);
+			showMessage("Der Benutzer " + model.getName() + " wurde erfolgreich aktualisiert.", WindowColors.SUCCESS);
+		}
 		
-		Person newPerson = new Person();
+		mainWindow.getNavTree().refreshPersons();
+	}
+	
+	private void fillPerson(Person newPerson){
 		newPerson.setName(nameInput.getText());
 		newPerson.setBirthday(birthdayInput.getDate());
-		newPerson.setWordsRetention(words);
+		newPerson.setWordsRetention(Integer.valueOf(wordRetentionInput.getText()));
 		if(genderSelect.getSelectedIndex() == 0){
 			newPerson.setGender(Person.Gender.MALE);
 		}else if(genderSelect.getSelectedIndex() == 1){
@@ -166,16 +212,6 @@ public class CreatePersonView extends JPanel implements ActionListener {
 		}else{
 			log.error("Unknown gender selected");
 		}
-		log.info("Created new user: " + newPerson);
-		
-		disableInput();
-
-		ShowGoDAO.getShowGo().addPerson(newPerson);
-		mainWindow.getNavTree().refreshPersons();
-		
-		this.add(createAnotherButton, "3,9,l,c");
-		showMessage("Der Benutzer " + newPerson.getName() + " wurde erfolgreich angelegt.", WindowColors.SUCCESS);
-
 	}
 	
 	private void showMessage(String message, Color background){

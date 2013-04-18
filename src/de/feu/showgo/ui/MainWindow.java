@@ -10,10 +10,11 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
+import de.feu.showgo.model.Person;
 import de.feu.showgo.ui.actions.ShowCreatePersonAction;
 import de.feu.showgo.ui.actions.ShowReadPlayAction;
 import de.feu.showgo.ui.tree.NavTree;
-import de.feu.showgo.ui.views.CreatePersonView;
+import de.feu.showgo.ui.views.PersonManagementView;
 import de.feu.showgo.ui.views.ReadPlayView;
 import de.feu.showgo.ui.views.StartupView;
 
@@ -88,7 +89,11 @@ public class MainWindow extends JFrame {
 	}
 	
 	public void showCreatePersonView(){
-		displayView(new CreatePersonView(this));
+		displayView(new PersonManagementView(this));
+	}
+	
+	public void showEditPerson(Person person){
+		displayView(new PersonManagementView(this, person));
 	}
 	
 	public void showReadPlayView(){

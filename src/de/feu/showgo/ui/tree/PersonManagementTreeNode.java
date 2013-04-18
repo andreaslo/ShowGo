@@ -10,11 +10,11 @@ import de.feu.showgo.ui.MainWindow;
 import de.feu.showgo.ui.actions.ShowCreatePersonAction;
 
 
-public class PersonTreeNode extends TreeElement{
+public class PersonManagementTreeNode extends TreeElement{
 
 	private MainWindow mainWindow;
 	
-	public PersonTreeNode(Object customObject, MainWindow mainWindow) {
+	public PersonManagementTreeNode(Object customObject, MainWindow mainWindow) {
 		super(customObject);
 		this.mainWindow = mainWindow;
 	}
