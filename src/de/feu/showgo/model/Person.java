@@ -11,7 +11,7 @@ public class Person {
 	private String name;
 	private Date birthday;
 	private Gender gender;
-	
+	private int wordsRetention;
 	
 	public String getName() {
 		return name;
@@ -34,7 +34,13 @@ public class Person {
 	@Override
 	public String toString() {
 		return "Person [name=" + name + ", birthday=" + birthday + ", gender="
-				+ gender + "]";
+				+ gender + ", wordsRetention=" + wordsRetention + "]";
+	}
+	public int getWordsRetention() {
+		return wordsRetention;
+	}
+	public void setWordsRetention(int wordsRetention) {
+		this.wordsRetention = wordsRetention;
 	}
 	
 	
