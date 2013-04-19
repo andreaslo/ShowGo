@@ -22,25 +22,23 @@ public class MainWindow extends JFrame {
 
 	private JPanel currentView;
 	private NavTree navTree;
-	
+
 	public MainWindow() {
 
 	}
 
 	public void init() {
-		
+
 		navTree = new NavTree(this);
-		
+
 		this.setSize(1000, 600);
 		this.setLocationByPlatform(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("ShowGo - Andreas Lösche / 8614989");
 		this.setJMenuBar(createMenu());
 
-		
-	    double size[][] = {{10,350,10,TableLayout.FILL,10},
-         		{10,TableLayout.FILL,10}};
-	    this.setLayout (new TableLayout(size));
+		double size[][] = { { 10, 350, 10, TableLayout.FILL, 10 }, { 10, TableLayout.FILL, 10 } };
+		this.setLayout(new TableLayout(size));
 
 		this.add(navTree.getTree(), "1,1");
 
@@ -48,8 +46,6 @@ public class MainWindow extends JFrame {
 
 		this.setVisible(true);
 	}
-
-	
 
 	private JMenuBar createMenu() {
 		JMenu fileMenu = new JMenu("Datei");
@@ -63,23 +59,21 @@ public class MainWindow extends JFrame {
 		readPlay.addActionListener(new ShowReadPlayAction(this));
 		actionMenu.add(addPerson);
 		actionMenu.add(readPlay);
-		
-		
+
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.add(fileMenu);
 		menuBar.add(actionMenu);
 
 		return menuBar;
 	}
-	
+
 	public void displayView(JPanel newView) {
-		if(currentView != null){
+		if (currentView != null) {
 			this.remove(currentView);
 		}
 		currentView = newView;
 
-		TitledBorder titledBorder = BorderFactory.createTitledBorder(
-				BorderFactory.createLoweredBevelBorder(), currentView.getName());
+		TitledBorder titledBorder = BorderFactory.createTitledBorder(BorderFactory.createLoweredBevelBorder(), currentView.getName());
 		titledBorder.setTitlePosition(TitledBorder.ABOVE_TOP);
 
 		currentView.setBorder(titledBorder);
@@ -87,16 +81,16 @@ public class MainWindow extends JFrame {
 		this.validate();
 		this.repaint();
 	}
-	
-	public void showCreatePersonView(){
+
+	public void showCreatePersonView() {
 		displayView(new PersonManagementView(this));
 	}
-	
-	public void showEditPerson(Person person){
+
+	public void showEditPerson(Person person) {
 		displayView(new PersonManagementView(this, person));
 	}
-	
-	public void showReadPlayView(){
+
+	public void showReadPlayView() {
 		System.out.println("read play");
 		displayView(new ReadPlayView());
 	}
@@ -105,6 +99,13 @@ public class MainWindow extends JFrame {
 		return navTree;
 	}
 
+	public JPanel getCurrentView() {
+		return currentView;
+	}
+
 	
-	
+	public void showStartupView(){
+		displayView(new StartupView());
+	}
+
 }

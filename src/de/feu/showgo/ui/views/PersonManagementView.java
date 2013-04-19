@@ -243,5 +243,15 @@ public class PersonManagementView extends JPanel implements ActionListener {
 		saveButton.setEnabled(false);
 		wordRetentionInput.setEnabled(false);
 	}
+
+	public Person getModel() {
+		return model;
+	}
+
+	public void setModel(Person model) {
+		this.model = model;
+	}
+	
+	
 	
 }

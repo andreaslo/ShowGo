@@ -11,6 +11,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
+import org.apache.log4j.Logger;
+
 import de.feu.showgo.ShowGoDAO;
 import de.feu.showgo.model.Person;
 import de.feu.showgo.ui.MainWindow;
@@ -20,6 +22,7 @@ public class NavTree {
 	private JTree tree;
 	private MainWindow mainWindow;
 	private PersonManagementTreeNode personTreeNode;
+	private Logger log = Logger.getLogger(NavTree.class);
 	
 	public NavTree(MainWindow mainWindow){
 		this.mainWindow = mainWindow;
@@ -99,7 +102,7 @@ public class NavTree {
 		personTreeNode.removeAllChildren();
 		for(Person person : persons){
 			personTreeNode.add(new PersonNode(person, mainWindow));
-			System.out.println("Adding node, childs: " + personTreeNode.getChildCount());
+			log.debug("Adding node, childs: " + personTreeNode.getChildCount());
 		}
 		
 	    DefaultTreeModel dtm = (DefaultTreeModel) tree.getModel();  
