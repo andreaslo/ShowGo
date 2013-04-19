@@ -49,7 +49,15 @@ public class MainWindow extends JFrame {
 
 	private JMenuBar createMenu() {
 		JMenu fileMenu = new JMenu("Datei");
+		JMenuItem newTheater = new JMenuItem("Neues Theater");
+		JMenuItem load = new JMenuItem("Laden");
+		JMenuItem save = new JMenuItem("Speichern");
 		JMenuItem close = new JMenuItem("Schließen");
+		fileMenu.add(newTheater);
+		fileMenu.add(load);
+		fileMenu.addSeparator();
+		fileMenu.add(save);
+		fileMenu.addSeparator();
 		fileMenu.add(close);
 
 		JMenu actionMenu = new JMenu("Aktionen");

@@ -4,10 +4,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.apache.log4j.Logger;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ShowGo {
 
+	@XmlElement(name="person")
 	private List<Person> persons = new ArrayList<Person>();
 	
 	private final static Logger log = Logger.getLogger(ShowGo.class);
@@ -28,6 +36,31 @@ public class ShowGo {
 		}else{
 			log.warn("could not delte user " + person.getName());
 		}
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((persons == null) ? 0 : persons.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ShowGo other = (ShowGo) obj;
+		if (persons == null) {
+			if (other.persons != null)
+				return false;
+		} else if (!persons.equals(other.persons))
+			return false;
+		return true;
 	}
 	
 	
