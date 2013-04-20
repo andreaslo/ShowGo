@@ -3,12 +3,8 @@ package de.feu.showgo.ui.actions;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
 
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.bind.JAXBException;
 
 import org.apache.log4j.Logger;
@@ -18,7 +14,7 @@ import de.feu.showgo.ui.MainWindow;
 import de.feu.showgo.ui.dialogs.ShowGoFileChooser;
 
 public class SaveAsAction implements ActionListener {
-	private final static Logger log = Logger.getLogger(SaveShowGoAction.class);
+	private final static Logger log = Logger.getLogger(SaveAsAction.class);
 	private MainWindow mainWindow;
 
 	public SaveAsAction(MainWindow mainWindow) {

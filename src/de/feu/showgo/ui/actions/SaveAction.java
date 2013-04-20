@@ -17,12 +17,12 @@ import de.feu.showgo.ShowGoDAO;
 import de.feu.showgo.ui.MainWindow;
 import de.feu.showgo.ui.dialogs.ShowGoFileChooser;
 
-public class SaveShowGoAction implements ActionListener {
+public class SaveAction implements ActionListener {
 
-	private final static Logger log = Logger.getLogger(SaveShowGoAction.class);
+	private final static Logger log = Logger.getLogger(SaveAction.class);
 	private MainWindow mainWindow;
 
-	public SaveShowGoAction(MainWindow mainWindow) {
+	public SaveAction(MainWindow mainWindow) {
 		this.mainWindow = mainWindow;
 	}
 

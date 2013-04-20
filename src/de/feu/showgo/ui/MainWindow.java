@@ -12,7 +12,7 @@ import javax.swing.border.TitledBorder;
 
 import de.feu.showgo.model.Person;
 import de.feu.showgo.ui.actions.SaveAsAction;
-import de.feu.showgo.ui.actions.SaveShowGoAction;
+import de.feu.showgo.ui.actions.SaveAction;
 import de.feu.showgo.ui.actions.ShowCreatePersonAction;
 import de.feu.showgo.ui.actions.ShowReadPlayAction;
 import de.feu.showgo.ui.tree.NavTree;
@@ -54,7 +54,7 @@ public class MainWindow extends JFrame {
 		JMenuItem newTheater = new JMenuItem("Neues Theater");
 		JMenuItem load = new JMenuItem("Laden");
 		JMenuItem save = new JMenuItem("Speichern");
-		save.addActionListener(new SaveShowGoAction(this));
+		save.addActionListener(new SaveAction(this));
 		JMenuItem saveAs = new JMenuItem("Speichern unter");
 		saveAs.addActionListener(new SaveAsAction(this));
 		JMenuItem close = new JMenuItem("Schließen");
