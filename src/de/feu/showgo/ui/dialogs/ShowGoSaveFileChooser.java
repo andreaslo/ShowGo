@@ -17,7 +17,7 @@ import de.feu.showgo.ui.actions.SaveAction;
 
 public class ShowGoSaveFileChooser {
 
-	private final static Logger log = Logger.getLogger(SaveAction.class);
+	private final static Logger log = Logger.getLogger(ShowGoSaveFileChooser.class);
 	private MainWindow mainWindow;
 	private JFileChooser fc;
 	private File selectedFile;
