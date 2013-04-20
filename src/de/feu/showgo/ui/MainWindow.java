@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 import de.feu.showgo.model.Person;
+import de.feu.showgo.ui.actions.NewAction;
 import de.feu.showgo.ui.actions.SaveAsAction;
 import de.feu.showgo.ui.actions.SaveAction;
 import de.feu.showgo.ui.actions.ShowCreatePersonAction;
@@ -54,6 +55,7 @@ public class MainWindow extends JFrame {
 	private JMenuBar createMenu() {
 		JMenu fileMenu = new JMenu("Datei");
 		JMenuItem newTheater = new JMenuItem("Neues Theater");
+		newTheater.addActionListener(new NewAction(this));
 		JMenuItem load = new JMenuItem("Laden");
 		JMenuItem save = new JMenuItem("Speichern");
 		save.addActionListener(new SaveAction(this));
