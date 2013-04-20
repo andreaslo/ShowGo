@@ -129,7 +129,11 @@ public class MainWindow extends JFrame {
 	 * @param filename
 	 */
 	public void setTitleFilename(String filename){
-		this.setTitle(TITLE + " - " + filename);
+		if(filename == null){
+			setTitle(TITLE);
+		}else{
+			setTitle(TITLE + " - " + filename);
+		}
 	}
 	
 }
