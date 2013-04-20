@@ -15,7 +15,7 @@ import de.feu.showgo.ShowGoDAO;
 import de.feu.showgo.ui.MainWindow;
 import de.feu.showgo.ui.actions.SaveAction;
 
-public class ShowGoFileChooser {
+public class ShowGoSaveFileChooser {
 
 	private final static Logger log = Logger.getLogger(SaveAction.class);
 	private MainWindow mainWindow;
@@ -23,7 +23,7 @@ public class ShowGoFileChooser {
 	private File selectedFile;
 	private boolean approved;
 	
-	public ShowGoFileChooser(MainWindow mainWindow){
+	public ShowGoSaveFileChooser(MainWindow mainWindow){
 		this.mainWindow = mainWindow;
 		fc = new JFileChooser() {
 			@Override
@@ -73,7 +73,6 @@ public class ShowGoFileChooser {
 				}
 
 				log.debug("Saving: " + file.getCanonicalPath());
-
 				this.selectedFile = file;
 				this.approved = true;
 			} catch (IOException e) {

@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
 
 import de.feu.showgo.ShowGoDAO;
 import de.feu.showgo.ui.MainWindow;
-import de.feu.showgo.ui.dialogs.ShowGoFileChooser;
+import de.feu.showgo.ui.dialogs.ShowGoSaveFileChooser;
 
 public class SaveAction implements ActionListener {
 
@@ -29,7 +29,7 @@ public class SaveAction implements ActionListener {
 		
 		if(ShowGoDAO.getSaveFile() == null){
 			// Ask user to select a file
-			ShowGoFileChooser fileChooser = new ShowGoFileChooser(mainWindow);
+			ShowGoSaveFileChooser fileChooser = new ShowGoSaveFileChooser(mainWindow);
 			fileChooser.showDialog();
 			if (fileChooser.isApproved()) {
 				target = fileChooser.getSelectedFile();
