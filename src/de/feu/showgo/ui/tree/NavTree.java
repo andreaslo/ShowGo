@@ -114,6 +114,8 @@ public class NavTree {
 		tree.expandRow(personTreeNode.getLevel());
 	}
 	
-	
+	public void refreshTree(){
+		refreshPersons();
+	}
 	
 }
