@@ -27,7 +27,5 @@ public class ShowGoIO {
 	public static ShowGo loadShowGo(File location){
 		return JAXB.unmarshal(location, ShowGo.class);
 	}
-
-
 	
 }

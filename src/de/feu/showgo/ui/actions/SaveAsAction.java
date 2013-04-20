@@ -16,12 +16,11 @@ import org.apache.log4j.Logger;
 import de.feu.showgo.ShowGoDAO;
 import de.feu.showgo.ui.MainWindow;
 
-public class SaveShowGoAction implements ActionListener {
-
+public class SaveAsAction implements ActionListener {
 	private final static Logger log = Logger.getLogger(SaveShowGoAction.class);
 	private MainWindow mainWindow;
 
-	public SaveShowGoAction(MainWindow mainWindow) {
+	public SaveAsAction(MainWindow mainWindow) {
 		this.mainWindow = mainWindow;
 	}
 
