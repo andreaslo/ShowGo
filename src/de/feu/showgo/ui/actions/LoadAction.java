@@ -2,12 +2,13 @@ package de.feu.showgo.ui.actions;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.JOptionPane;
+import java.io.File;
 
 import de.feu.showgo.ShowGoDAO;
+import de.feu.showgo.io.ShowGoIO;
 import de.feu.showgo.model.ShowGo;
 import de.feu.showgo.ui.MainWindow;
+import de.feu.showgo.ui.dialogs.ShowGoLoadFile;
 
 public class LoadAction implements ActionListener {
 
@@ -20,19 +21,21 @@ public class LoadAction implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		int result = JOptionPane.showConfirmDialog(mainWindow,
-				"Sind Sie sicher, dass Sie ein neues Theater anlegen wollen? Alle nicht gespeicherten Daten gehen verloren.", "Neues Theater",
-				JOptionPane.YES_NO_OPTION);
-		if (result == JOptionPane.YES_OPTION) {
+		ShowGoLoadFile dialog = new ShowGoLoadFile(mainWindow);
+		dialog.showDialog();
+		File selectedFile = dialog.getSelectedFile();
+		
+		if(dialog.isApproved()){
+			ShowGo loaded = ShowGoIO.loadShowGo(selectedFile);
 			
+			ShowGoDAO.setShowGo(loaded);
+			ShowGoDAO.setSaveFile(selectedFile);
+			mainWindow.setTitleFilename(selectedFile.getName());
+			mainWindow.getNavTree().refreshTree();
+			mainWindow.showStartupView();
 		}
 		
-		
-		ShowGoDAO.setShowGo(new ShowGo());
-		ShowGoDAO.setSaveFile(null);
-		mainWindow.setTitleFilename(null);
-		mainWindow.getNavTree().refreshTree();
-		mainWindow.showStartupView();
+
 	}
 
 
