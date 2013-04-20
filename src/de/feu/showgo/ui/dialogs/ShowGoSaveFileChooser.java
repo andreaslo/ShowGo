@@ -7,13 +7,10 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.xml.bind.JAXBException;
 
 import org.apache.log4j.Logger;
 
-import de.feu.showgo.ShowGoDAO;
 import de.feu.showgo.ui.MainWindow;
-import de.feu.showgo.ui.actions.SaveAction;
 
 public class ShowGoSaveFileChooser {
 
