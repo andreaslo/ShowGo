@@ -22,6 +22,8 @@ import de.feu.showgo.ui.views.StartupView;
 
 public class MainWindow extends JFrame {
 
+	private final static String TITLE = "ShowGo - Andreas Lösche / 8614989";
+
 	private JPanel currentView;
 	private NavTree navTree;
 
@@ -36,7 +38,7 @@ public class MainWindow extends JFrame {
 		this.setSize(1000, 600);
 		this.setLocationByPlatform(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setTitle("ShowGo - Andreas Lösche / 8614989");
+		this.setTitle(TITLE);
 		this.setJMenuBar(createMenu());
 
 		double size[][] = { { 10, 350, 10, TableLayout.FILL, 10 }, { 10, TableLayout.FILL, 10 } };
@@ -122,4 +124,12 @@ public class MainWindow extends JFrame {
 		displayView(new StartupView());
 	}
 
+	/**
+	 * Displays the current save file in the title bar.
+	 * @param filename
+	 */
+	public void setTitleFilename(String filename){
+		this.setTitle(TITLE + " - " + filename);
+	}
+	
 }

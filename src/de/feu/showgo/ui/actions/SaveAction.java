@@ -52,5 +52,6 @@ public class SaveAction implements ActionListener {
 					JOptionPane.ERROR_MESSAGE);
 		}
 		ShowGoDAO.setSaveFile(file);
+		mainWindow.setTitleFilename(file.getName());
 	}
 }
