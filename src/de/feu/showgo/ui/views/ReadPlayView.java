@@ -8,7 +8,10 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -19,11 +22,12 @@ import org.apache.log4j.Logger;
 
 import de.feu.showgo.io.ParsingException;
 import de.feu.showgo.io.PlayParser;
+import de.feu.showgo.model.Role;
 import de.feu.showgo.model.TheaterPlay;
 import de.feu.showgo.ui.MainWindow;
 
 public class ReadPlayView extends JPanel {
-	
+
 	private TheaterPlay model;
 	private MainWindow mainWindow;
 	private static final Logger log = Logger.getLogger(ReadPlayView.class);
@@ -48,7 +52,7 @@ public class ReadPlayView extends JPanel {
 		double size[][] = { { TableLayout.FILL, 20, TableLayout.PREFERRED }, { 30, 30 } };
 		fileSelectPanel.setLayout(new TableLayout(size));
 
-		final JTextField fileInput = new JTextField();
+		final JTextField fileInput = new JTextField("/home/andreas/Macbeth.html");
 		JButton selectFileButton = new JButton("Durchsuchen");
 
 		selectFileButton.addActionListener(new ActionListener() {
@@ -99,12 +103,12 @@ public class ReadPlayView extends JPanel {
 							JOptionPane.ERROR_MESSAGE);
 					return;
 				}
-				
+
 				model = parsedPlay;
-				JOptionPane.showMessageDialog(mainWindow, "Das Stück " + parsedPlay.getName() + " wurde erfolgreich eingelesen.", parsedPlay.getName()
-						+ " erfoglreich eingelesen", JOptionPane.INFORMATION_MESSAGE);
-				
-				showRoleSelectPanel();				
+				JOptionPane.showMessageDialog(mainWindow, "Das Stück " + parsedPlay.getName() + " wurde erfolgreich eingelesen.",
+						parsedPlay.getName() + " erfoglreich eingelesen", JOptionPane.INFORMATION_MESSAGE);
+
+				showRoleSelectPanel();
 			}
 		});
 
@@ -115,19 +119,51 @@ public class ReadPlayView extends JPanel {
 		return fileSelectPanel;
 	}
 
-	
-	private void showRoleSelectPanel(){
+	private void showRoleSelectPanel() {
 		JPanel rolePanel = createRoleSelectPanel();
 		add(rolePanel, "1,2");
+		
+		validate();
+		repaint();
 	}
-	
-	private JPanel createRoleSelectPanel(){
+
+	private JPanel createRoleSelectPanel() {
+		JPanel roleSelectPanel = new JPanel();
+		double size[][] = { { TableLayout.FILL}, {  } };
+		TableLayout layout = new TableLayout(size);
+		roleSelectPanel.setLayout(layout);
+		
+		for(Role role : model.getRoles()){
+			layout.insertRow(0, TableLayout.PREFERRED);
+			JPanel rolePanel = createRolePanel(role);
+			roleSelectPanel.add(rolePanel, "0,0");
+		}
+		
+		
+		return roleSelectPanel;
+	}
+
+	private JPanel createRolePanel(Role role) {
+		log.debug("creating role panel for " + role);
+		
 		JPanel rolePanel = new JPanel();
+
+		JCheckBox pseudoSelect = new JCheckBox();
+		JLabel nameLabel = new JLabel(role.getName());
+		String[] genders = { "Männlich", "Weiblich" };
+		JComboBox<String> genderSelect = new JComboBox<String>(genders);
+		JTextField requiredWords = new JTextField("12345");
+		requiredWords.setEnabled(false);
 		
+		double size[][] = { { 50, TableLayout.FILL, TableLayout.PREFERRED, TableLayout.PREFERRED }, { TableLayout.PREFERRED } };
+		rolePanel.setLayout(new TableLayout(size));
 		
+		rolePanel.add(pseudoSelect, "0,0");
+		rolePanel.add(nameLabel, "1,0");
+		rolePanel.add(genderSelect, "2,0");
+		rolePanel.add(requiredWords, "3,0");
 		
 		return rolePanel;
 	}
-	
-	
+
 }
