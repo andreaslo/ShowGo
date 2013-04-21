@@ -17,13 +17,16 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.log4j.Logger;
 
+import de.feu.showgo.io.ParsingException;
+import de.feu.showgo.io.PlayParser;
+import de.feu.showgo.model.TheaterPlay;
 import de.feu.showgo.ui.MainWindow;
 
 public class ReadPlayView extends JPanel {
 
 	private MainWindow mainWindow;
 	private static final Logger log = Logger.getLogger(ReadPlayView.class);
-	
+
 	public ReadPlayView(MainWindow mainWindow) {
 		this.mainWindow = mainWindow;
 		createComponent();
@@ -33,49 +36,78 @@ public class ReadPlayView extends JPanel {
 	private void createComponent() {
 		double size[][] = { { 20, TableLayout.FILL, 20 }, { 20, TableLayout.PREFERRED } };
 		setLayout(new TableLayout(size));
-		
+
 		JPanel fileSelectPanel = createFileSelectPanel();
-		
+
 		add(fileSelectPanel, "1,1");
 	}
-	
-	private JPanel createFileSelectPanel(){
+
+	private JPanel createFileSelectPanel() {
 		JPanel fileSelectPanel = new JPanel();
 		double size[][] = { { TableLayout.FILL, 20, TableLayout.PREFERRED }, { 30, 30 } };
 		fileSelectPanel.setLayout(new TableLayout(size));
-		
+
 		final JTextField fileInput = new JTextField();
 		JButton selectFileButton = new JButton("Durchsuchen");
-		
+
 		selectFileButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				JFileChooser fc = new JFileChooser();
 				fc.setDialogType(JFileChooser.OPEN_DIALOG);
-				fc.setAcceptAllFileFilterUsed(false);
+				fc.setAcceptAllFileFilterUsed(true);
 
-				FileFilter filter = new FileNameExtensionFilter("ShowGo-Datei", "showgo");
+				FileFilter filter = new FileNameExtensionFilter("HTML-Datei", "html");
 				fc.addChoosableFileFilter(filter);
 				int result = fc.showOpenDialog(mainWindow);
-				if(result == JFileChooser.APPROVE_OPTION){
+				if (result == JFileChooser.APPROVE_OPTION) {
 					File selectedFile = fc.getSelectedFile();
 					try {
 						fileInput.setText(selectedFile.getCanonicalPath());
 					} catch (IOException e) {
-						log.error("",e);
-						JOptionPane.showMessageDialog(mainWindow, "Es ist ein Problem beim Lesen der Datei aufgetreten", "Fehler", JOptionPane.ERROR_MESSAGE);
+						log.error("", e);
+						JOptionPane.showMessageDialog(mainWindow, "Es ist ein Problem beim Lesen der Datei aufgetreten", "Fehler",
+								JOptionPane.ERROR_MESSAGE);
 					}
 				}
 			}
 		});
-		
+
 		JButton doReadPlayButton = new JButton("Stück einlesen");
-		
+
+		doReadPlayButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				File selectedFile = new File(fileInput.getText());
+
+				PlayParser parser = new PlayParser();
+				TheaterPlay play = null;
+				try {
+					play = parser.generatePlay(selectedFile);
+				} catch (IOException e) {
+					log.error("", e);
+					JOptionPane.showMessageDialog(mainWindow, "Die Datei \"" + selectedFile.getName() + "\" konnte nicht gelesen werden.", "Fehler",
+							JOptionPane.ERROR_MESSAGE);
+					return;
+				} catch (ParsingException e) {
+					log.error("", e);
+					JOptionPane.showMessageDialog(mainWindow, "Die Datei \"" + selectedFile.getName()
+							+ "\" konnte nicht geparst werden. Es ist folgender Fehler aufgetreten: \n" + e.getMessage(), "Fehler",
+							JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				JOptionPane.showMessageDialog(mainWindow, "Das Stück " + play.getName() + " wurde erfolgreich eingelesen.", play.getName()
+						+ " erfoglreich eingelesen", JOptionPane.INFORMATION_MESSAGE);
+			}
+		});
+
 		fileSelectPanel.add(fileInput, "0,0,f,c");
 		fileSelectPanel.add(selectFileButton, "2,0,r,c");
 		fileSelectPanel.add(doReadPlayButton, "0,1,l,c");
-		
+
 		return fileSelectPanel;
 	}
 
