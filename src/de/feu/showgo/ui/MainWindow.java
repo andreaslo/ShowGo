@@ -112,7 +112,7 @@ public class MainWindow extends JFrame {
 
 	public void showReadPlayView() {
 		System.out.println("read play");
-		displayView(new ReadPlayView());
+		displayView(new ReadPlayView(this));
 	}
 
 	public NavTree getNavTree() {
