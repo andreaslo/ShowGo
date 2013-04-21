@@ -23,7 +23,8 @@ import de.feu.showgo.model.TheaterPlay;
 import de.feu.showgo.ui.MainWindow;
 
 public class ReadPlayView extends JPanel {
-
+	
+	private TheaterPlay model;
 	private MainWindow mainWindow;
 	private static final Logger log = Logger.getLogger(ReadPlayView.class);
 
@@ -34,7 +35,7 @@ public class ReadPlayView extends JPanel {
 	}
 
 	private void createComponent() {
-		double size[][] = { { 20, TableLayout.FILL, 20 }, { 20, TableLayout.PREFERRED } };
+		double size[][] = { { 20, TableLayout.FILL, 20 }, { 20, TableLayout.PREFERRED, TableLayout.PREFERRED } };
 		setLayout(new TableLayout(size));
 
 		JPanel fileSelectPanel = createFileSelectPanel();
@@ -83,9 +84,9 @@ public class ReadPlayView extends JPanel {
 				File selectedFile = new File(fileInput.getText());
 
 				PlayParser parser = new PlayParser();
-				TheaterPlay play = null;
+				TheaterPlay parsedPlay = null;
 				try {
-					play = parser.generatePlay(selectedFile);
+					parsedPlay = parser.generatePlay(selectedFile);
 				} catch (IOException e) {
 					log.error("", e);
 					JOptionPane.showMessageDialog(mainWindow, "Die Datei \"" + selectedFile.getName() + "\" konnte nicht gelesen werden.", "Fehler",
@@ -98,9 +99,12 @@ public class ReadPlayView extends JPanel {
 							JOptionPane.ERROR_MESSAGE);
 					return;
 				}
-
-				JOptionPane.showMessageDialog(mainWindow, "Das Stück " + play.getName() + " wurde erfolgreich eingelesen.", play.getName()
+				
+				model = parsedPlay;
+				JOptionPane.showMessageDialog(mainWindow, "Das Stück " + parsedPlay.getName() + " wurde erfolgreich eingelesen.", parsedPlay.getName()
 						+ " erfoglreich eingelesen", JOptionPane.INFORMATION_MESSAGE);
+				
+				showRoleSelectPanel();				
 			}
 		});
 
@@ -111,4 +115,19 @@ public class ReadPlayView extends JPanel {
 		return fileSelectPanel;
 	}
 
+	
+	private void showRoleSelectPanel(){
+		JPanel rolePanel = createRoleSelectPanel();
+		add(rolePanel, "1,2");
+	}
+	
+	private JPanel createRoleSelectPanel(){
+		JPanel rolePanel = new JPanel();
+		
+		
+		
+		return rolePanel;
+	}
+	
+	
 }
