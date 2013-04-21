@@ -13,26 +13,21 @@ public class ReadPlayView extends JPanel {
 
 	public ReadPlayView() {
 		createComponent();
+		setName("Bühnenstück einlesen");
 	}
 
 	private void createComponent() {
-
-//		double size[][] = { { 20, 150, 20, TableLayout.FILL, 20 }, { 20, 30, 10, TableLayout.PREFERRED, 10, 30, 10, 30, 10, 30, 10, 30 } };
-//		this.setLayout(new TableLayout(size));
-		
-		setLayout(new GridLayout(1,1));
-
+		double size[][] = { { 20, TableLayout.FILL, 20 }, { 20, TableLayout.PREFERRED } };
+		setLayout(new TableLayout(size));
 		
 		JPanel fileSelectPanel = createFileSelectPanel();
 		
-		
-		add(fileSelectPanel);
-
+		add(fileSelectPanel, "1,1");
 	}
 	
 	private JPanel createFileSelectPanel(){
 		JPanel fileSelectPanel = new JPanel();
-		double size[][] = { { TableLayout.FILL, TableLayout.PREFERRED }, { 30, 30 } };
+		double size[][] = { { TableLayout.FILL, 20, TableLayout.PREFERRED }, { 30, 30 } };
 		fileSelectPanel.setLayout(new TableLayout(size));
 		
 		JTextField fileInput = new JTextField();
@@ -40,7 +35,7 @@ public class ReadPlayView extends JPanel {
 		JButton doReadPlayButton = new JButton("Stück einlesen");
 		
 		fileSelectPanel.add(fileInput, "0,0,f,c");
-		fileSelectPanel.add(selectFileButton, "1,0,r,c");
+		fileSelectPanel.add(selectFileButton, "2,0,r,c");
 		fileSelectPanel.add(doReadPlayButton, "0,1,l,c");
 		
 		return fileSelectPanel;
