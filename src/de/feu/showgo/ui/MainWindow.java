@@ -8,13 +8,14 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 
 import de.feu.showgo.model.Person;
 import de.feu.showgo.ui.actions.LoadAction;
 import de.feu.showgo.ui.actions.NewAction;
-import de.feu.showgo.ui.actions.SaveAsAction;
 import de.feu.showgo.ui.actions.SaveAction;
+import de.feu.showgo.ui.actions.SaveAsAction;
 import de.feu.showgo.ui.actions.ShowCreatePersonAction;
 import de.feu.showgo.ui.actions.ShowReadPlayAction;
 import de.feu.showgo.ui.tree.NavTree;
@@ -27,6 +28,7 @@ public class MainWindow extends JFrame {
 	private final static String TITLE = "ShowGo - Andreas Lösche / 8614989";
 
 	private JPanel currentView;
+	private JScrollPane scrolledView;
 	private NavTree navTree;
 
 	public MainWindow() {
@@ -88,8 +90,8 @@ public class MainWindow extends JFrame {
 	}
 
 	public void displayView(JPanel newView) {
-		if (currentView != null) {
-			this.remove(currentView);
+		if (scrolledView != null) {
+			this.remove(scrolledView);
 		}
 		currentView = newView;
 
@@ -97,7 +99,11 @@ public class MainWindow extends JFrame {
 		titledBorder.setTitlePosition(TitledBorder.ABOVE_TOP);
 
 		currentView.setBorder(titledBorder);
-		this.add(currentView, "3,1");
+		
+		scrolledView = new JScrollPane(currentView);
+		scrolledView.setBorder(null);
+		
+		this.add(scrolledView, "3,1");
 		this.validate();
 		this.repaint();
 	}
