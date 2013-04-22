@@ -6,15 +6,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -25,6 +29,7 @@ import de.feu.showgo.io.PlayParser;
 import de.feu.showgo.model.Role;
 import de.feu.showgo.model.TheaterPlay;
 import de.feu.showgo.ui.MainWindow;
+import de.feu.showgo.ui.dialogs.RolesSelectDialog;
 
 public class ReadPlayView extends JPanel {
 
@@ -188,7 +193,7 @@ public class ReadPlayView extends JPanel {
 		return rolePanel;
 	}
 	
-	private void setPseude(Role role, JPanel rolePanel){
+	private void setPseude(final Role role, JPanel rolePanel){
 		rolePanel.removeAll();
 		
 		double size[][] = { { 85, 270, 190}, { 10, TableLayout.PREFERRED, TableLayout.PREFERRED, 10 } };
@@ -199,6 +204,16 @@ public class ReadPlayView extends JPanel {
 		
 		JLabel nameLabel = new JLabel(role.getName());
 		JButton assignRoles = new JButton("Rollen zuordnen");
+		
+		assignRoles.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				RolesSelectDialog dialog = new RolesSelectDialog(role, mainWindow);
+				dialog.showDialog();
+				log.debug("dialog closed");
+			}
+		});
 		
 		JLabel roleLabel = new JLabel("Rollen: ");
 		JLabel assignedRolesDisplay = new JLabel("1. Hexe, 2. Hexe");
@@ -216,8 +231,8 @@ public class ReadPlayView extends JPanel {
 		
 		revalidate();
 		repaint();
-		
-		
 	}
+	
+	
 
 }
