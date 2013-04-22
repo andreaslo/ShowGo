@@ -129,14 +129,25 @@ public class ReadPlayView extends JPanel {
 
 	private JPanel createRoleSelectPanel() {
 		JPanel roleSelectPanel = new JPanel();
-		double size[][] = { { TableLayout.FILL}, {  } };
+		double size[][] = { { TableLayout.FILL}, { TableLayout.PREFERRED } };
 		TableLayout layout = new TableLayout(size);
 		roleSelectPanel.setLayout(layout);
 		
+		
+		JPanel header = new JPanel();
+		double sizeHeader[][] = { { 85, 270, 100, 10, 80 }, { TableLayout.PREFERRED } };
+		header.setLayout(new TableLayout(sizeHeader));
+		header.add(new JLabel("Pseudorolle"), "0,0");
+		header.add(new JLabel("Name"), "1,0");
+		header.add(new JLabel("Geschlecht"),"2,0");
+		header.add(new JLabel("Wörter"),"4,0");
+		
+		roleSelectPanel.add(header, "0,0");
+		
 		for(Role role : model.getRoles()){
-			layout.insertRow(0, TableLayout.PREFERRED);
+			layout.insertRow(1, TableLayout.PREFERRED);
 			JPanel rolePanel = createRolePanel(role);
-			roleSelectPanel.add(rolePanel, "0,0");
+			roleSelectPanel.add(rolePanel, "0,1");
 		}
 		
 		
@@ -155,13 +166,13 @@ public class ReadPlayView extends JPanel {
 		JTextField requiredWords = new JTextField("12345");
 		requiredWords.setEnabled(false);
 		
-		double size[][] = { { 50, TableLayout.FILL, TableLayout.PREFERRED, TableLayout.PREFERRED }, { TableLayout.PREFERRED } };
+		double size[][] = { { 85, 270, 100, 10, 80 }, { TableLayout.PREFERRED } };
 		rolePanel.setLayout(new TableLayout(size));
 		
 		rolePanel.add(pseudoSelect, "0,0");
 		rolePanel.add(nameLabel, "1,0");
 		rolePanel.add(genderSelect, "2,0");
-		rolePanel.add(requiredWords, "3,0");
+		rolePanel.add(requiredWords, "4,0");
 		
 		return rolePanel;
 	}
