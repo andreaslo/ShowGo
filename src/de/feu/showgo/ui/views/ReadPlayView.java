@@ -129,7 +129,7 @@ public class ReadPlayView extends JPanel {
 
 	private JPanel createRoleSelectPanel() {
 		JPanel roleSelectPanel = new JPanel();
-		double size[][] = { { TableLayout.FILL}, { TableLayout.PREFERRED } };
+		double size[][] = { { TableLayout.FILL}, { 25 } };
 		TableLayout layout = new TableLayout(size);
 		roleSelectPanel.setLayout(layout);
 		
@@ -145,7 +145,7 @@ public class ReadPlayView extends JPanel {
 		roleSelectPanel.add(header, "0,0");
 		
 		for(Role role : model.getRoles()){
-			layout.insertRow(1, TableLayout.PREFERRED);
+			layout.insertRow(1, 25);
 			JPanel rolePanel = createRolePanel(role);
 			roleSelectPanel.add(rolePanel, "0,1");
 		}
