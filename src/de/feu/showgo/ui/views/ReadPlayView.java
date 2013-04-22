@@ -145,7 +145,7 @@ public class ReadPlayView extends JPanel {
 		roleSelectPanel.add(header, "0,0");
 		
 		for(Role role : model.getRoles()){
-			layout.insertRow(1, 25);
+			layout.insertRow(1, TableLayout.PREFERRED);
 			JPanel rolePanel = createRolePanel(role);
 			roleSelectPanel.add(rolePanel, "0,1");
 		}
@@ -154,12 +154,23 @@ public class ReadPlayView extends JPanel {
 		return roleSelectPanel;
 	}
 
-	private JPanel createRolePanel(Role role) {
+	private JPanel createRolePanel(final Role role) {
 		log.debug("creating role panel for " + role);
 		
-		JPanel rolePanel = new JPanel();
+		final JPanel rolePanel = new JPanel();
 
 		JCheckBox pseudoSelect = new JCheckBox();
+		
+		pseudoSelect.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				log.debug("pseudo action "+role);
+				setPseude(role, rolePanel);
+			}
+		});
+		
+		
 		JLabel nameLabel = new JLabel(role.getName());
 		String[] genders = { "Männlich", "Weiblich" };
 		JComboBox<String> genderSelect = new JComboBox<String>(genders);
@@ -175,6 +186,38 @@ public class ReadPlayView extends JPanel {
 		rolePanel.add(requiredWords, "4,0");
 		
 		return rolePanel;
+	}
+	
+	private void setPseude(Role role, JPanel rolePanel){
+		rolePanel.removeAll();
+		
+		double size[][] = { { 85, 270, 190}, { 10, TableLayout.PREFERRED, TableLayout.PREFERRED, 10 } };
+		rolePanel.setLayout(new TableLayout(size));
+		
+		JCheckBox pseudoSelect = new JCheckBox();
+		pseudoSelect.setSelected(true);
+		
+		JLabel nameLabel = new JLabel(role.getName());
+		JButton assignRoles = new JButton("Rollen zuordnen");
+		
+		JLabel roleLabel = new JLabel("Rollen: ");
+		JLabel assignedRolesDisplay = new JLabel("1. Hexe, 2. Hexe");
+		
+		JPanel roleDisplayPanel = new JPanel();
+		double roleDisplayPanelSize[][] = { { TableLayout.PREFERRED, TableLayout.FILL }, { TableLayout.PREFERRED } };
+		roleDisplayPanel.setLayout(new TableLayout(roleDisplayPanelSize));
+		roleDisplayPanel.add(roleLabel,"0,0");
+		roleDisplayPanel.add(assignedRolesDisplay,"1,0");
+		
+		rolePanel.add(pseudoSelect, "0,1");
+		rolePanel.add(nameLabel, "1,1");
+		rolePanel.add(assignRoles, "2,1,l,f");
+		rolePanel.add(roleDisplayPanel,"1,2,2,2");
+		
+		revalidate();
+		repaint();
+		
+		
 	}
 
 }
