@@ -123,7 +123,7 @@ public class ReadPlayView extends JPanel {
 		JPanel rolePanel = createRoleSelectPanel();
 		add(rolePanel, "1,2");
 		
-		validate();
+		revalidate();
 		repaint();
 	}
 

@@ -104,7 +104,7 @@ public class MainWindow extends JFrame {
 		scrolledView.setBorder(null);
 		
 		this.add(scrolledView, "3,1");
-		this.validate();
+		this.revalidate();
 		this.repaint();
 	}
 

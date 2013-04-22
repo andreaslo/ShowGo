@@ -224,14 +224,14 @@ public class PersonManagementView extends JPanel implements ActionListener {
 		currentMessage.setBackground(background);
 		currentMessage.setOpaque(true);
 		this.add(currentMessage, "1,11,3,11");
-		this.validate();
+		this.revalidate();
 		this.repaint();
 	}
 	
 	private void removeMessage(){
 		if(currentMessage != null){
 			this.remove(currentMessage);
-			this.validate();
+			this.revalidate();
 			this.repaint();
 		}
 	}

@@ -108,7 +108,7 @@ public class NavTree {
 	    DefaultTreeModel dtm = (DefaultTreeModel) tree.getModel();  
 	    dtm.reload(personTreeNode);
 		
-		tree.validate();
+		tree.revalidate();
 		tree.repaint();
 		
 		tree.expandRow(personTreeNode.getLevel());
