@@ -4,6 +4,7 @@ import info.clearthought.layout.TableLayout;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -13,6 +14,8 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
+import org.apache.log4j.Logger;
 
 import de.feu.showgo.model.Role;
 import de.feu.showgo.model.TheaterPlay;
@@ -24,10 +27,12 @@ public class RolesSelectDialog {
 	private TheaterPlay play;
 	private boolean approved;
 	private List<Role> selectedRoles;
+	private static final Logger log = Logger.getLogger(RolesSelectDialog.class);
 	
 	
 	public RolesSelectDialog(Role role, MainWindow mainWindow, TheaterPlay play) {
 		this.play = play;
+		selectedRoles = new ArrayList<Role>();
 		
 		dialog = new JDialog(mainWindow);
 		dialog.setSize(400,600);
@@ -54,8 +59,7 @@ public class RolesSelectDialog {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				approved = true;
-				
-				
+				dialog.dispose();
 			}
 		});
 		
@@ -83,9 +87,27 @@ public class RolesSelectDialog {
 		TableLayout selectTableLayout = new TableLayout(sizeSelectTable);
 		selectTable.setLayout(selectTableLayout);
 		
-		for(Role curRole : play.getRoles()){
+		for(final Role curRole : play.getRoles()){
 			selectTableLayout.insertRow(1, TableLayout.PREFERRED);
 			JCheckBox roleSelected = new JCheckBox();
+			
+			roleSelected.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent arg0) {				
+					if(selectedRoles.contains(curRole)){
+						log.debug("removing selection for: " + curRole);
+						selectedRoles.remove(curRole);
+					}else{
+						log.debug("Set as selected: " + curRole);
+						selectedRoles.add(curRole);
+					}
+					log.debug("There are " + selectedRoles.size() + " roles selected");
+				}
+			});
+			
+			
+			
 			JLabel roleDisplay = new JLabel(curRole.getName());
 			selectTable.add(roleSelected, "0,1");
 			selectTable.add(roleDisplay, "1,1");
