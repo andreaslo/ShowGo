@@ -6,6 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -31,10 +34,12 @@ public class ReadPlayView extends JPanel {
 
 	private TheaterPlay model;
 	private MainWindow mainWindow;
+	private Map<Role, List<Role>> pseudoRoleAssignments;
 	private static final Logger log = Logger.getLogger(ReadPlayView.class);
 
 	public ReadPlayView(MainWindow mainWindow) {
 		this.mainWindow = mainWindow;
+		pseudoRoleAssignments = new HashMap<Role, List<Role>>();
 		createComponent();
 		setName("Bühnenstück einlesen");
 	}
@@ -207,7 +212,7 @@ public class ReadPlayView extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				RolesSelectDialog dialog = new RolesSelectDialog(role, mainWindow, model);
+				RolesSelectDialog dialog = new RolesSelectDialog(role, mainWindow, model, pseudoRoleAssignments.get(role));
 				dialog.showDialog();
 				log.debug("dialog closed");
 				log.debug("Selected roles: " + dialog.getSelectedRoles());
@@ -223,10 +228,11 @@ public class ReadPlayView extends JPanel {
 						roleText = roleText.substring(0,roleText.length()-2);
 					}
 					assignedRolesDisplay.setText(roleText);
+					
+					pseudoRoleAssignments.put(role, dialog.getSelectedRoles());
 				}
 			}
 		});
-
 		
 		JPanel roleDisplayPanel = new JPanel();
 		double roleDisplayPanelSize[][] = { { TableLayout.PREFERRED, TableLayout.FILL }, { TableLayout.PREFERRED } };

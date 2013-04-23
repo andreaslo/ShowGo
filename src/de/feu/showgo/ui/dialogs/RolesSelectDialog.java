@@ -30,9 +30,14 @@ public class RolesSelectDialog {
 	private static final Logger log = Logger.getLogger(RolesSelectDialog.class);
 	
 	
-	public RolesSelectDialog(Role role, MainWindow mainWindow, TheaterPlay play) {
+	public RolesSelectDialog(Role role, MainWindow mainWindow, TheaterPlay play, List<Role> assignedRoles) {
 		this.play = play;
-		selectedRoles = new ArrayList<Role>();
+		log.debug("Assigned roles: " + assignedRoles);
+		if(assignedRoles == null){
+			selectedRoles = new ArrayList<Role>();
+		}else{
+			selectedRoles = assignedRoles;
+		}
 		
 		dialog = new JDialog(mainWindow);
 		dialog.setSize(400,600);
@@ -90,6 +95,9 @@ public class RolesSelectDialog {
 		for(final Role curRole : play.getRoles()){
 			selectTableLayout.insertRow(1, TableLayout.PREFERRED);
 			JCheckBox roleSelected = new JCheckBox();
+			if(selectedRoles.contains(curRole)){
+				roleSelected.setSelected(true);
+			}
 			
 			roleSelected.addActionListener(new ActionListener() {
 				
