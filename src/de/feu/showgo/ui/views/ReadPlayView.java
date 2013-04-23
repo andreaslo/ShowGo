@@ -199,7 +199,7 @@ public class ReadPlayView extends JPanel {
 		pseudoSelect.setSelected(true);
 		
 		JLabel roleLabel = new JLabel("Rollen: ");
-		final JLabel assignedRolesDisplay = new JLabel("1. Hexe, 2. Hexe");
+		final JLabel assignedRolesDisplay = new JLabel("");
 		JLabel nameLabel = new JLabel(role.getName());
 		JButton assignRoles = new JButton("Rollen zuordnen");
 		
