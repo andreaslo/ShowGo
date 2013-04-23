@@ -164,7 +164,12 @@ public class ReadPlayView extends JPanel {
 		log.debug("creating role panel for " + role);
 		
 		final JPanel rolePanel = new JPanel();
-
+		fillRolePanel(role, rolePanel);
+		
+		return rolePanel;
+	}
+	
+	private void fillRolePanel(final Role role, final JPanel rolePanel){
 		JCheckBox pseudoSelect = new JCheckBox();
 		
 		pseudoSelect.addActionListener(new ActionListener() {
@@ -190,11 +195,17 @@ public class ReadPlayView extends JPanel {
 		rolePanel.add(nameLabel, "1,0");
 		rolePanel.add(genderSelect, "2,0");
 		rolePanel.add(requiredWords, "4,0");
-		
-		return rolePanel;
 	}
 	
-	private void setPseude(final Role role, JPanel rolePanel){
+	private void unsetPseudo(final Role role, JPanel rolePanel){
+		pseudoRoleAssignments.remove(role);
+		rolePanel.removeAll();
+		fillRolePanel(role, rolePanel);
+		revalidate();
+		repaint();
+	}
+	
+	private void setPseude(final Role role, final JPanel rolePanel){
 		rolePanel.removeAll();
 		
 		double size[][] = { { 85, 270, 190}, { 10, TableLayout.PREFERRED, TableLayout.PREFERRED, 10 } };
@@ -202,6 +213,13 @@ public class ReadPlayView extends JPanel {
 		
 		JCheckBox pseudoSelect = new JCheckBox();
 		pseudoSelect.setSelected(true);
+		pseudoSelect.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				unsetPseudo(role, rolePanel);
+			}
+		});
 		
 		JLabel roleLabel = new JLabel("Rollen: ");
 		final JLabel assignedRolesDisplay = new JLabel("");
