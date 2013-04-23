@@ -198,6 +198,8 @@ public class ReadPlayView extends JPanel {
 		JCheckBox pseudoSelect = new JCheckBox();
 		pseudoSelect.setSelected(true);
 		
+		JLabel roleLabel = new JLabel("Rollen: ");
+		final JLabel assignedRolesDisplay = new JLabel("1. Hexe, 2. Hexe");
 		JLabel nameLabel = new JLabel(role.getName());
 		JButton assignRoles = new JButton("Rollen zuordnen");
 		
@@ -208,11 +210,23 @@ public class ReadPlayView extends JPanel {
 				RolesSelectDialog dialog = new RolesSelectDialog(role, mainWindow, model);
 				dialog.showDialog();
 				log.debug("dialog closed");
+				log.debug("Selected roles: " + dialog.getSelectedRoles());
+				
+				if(dialog.isApproved()){
+					StringBuilder roleLabelBuilder = new StringBuilder();
+					for(Role selectedRole : dialog.getSelectedRoles()){
+						roleLabelBuilder.append(selectedRole.getName() + ", ");
+					}
+					//remove last ,
+					String roleText = roleLabelBuilder.toString();
+					if(roleText.length() > 0){
+						roleText = roleText.substring(0,roleText.length()-2);
+					}
+					assignedRolesDisplay.setText(roleText);
+				}
 			}
 		});
-		
-		JLabel roleLabel = new JLabel("Rollen: ");
-		JLabel assignedRolesDisplay = new JLabel("1. Hexe, 2. Hexe");
+
 		
 		JPanel roleDisplayPanel = new JPanel();
 		double roleDisplayPanelSize[][] = { { TableLayout.PREFERRED, TableLayout.FILL }, { TableLayout.PREFERRED } };
