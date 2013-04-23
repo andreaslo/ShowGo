@@ -21,6 +21,7 @@ import org.apache.log4j.Logger;
 import com.toedter.calendar.JCalendar;
 
 import de.feu.showgo.ShowGoDAO;
+import de.feu.showgo.model.Gender;
 import de.feu.showgo.model.Person;
 import de.feu.showgo.ui.MainWindow;
 import de.feu.showgo.ui.WindowColors;
@@ -56,10 +57,10 @@ public class PersonManagementView extends JPanel implements ActionListener {
 		
 		nameInput.setText(person.getName());
 		birthdayInput.setDate(person.getBirthday());
-		if(person.getGender() == Person.Gender.MALE){
+		if(person.getGender() == Gender.MALE){
 			log.debug("male");
 			genderSelect.setSelectedIndex(0);
-		}else if(person.getGender() == Person.Gender.FEMALE){
+		}else if(person.getGender() == Gender.FEMALE){
 			log.debug("female");
 			genderSelect.setSelectedIndex(1);
 		}else{
@@ -206,9 +207,9 @@ public class PersonManagementView extends JPanel implements ActionListener {
 		newPerson.setBirthday(birthdayInput.getDate());
 		newPerson.setWordsRetention(Integer.valueOf(wordRetentionInput.getText()));
 		if(genderSelect.getSelectedIndex() == 0){
-			newPerson.setGender(Person.Gender.MALE);
+			newPerson.setGender(Gender.MALE);
 		}else if(genderSelect.getSelectedIndex() == 1){
-			newPerson.setGender(Person.Gender.FEMALE);
+			newPerson.setGender(Gender.FEMALE);
 		}else{
 			log.error("Unknown gender selected");
 		}

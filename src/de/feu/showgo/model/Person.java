@@ -8,10 +8,6 @@ import javax.xml.bind.annotation.XmlElement;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Person {
-
-	public enum Gender {
-		MALE, FEMALE
-	}
 	
 	@XmlElement(name="name")
 	private String name;

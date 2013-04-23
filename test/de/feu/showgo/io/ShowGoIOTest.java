@@ -11,6 +11,7 @@ import javax.xml.bind.JAXBException;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
+import de.feu.showgo.model.Gender;
 import de.feu.showgo.model.Person;
 import de.feu.showgo.model.ShowGo;
 
@@ -23,7 +24,7 @@ public class ShowGoIOTest {
 		ShowGo saveObj = new ShowGo();
 		Person p1 = new Person();
 		p1.setName("TestName");
-		p1.setGender(Person.Gender.FEMALE);
+		p1.setGender(Gender.FEMALE);
 		p1.setBirthday(new Date());
 		p1.setWordsRetention(1234);
 		saveObj.addPerson(p1);
