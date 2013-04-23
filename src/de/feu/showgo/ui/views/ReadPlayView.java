@@ -198,6 +198,7 @@ public class ReadPlayView extends JPanel {
 	}
 	
 	private void unsetPseudo(final Role role, JPanel rolePanel){
+		log.debug("unset pseudo");
 		pseudoRoleAssignments.remove(role);
 		rolePanel.removeAll();
 		fillRolePanel(role, rolePanel);
