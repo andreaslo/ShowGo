@@ -133,7 +133,7 @@ public class RolesSelectDialog {
 	}
 
 	public List<Role> getSelectedRoles() {
-		return Collections.unmodifiableList(selectedRoles);
+		return selectedRoles;
 	}
 
 	
