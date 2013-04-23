@@ -209,7 +209,7 @@ public class ReadPlayView extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				RolesSelectDialog dialog = new RolesSelectDialog(role, mainWindow);
+				RolesSelectDialog dialog = new RolesSelectDialog(role, mainWindow, model);
 				dialog.showDialog();
 				log.debug("dialog closed");
 			}
