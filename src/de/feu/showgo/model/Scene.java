@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlIDREF;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Scene {
@@ -20,6 +21,9 @@ public class Scene {
 	@XmlElement( name="stageDirection", type = StageDirection.class ),
 	@XmlElement( name="passage", type = Passage.class) } )
 	private List<Paragraph> paragraphs = new ArrayList<Paragraph>();
+	
+	@XmlElement(name="allRole")
+	private Role allRole;
 	
 	
 	public String getName() {
@@ -67,6 +71,12 @@ public class Scene {
 		} else if (!paragraphs.equals(other.paragraphs))
 			return false;
 		return true;
+	}
+	public Role getAllRole() {
+		return allRole;
+	}
+	public void setAllRole(Role allRole) {
+		this.allRole = allRole;
 	}
 	
 	

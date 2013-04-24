@@ -263,11 +263,16 @@ public class PlayParser {
 		
 		scene.setName(StringUtil.sanitizeText(sceneElement.getText()));
 		Role lastRole = null; // A paragraph might not contain a role if it is not the first one, see discussion in newsgroup
+		Role sceneAll = new Role(); // The role "alle" for this scene. This is the only scene dependent role, all other one are global
+		sceneAll.setName("ALLE");
 		for(ParseElement child : sceneElement.getChildren()){
-			Paragraph paragraph = parseParagraph(child, lastRole, roles);
+			Paragraph paragraph = parseParagraph(child, lastRole, roles, sceneAll);
 			
 			if(paragraph instanceof Passage){
 				lastRole = ((Passage) paragraph).getRole();
+				if(lastRole == sceneAll){
+					scene.setAllRole(sceneAll);
+				}
 			}
 			
 			scene.addParagraphs(paragraph);
@@ -276,7 +281,7 @@ public class PlayParser {
 		return scene;
 	}
 	
-	private Paragraph parseParagraph(ParseElement paragraphElement, Role lastRole, Map<String, Role> roles) throws ParsingException{
+	private Paragraph parseParagraph(ParseElement paragraphElement, Role lastRole, Map<String, Role> roles, Role sceneAll) throws ParsingException{
 		if(!"regie".equals(paragraphElement.getTagName()) && !"passage".equals(paragraphElement.getTagName())){
 			throw new ParsingException("Paragraph element is not defined by a 'passage' or 'regie' tag name. Element: " + paragraphElement);
 		}
@@ -284,7 +289,7 @@ public class PlayParser {
 		if("regie".equals(paragraphElement.getTagName())){
 			return parseStageDirection(paragraphElement);
 		}else if("passage".equals(paragraphElement.getTagName())){
-			return parsePassage(paragraphElement, lastRole, roles);
+			return parsePassage(paragraphElement, lastRole, roles, sceneAll);
 		}else{
 			// should definitely not happen
 			return null;
@@ -303,7 +308,7 @@ public class PlayParser {
 		return stageDirection;
 	}
 	
-	private Passage parsePassage(ParseElement passageElement, Role lastRole, Map<String, Role> roles) throws ParsingException{
+	private Passage parsePassage(ParseElement passageElement, Role lastRole, Map<String, Role> roles, Role sceneAll) throws ParsingException{
 		Passage passage = new Passage();
 		if(!"passage".equals(passageElement.getTagName())){
 			throw new ParsingException("Passage element is not defined by a 'passage' tag name. Element: " + passageElement);
@@ -315,12 +320,17 @@ public class PlayParser {
 		if(passageElement.getChildren().size() != 1){
 			log.debug("no role assigned for " + passageElement.getText());
 			if(lastRole == null){
-				throw new ParsingException("First passage in a scene does not define a role, element text:" + passageElement.getText());
+				throw new ParsingException("First passage in a scene does not declare a role, element text:" + passageElement.getText());
 			}
 			
 			passage.setRole(lastRole);
 		}else{
 			Role newRole = parseRole(passageElement.getChildren().get(0));
+			
+			if(newRole.equals(sceneAll)){
+				passage.setRole(sceneAll);
+				return passage;
+			}
 			
 			if(!roles.containsKey(newRole.getName())){
 				roles.put(newRole.getName(), newRole);
