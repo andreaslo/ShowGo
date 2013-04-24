@@ -15,6 +15,8 @@ public class Role {
 
 	@XmlAttribute
     @XmlID
+    private String id;
+	@XmlElement(name="name")
 	private String name;
 	@XmlElement(name="words")
 	private int words;
@@ -22,6 +24,14 @@ public class Role {
 	private boolean pseudoRole;
 	@XmlIDREF
 	private List<Role> assigendRoles = new ArrayList<Role>();
+	
+	private static int idCounter;
+	
+	public Role(){
+		idCounter++;
+		id = idCounter + "";
+	}
+	
 	
 	public String getName() {
 		return name;
