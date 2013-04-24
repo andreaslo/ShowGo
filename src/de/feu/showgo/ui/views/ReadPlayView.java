@@ -25,7 +25,9 @@ import org.apache.log4j.Logger;
 
 import de.feu.showgo.io.ParsingException;
 import de.feu.showgo.io.PlayParser;
+import de.feu.showgo.model.Act;
 import de.feu.showgo.model.Role;
+import de.feu.showgo.model.Scene;
 import de.feu.showgo.model.TheaterPlay;
 import de.feu.showgo.ui.MainWindow;
 import de.feu.showgo.ui.dialogs.RolesSelectDialog;
@@ -45,7 +47,7 @@ public class ReadPlayView extends JPanel {
 	}
 
 	private void createComponent() {
-		double size[][] = { { 20, TableLayout.FILL, 20 }, { 20, TableLayout.PREFERRED, TableLayout.PREFERRED } };
+		double size[][] = { { 20, TableLayout.FILL, 20 }, { 20, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, } };
 		setLayout(new TableLayout(size));
 
 		JPanel fileSelectPanel = createFileSelectPanel();
@@ -128,76 +130,98 @@ public class ReadPlayView extends JPanel {
 	private void showRoleSelectPanel() {
 		JPanel rolePanel = createRoleSelectPanel();
 		add(rolePanel, "1,2");
-		
+
+		JPanel roleAllPanel = createSpecialRoleAllSelectPanel();
+		add(roleAllPanel, "1,3");
+
 		revalidate();
 		repaint();
 	}
 
-	private JPanel createRoleSelectPanel() {
+	private JPanel createSpecialRoleAllSelectPanel() {
 		JPanel roleSelectPanel = new JPanel();
-		double size[][] = { { TableLayout.FILL}, { 25 } };
+		double size[][] = { { TableLayout.FILL }, { 25 } };
 		TableLayout layout = new TableLayout(size);
 		roleSelectPanel.setLayout(layout);
-		
-		
+
+		for (Act act : model.getActs()) {
+			for (Scene scene : act.getScenes()) {
+				if (scene.getAllRole() != null) {
+					JPanel rolePanel = new JPanel();
+					setPseude(scene.getAllRole(), rolePanel);
+					layout.insertRow(1, TableLayout.PREFERRED);
+					roleSelectPanel.add(rolePanel, "0,1");
+					layout.insertRow(1, TableLayout.PREFERRED);
+					roleSelectPanel.add(new JLabel(scene.getName()), "0,1");
+				}
+			}
+		}
+
+		return roleSelectPanel;
+	}
+
+	private JPanel createRoleSelectPanel() {
+		JPanel roleSelectPanel = new JPanel();
+		double size[][] = { { TableLayout.FILL }, { 25 } };
+		TableLayout layout = new TableLayout(size);
+		roleSelectPanel.setLayout(layout);
+
 		JPanel header = new JPanel();
 		double sizeHeader[][] = { { 85, 270, 100, 10, 80 }, { TableLayout.PREFERRED } };
 		header.setLayout(new TableLayout(sizeHeader));
 		header.add(new JLabel("Pseudorolle"), "0,0");
 		header.add(new JLabel("Name"), "1,0");
-		header.add(new JLabel("Geschlecht"),"2,0");
-		header.add(new JLabel("Wörter"),"4,0");
-		
+		header.add(new JLabel("Geschlecht"), "2,0");
+		header.add(new JLabel("Wörter"), "4,0");
+
 		roleSelectPanel.add(header, "0,0");
-		
-		for(Role role : model.getRoles()){
+
+		for (Role role : model.getRoles()) {
 			layout.insertRow(1, TableLayout.PREFERRED);
 			JPanel rolePanel = createRolePanel(role);
 			roleSelectPanel.add(rolePanel, "0,1");
 		}
-		
-		
+
 		return roleSelectPanel;
 	}
 
 	private JPanel createRolePanel(final Role role) {
 		log.debug("creating role panel for " + role);
-		
+
 		final JPanel rolePanel = new JPanel();
 		fillRolePanel(role, rolePanel);
-		
+
 		return rolePanel;
 	}
-	
-	private void fillRolePanel(final Role role, final JPanel rolePanel){
+
+	private void fillRolePanel(final Role role, final JPanel rolePanel) {
 		JCheckBox pseudoSelect = new JCheckBox();
-		
+
 		pseudoSelect.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				log.debug("pseudo action "+role);
+				log.debug("pseudo action " + role);
 				setPseude(role, rolePanel);
 			}
 		});
-		
-		
+
 		JLabel nameLabel = new JLabel(role.getName());
 		String[] genders = { "Männlich", "Weiblich" };
 		JComboBox<String> genderSelect = new JComboBox<String>(genders);
 		JTextField requiredWords = new JTextField("12345");
 		requiredWords.setEnabled(false);
-		
+
 		double size[][] = { { 85, 270, 100, 10, 80 }, { TableLayout.PREFERRED } };
 		rolePanel.setLayout(new TableLayout(size));
-		
+
 		rolePanel.add(pseudoSelect, "0,0");
 		rolePanel.add(nameLabel, "1,0");
 		rolePanel.add(genderSelect, "2,0");
 		rolePanel.add(requiredWords, "4,0");
 	}
-	
-	private void unsetPseudo(final Role role, JPanel rolePanel){
+
+	private void unsetPseudo(final Role role, JPanel rolePanel) {
 		log.debug("unset pseudo");
 		pseudoRoleAssignments.remove(role);
 		rolePanel.removeAll();
@@ -205,69 +229,67 @@ public class ReadPlayView extends JPanel {
 		revalidate();
 		repaint();
 	}
-	
-	private void setPseude(final Role role, final JPanel rolePanel){
+
+	private void setPseude(final Role role, final JPanel rolePanel) {
 		rolePanel.removeAll();
-		
-		double size[][] = { { 85, 270, 190}, { 10, TableLayout.PREFERRED, TableLayout.PREFERRED, 10 } };
+
+		double size[][] = { { 85, 270, 190 }, { 10, TableLayout.PREFERRED, TableLayout.PREFERRED, 10 } };
 		rolePanel.setLayout(new TableLayout(size));
-		
+
 		JCheckBox pseudoSelect = new JCheckBox();
 		pseudoSelect.setSelected(true);
 		pseudoSelect.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				unsetPseudo(role, rolePanel);
 			}
 		});
-		
+
 		JLabel roleLabel = new JLabel("Rollen: ");
 		final JLabel assignedRolesDisplay = new JLabel("");
 		JLabel nameLabel = new JLabel(role.getName());
 		JButton assignRoles = new JButton("Rollen zuordnen");
-		
+
 		assignRoles.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				RolesSelectDialog dialog = new RolesSelectDialog(role, mainWindow, model, pseudoRoleAssignments.get(role));
 				dialog.showDialog();
 				log.debug("dialog closed");
 				log.debug("Selected roles: " + dialog.getSelectedRoles());
-				
-				if(dialog.isApproved()){
+
+				if (dialog.isApproved()) {
 					StringBuilder roleLabelBuilder = new StringBuilder();
-					for(Role selectedRole : dialog.getSelectedRoles()){
+					for (Role selectedRole : dialog.getSelectedRoles()) {
 						roleLabelBuilder.append(selectedRole.getName() + ", ");
 					}
-					//remove last ,
+					// remove last ,
 					String roleText = roleLabelBuilder.toString();
-					if(roleText.length() > 0){
-						roleText = roleText.substring(0,roleText.length()-2);
+					if (roleText.length() > 0) {
+						roleText = roleText.substring(0, roleText.length() - 2);
 					}
 					assignedRolesDisplay.setText(roleText);
-					
+
 					pseudoRoleAssignments.put(role, dialog.getSelectedRoles());
 				}
 			}
 		});
-		
+
 		JPanel roleDisplayPanel = new JPanel();
 		double roleDisplayPanelSize[][] = { { TableLayout.PREFERRED, TableLayout.FILL }, { TableLayout.PREFERRED } };
 		roleDisplayPanel.setLayout(new TableLayout(roleDisplayPanelSize));
-		roleDisplayPanel.add(roleLabel,"0,0");
-		roleDisplayPanel.add(assignedRolesDisplay,"1,0");
-		
+		roleDisplayPanel.add(roleLabel, "0,0");
+		roleDisplayPanel.add(assignedRolesDisplay, "1,0");
+
 		rolePanel.add(pseudoSelect, "0,1");
 		rolePanel.add(nameLabel, "1,1");
 		rolePanel.add(assignRoles, "2,1,l,f");
-		rolePanel.add(roleDisplayPanel,"1,2,2,2");
-		
+		rolePanel.add(roleDisplayPanel, "1,2,2,2");
+
 		revalidate();
 		repaint();
 	}
-	
-	
 
 }
