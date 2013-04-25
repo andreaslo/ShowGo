@@ -167,12 +167,13 @@ public class ReadPlayView extends JPanel {
 		roleSelectPanel.setLayout(layout);
 
 		JPanel header = new JPanel();
-		double sizeHeader[][] = { { 85, 270, 100, 10, 80 }, { TableLayout.PREFERRED } };
+		double sizeHeader[][] = { { 85, 270, 100, 10, 80, 10, 110 }, { TableLayout.PREFERRED } };
 		header.setLayout(new TableLayout(sizeHeader));
 		header.add(new JLabel("Pseudorolle"), "0,0");
 		header.add(new JLabel("Name"), "1,0");
 		header.add(new JLabel("Geschlecht"), "2,0");
 		header.add(new JLabel("Wörter"), "4,0");
+		header.add(new JLabel("Alter von bis"), "6,0");
 
 		roleSelectPanel.add(header, "0,0");
 
@@ -211,14 +212,18 @@ public class ReadPlayView extends JPanel {
 		JComboBox<String> genderSelect = new JComboBox<String>(genders);
 		JTextField requiredWords = new JTextField("12345");
 		requiredWords.setEnabled(false);
+		JTextField ageFrom = new JTextField();
+		JTextField ageTo = new JTextField();
 
-		double size[][] = { { 85, 270, 100, 10, 80 }, { TableLayout.PREFERRED } };
+		double size[][] = { { 85, 270, 100, 10, 80, 10, 50, 10, 50 }, { TableLayout.PREFERRED } };
 		rolePanel.setLayout(new TableLayout(size));
 
 		rolePanel.add(pseudoSelect, "0,0");
 		rolePanel.add(nameLabel, "1,0");
 		rolePanel.add(genderSelect, "2,0");
 		rolePanel.add(requiredWords, "4,0");
+		rolePanel.add(ageFrom, "6,0");
+		rolePanel.add(ageTo, "8,0");
 	}
 
 	private void unsetPseudo(final Role role, JPanel rolePanel) {
