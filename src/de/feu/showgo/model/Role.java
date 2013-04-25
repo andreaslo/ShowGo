@@ -20,6 +20,11 @@ public class Role {
 	private String name;
 	@XmlElement(name="words")
 	private int words;
+	@XmlElement(name="ageFrom")
+	private int ageFrom;
+	@XmlElement(name="ageTo")
+	private int ageTo;
+	
 	@XmlElement(name="pseudoRole")
 	private boolean pseudoRole;
 	@XmlIDREF
@@ -107,6 +112,26 @@ public class Role {
 	
 	public List<Role> getAssigendRoles() {
 		return assigendRoles;
+	}
+
+
+	public int getAgeFrom() {
+		return ageFrom;
+	}
+
+
+	public void setAgeFrom(int ageFrom) {
+		this.ageFrom = ageFrom;
+	}
+
+
+	public int getAgeTo() {
+		return ageTo;
+	}
+
+
+	public void setAgeTo(int ageTo) {
+		this.ageTo = ageTo;
 	}
 
 	
