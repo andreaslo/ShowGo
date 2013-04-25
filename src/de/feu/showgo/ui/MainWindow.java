@@ -39,7 +39,7 @@ public class MainWindow extends JFrame {
 
 		navTree = new NavTree(this);
 
-		this.setSize(1000, 600);
+		this.setSize(1150, 800);
 		this.setLocationByPlatform(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle(TITLE);
