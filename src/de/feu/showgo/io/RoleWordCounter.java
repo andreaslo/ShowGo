@@ -23,7 +23,7 @@ public class RoleWordCounter {
 						int textCount = StringUtil.wordCounter(passage.getText());
 						if(passageRole.isPseudoRole()){
 							for(Role assignedRole : passageRole.getAssigendRoles()){
-								assignedRole.setWords(passageRole.getWords() + textCount);
+								assignedRole.setWords(assignedRole.getWords() + textCount);
 							}
 						}else{
 							passageRole.setWords(passageRole.getWords() + textCount);
