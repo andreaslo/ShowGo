@@ -211,7 +211,7 @@ public class ReadPlayView extends JPanel {
 		JLabel nameLabel = new JLabel(role.getName());
 		String[] genders = { "Männlich", "Weiblich" };
 		JComboBox<String> genderSelect = new JComboBox<String>(genders);
-		JTextField requiredWords = new JTextField("12345");
+		JTextField requiredWords = new JTextField(role.getWords()+"");
 		requiredWords.setEnabled(false);
 		JTextField ageFrom = new JTextField();
 		JTextField ageTo = new JTextField();
