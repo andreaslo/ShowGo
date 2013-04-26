@@ -49,4 +49,37 @@ public class RecognizePseudoTest {
 		assertEquals(pseudoRole.getAssigendRoles().size(), 2);		
 	}
 
+	@Test
+	public void testThreeWitches() {
+		
+		TheaterPlay play = new TheaterPlay();
+		Role pseudoRole = new Role();
+		pseudoRole.setName("1., 2. UND 3. Hexe");
+		Role firstWitch = new Role();
+		firstWitch.setName("1. HEXE");
+		Role secondWitch = new Role();
+		secondWitch.setName("2. HEXE");
+		Role thirdWitch = new Role();
+		thirdWitch.setName("3. HEXE");
+		
+		List<Role> roles = new ArrayList<Role>();
+		roles.add(firstWitch);
+		roles.add(secondWitch);
+		roles.add(thirdWitch);
+		roles.add(pseudoRole);
+		
+		play.setRoles(roles);
+		PseudoRoleRecognition recognizer = new PseudoRoleRecognition();
+		recognizer.recognizePseudoRoles(play);
+		
+		assertTrue(pseudoRole.isPseudoRole());
+		assertTrue(pseudoRole.getAssigendRoles().contains(firstWitch));
+		assertTrue(pseudoRole.getAssigendRoles().contains(secondWitch));
+		assertTrue(pseudoRole.getAssigendRoles().contains(thirdWitch));
+		assertFalse(firstWitch.isPseudoRole());
+		assertFalse(secondWitch.isPseudoRole());
+		assertFalse(thirdWitch.isPseudoRole());
+		assertEquals(pseudoRole.getAssigendRoles().size(), 3);		
+	}
+	
 }
