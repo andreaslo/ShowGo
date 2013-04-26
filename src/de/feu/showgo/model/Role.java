@@ -103,6 +103,10 @@ public class Role {
 	}
 
 	public void setPseudoRole(boolean pseudoRole) {
+		if(!pseudoRole){
+			assigendRoles.clear();
+		}
+		
 		this.pseudoRole = pseudoRole;
 	}
 
