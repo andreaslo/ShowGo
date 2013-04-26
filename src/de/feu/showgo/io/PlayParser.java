@@ -232,6 +232,8 @@ public class PlayParser {
 		}
 		play.setRoles(rolesList);
 
+		PseudoRoleRecognition recognizer = new PseudoRoleRecognition();
+		recognizer.recognizePseudoRoles(play);
 		return play;
 	}
 
