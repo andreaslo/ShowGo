@@ -356,5 +356,14 @@ public class PlayParser {
 		
 		return role;
 	}
+	
+	
+	
+	public void recognizePseudoRoles(TheaterPlay play){
+		
+	}
 
+	
+	
+	
 }
