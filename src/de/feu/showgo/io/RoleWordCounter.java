@@ -29,7 +29,7 @@ public class RoleWordCounter {
 							passageRole.setWords(passageRole.getWords() + textCount);
 						}
 					}
-				}
+				}				
 			}
 		}
 	}

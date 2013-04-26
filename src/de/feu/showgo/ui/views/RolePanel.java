@@ -22,16 +22,20 @@ import de.feu.showgo.ui.dialogs.RolesSelectDialog;
 public class RolePanel {
 
 	private MainWindow mainWindow;
+	private ReadPlayView view;
 	private TheaterPlay model;
 	private Role role;
 	private JPanel rolePanel;
 	private static final Logger log = Logger.getLogger(RolePanel.class);
+	private JTextField requiredWords;
 	
-	public RolePanel(MainWindow mainWindow, TheaterPlay model, Role role, JPanel rolePanel){
+	
+	public RolePanel(MainWindow mainWindow, ReadPlayView view, TheaterPlay model, Role role, JPanel rolePanel){
 		this.role = role;
 		this.rolePanel = rolePanel;
 		this.mainWindow = mainWindow;
 		this.model = model;
+		this.view = view;
 	}
 	
 	
@@ -51,7 +55,7 @@ public class RolePanel {
 		JLabel nameLabel = new JLabel(role.getName());
 		String[] genders = { "Männlich", "Weiblich" };
 		JComboBox<String> genderSelect = new JComboBox<String>(genders);
-		JTextField requiredWords = new JTextField(role.getWords() + "");
+		requiredWords = new JTextField(role.getWords() + "");
 		requiredWords.setEnabled(false);
 		JTextField ageFrom = new JTextField();
 		JTextField ageTo = new JTextField();
@@ -74,6 +78,7 @@ public class RolePanel {
 	private void unsetPseudo(final Role role, JPanel rolePanel) {
 		log.debug("unset pseudo");
 		role.setPseudoRole(false);
+		view.updateWordCounter();
 		setToNormalRole();
 	}
 
@@ -112,6 +117,7 @@ public class RolePanel {
 				if (dialog.isApproved()) {
 					role.setAssigendRoles(dialog.getSelectedRoles());
 					setAssignedLabelText(assignedRolesDisplay, role);
+					view.updateWordCounter();
 				}
 			}
 		});
@@ -147,5 +153,12 @@ public class RolePanel {
 													// line-breaks
 	}
 
-	
+
+	public Role getRole() {
+		return role;
+	}
+
+
+
+
 }

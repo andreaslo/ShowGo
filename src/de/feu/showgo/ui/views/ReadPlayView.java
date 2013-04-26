@@ -6,10 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -28,13 +28,13 @@ import de.feu.showgo.model.Role;
 import de.feu.showgo.model.Scene;
 import de.feu.showgo.model.TheaterPlay;
 import de.feu.showgo.ui.MainWindow;
-import de.feu.showgo.ui.dialogs.RolesSelectDialog;
 
 public class ReadPlayView extends JPanel {
 
 	private TheaterPlay model;
 	private MainWindow mainWindow;
 	private static final Logger log = Logger.getLogger(ReadPlayView.class);
+	private List<RolePanel> rolePanels;
 
 	public ReadPlayView(MainWindow mainWindow) {
 		this.mainWindow = mainWindow;
@@ -112,7 +112,7 @@ public class ReadPlayView extends JPanel {
 				JOptionPane.showMessageDialog(mainWindow, "Das Stück " + parsedPlay.getName() + " wurde erfolgreich eingelesen.",
 						parsedPlay.getName() + " erfoglreich eingelesen", JOptionPane.INFORMATION_MESSAGE);
 
-				showRoleSelectPanel();
+				createAndShowRoleSelect();
 			}
 		});
 
@@ -123,8 +123,10 @@ public class ReadPlayView extends JPanel {
 		return fileSelectPanel;
 	}
 
-	private void showRoleSelectPanel() {
-		JPanel rolePanel = createRoleSelectPanel();
+	private void createAndShowRoleSelect() {
+		rolePanels = new ArrayList<RolePanel>();
+		
+		JPanel rolePanel = createRoleSelectTable();
 		add(rolePanel, "1,2");
 
 		JPanel roleAllPanel = createSpecialRoleAllSelectPanel();
@@ -155,7 +157,7 @@ public class ReadPlayView extends JPanel {
 		return roleSelectPanel;
 	}
 
-	private JPanel createRoleSelectPanel() {
+	private JPanel createRoleSelectTable() {
 		JPanel roleSelectPanel = new JPanel();
 		double size[][] = { { TableLayout.FILL }, { 25 } };
 		TableLayout layout = new TableLayout(size);
@@ -185,7 +187,8 @@ public class ReadPlayView extends JPanel {
 		log.debug("creating role panel for " + role);
 
 		final JPanel rolePanel = new JPanel();
-		RolePanel rolePanelWrapper = new RolePanel(mainWindow, model, role, rolePanel);
+		RolePanel rolePanelWrapper = new RolePanel(mainWindow, this, model, role, rolePanel);
+		rolePanels.add(rolePanelWrapper);
 		
 		if (role.isPseudoRole()) {
 			rolePanelWrapper.setToPseudeRole();
@@ -203,11 +206,15 @@ public class ReadPlayView extends JPanel {
 	 * Recalculates the words per role and updates the UI. Should be called
 	 * after changing a role to a pseudo role or back.
 	 */
-	private void updateWordCounter() {
+	public void updateWordCounter() {
 		RoleWordCounter counter = new RoleWordCounter();
 		counter.updateRoleWords(model);
 		
-		
+		for(RolePanel panel : rolePanels){
+			if(!panel.getRole().isPseudoRole()){
+				panel.setToNormalRole();
+			}
+		}
 	}
 
 }
