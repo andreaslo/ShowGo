@@ -54,7 +54,7 @@ public class RecognizePseudoTest {
 		
 		TheaterPlay play = new TheaterPlay();
 		Role pseudoRole = new Role();
-		pseudoRole.setName("1., 2. UND 3. Hexe");
+		pseudoRole.setName("1., 2. UND 3. HEXE");
 		Role firstWitch = new Role();
 		firstWitch.setName("1. HEXE");
 		Role secondWitch = new Role();
