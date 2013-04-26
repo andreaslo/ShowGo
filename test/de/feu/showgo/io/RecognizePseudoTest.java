@@ -97,11 +97,15 @@ public class RecognizePseudoTest {
 			recognizer.recognizePseudoRoles(play);
 			
 			Role allRole = play.getActs().get(0).getScenes().get(0).getAllRole();
+			for(Role assignedRole : allRole.getAssigendRoles()){
+				log.debug(assignedRole.getName());
+			}
+			
 			assertTrue(allRole.isPseudoRole());
-			assertEquals(allRole.getAssigendRoles().size(), 3);
 			assertTrue(allRole.getAssigendRoles().contains(findRoleByName(play.getRoles(), "1. HEXE")));
 			assertTrue(allRole.getAssigendRoles().contains(findRoleByName(play.getRoles(), "2. HEXE")));
 			assertTrue(allRole.getAssigendRoles().contains(findRoleByName(play.getRoles(), "3. HEXE")));
+			assertEquals(allRole.getAssigendRoles().size(), 3);
 		} catch (IOException e) {
 			log.error("",e);
 		} catch (ParsingException e) {

@@ -7,13 +7,17 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 
+import de.feu.showgo.model.Act;
+import de.feu.showgo.model.Paragraph;
+import de.feu.showgo.model.Passage;
 import de.feu.showgo.model.Role;
+import de.feu.showgo.model.Scene;
 import de.feu.showgo.model.TheaterPlay;
 
 public class PseudoRoleRecognition {
 
 	private static final Logger log = Logger.getLogger(PseudoRoleRecognition.class);
-	
+
 	public void recognizePseudoRoles(TheaterPlay play) {
 		log.debug("recognizing pseudo roles");
 
@@ -23,6 +27,8 @@ public class PseudoRoleRecognition {
 			recognizeAndPattern(curRole, play.getRoles());
 			recognizeEnumeration(curRole, play.getRoles());
 		}
+
+		fillAllRoles(play);
 	}
 
 	private Role findRoleByName(List<Role> haystack, String needle) {
@@ -33,23 +39,25 @@ public class PseudoRoleRecognition {
 		}
 		return null;
 	}
-	
-	private boolean recognizeEnumeration(Role curRole, List<Role> allRoles){
+
+	private boolean recognizeEnumeration(Role curRole, List<Role> allRoles) {
 		Pattern p = Pattern.compile("([0-9])\\.,+ ([0-9])\\. und ([0-9])\\. (\\w+)", Pattern.DOTALL | Pattern.CASE_INSENSITIVE);
 		Matcher m = p.matcher(curRole.getName());
 
 		if (m.find()) {
 			log.debug("Pattern enumeration matches");
-			
+
 			List<String> personNames = new ArrayList<String>();
-			for(int i = 1; i < m.groupCount(); i++){ // i=0 contains all matches, the last group the name
+			for (int i = 1; i < m.groupCount(); i++) { // i=0 contains all
+														// matches, the last
+														// group the name
 				String personName = m.group(i) + ". " + m.group(m.groupCount());
 				log.debug("person name " + i + ": " + personName);
 				personNames.add(personName);
 			}
-			
+
 			curRole.setPseudoRole(true);
-			for(String personName : personNames){
+			for (String personName : personNames) {
 				Role role = findRoleByName(allRoles, personName);
 				if (role == null) {
 					log.debug(personName + " not found in role list");
@@ -59,12 +67,11 @@ public class PseudoRoleRecognition {
 			}
 			return true;
 		}
-		
+
 		return false;
 	}
-	
-	
-	private boolean recognizeAndPattern(Role curRole, List<Role> allRoles){
+
+	private boolean recognizeAndPattern(Role curRole, List<Role> allRoles) {
 		Pattern p = Pattern.compile("(\\w+) und (\\w+)", Pattern.DOTALL | Pattern.CASE_INSENSITIVE);
 		Matcher m = p.matcher(curRole.getName());
 
@@ -90,11 +97,31 @@ public class PseudoRoleRecognition {
 			} else {
 				curRole.assignRole(role2);
 			}
-			
+
 			return true;
 		}
-		
+
 		return false;
+	}
+
+	private void fillAllRoles(TheaterPlay play){
+		for (Act act : play.getActs()) {
+			for (Scene scene : act.getScenes()) {
+				Role allRole = scene.getAllRole();
+				if (allRole != null) {
+					allRole.setPseudoRole(true);
+					for (Paragraph paragraph : scene.getParagraphs()) {
+						if (paragraph instanceof Passage) {
+							Passage curPassage = (Passage) paragraph;
+							Role passageRole = curPassage.getRole();
+							if (!allRole.getAssigendRoles().contains(passageRole) && passageRole != allRole) {
+								allRole.assignRole(passageRole);
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 	
 }
