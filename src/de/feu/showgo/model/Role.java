@@ -134,6 +134,11 @@ public class Role {
 		this.ageTo = ageTo;
 	}
 
+
+	public void setAssigendRoles(List<Role> assigendRoles) {
+		this.assigendRoles = assigendRoles;
+	}
+
 	
 	
 	

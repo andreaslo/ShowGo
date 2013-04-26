@@ -6,9 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -36,12 +33,10 @@ public class ReadPlayView extends JPanel {
 
 	private TheaterPlay model;
 	private MainWindow mainWindow;
-	private Map<Role, List<Role>> pseudoRoleAssignments;
 	private static final Logger log = Logger.getLogger(ReadPlayView.class);
 
 	public ReadPlayView(MainWindow mainWindow) {
 		this.mainWindow = mainWindow;
-		pseudoRoleAssignments = new HashMap<Role, List<Role>>();
 		createComponent();
 		setName("Bühnenstück einlesen");
 	}
@@ -189,8 +184,14 @@ public class ReadPlayView extends JPanel {
 	private JPanel createRolePanel(final Role role) {
 		log.debug("creating role panel for " + role);
 
+		
 		final JPanel rolePanel = new JPanel();
-		fillRolePanel(role, rolePanel);
+		if(role.isPseudoRole()){
+			setPseude(role, rolePanel);
+		}else{
+			fillRolePanel(role, rolePanel);
+		}
+
 
 		return rolePanel;
 	}
@@ -228,7 +229,8 @@ public class ReadPlayView extends JPanel {
 
 	private void unsetPseudo(final Role role, JPanel rolePanel) {
 		log.debug("unset pseudo");
-		pseudoRoleAssignments.remove(role);
+		role.setPseudoRole(false);
+		role.setAssigendRoles(null);
 		rolePanel.removeAll();
 		fillRolePanel(role, rolePanel);
 		revalidate();
@@ -236,6 +238,8 @@ public class ReadPlayView extends JPanel {
 	}
 
 	private void setPseude(final Role role, final JPanel rolePanel) {
+		role.setPseudoRole(true);
+		
 		rolePanel.removeAll();
 
 		double size[][] = { { 85, 270, 190 }, { 10, TableLayout.PREFERRED, TableLayout.PREFERRED, 10 } };
@@ -260,24 +264,14 @@ public class ReadPlayView extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				RolesSelectDialog dialog = new RolesSelectDialog(role, mainWindow, model, pseudoRoleAssignments.get(role));
+				RolesSelectDialog dialog = new RolesSelectDialog(role, mainWindow, model,role.getAssigendRoles());
 				dialog.showDialog();
 				log.debug("dialog closed");
 				log.debug("Selected roles: " + dialog.getSelectedRoles());
 
 				if (dialog.isApproved()) {
-					StringBuilder roleLabelBuilder = new StringBuilder();
-					for (Role selectedRole : dialog.getSelectedRoles()) {
-						roleLabelBuilder.append(selectedRole.getName() + ", ");
-					}
-					// remove last ,
-					String roleText = roleLabelBuilder.toString();
-					if (roleText.length() > 0) {
-						roleText = roleText.substring(0, roleText.length() - 2);
-					}
-					assignedRolesDisplay.setText(roleText);
-
-					pseudoRoleAssignments.put(role, dialog.getSelectedRoles());
+					role.setAssigendRoles(dialog.getSelectedRoles());
+					setAssignedLabelTest(assignedRolesDisplay, role);
 				}
 			}
 		});
@@ -285,7 +279,7 @@ public class ReadPlayView extends JPanel {
 		JPanel roleDisplayPanel = new JPanel();
 		double roleDisplayPanelSize[][] = { { TableLayout.PREFERRED, TableLayout.FILL }, { TableLayout.PREFERRED } };
 		roleDisplayPanel.setLayout(new TableLayout(roleDisplayPanelSize));
-		roleDisplayPanel.add(roleLabel, "0,0");
+		roleDisplayPanel.add(roleLabel, "0,0,l,t");
 		roleDisplayPanel.add(assignedRolesDisplay, "1,0");
 
 		rolePanel.add(pseudoSelect, "0,1");
@@ -293,8 +287,23 @@ public class ReadPlayView extends JPanel {
 		rolePanel.add(assignRoles, "2,1,l,f");
 		rolePanel.add(roleDisplayPanel, "1,2,2,2");
 
+		setAssignedLabelTest(assignedRolesDisplay, role);
+		
 		revalidate();
 		repaint();
+	}
+	
+	private void setAssignedLabelTest(JLabel roleDisplay, Role pseudoRole){
+		StringBuilder roleLabelBuilder = new StringBuilder();
+		for (Role selectedRole : pseudoRole.getAssigendRoles()) {
+			roleLabelBuilder.append(selectedRole.getName() + ", ");
+		}
+		// remove last ,
+		String roleText = roleLabelBuilder.toString();
+		if (roleText.length() > 0) {
+			roleText = roleText.substring(0, roleText.length() - 2);
+		}
+		roleDisplay.setText("<html>" + roleText); // the html-tag enables line-breaks
 	}
 
 }
