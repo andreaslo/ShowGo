@@ -234,6 +234,8 @@ public class PlayParser {
 
 		PseudoRoleRecognition recognizer = new PseudoRoleRecognition();
 		recognizer.recognizePseudoRoles(play);
+		RoleWordCounter wordCounter = new RoleWordCounter();
+		wordCounter.updateRoleWords(play);
 		return play;
 	}
 
