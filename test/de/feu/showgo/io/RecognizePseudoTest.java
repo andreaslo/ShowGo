@@ -7,6 +7,8 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.BasicConfigurator;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.feu.showgo.model.Role;
@@ -14,6 +16,11 @@ import de.feu.showgo.model.TheaterPlay;
 
 public class RecognizePseudoTest {
 
+	@BeforeClass
+	public static void setUp(){
+		BasicConfigurator.configure();
+	}
+	
 	@Test
 	public void testAndKeyword() {
 		
@@ -30,6 +37,7 @@ public class RecognizePseudoTest {
 		roles.add(lenox);
 		roles.add(pseudoRole);
 		
+		play.setRoles(roles);
 		PlayParser parser = new PlayParser();
 		parser.recognizePseudoRoles(play);
 		
