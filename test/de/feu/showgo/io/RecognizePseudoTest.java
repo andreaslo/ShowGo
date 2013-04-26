@@ -38,8 +38,8 @@ public class RecognizePseudoTest {
 		roles.add(pseudoRole);
 		
 		play.setRoles(roles);
-		PlayParser parser = new PlayParser();
-		parser.recognizePseudoRoles(play);
+		PseudoRoleRecognition recognizer = new PseudoRoleRecognition();
+		recognizer.recognizePseudoRoles(play);
 		
 		assertTrue(pseudoRole.isPseudoRole());
 		assertTrue(pseudoRole.getAssigendRoles().contains(macbeth));
