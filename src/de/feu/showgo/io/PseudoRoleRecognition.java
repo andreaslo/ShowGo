@@ -1,5 +1,6 @@
 package de.feu.showgo.io;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,7 +21,7 @@ public class PseudoRoleRecognition {
 			log.debug("Recognizing role " + curRole);
 
 			recognizeAndPattern(curRole, play.getRoles());
-			
+			recognizeEnumeration(curRole, play.getRoles());
 		}
 	}
 
@@ -32,6 +33,36 @@ public class PseudoRoleRecognition {
 		}
 		return null;
 	}
+	
+	private boolean recognizeEnumeration(Role curRole, List<Role> allRoles){
+		Pattern p = Pattern.compile("([0-9])\\.,+ ([0-9])\\. und ([0-9])\\. (\\w+)", Pattern.DOTALL | Pattern.CASE_INSENSITIVE);
+		Matcher m = p.matcher(curRole.getName());
+
+		if (m.find()) {
+			log.debug("Pattern enumeration matches");
+			
+			List<String> personNames = new ArrayList<String>();
+			for(int i = 1; i < m.groupCount(); i++){ // i=0 contains all matches, the last group the name
+				String personName = m.group(i) + ". " + m.group(m.groupCount());
+				log.debug("person name " + i + ": " + personName);
+				personNames.add(personName);
+			}
+			
+			curRole.setPseudoRole(true);
+			for(String personName : personNames){
+				Role role = findRoleByName(allRoles, personName);
+				if (role == null) {
+					log.debug(personName + " not found in role list");
+				} else {
+					curRole.assignRole(role);
+				}
+			}
+			return true;
+		}
+		
+		return false;
+	}
+	
 	
 	private boolean recognizeAndPattern(Role curRole, List<Role> allRoles){
 		Pattern p = Pattern.compile("(\\w+) und (\\w+)", Pattern.DOTALL | Pattern.CASE_INSENSITIVE);
