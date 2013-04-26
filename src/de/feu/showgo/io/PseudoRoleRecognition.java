@@ -19,35 +19,9 @@ public class PseudoRoleRecognition {
 		for (Role curRole : play.getRoles()) {
 			log.debug("Recognizing role " + curRole);
 
-			Pattern p = Pattern.compile("(\\w+) und (\\w+)", Pattern.DOTALL | Pattern.CASE_INSENSITIVE);
-			Matcher m = p.matcher(curRole.getName());
-
-			if (m.find()) {
-				log.debug("Pattern and matches");
-				String personName1 = m.group(1);
-				String personName2 = m.group(2);
-				log.debug("person 1: " + personName1);
-				log.debug("person 2: " + personName2);
-
-				Role role1 = findRoleByName(play.getRoles(), personName1);
-
-				Role role2 = findRoleByName(play.getRoles(), personName2);
-
-				curRole.setPseudoRole(true);
-				if (role1 == null) {
-					log.debug(personName1 + " not found in role list");
-				} else {
-					curRole.assignRole(role1);
-				}
-				if (role2 == null) {
-					log.debug(personName2 + " not found in role list");
-				} else {
-					curRole.assignRole(role2);
-				}
-			}
-
+			recognizeAndPattern(curRole, play.getRoles());
+			
 		}
-
 	}
 
 	private Role findRoleByName(List<Role> haystack, String needle) {
@@ -57,6 +31,39 @@ public class PseudoRoleRecognition {
 			}
 		}
 		return null;
+	}
+	
+	private boolean recognizeAndPattern(Role curRole, List<Role> allRoles){
+		Pattern p = Pattern.compile("(\\w+) und (\\w+)", Pattern.DOTALL | Pattern.CASE_INSENSITIVE);
+		Matcher m = p.matcher(curRole.getName());
+
+		if (m.find()) {
+			log.debug("Pattern and matches");
+			String personName1 = m.group(1);
+			String personName2 = m.group(2);
+			log.debug("person 1: " + personName1);
+			log.debug("person 2: " + personName2);
+
+			Role role1 = findRoleByName(allRoles, personName1);
+
+			Role role2 = findRoleByName(allRoles, personName2);
+
+			curRole.setPseudoRole(true);
+			if (role1 == null) {
+				log.debug(personName1 + " not found in role list");
+			} else {
+				curRole.assignRole(role1);
+			}
+			if (role2 == null) {
+				log.debug(personName2 + " not found in role list");
+			} else {
+				curRole.assignRole(role2);
+			}
+			
+			return true;
+		}
+		
+		return false;
 	}
 	
 }
