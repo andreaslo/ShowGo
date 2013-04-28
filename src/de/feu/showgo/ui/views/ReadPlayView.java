@@ -2,6 +2,7 @@ package de.feu.showgo.ui.views;
 
 import info.clearthought.layout.TableLayout;
 
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -43,7 +44,7 @@ public class ReadPlayView extends JPanel {
 	}
 
 	private void createComponent() {
-		double size[][] = { { 20, TableLayout.FILL, 20 }, { 20, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, } };
+		double size[][] = { { 20, TableLayout.FILL, 20 }, { 20, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED } };
 		setLayout(new TableLayout(size));
 
 		JPanel fileSelectPanel = createFileSelectPanel();
@@ -56,7 +57,7 @@ public class ReadPlayView extends JPanel {
 		double size[][] = { { TableLayout.FILL, 20, TableLayout.PREFERRED }, { 30, 30 } };
 		fileSelectPanel.setLayout(new TableLayout(size));
 
-		final JTextField fileInput = new JTextField("/home/andreas/Macbeth.html");
+		final JTextField fileInput = new JTextField("/home/andreas/Macshort.html");
 		JButton selectFileButton = new JButton("Durchsuchen");
 
 		selectFileButton.addActionListener(new ActionListener() {
@@ -131,6 +132,9 @@ public class ReadPlayView extends JPanel {
 
 		JPanel roleAllPanel = createSpecialRoleAllSelectPanel();
 		add(roleAllPanel, "1,3");
+		
+		JPanel submitPanel = createSubmitPanel();
+		add(submitPanel, "1,4");
 
 		revalidate();
 		repaint();
@@ -198,9 +202,6 @@ public class ReadPlayView extends JPanel {
 
 		return rolePanel;
 	}
-
-
-
 	
 	/**
 	 * Recalculates the words per role and updates the UI. Should be called
@@ -215,6 +216,17 @@ public class ReadPlayView extends JPanel {
 				panel.setToNormalRole();
 			}
 		}
+	}
+	
+	
+	private JPanel createSubmitPanel(){
+		JPanel submitPanel = new JPanel();
+		submitPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+		
+		JButton saveButton = new JButton("Speichern");
+		submitPanel.add(saveButton);
+		
+		return submitPanel;
 	}
 
 }
