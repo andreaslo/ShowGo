@@ -243,6 +243,8 @@ public class ReadPlayView extends JPanel {
 				
 				log.debug("disabeling all components");
 				enableComponents(viewPanel, false);
+				
+				mainWindow.getNavTree().refreshPlays();
 			}
 		});
 

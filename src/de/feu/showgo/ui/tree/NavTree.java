@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 
 import de.feu.showgo.ShowGoDAO;
 import de.feu.showgo.model.Person;
+import de.feu.showgo.model.TheaterPlay;
 import de.feu.showgo.ui.MainWindow;
 
 public class NavTree {
@@ -22,6 +23,8 @@ public class NavTree {
 	private JTree tree;
 	private MainWindow mainWindow;
 	private PersonManagementTreeNode personTreeNode;
+	private PlayTreeNode playsTreeNode;
+	
 	private Logger log = Logger.getLogger(NavTree.class);
 	
 	public NavTree(MainWindow mainWindow){
@@ -33,9 +36,9 @@ public class NavTree {
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode("Wurzel");
 		
 		DefaultMutableTreeNode coreData = new DefaultMutableTreeNode("Stammdaten");
-		DefaultMutableTreeNode plays = new PlayTreeNode("Stücke", mainWindow);
+		playsTreeNode = new PlayTreeNode("Stücke", mainWindow);
 		personTreeNode = new PersonManagementTreeNode("Personen", mainWindow);
-		coreData.add(plays);
+		coreData.add(playsTreeNode);
 		coreData.add(personTreeNode);
 		root.add(coreData);
 		
@@ -114,8 +117,27 @@ public class NavTree {
 		tree.expandRow(personTreeNode.getLevel());
 	}
 	
+	public void refreshPlays(){
+		List<TheaterPlay> plays = ShowGoDAO.getShowGo().getPlays();
+		
+		playsTreeNode.removeAllChildren();
+		for(TheaterPlay play : plays){
+			playsTreeNode.add(new PlayNode(play, mainWindow));
+			log.debug("Adding node, childs: " + playsTreeNode.getChildCount());
+		}
+		
+	    DefaultTreeModel dtm = (DefaultTreeModel) tree.getModel();  
+	    dtm.reload(playsTreeNode);
+		
+		tree.revalidate();
+		tree.repaint();
+		
+		tree.expandRow(playsTreeNode.getLevel());
+	}
+	
 	public void refreshTree(){
 		refreshPersons();
+		refreshPlays();
 	}
 	
 }
