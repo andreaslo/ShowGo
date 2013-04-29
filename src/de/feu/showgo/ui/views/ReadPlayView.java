@@ -23,6 +23,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.log4j.Logger;
 
+import de.feu.showgo.ShowGoDAO;
 import de.feu.showgo.io.ParsingException;
 import de.feu.showgo.io.PlayParser;
 import de.feu.showgo.io.RoleWordCounter;
@@ -238,6 +239,8 @@ public class ReadPlayView extends JPanel {
 					panel.saveRole();
 				}
 
+				ShowGoDAO.getShowGo().addPlay(model);
+				
 				log.debug("disabeling all components");
 				enableComponents(viewPanel, false);
 			}
