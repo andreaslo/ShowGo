@@ -2,6 +2,7 @@ package de.feu.showgo.ui.views;
 
 import info.clearthought.layout.TableLayout;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.FlowLayout;
@@ -12,12 +13,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -32,6 +35,7 @@ import de.feu.showgo.model.Role;
 import de.feu.showgo.model.Scene;
 import de.feu.showgo.model.TheaterPlay;
 import de.feu.showgo.ui.MainWindow;
+import de.feu.showgo.ui.WindowColors;
 
 public class ReadPlayView extends JPanel {
 
@@ -39,6 +43,7 @@ public class ReadPlayView extends JPanel {
 	private MainWindow mainWindow;
 	private static final Logger log = Logger.getLogger(ReadPlayView.class);
 	private List<RolePanel> rolePanels;
+	private JLabel currentMessage;
 
 	public ReadPlayView(MainWindow mainWindow) {
 		this.mainWindow = mainWindow;
@@ -48,7 +53,7 @@ public class ReadPlayView extends JPanel {
 
 	private void createComponent() {
 		double size[][] = { { 20, TableLayout.FILL, 20 },
-				{ 20, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED } };
+				{ 20, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, 30 } };
 		setLayout(new TableLayout(size));
 
 		JPanel fileSelectPanel = createFileSelectPanel();
@@ -245,6 +250,8 @@ public class ReadPlayView extends JPanel {
 				enableComponents(viewPanel, false);
 				
 				mainWindow.getNavTree().refreshPlays();
+				
+				showMessage("Das Stück " + model.getName() + " wurde erfolgreich angelegt.", WindowColors.SUCCESS);
 			}
 		});
 
@@ -266,4 +273,27 @@ public class ReadPlayView extends JPanel {
 			}
 		}
 	}
+	
+	private void showMessage(String message, Color background){
+		removeMessage();
+		
+		log.debug("showing message " + message);
+		currentMessage = new JLabel(message);
+		currentMessage.setBorder(BorderFactory.createEtchedBorder());
+		currentMessage.setHorizontalAlignment( SwingConstants.CENTER );
+		currentMessage.setBackground(background);
+		currentMessage.setOpaque(true);
+		this.add(currentMessage, "1,5");
+		this.revalidate();
+		this.repaint();
+	}
+
+	private void removeMessage(){
+		if(currentMessage != null){
+			this.remove(currentMessage);
+			this.revalidate();
+			this.repaint();
+		}
+	}
+	
 }
