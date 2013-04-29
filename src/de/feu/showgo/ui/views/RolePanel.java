@@ -32,6 +32,7 @@ public class RolePanel {
 	private JTextField ageFrom;
 	private JTextField ageTo;
 	private JComboBox<String> genderSelect;
+	private String errorMessage;
 	
 	
 	public RolePanel(MainWindow mainWindow, ReadPlayView view, TheaterPlay model, Role role, JPanel rolePanel){
@@ -181,7 +182,66 @@ public class RolePanel {
 		}
 	}
 
+	/**
+	 * This methode validates the role panel. For regular roles both age fields must be set, contain an integer and the from age
+	 * must not be higher than the to age. Pseudo Roles need a least one child role assigned.
+	 * 
+	 * @return
+	 */
+	public boolean isValid(){
+		return performValidation();
+	}
+	
+	private boolean performValidation(){
+		if(role.isPseudoRole()){
+			if(role.getAssigendRoles().isEmpty()){
+				errorMessage = "Der Pseudorolle " + role.getName() + " sind keine Rollen zugewiesen.";
+				return false;
+			}
+		}else{
+			if(ageFrom.getText().equals("")){
+				errorMessage = "Das \"Alter von\" Feld ist nicht gesetzt für Rolle " + role.getName();
+				return false;
+			}
+			if(ageTo.getText().equals("")){
+				errorMessage = "Das \"Alter bis\" Feld ist nicht gesetzt für Rolle " + role.getName();
+				return false;
+			}
+			
+			int ageFromInt = 0;
+			int ageToInt = 0;
+			try{
+				ageFromInt = Integer.valueOf(ageFrom.getText());
+			}catch(NumberFormatException notUsed){
+				errorMessage = "Das \"Alter von\" Feld der Rolle " + role.getName()+ " enthält keine ganze Zahl.";
+				return false;
+			}
+			
+			try{
+				ageToInt = Integer.valueOf(ageTo.getText());
+			}catch(NumberFormatException notUsed){
+				errorMessage = "Das \"Alter bis\" Feld der Rolle " + role.getName()+ " enthält keine ganze Zahl.";
+				return false;
+			}
+			
+			if(ageFromInt > ageToInt){
+				errorMessage = "Das \"Alter von\" Feld der Rolle " + role.getName()+ " ist größer als das \"Alter bis\" Feld.";
+				return false;
+			}
+		}
+		
+		
+		return true;
+	}
 
-
-
+	/**
+	 * This method returns the validation error message. If there is no error it returns null. The method internally performs a validation.
+	 * @return
+	 */
+	public String getValidationErrorMessage() {
+		errorMessage = null;
+		performValidation();
+		return errorMessage;
+	}
+	
 }

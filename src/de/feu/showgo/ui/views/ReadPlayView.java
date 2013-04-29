@@ -239,6 +239,14 @@ public class ReadPlayView extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				log.debug("validating");
+				for (RolePanel panel : rolePanels) {
+					if(!panel.isValid()){
+						showMessage(panel.getValidationErrorMessage(), WindowColors.ERROR);
+						return;
+					}
+				}
+				
 				log.debug("saving roles to backing model");
 				for (RolePanel panel : rolePanels) {
 					panel.saveRole();
