@@ -46,6 +46,7 @@ public class ShowGo {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((persons == null) ? 0 : persons.hashCode());
+		result = prime * result + ((plays == null) ? 0 : plays.hashCode());
 		return result;
 	}
 
@@ -62,6 +63,11 @@ public class ShowGo {
 			if (other.persons != null)
 				return false;
 		} else if (!persons.equals(other.persons))
+			return false;
+		if (plays == null) {
+			if (other.plays != null)
+				return false;
+		} else if (!plays.equals(other.plays))
 			return false;
 		return true;
 	}
