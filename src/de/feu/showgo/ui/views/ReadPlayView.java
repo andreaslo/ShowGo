@@ -2,6 +2,8 @@ package de.feu.showgo.ui.views;
 
 import info.clearthought.layout.TableLayout;
 
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,7 +46,8 @@ public class ReadPlayView extends JPanel {
 	}
 
 	private void createComponent() {
-		double size[][] = { { 20, TableLayout.FILL, 20 }, { 20, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED } };
+		double size[][] = { { 20, TableLayout.FILL, 20 },
+				{ 20, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED } };
 		setLayout(new TableLayout(size));
 
 		JPanel fileSelectPanel = createFileSelectPanel();
@@ -126,13 +129,13 @@ public class ReadPlayView extends JPanel {
 
 	private void createAndShowRoleSelect() {
 		rolePanels = new ArrayList<RolePanel>();
-		
+
 		JPanel rolePanel = createRoleSelectTable();
 		add(rolePanel, "1,2");
 
 		JPanel roleAllPanel = createSpecialRoleAllSelectPanel();
 		add(roleAllPanel, "1,3");
-		
+
 		JPanel submitPanel = createSubmitPanel();
 		add(submitPanel, "1,4");
 
@@ -193,7 +196,7 @@ public class ReadPlayView extends JPanel {
 		final JPanel rolePanel = new JPanel();
 		RolePanel rolePanelWrapper = new RolePanel(mainWindow, this, model, role, rolePanel);
 		rolePanels.add(rolePanelWrapper);
-		
+
 		if (role.isPseudoRole()) {
 			rolePanelWrapper.setToPseudeRole();
 		} else {
@@ -202,7 +205,7 @@ public class ReadPlayView extends JPanel {
 
 		return rolePanel;
 	}
-	
+
 	/**
 	 * Recalculates the words per role and updates the UI. Should be called
 	 * after changing a role to a pseudo role or back.
@@ -210,23 +213,46 @@ public class ReadPlayView extends JPanel {
 	public void updateWordCounter() {
 		RoleWordCounter counter = new RoleWordCounter();
 		counter.updateRoleWords(model);
-		
-		for(RolePanel panel : rolePanels){
-			if(!panel.getRole().isPseudoRole()){
+
+		for (RolePanel panel : rolePanels) {
+			if (!panel.getRole().isPseudoRole()) {
 				panel.setToNormalRole();
 			}
 		}
 	}
-	
-	
-	private JPanel createSubmitPanel(){
+
+	private JPanel createSubmitPanel() {
 		JPanel submitPanel = new JPanel();
 		submitPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-		
+
 		JButton saveButton = new JButton("Speichern");
 		submitPanel.add(saveButton);
-		
+
+		final JPanel viewPanel = this;
+		saveButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				log.debug("saving roles to backing model");
+				for (RolePanel panel : rolePanels) {
+					panel.saveRole();
+				}
+
+				log.debug("");
+				enableComponents(viewPanel, false);
+			}
+		});
+
 		return submitPanel;
 	}
 
+	private void enableComponents(Container container, boolean enable) {
+		Component[] components = container.getComponents();
+		for (Component component : components) {
+			component.setEnabled(enable);
+			if (component instanceof Container) {
+				enableComponents((Container) component, enable);
+			}
+		}
+	}
 }

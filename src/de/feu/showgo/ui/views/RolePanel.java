@@ -13,7 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import org.apache.log4j.Logger;
+import org.hamcrest.core.Is;
 
+import de.feu.showgo.model.Gender;
 import de.feu.showgo.model.Role;
 import de.feu.showgo.model.TheaterPlay;
 import de.feu.showgo.ui.MainWindow;
@@ -28,6 +30,9 @@ public class RolePanel {
 	private JPanel rolePanel;
 	private static final Logger log = Logger.getLogger(RolePanel.class);
 	private JTextField requiredWords;
+	private JTextField ageFrom;
+	private JTextField ageTo;
+	private JComboBox<String> genderSelect;
 	
 	
 	public RolePanel(MainWindow mainWindow, ReadPlayView view, TheaterPlay model, Role role, JPanel rolePanel){
@@ -54,11 +59,11 @@ public class RolePanel {
 
 		JLabel nameLabel = new JLabel(role.getName());
 		String[] genders = { "Männlich", "Weiblich" };
-		JComboBox<String> genderSelect = new JComboBox<String>(genders);
+		genderSelect = new JComboBox<String>(genders);
 		requiredWords = new JTextField(role.getWords() + "");
 		requiredWords.setEnabled(false);
-		JTextField ageFrom = new JTextField();
-		JTextField ageTo = new JTextField();
+		ageFrom = new JTextField();
+		ageTo = new JTextField();
 
 		double size[][] = { { 85, 270, 100, 10, 80, 10, 50, 10, 50 }, { TableLayout.PREFERRED } };
 		rolePanel.setLayout(new TableLayout(size));
@@ -156,6 +161,25 @@ public class RolePanel {
 
 	public Role getRole() {
 		return role;
+	}
+
+
+	/**
+	 * This methods stores the ui fields into the backing model. The method is only applicable for non-pseudo roles. It will do nothing
+	 * called on a pseudo-role.
+	 */
+	public void saveRole() {
+		if(!role.isPseudoRole()){
+			role.setAgeFrom(Integer.valueOf(ageFrom.getText()));
+			role.setAgeTo(Integer.valueOf(ageTo.getText()));
+			if(genderSelect.getSelectedIndex() == 0){
+				role.setGender(Gender.MALE);
+			}else if(genderSelect.getSelectedIndex() == 1){
+				role.setGender(Gender.FEMALE);
+			}else{
+				log.error("unknown gender");
+			}
+		}
 	}
 
 
