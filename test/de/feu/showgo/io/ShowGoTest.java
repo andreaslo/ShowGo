@@ -1,7 +1,9 @@
 package de.feu.showgo.io;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 
 import org.junit.Test;
@@ -9,6 +11,7 @@ import org.junit.Test;
 import de.feu.showgo.model.Gender;
 import de.feu.showgo.model.Person;
 import de.feu.showgo.model.ShowGo;
+import de.feu.showgo.model.TheaterPlay;
 
 public class ShowGoTest {
 
@@ -33,6 +36,40 @@ public class ShowGoTest {
 		show2.addPerson(p2);
 		
 		assertEquals(show1, show2);
+	}
+	
+	@Test
+	public void equalsTestPlays() {
+		Date birthday = new Date();
+		
+		ShowGo equal1 = new ShowGo();
+		ShowGo equal2 = new ShowGo();
+		ShowGo different = new ShowGo();
+		
+		PlayParser parser = new PlayParser();
+		File macBethInput = new File("testData" + System.getProperty("file.separator") + "Macbeth.html");
+		File macShortInput = new File("testData" + System.getProperty("file.separator") + "Macshort.html");
+		TheaterPlay macBeth = null;
+		TheaterPlay macShort = null;
+		try {
+			macBeth = parser.generatePlay(macBethInput);
+			macShort = parser.generatePlay(macShortInput);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		} catch (ParsingException e1) {
+			e1.printStackTrace();
+		}
+		
+		assertNotNull(macBeth);
+		assertNotNull(macShort);
+		
+		equal1.addPlay(macBeth);
+		equal2.addPlay(macBeth);
+		different.addPlay(macShort);
+		
+		assertEquals(equal1, equal2);
+		assertNotEquals(equal1, different);
+		
 	}
 
 }
