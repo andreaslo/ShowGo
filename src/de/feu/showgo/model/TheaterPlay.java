@@ -1,6 +1,7 @@
 package de.feu.showgo.model;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -44,6 +45,17 @@ public class TheaterPlay {
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
+	
+	public List<Role> getRegularRoles(){
+		List<Role> regularRoles = new ArrayList<Role>();
+		for(Role role : roles){
+			if(!role.isPseudoRole()){
+				regularRoles.add(role);
+			}
+		}
+		return regularRoles;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
