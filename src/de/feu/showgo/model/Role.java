@@ -24,6 +24,9 @@ public class Role {
 	private int ageFrom;
 	@XmlElement(name="ageTo")
 	private int ageTo;
+	@XmlElement(name="gender")
+	private Gender gender;
+	
 	
 	@XmlElement(name="pseudoRole")
 	private boolean pseudoRole;
@@ -141,6 +144,16 @@ public class Role {
 
 	public void setAssigendRoles(List<Role> assigendRoles) {
 		this.assigendRoles = assigendRoles;
+	}
+
+
+	public Gender getGender() {
+		return gender;
+	}
+
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
 	}
 
 	
