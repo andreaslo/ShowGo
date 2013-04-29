@@ -238,7 +238,7 @@ public class ReadPlayView extends JPanel {
 					panel.saveRole();
 				}
 
-				log.debug("");
+				log.debug("disabeling all components");
 				enableComponents(viewPanel, false);
 			}
 		});
@@ -246,6 +246,12 @@ public class ReadPlayView extends JPanel {
 		return submitPanel;
 	}
 
+	/**
+	 * This method recursively sets the enabled state for a container.
+	 * 
+	 * @param container
+	 * @param enable
+	 */
 	private void enableComponents(Container container, boolean enable) {
 		Component[] components = container.getComponents();
 		for (Component component : components) {
