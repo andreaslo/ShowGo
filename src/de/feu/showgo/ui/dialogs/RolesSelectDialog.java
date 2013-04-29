@@ -92,7 +92,7 @@ public class RolesSelectDialog {
 		TableLayout selectTableLayout = new TableLayout(sizeSelectTable);
 		selectTable.setLayout(selectTableLayout);
 		
-		for(final Role curRole : play.getRoles()){
+		for(final Role curRole : play.getRegularRoles()){
 			selectTableLayout.insertRow(1, TableLayout.PREFERRED);
 			JCheckBox roleSelected = new JCheckBox();
 			if(selectedRoles.contains(curRole)){
