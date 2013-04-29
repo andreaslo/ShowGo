@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import org.apache.log4j.Logger;
-import org.hamcrest.core.Is;
 
 import de.feu.showgo.model.Gender;
 import de.feu.showgo.model.Role;
