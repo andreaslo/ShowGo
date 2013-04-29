@@ -71,5 +71,12 @@ public class ShowGo {
 		
 		log.debug("play "+play.getName()+" added, list length: " + plays.size());
 	}
+
+	public List<TheaterPlay> getPlays() {
+		return Collections.unmodifiableList(plays);
+	}
+	
+	
+	
 	
 }
