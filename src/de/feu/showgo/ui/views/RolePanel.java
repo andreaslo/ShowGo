@@ -62,8 +62,8 @@ public class RolePanel {
 		genderSelect = new JComboBox<String>(genders);
 		requiredWords = new JTextField(role.getWords() + "");
 		requiredWords.setEnabled(false);
-		ageFrom = new JTextField("20");
-		ageTo = new JTextField("25");
+		ageFrom = new JTextField();
+		ageTo = new JTextField();
 
 		double size[][] = { { 85, 270, 100, 10, 80, 10, 50, 10, 50 }, { TableLayout.PREFERRED } };
 		rolePanel.setLayout(new TableLayout(size));
