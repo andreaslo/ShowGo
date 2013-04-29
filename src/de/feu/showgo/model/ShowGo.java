@@ -18,6 +18,9 @@ public class ShowGo {
 	@XmlElement(name="person")
 	private List<Person> persons = new ArrayList<Person>();
 	
+	@XmlElement(name="play")
+	private List<TheaterPlay> plays = new ArrayList<TheaterPlay>();
+	
 	private final static Logger log = Logger.getLogger(ShowGo.class);
 
 	public List<Person> getPersons() {
@@ -34,7 +37,7 @@ public class ShowGo {
 		if(persons.remove(person)){
 			log.debug("person "+person.getName()+" added, list length: " + persons.size());
 		}else{
-			log.warn("could not delte user " + person.getName());
+			log.warn("could not delete user " + person.getName());
 		}
 	}
 
@@ -63,6 +66,10 @@ public class ShowGo {
 		return true;
 	}
 	
-	
+	public void addPlay(TheaterPlay play) {
+		plays.add(play);
+		
+		log.debug("play "+play.getName()+" added, list length: " + plays.size());
+	}
 	
 }
