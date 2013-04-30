@@ -156,8 +156,8 @@ public class MainWindow extends JFrame {
 		displayView(new EnsembleView(this));		
 	}
 
-	public void showEditEnsemble(Ensemble ensemble) {
-		displayView(new EnsembleView(this, ensemble));		
+	public void showEditEnsemble(Ensemble ensemble, boolean editable) {
+		displayView(new EnsembleView(this, ensemble, editable));		
 	}
 	
 }

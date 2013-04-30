@@ -3,6 +3,8 @@ package de.feu.showgo.ui.views;
 import info.clearthought.layout.TableLayout;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -42,12 +44,14 @@ public class EnsembleView extends JPanel {
 		createComponent();
 	}
 
-	public EnsembleView(MainWindow mainWindow, Ensemble ensemble) {
+	public EnsembleView(MainWindow mainWindow, Ensemble ensemble, boolean editable) {
 		log.debug("showing ensemble view");
 		this.mainWindow = mainWindow;
 		setName("Ensemble " + ensemble.getName() + " bearbeiten");
 		model = ensemble;
 		createComponent();
+		
+		enableComponents(this, editable);
 	}
 
 	private void createComponent() {
@@ -181,6 +185,18 @@ public class EnsembleView extends JPanel {
 			this.remove(currentMessage);
 			this.revalidate();
 			this.repaint();
+		}
+	}
+	
+	private void enableComponents(Container container, boolean enable) {
+		log.debug("enable components: " + enable);
+		
+		Component[] components = container.getComponents();
+		for (Component component : components) {
+			component.setEnabled(enable);
+			if (component instanceof Container) {
+				enableComponents((Container) component, enable);
+			}
 		}
 	}
 
