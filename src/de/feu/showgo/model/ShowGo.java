@@ -98,6 +98,14 @@ public class ShowGo {
 	public List<TheaterPlay> getPlays() {
 		return Collections.unmodifiableList(plays);
 	}
+
+	public void delteEnsemble(Ensemble ensemble) {
+		if(ensembles.remove(ensemble)){
+			log.debug("ensebmble "+ensemble.getName()+" added, list length: " + ensembles.size());
+		}else{
+			log.warn("could not delete ensemble " + ensemble.getName());
+		}
+	}
 	
 	
 	

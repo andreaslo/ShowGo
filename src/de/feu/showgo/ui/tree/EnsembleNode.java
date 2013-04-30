@@ -5,6 +5,7 @@ import javax.swing.JPopupMenu;
 
 import de.feu.showgo.model.Ensemble;
 import de.feu.showgo.ui.MainWindow;
+import de.feu.showgo.ui.actions.DeleteEnsembleAction;
 import de.feu.showgo.ui.actions.EditEnsembleAction;
 
 public class EnsembleNode extends TreeElement{
@@ -26,13 +27,13 @@ public class EnsembleNode extends TreeElement{
 			
 			JMenuItem editEnsemble = new JMenuItem("Bearbeiten");
 			editEnsemble.addActionListener(new EditEnsembleAction(mainWindow, ensemble));
-//			
-//			JMenuItem deletePerson = new JMenuItem("Löschen");
-//			deletePerson.addActionListener(new DeletePersonAction(mainWindow, person));
-//			
+			
+			JMenuItem deleteEnsemble = new JMenuItem("Löschen");
+			deleteEnsemble.addActionListener(new DeleteEnsembleAction(mainWindow, ensemble));
+			
 			popup.add(editEnsemble);
-//			popup.addSeparator();
-//			popup.add(deletePerson);
+			popup.addSeparator();
+			popup.add(deleteEnsemble);
 			return popup;
 		}
 

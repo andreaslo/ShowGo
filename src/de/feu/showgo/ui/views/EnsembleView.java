@@ -184,4 +184,8 @@ public class EnsembleView extends JPanel {
 		}
 	}
 
+	public Ensemble getModel() {
+		return model;
+	}
+
 }
