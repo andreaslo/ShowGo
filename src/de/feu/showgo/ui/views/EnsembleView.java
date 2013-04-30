@@ -2,9 +2,11 @@ package de.feu.showgo.ui.views;
 
 import info.clearthought.layout.TableLayout;
 
+import java.awt.Font;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -17,13 +19,13 @@ import de.feu.showgo.model.Person;
 import de.feu.showgo.ui.MainWindow;
 
 public class EnsembleView extends JPanel {
-	
+
 	private final static Logger log = Logger.getLogger(EnsembleView.class);
 	private MainWindow mainWindow;
 	private Ensemble model;
 	private PersonsTable assignedPersonsTable;
 	private PersonsTable availablePersonsTable;
-	
+
 	public EnsembleView(MainWindow mainWindow) {
 		log.debug("showing ensemble view");
 		this.mainWindow = mainWindow;
@@ -32,43 +34,51 @@ public class EnsembleView extends JPanel {
 		createComponent();
 	}
 
-
 	private void createComponent() {
 		double size[][] = { { 20, TableLayout.FILL, 20 },
-				{ 20, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, 30 } };
+				{ 20, 60, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, 30 } };
 		setLayout(new TableLayout(size));
 	
 		JPanel ensembleNamePanel = createEnsembleNamePanel();
 		assignedPersonsTable = createAssignedPersonsPanel();
 		availablePersonsTable = createAvailablePersonsPanel();
 		
+
+		JLabel assignedRolesLabel = new JLabel("Zugewiesene Rollen");
+		Font boldFont=new Font(assignedRolesLabel.getFont().getName(),Font.BOLD,assignedRolesLabel.getFont().getSize());
+		assignedRolesLabel.setFont(boldFont);
+		JLabel availableRolesLabel = new JLabel("Verfügbare Rollen");
+		availableRolesLabel.setFont(boldFont);
 		
-		add(ensembleNamePanel, "1,1");
-		add(assignedPersonsTable, "1,2");
-		add(availablePersonsTable, "1,3");
+		add(ensembleNamePanel, "1,1,f,t");
+		add(assignedRolesLabel, "1,2");
+		add(assignedPersonsTable, "1,3");
+		add(availableRolesLabel, "1,4");
+		add(availablePersonsTable, "1,5");
+		
 		
 		revalidate();
 		repaint();
 	}
-	
-	private JPanel createEnsembleNamePanel(){
+
+	private JPanel createEnsembleNamePanel() {
 		JPanel ensembleNamePanel = new JPanel();
 		double size[][] = { { 120, TableLayout.FILL }, { 30 } };
 		TableLayout layout = new TableLayout(size);
 		ensembleNamePanel.setLayout(layout);
-		
+
 		ensembleNamePanel.add(new JLabel("Ensemble Name:"), "0,0");
-		
+
 		JTextField ensembleNameInput = new JTextField();
 		ensembleNamePanel.add(ensembleNameInput, "1,0,f,c");
 
 		return ensembleNamePanel;
 	}
 
-	private PersonsTable createAvailablePersonsPanel(){
+	private PersonsTable createAvailablePersonsPanel() {
 		final PersonsTable availablePersonsTable = new PersonsTable(this, getAvailablePersons(), "Hinzufügen");
 		availablePersonsTable.addPersonEvent(new PersonEvent() {
-			
+
 			@Override
 			public void personEvent(Person person) {
 				log.debug("assigning person: " + person);
@@ -77,14 +87,14 @@ public class EnsembleView extends JPanel {
 				availablePersonsTable.update(getAvailablePersons());
 			}
 		});
-		
-		return availablePersonsTable;		
+
+		return availablePersonsTable;
 	}
-	
-	private PersonsTable createAssignedPersonsPanel(){
+
+	private PersonsTable createAssignedPersonsPanel() {
 		PersonsTable selectedPersonsTable = new PersonsTable(this, model.getMembers(), "Entfernen");
 		selectedPersonsTable.addPersonEvent(new PersonEvent() {
-			
+
 			@Override
 			public void personEvent(Person person) {
 				log.debug("removing person: " + person);
@@ -93,19 +103,18 @@ public class EnsembleView extends JPanel {
 				availablePersonsTable.update(getAvailablePersons());
 			}
 		});
-		
-		return selectedPersonsTable;		
+
+		return selectedPersonsTable;
 	}
-	
-	private List<Person> getAvailablePersons(){
+
+	private List<Person> getAvailablePersons() {
 		List<Person> avaiblablePersons = new LinkedList<Person>();
-		for(Person p : ShowGoDAO.getShowGo().getPersons()){
-			if(!model.getMembers().contains(p)){
+		for (Person p : ShowGoDAO.getShowGo().getPersons()) {
+			if (!model.getMembers().contains(p)) {
 				avaiblablePersons.add(p);
 			}
 		}
 		return avaiblablePersons;
 	}
-	
 
 }
