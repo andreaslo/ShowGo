@@ -8,6 +8,7 @@ import javax.swing.JTextField;
 
 import org.apache.log4j.Logger;
 
+import de.feu.showgo.ShowGoDAO;
 import de.feu.showgo.model.Act;
 import de.feu.showgo.model.Scene;
 import de.feu.showgo.ui.MainWindow;
@@ -32,8 +33,10 @@ public class EnsembleView extends JPanel {
 		setLayout(new TableLayout(size));
 	
 		JPanel ensembleNamePanel = createEnsembleNamePanel();
+		PersonsTable availablePersonsTable = createAvailablePersonsPanel();
 	
 		add(ensembleNamePanel, "1,1");
+		add(availablePersonsTable, "1,2");
 	}
 	
 	private JPanel createEnsembleNamePanel(){
@@ -50,7 +53,11 @@ public class EnsembleView extends JPanel {
 		return ensembleNamePanel;
 	}
 
-
+	private PersonsTable createAvailablePersonsPanel(){
+		PersonsTable availablePersonsTable = new PersonsTable(this, ShowGoDAO.getShowGo().getPersons());
+		
+		return availablePersonsTable;		
+	}
 	
 	
 
