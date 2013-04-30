@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 
 import de.feu.showgo.ShowGoDAO;
 import de.feu.showgo.model.Act;
+import de.feu.showgo.model.Person;
 import de.feu.showgo.model.Scene;
 import de.feu.showgo.ui.MainWindow;
 
@@ -54,10 +55,18 @@ public class EnsembleView extends JPanel {
 	}
 
 	private PersonsTable createAvailablePersonsPanel(){
-		PersonsTable availablePersonsTable = new PersonsTable(this, ShowGoDAO.getShowGo().getPersons());
+		PersonsTable availablePersonsTable = new PersonsTable(this, ShowGoDAO.getShowGo().getPersons(), "Hinzufügen");
+		availablePersonsTable.addPersonEvent(new PersonEvent() {
+			
+			@Override
+			public void personEvent(Person person) {
+				log.debug("event for person: " + person);
+			}
+		});
 		
 		return availablePersonsTable;		
 	}
+	
 	
 	
 
