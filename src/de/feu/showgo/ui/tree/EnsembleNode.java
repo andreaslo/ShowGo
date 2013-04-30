@@ -5,6 +5,7 @@ import javax.swing.JPopupMenu;
 
 import de.feu.showgo.model.Ensemble;
 import de.feu.showgo.ui.MainWindow;
+import de.feu.showgo.ui.actions.CopyEnsembleAction;
 import de.feu.showgo.ui.actions.DeleteEnsembleAction;
 import de.feu.showgo.ui.actions.EditEnsembleAction;
 import de.feu.showgo.ui.actions.ViewEnsembleAction;
@@ -32,12 +33,17 @@ public class EnsembleNode extends TreeElement{
 			JMenuItem editEnsemble = new JMenuItem("Bearbeiten");
 			editEnsemble.addActionListener(new EditEnsembleAction(mainWindow, ensemble));
 			
+			JMenuItem copyEnsemble = new JMenuItem("Kopieren");
+			copyEnsemble.addActionListener(new CopyEnsembleAction(mainWindow, ensemble));
+			
 			JMenuItem deleteEnsemble = new JMenuItem("Löschen");
 			deleteEnsemble.addActionListener(new DeleteEnsembleAction(mainWindow, ensemble));
 			
 			popup.add(showEnsemble);
 			popup.add(editEnsemble);
 			popup.addSeparator();
+			popup.add(copyEnsemble);
+			popup.addSeparator();			
 			popup.add(deleteEnsemble);
 			return popup;
 		}
