@@ -34,6 +34,19 @@ public class Ensemble {
 	public void removePerson(Person person){
 		members.remove(person);
 	}
+	
+	public Ensemble(){}
+	
+	/**
+	 * Copy constructor
+	 * 
+	 * @param oldEnsemble
+	 */
+	public Ensemble(Ensemble oldEnsemble){
+		setName(oldEnsemble.getName());
+		members = new ArrayList<Person>(oldEnsemble.getMembers());
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
