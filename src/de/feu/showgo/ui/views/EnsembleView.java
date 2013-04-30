@@ -189,8 +189,6 @@ public class EnsembleView extends JPanel {
 	}
 	
 	private void enableComponents(Container container, boolean enable) {
-		log.debug("enable components: " + enable);
-		
 		Component[] components = container.getComponents();
 		for (Component component : components) {
 			component.setEnabled(enable);
