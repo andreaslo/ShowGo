@@ -2,6 +2,7 @@ package de.feu.showgo.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -33,11 +34,8 @@ public class Role {
 	@XmlIDREF
 	private List<Role> assigendRoles = new ArrayList<Role>();
 	
-	private static int idCounter;
-	
 	public Role(){
-		idCounter++;
-		id = idCounter + "";
+		id = UUID.randomUUID().toString();
 	}
 	
 	
