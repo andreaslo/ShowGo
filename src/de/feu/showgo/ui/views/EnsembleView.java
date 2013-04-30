@@ -9,10 +9,8 @@ import javax.swing.JTextField;
 import org.apache.log4j.Logger;
 
 import de.feu.showgo.ShowGoDAO;
-import de.feu.showgo.model.Act;
 import de.feu.showgo.model.Ensemble;
 import de.feu.showgo.model.Person;
-import de.feu.showgo.model.Scene;
 import de.feu.showgo.ui.MainWindow;
 
 public class EnsembleView extends JPanel {
