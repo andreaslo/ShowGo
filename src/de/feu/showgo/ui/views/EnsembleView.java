@@ -84,6 +84,8 @@ public class EnsembleView extends JPanel {
 				
 				model.setName(ensembleNameInput.getText());
 				
+				ShowGoDAO.getShowGo().addEnsemble(model);
+				
 				showMessage("Das Ensemble " + model.getName() + " wurde erfolgreich gespeichert.", WindowColors.SUCCESS);
 			}
 		});
