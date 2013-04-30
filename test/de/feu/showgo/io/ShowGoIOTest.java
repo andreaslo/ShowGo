@@ -73,6 +73,7 @@ public class ShowGoIOTest {
 		ensemble.assignPerson(p1);
 		ensemble.assignPerson(p2);
 		ensemble.assignPerson(p3);
+		saveObj.addEnsemble(ensemble);
 		
 		
 		try {
