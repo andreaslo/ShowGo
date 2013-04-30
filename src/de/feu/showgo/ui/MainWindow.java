@@ -17,8 +17,10 @@ import de.feu.showgo.ui.actions.NewAction;
 import de.feu.showgo.ui.actions.SaveAction;
 import de.feu.showgo.ui.actions.SaveAsAction;
 import de.feu.showgo.ui.actions.ShowCreatePersonAction;
+import de.feu.showgo.ui.actions.ShowEnsembleViewAction;
 import de.feu.showgo.ui.actions.ShowReadPlayAction;
 import de.feu.showgo.ui.tree.NavTree;
+import de.feu.showgo.ui.views.EnsembleView;
 import de.feu.showgo.ui.views.PersonManagementView;
 import de.feu.showgo.ui.views.ReadPlayView;
 import de.feu.showgo.ui.views.StartupView;
@@ -79,8 +81,11 @@ public class MainWindow extends JFrame {
 		addPerson.addActionListener(new ShowCreatePersonAction(this));
 		JMenuItem readPlay = new JMenuItem("Stück einlesen");
 		readPlay.addActionListener(new ShowReadPlayAction(this));
+		JMenuItem createEnsemble = new JMenuItem("Ensemble anlegen");
+		createEnsemble.addActionListener(new ShowEnsembleViewAction(this));
 		actionMenu.add(addPerson);
 		actionMenu.add(readPlay);
+		actionMenu.add(createEnsemble);
 
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.add(fileMenu);
@@ -144,6 +149,10 @@ public class MainWindow extends JFrame {
 		}else{
 			setTitle(TITLE + " - " + filename);
 		}
+	}
+
+	public void showEnsembleView() {
+		displayView(new EnsembleView(this));		
 	}
 	
 }
