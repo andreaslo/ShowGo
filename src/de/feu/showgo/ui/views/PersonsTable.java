@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import de.feu.showgo.model.Gender;
 import de.feu.showgo.model.Person;
 
 public class PersonsTable extends JPanel {
@@ -32,7 +33,7 @@ public class PersonsTable extends JPanel {
 		header.add(new JLabel("Name"), "0,0");
 		header.add(new JLabel("Geburtstag"), "1,0");
 		header.add(new JLabel("Geschlecht"), "2,0");
-		header.add(new JLabel("Merfähigkeit in wörtern"), "3,0");
+		header.add(new JLabel("Merfähigkeit in Wörtern"), "3,0");
 
 		add(header, "0,0");
 
@@ -53,7 +54,12 @@ public class PersonsTable extends JPanel {
 		SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
 		
 		row.add(new JLabel(formatter.format(person.getBirthday())), "1,0");
-		row.add(new JLabel(person.getGender().toString()), "2,0");
+		if(person.getGender() == Gender.MALE){
+			row.add(new JLabel("Männlich"), "2,0");
+		}else if(person.getGender() == Gender.FEMALE){
+			row.add(new JLabel("Weiblich"), "2,0");
+		}
+		
 		row.add(new JLabel(person.getWordsRetention() + ""), "3,0");
 		
 		return row;
