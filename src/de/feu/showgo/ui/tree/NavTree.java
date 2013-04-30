@@ -14,6 +14,7 @@ import javax.swing.tree.TreePath;
 import org.apache.log4j.Logger;
 
 import de.feu.showgo.ShowGoDAO;
+import de.feu.showgo.model.Ensemble;
 import de.feu.showgo.model.Person;
 import de.feu.showgo.model.TheaterPlay;
 import de.feu.showgo.ui.MainWindow;
@@ -24,7 +25,7 @@ public class NavTree {
 	private MainWindow mainWindow;
 	private PersonManagementTreeNode personTreeNode;
 	private PlayTreeNode playsTreeNode;
-	private EnsembleManagementTreeNode ensembles;
+	private EnsembleManagementTreeNode ensemblesTreeNode;
 	
 	private Logger log = Logger.getLogger(NavTree.class);
 	
@@ -43,8 +44,8 @@ public class NavTree {
 		coreData.add(personTreeNode);
 		root.add(coreData);
 		
-		ensembles = new EnsembleManagementTreeNode("Ensembles", mainWindow);
-		root.add(ensembles);
+		ensemblesTreeNode = new EnsembleManagementTreeNode("Ensembles", mainWindow);
+		root.add(ensemblesTreeNode);
 		
 		DefaultMutableTreeNode production = new DefaultMutableTreeNode("Inszenierungen");
 		root.add(production);
@@ -136,9 +137,28 @@ public class NavTree {
 		tree.expandRow(playsTreeNode.getLevel());
 	}
 	
+	public void refreshEnsembles(){
+		List<Ensemble> ensembles = ShowGoDAO.getShowGo().getEnsembles();
+		
+		ensemblesTreeNode.removeAllChildren();
+		for(Ensemble ensemble : ensembles){
+			ensemblesTreeNode.add(new EnsembleNode(ensemble, mainWindow));
+			log.debug("Adding node, childs: " + ensemblesTreeNode.getChildCount());
+		}
+		
+	    DefaultTreeModel dtm = (DefaultTreeModel) tree.getModel();  
+	    dtm.reload(ensemblesTreeNode);
+		
+		tree.revalidate();
+		tree.repaint();
+		
+		tree.expandRow(ensemblesTreeNode.getLevel());
+	}
+	
 	public void refreshTree(){
 		refreshPersons();
 		refreshPlays();
+		refreshEnsembles();
 	}
 	
 }
