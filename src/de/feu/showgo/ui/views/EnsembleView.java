@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 
 import de.feu.showgo.ShowGoDAO;
 import de.feu.showgo.model.Act;
+import de.feu.showgo.model.Ensemble;
 import de.feu.showgo.model.Person;
 import de.feu.showgo.model.Scene;
 import de.feu.showgo.ui.MainWindow;
@@ -18,12 +19,14 @@ public class EnsembleView extends JPanel {
 	
 	private final static Logger log = Logger.getLogger(EnsembleView.class);
 	private MainWindow mainWindow;
+	private Ensemble model;
 	
 	
 	public EnsembleView(MainWindow mainWindow) {
 		log.debug("showing ensemble view");
 		this.mainWindow = mainWindow;
 		setName("Ensemble anlegen");
+		model = new Ensemble();
 		createComponent();
 	}
 
@@ -34,10 +37,16 @@ public class EnsembleView extends JPanel {
 		setLayout(new TableLayout(size));
 	
 		JPanel ensembleNamePanel = createEnsembleNamePanel();
+		PersonsTable assignedPersonsTable = createAssignedPersonsPanel();
 		PersonsTable availablePersonsTable = createAvailablePersonsPanel();
-	
+		
+		
 		add(ensembleNamePanel, "1,1");
-		add(availablePersonsTable, "1,2");
+		add(assignedPersonsTable, "1,2");
+		add(availablePersonsTable, "1,3");
+		
+		revalidate();
+		repaint();
 	}
 	
 	private JPanel createEnsembleNamePanel(){
@@ -65,6 +74,19 @@ public class EnsembleView extends JPanel {
 		});
 		
 		return availablePersonsTable;		
+	}
+	
+	private PersonsTable createAssignedPersonsPanel(){
+		PersonsTable selectedPersonsTable = new PersonsTable(this, model.getMembers(), "Entfernen");
+		selectedPersonsTable.addPersonEvent(new PersonEvent() {
+			
+			@Override
+			public void personEvent(Person person) {
+				log.debug("event for person: " + person);
+			}
+		});
+		
+		return selectedPersonsTable;		
 	}
 	
 	
