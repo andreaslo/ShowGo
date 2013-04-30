@@ -18,8 +18,12 @@ public class Ensemble {
 		return Collections.unmodifiableList(members);
 	}
 	
+	public void assignPerson(Person person){
+		members.add(person);
+	}
 	
-	
-	
+	public void removePerson(Person person){
+		members.remove(person);
+	}
 	
 }
