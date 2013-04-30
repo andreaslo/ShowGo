@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import de.feu.showgo.model.Ensemble;
-import de.feu.showgo.model.Person;
 import de.feu.showgo.ui.MainWindow;
 
 public class EditEnsembleAction implements ActionListener {
