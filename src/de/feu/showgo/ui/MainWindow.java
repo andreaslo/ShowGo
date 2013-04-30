@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 
+import de.feu.showgo.model.Ensemble;
 import de.feu.showgo.model.Person;
 import de.feu.showgo.ui.actions.LoadAction;
 import de.feu.showgo.ui.actions.NewAction;
@@ -153,6 +154,10 @@ public class MainWindow extends JFrame {
 
 	public void showEnsembleView() {
 		displayView(new EnsembleView(this));		
+	}
+
+	public void showEditEnsemble(Ensemble ensemble) {
+		displayView(new EnsembleView(this, ensemble));		
 	}
 	
 }

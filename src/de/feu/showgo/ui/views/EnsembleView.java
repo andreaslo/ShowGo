@@ -33,12 +33,20 @@ public class EnsembleView extends JPanel {
 	private PersonsTable availablePersonsTable;
 	private JLabel currentMessage;
 	private JTextField ensembleNameInput;
-
+	
 	public EnsembleView(MainWindow mainWindow) {
 		log.debug("showing ensemble view");
 		this.mainWindow = mainWindow;
 		setName("Ensemble anlegen");
 		model = new Ensemble();
+		createComponent();
+	}
+
+	public EnsembleView(MainWindow mainWindow, Ensemble ensemble) {
+		log.debug("showing ensemble view");
+		this.mainWindow = mainWindow;
+		setName("Ensemble " + ensemble.getName() + " bearbeiten");
+		model = ensemble;
 		createComponent();
 	}
 
@@ -84,7 +92,10 @@ public class EnsembleView extends JPanel {
 				
 				model.setName(ensembleNameInput.getText());
 				
-				ShowGoDAO.getShowGo().addEnsemble(model);
+				if(!ShowGoDAO.getShowGo().getEnsembles().contains(model)){
+					ShowGoDAO.getShowGo().addEnsemble(model);
+				}
+				
 				mainWindow.getNavTree().refreshEnsembles();
 				
 				showMessage("Das Ensemble " + model.getName() + " wurde erfolgreich gespeichert.", WindowColors.SUCCESS);
@@ -103,7 +114,7 @@ public class EnsembleView extends JPanel {
 
 		ensembleNamePanel.add(new JLabel("Ensemble Name:"), "0,0");
 
-		ensembleNameInput = new JTextField();
+		ensembleNameInput = new JTextField(model.getName());
 		ensembleNamePanel.add(ensembleNameInput, "1,0,f,c");
 
 		return ensembleNamePanel;
