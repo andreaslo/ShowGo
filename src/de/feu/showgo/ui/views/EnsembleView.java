@@ -2,6 +2,9 @@ package de.feu.showgo.ui.views;
 
 import info.clearthought.layout.TableLayout;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -18,7 +21,8 @@ public class EnsembleView extends JPanel {
 	private final static Logger log = Logger.getLogger(EnsembleView.class);
 	private MainWindow mainWindow;
 	private Ensemble model;
-	
+	private PersonsTable assignedPersonsTable;
+	private PersonsTable availablePersonsTable;
 	
 	public EnsembleView(MainWindow mainWindow) {
 		log.debug("showing ensemble view");
@@ -35,8 +39,8 @@ public class EnsembleView extends JPanel {
 		setLayout(new TableLayout(size));
 	
 		JPanel ensembleNamePanel = createEnsembleNamePanel();
-		PersonsTable assignedPersonsTable = createAssignedPersonsPanel();
-		PersonsTable availablePersonsTable = createAvailablePersonsPanel();
+		assignedPersonsTable = createAssignedPersonsPanel();
+		availablePersonsTable = createAvailablePersonsPanel();
 		
 		
 		add(ensembleNamePanel, "1,1");
@@ -62,12 +66,15 @@ public class EnsembleView extends JPanel {
 	}
 
 	private PersonsTable createAvailablePersonsPanel(){
-		PersonsTable availablePersonsTable = new PersonsTable(this, ShowGoDAO.getShowGo().getPersons(), "Hinzufügen");
+		final PersonsTable availablePersonsTable = new PersonsTable(this, getAvailablePersons(), "Hinzufügen");
 		availablePersonsTable.addPersonEvent(new PersonEvent() {
 			
 			@Override
 			public void personEvent(Person person) {
-				log.debug("event for person: " + person);
+				log.debug("assigning person: " + person);
+				model.assignPerson(person);
+				assignedPersonsTable.update(model.getMembers());
+				availablePersonsTable.update(getAvailablePersons());
 			}
 		});
 		
@@ -80,14 +87,25 @@ public class EnsembleView extends JPanel {
 			
 			@Override
 			public void personEvent(Person person) {
-				log.debug("event for person: " + person);
+				log.debug("removing person: " + person);
+				model.removePerson(person);
+				assignedPersonsTable.update(model.getMembers());
+				availablePersonsTable.update(getAvailablePersons());
 			}
 		});
 		
 		return selectedPersonsTable;		
 	}
 	
-	
+	private List<Person> getAvailablePersons(){
+		List<Person> avaiblablePersons = new LinkedList<Person>();
+		for(Person p : ShowGoDAO.getShowGo().getPersons()){
+			if(!model.getMembers().contains(p)){
+				avaiblablePersons.add(p);
+			}
+		}
+		return avaiblablePersons;
+	}
 	
 
 }

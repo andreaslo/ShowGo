@@ -86,5 +86,13 @@ public class PersonsTable extends JPanel {
 		
 		return row;
 	}
+
+	public void update(List<Person> persons) {
+		this.persons = persons;
+		removeAll();
+		createComponent();
+		revalidate();
+		repaint();
+	}
 	
 }
