@@ -21,6 +21,9 @@ public class ShowGo {
 	@XmlElement(name="play")
 	private List<TheaterPlay> plays = new ArrayList<TheaterPlay>();
 	
+	@XmlElement(name="ensemble")
+	private List<Ensemble> ensembles = new ArrayList<Ensemble>();
+	
 	private final static Logger log = Logger.getLogger(ShowGo.class);
 
 	public List<Person> getPersons() {
@@ -33,6 +36,14 @@ public class ShowGo {
 		log.debug("person "+person.getName()+" added, list length: " + persons.size());
 	}
 	
+	public void addEnsemble(Ensemble ensemble){
+		ensembles.add(ensemble);
+	}
+	
+	public List<Ensemble> getEnsembles() {
+		return Collections.unmodifiableList(ensembles);
+	}
+
 	public void deltePerson(Person person) {
 		if(persons.remove(person)){
 			log.debug("person "+person.getName()+" added, list length: " + persons.size());
@@ -45,6 +56,7 @@ public class ShowGo {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((ensembles == null) ? 0 : ensembles.hashCode());
 		result = prime * result + ((persons == null) ? 0 : persons.hashCode());
 		result = prime * result + ((plays == null) ? 0 : plays.hashCode());
 		return result;
@@ -59,6 +71,11 @@ public class ShowGo {
 		if (getClass() != obj.getClass())
 			return false;
 		ShowGo other = (ShowGo) obj;
+		if (ensembles == null) {
+			if (other.ensembles != null)
+				return false;
+		} else if (!ensembles.equals(other.ensembles))
+			return false;
 		if (persons == null) {
 			if (other.persons != null)
 				return false;
