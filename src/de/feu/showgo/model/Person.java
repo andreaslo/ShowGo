@@ -1,14 +1,20 @@
 package de.feu.showgo.model;
 
 import java.util.Date;
+import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlID;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Person {
 	
+	@XmlAttribute
+    @XmlID
+	private String id;
 	@XmlElement(name="name")
 	private String name;
 	@XmlElement(name="birthday")
@@ -17,6 +23,10 @@ public class Person {
 	private Gender gender;
 	@XmlElement(name="words")
 	private int wordsRetention;
+	
+	public Person() {
+		id = UUID.randomUUID().toString();
+	}
 	
 	public String getName() {
 		return name;
