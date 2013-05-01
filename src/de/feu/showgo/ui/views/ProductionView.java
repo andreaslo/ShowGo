@@ -52,7 +52,6 @@ public class ProductionView extends JPanel {
 
 		add(productionNamePanel, "1,1,f,t");
 		add(playSelectPanel, "1,2");
-
 	}
 
 	private JPanel createProductionNamePanel() {

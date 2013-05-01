@@ -5,6 +5,7 @@ import java.awt.Component;
 import info.clearthought.layout.TableLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -61,29 +62,35 @@ public class EditTheaterPlayPanel extends JPanel{
 	
 	private JPanel createActNamePanel(Act act){
 		JPanel namePanel = new JPanel();
-		double size[][] = { { 80, TableLayout.FILL }, { 30 } };
+		double size[][] = { { 80, 80, TableLayout.FILL }, { 30 } };
 		TableLayout layout = new TableLayout(size);
 		namePanel.setLayout(layout);
 
-		namePanel.add(new JLabel("Act:"), "0,0");
+		namePanel.add(new JLabel("Akt:"), "1,0");
 
 		JTextField actText = new JTextField(act.getName());
-		namePanel.add(actText, "1,0,f,c");
+		namePanel.add(actText, "2,0,f,c");
+		
+		JButton delete = new JButton("Löschen");
+		namePanel.add(delete, "0,0,l,c");
 
 		return namePanel;
 	}
 	
 	private JPanel createSceneNamePanel(Scene scene){
 		JPanel namePanel = new JPanel();
-		double size[][] = { { 20, 80, TableLayout.FILL }, { 30 } };
+		double size[][] = { { 20, 80, 80, TableLayout.FILL }, { 30 } };
 		TableLayout layout = new TableLayout(size);
 		namePanel.setLayout(layout);
 
-		namePanel.add(new JLabel("Szene:"), "1,0");
+		namePanel.add(new JLabel("Szene:"), "2,0");
 
 		JTextField actText = new JTextField(scene.getName());
-		namePanel.add(actText, "2,0,f,c");
+		namePanel.add(actText, "3,0,f,c");
 
+		JButton delete = new JButton("Löschen");
+		namePanel.add(delete, "1,0,l,c");
+		
 		return namePanel;
 	}
 	
@@ -99,7 +106,7 @@ public class EditTheaterPlayPanel extends JPanel{
 
 	private JPanel createPassagePanel(Passage passage, Role allRole) {
 		JPanel namePanel = new JPanel();
-		double size[][] = { { 40, 200, TableLayout.FILL }, { TableLayout.PREFERRED } };
+		double size[][] = { { 40, 80, 200, TableLayout.FILL }, { TableLayout.PREFERRED } };
 		TableLayout layout = new TableLayout(size);
 		namePanel.setLayout(layout);
 		
@@ -112,15 +119,18 @@ public class EditTheaterPlayPanel extends JPanel{
 			roleSelect.addItem(allRole);
 		}
 		roleSelect.setSelectedItem(passage.getRole());
-		namePanel.add(roleSelect, "1,0,l,c");
+		namePanel.add(roleSelect, "2,0,l,c");
 
 		JTextArea actText = new JTextArea(passage.getText());
 		
 		Border border = BorderFactory.createEtchedBorder();
 		actText.setBorder(border);
 
-		namePanel.add(actText, "2,0,f,c");
+		namePanel.add(actText, "3,0,f,c");
 
+		JButton delete = new JButton("Löschen");
+		namePanel.add(delete, "1,0,l,c");
+		
 		return namePanel;
 	}
 
@@ -128,17 +138,20 @@ public class EditTheaterPlayPanel extends JPanel{
 
 	private JPanel createStageDiection(StageDirection stageDirection) {
 		JPanel namePanel = new JPanel();
-		double size[][] = { { 40, 200, TableLayout.FILL }, { TableLayout.PREFERRED } };
+		double size[][] = { { 40, 80, 200, TableLayout.FILL }, { TableLayout.PREFERRED } };
 		TableLayout layout = new TableLayout(size);
 		namePanel.setLayout(layout);
 
-		namePanel.add(new JLabel("Regieanweisung:"), "1,0");
+		namePanel.add(new JLabel("Regieanweisung:"), "2,0");
 
 		JTextArea stageDirectionText = new JTextArea(stageDirection.getText());
 		Border border = BorderFactory.createEtchedBorder();
 		stageDirectionText.setBorder(border);
-		namePanel.add(stageDirectionText, "2,0,f,c");
+		namePanel.add(stageDirectionText, "3,0,f,c");
 
+		JButton delete = new JButton("Löschen");
+		namePanel.add(delete, "1,0,l,c");
+		
 		return namePanel;
 	}
 	
