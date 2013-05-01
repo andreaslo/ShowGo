@@ -5,18 +5,22 @@ import info.clearthought.layout.TableLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
+import javax.xml.bind.JAXBException;
 
 import org.apache.log4j.Logger;
 
 import de.feu.showgo.ShowGoDAO;
+import de.feu.showgo.io.ParseUtil;
 import de.feu.showgo.model.Production;
 import de.feu.showgo.model.TheaterPlay;
 import de.feu.showgo.ui.MainWindow;
@@ -33,6 +37,7 @@ public class ProductionView extends JPanel {
 		log.debug("showing production view");
 		this.mainWindow = mainWindow;
 		setName("Neue Inszenierung anlegen");
+		model = new Production();
 		createComponent();
 	}
 
@@ -77,17 +82,36 @@ public class ProductionView extends JPanel {
 		for (TheaterPlay play : ShowGoDAO.getShowGo().getPlays()) {
 			playSelect.addItem(play);
 		}
-		
-		JButton usePlayAction = new JButton("Stück verwenden");
+
+		final JButton usePlayAction = new JButton("Stück verwenden");
 		usePlayAction.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(playSelect.getSelectedItem() != null){
-					log.debug("selected play: " + playSelect.getSelectedItem());
+				if (playSelect.getSelectedItem() != null) {
+					TheaterPlay copy = null;
+					try {
+						copy = ParseUtil.copyPlay((TheaterPlay) playSelect.getSelectedItem());
+					} catch (JAXBException e1) {
+						log.error("", e1);
+					} catch (IOException e1) {
+						log.error("", e1);
+					}
+
+					if (copy == null) {
+						JOptionPane.showMessageDialog(mainWindow,
+								"Es ist ein Problem beim Kopieren des Stücks aufgtreten. Für weitere Informationen s. das Logfile", "Fehler",
+								JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+
+					model.setPlay(copy);
+					
+					usePlayAction.setEnabled(false);
+					playSelect.setEnabled(false);
 				}
 			}
 		});
-		
+
 		productionNamePanel.add(playSelect, "0,1,f,c");
 		productionNamePanel.add(usePlayAction, "2,1,c,c");
 
