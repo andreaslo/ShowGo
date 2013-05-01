@@ -17,6 +17,7 @@ import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import org.apache.log4j.Logger;
 
 import de.feu.showgo.ShowGoDAO;
+import de.feu.showgo.model.Production;
 import de.feu.showgo.model.TheaterPlay;
 import de.feu.showgo.ui.MainWindow;
 
@@ -26,6 +27,7 @@ public class ProductionView extends JPanel {
 	private MainWindow mainWindow;
 	private JTextField productionNameInput;
 	private JComboBox<TheaterPlay> playSelect;
+	private Production model;
 
 	public ProductionView(MainWindow mainWindow) {
 		log.debug("showing production view");
@@ -80,7 +82,9 @@ public class ProductionView extends JPanel {
 		usePlayAction.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				log.debug("selected play: " + playSelect.getSelectedItem());
+				if(playSelect.getSelectedItem() != null){
+					log.debug("selected play: " + playSelect.getSelectedItem());
+				}
 			}
 		});
 		
