@@ -51,7 +51,8 @@ public class Role {
 
 	@Override
 	public String toString() {
-		return "Role [name=" + name + ", words=" + words + ", pseudoRole=" + pseudoRole + ", assigendRoles=" + assigendRoles + "]";
+		return "Role [id=" + id + ", name=" + name + ", words=" + words + ", ageFrom=" + ageFrom + ", ageTo=" + ageTo + ", gender=" + gender
+				+ ", pseudoRole=" + pseudoRole + ", assigendRoles=" + assigendRoles + "]";
 	}
 
 	@Override
