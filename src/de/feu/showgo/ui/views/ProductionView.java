@@ -108,6 +108,10 @@ public class ProductionView extends JPanel {
 					
 					usePlayAction.setEnabled(false);
 					playSelect.setEnabled(false);
+					
+					add(new EditTheaterPlayPanel(mainWindow, copy), "1,3");
+					revalidate();
+					repaint();
 				}
 			}
 		});
