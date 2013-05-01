@@ -1,21 +1,25 @@
 package de.feu.showgo.ui.views;
 
+import java.awt.Component;
+
 import info.clearthought.layout.TableLayout;
 
-import java.awt.Color;
-
 import javax.swing.BorderFactory;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
+import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
 import org.apache.log4j.Logger;
 
 import de.feu.showgo.model.Act;
 import de.feu.showgo.model.Paragraph;
 import de.feu.showgo.model.Passage;
+import de.feu.showgo.model.Role;
 import de.feu.showgo.model.Scene;
 import de.feu.showgo.model.StageDirection;
 import de.feu.showgo.model.TheaterPlay;
@@ -48,7 +52,7 @@ public class EditTheaterPlayPanel extends JPanel{
 				row++;
 				
 				for(Paragraph paragraph : scene.getParagraphs()){
-					add(createParagraphPanel(paragraph), "0," + row);
+					add(createParagraphPanel(paragraph, scene.getAllRole()), "0," + row);
 					row++;
 				}
 			}
@@ -83,25 +87,37 @@ public class EditTheaterPlayPanel extends JPanel{
 		return namePanel;
 	}
 	
-	private JPanel createParagraphPanel(Paragraph paragraph){
+	private JPanel createParagraphPanel(Paragraph paragraph, Role allRole){
 		if(paragraph instanceof StageDirection){
 			return createStageDiection((StageDirection) paragraph);
 		}else if(paragraph instanceof Passage){
-			return createPassagePanel((Passage) paragraph);
+			return createPassagePanel((Passage) paragraph, allRole);
 		}else{
 			return null;
 		}
 	}
 
-	private JPanel createPassagePanel(Passage passage) {
+	private JPanel createPassagePanel(Passage passage, Role allRole) {
 		JPanel namePanel = new JPanel();
-		double size[][] = { { 40, 120, TableLayout.FILL }, { TableLayout.PREFERRED } };
+		double size[][] = { { 40, 200, TableLayout.FILL }, { TableLayout.PREFERRED } };
 		TableLayout layout = new TableLayout(size);
 		namePanel.setLayout(layout);
-
-		namePanel.add(new JLabel(passage.getRole().getName()), "1,0");
+		
+		JComboBox<Role> roleSelect = new JComboBox<Role>();
+		roleSelect.setRenderer(new RoleComboRederer());
+		for(Role role : play.getRoles()){
+			roleSelect.addItem(role);
+		}
+		if(allRole != null){
+			roleSelect.addItem(allRole);
+		}
+		roleSelect.setSelectedItem(passage.getRole());
+		namePanel.add(roleSelect, "1,0,l,c");
 
 		JTextArea actText = new JTextArea(passage.getText());
+		
+		Border border = BorderFactory.createEtchedBorder();
+		actText.setBorder(border);
 
 		namePanel.add(actText, "2,0,f,c");
 
@@ -112,14 +128,16 @@ public class EditTheaterPlayPanel extends JPanel{
 
 	private JPanel createStageDiection(StageDirection stageDirection) {
 		JPanel namePanel = new JPanel();
-		double size[][] = { { 40, 120, TableLayout.FILL }, { TableLayout.PREFERRED } };
+		double size[][] = { { 40, 200, TableLayout.FILL }, { TableLayout.PREFERRED } };
 		TableLayout layout = new TableLayout(size);
 		namePanel.setLayout(layout);
 
 		namePanel.add(new JLabel("Regieanweisung:"), "1,0");
 
-		JTextArea actText = new JTextArea(stageDirection.getText());
-		namePanel.add(actText, "2,0,f,c");
+		JTextArea stageDirectionText = new JTextArea(stageDirection.getText());
+		Border border = BorderFactory.createEtchedBorder();
+		stageDirectionText.setBorder(border);
+		namePanel.add(stageDirectionText, "2,0,f,c");
 
 		return namePanel;
 	}
@@ -148,6 +166,20 @@ public class EditTheaterPlayPanel extends JPanel{
 		}
 		
 		return size;
+	}
+	
+	
+	private class RoleComboRederer extends BasicComboBoxRenderer {
+		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+			super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+
+			if (value != null) {
+				Role role = (Role) value;
+				setText(role.getName());
+			}
+
+			return this;
+		}
 	}
 
 }
