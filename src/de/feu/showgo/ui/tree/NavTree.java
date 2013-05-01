@@ -26,6 +26,7 @@ public class NavTree {
 	private PersonManagementTreeNode personTreeNode;
 	private PlayTreeNode playsTreeNode;
 	private EnsembleManagementTreeNode ensemblesTreeNode;
+	private ProductionManagementTreeNode productionManagementTreeNode;
 	
 	private Logger log = Logger.getLogger(NavTree.class);
 	
@@ -47,8 +48,8 @@ public class NavTree {
 		ensemblesTreeNode = new EnsembleManagementTreeNode("Ensembles", mainWindow);
 		root.add(ensemblesTreeNode);
 		
-		DefaultMutableTreeNode production = new DefaultMutableTreeNode("Inszenierungen");
-		root.add(production);
+		productionManagementTreeNode = new ProductionManagementTreeNode("Inszenierungen", mainWindow);
+		root.add(productionManagementTreeNode);
 		
 		tree = new JTree(root);
 		tree.setRootVisible(false);
