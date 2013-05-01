@@ -2,13 +2,14 @@ package de.feu.showgo.ui.views;
 
 import info.clearthought.layout.TableLayout;
 
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
+import java.awt.Color;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 
 import org.apache.log4j.Logger;
 
@@ -35,16 +36,20 @@ public class EditTheaterPlayPanel extends JPanel{
 	
 	
 	private void createComponent(){
-		setLayout(new GridLayout(0,1));
+		setLayout(new TableLayout(generateLayoutSize(play)));
+		int row = 0;
 		
 		for(Act act : play.getActs()){
-			add(createActNamePanel(act));
+			add(createActNamePanel(act), "0," + row);
+			row++;
 			
 			for(Scene scene : act.getScenes()){
-				add(createSceneNamePanel(scene));
+				add(createSceneNamePanel(scene), "0," + row);
+				row++;
 				
 				for(Paragraph paragraph : scene.getParagraphs()){
-					add(createParagraphPanel(paragraph));
+					add(createParagraphPanel(paragraph), "0," + row);
+					row++;
 				}
 			}
 		}
@@ -97,6 +102,7 @@ public class EditTheaterPlayPanel extends JPanel{
 		namePanel.add(new JLabel(passage.getRole().getName()), "1,0");
 
 		JTextArea actText = new JTextArea(passage.getText());
+
 		namePanel.add(actText, "2,0,f,c");
 
 		return namePanel;
@@ -116,6 +122,32 @@ public class EditTheaterPlayPanel extends JPanel{
 		namePanel.add(actText, "2,0,f,c");
 
 		return namePanel;
+	}
+	
+	private double[][] generateLayoutSize(TheaterPlay play){
+		int numRows = 0;
+		
+		for(Act act : play.getActs()){
+			numRows++;
+			for(Scene scene : act.getScenes()){
+				numRows++;
+				for(Paragraph paragraph : scene.getParagraphs()){
+					numRows++;
+				}
+			}
+		}
+		
+		double[][] size = new double[2][];
+		double[] width = {TableLayout.PREFERRED};
+		size[0] = width;
+		double[] height = new double[numRows];
+		size[1] = height;
+				
+		for(int i = 0; i < height.length; i++){
+			height[i] = TableLayout.PREFERRED;
+		}
+		
+		return size;
 	}
 
 }
