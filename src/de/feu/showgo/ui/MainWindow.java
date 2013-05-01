@@ -19,10 +19,12 @@ import de.feu.showgo.ui.actions.SaveAction;
 import de.feu.showgo.ui.actions.SaveAsAction;
 import de.feu.showgo.ui.actions.ShowCreatePersonAction;
 import de.feu.showgo.ui.actions.ShowEnsembleViewAction;
+import de.feu.showgo.ui.actions.ShowProductionViewAction;
 import de.feu.showgo.ui.actions.ShowReadPlayAction;
 import de.feu.showgo.ui.tree.NavTree;
 import de.feu.showgo.ui.views.EnsembleView;
 import de.feu.showgo.ui.views.PersonManagementView;
+import de.feu.showgo.ui.views.ProductionView;
 import de.feu.showgo.ui.views.ReadPlayView;
 import de.feu.showgo.ui.views.StartupView;
 
@@ -84,9 +86,13 @@ public class MainWindow extends JFrame {
 		readPlay.addActionListener(new ShowReadPlayAction(this));
 		JMenuItem createEnsemble = new JMenuItem("Ensemble anlegen");
 		createEnsemble.addActionListener(new ShowEnsembleViewAction(this));
+		JMenuItem createProduction = new JMenuItem("Inszeierung anlegen");
+		createProduction.addActionListener(new ShowProductionViewAction(this));
+		
 		actionMenu.add(addPerson);
 		actionMenu.add(readPlay);
 		actionMenu.add(createEnsemble);
+		actionMenu.add(createProduction);
 
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.add(fileMenu);
@@ -158,6 +164,10 @@ public class MainWindow extends JFrame {
 
 	public void showEditEnsemble(Ensemble ensemble, boolean editable) {
 		displayView(new EnsembleView(this, ensemble, editable));		
+	}
+
+	public void showProductionView() {
+		displayView(new ProductionView(this));		
 	}
 	
 }
