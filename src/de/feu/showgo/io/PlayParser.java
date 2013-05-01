@@ -308,7 +308,7 @@ public class PlayParser {
 			throw new ParsingException("Stage direction element is not defined by a 'regie' tag name. Element: " + paragraphElement);
 		}
 
-		stageDirection.setText(paragraphElement.getText());
+		stageDirection.setText(StringUtil.sanitizeText(paragraphElement.getText()));
 
 		return stageDirection;
 	}
@@ -319,7 +319,7 @@ public class PlayParser {
 			throw new ParsingException("Passage element is not defined by a 'passage' tag name. Element: " + passageElement);
 		}
 
-		passage.setText(passageElement.getText());
+		passage.setText(StringUtil.sanitzieParagraphText(passageElement.getText()));
 
 		if (passageElement.getChildren().size() != 1) {
 			log.debug("no role assigned for " + passageElement.getText());

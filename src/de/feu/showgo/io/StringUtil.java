@@ -25,6 +25,11 @@ public class StringUtil {
 		return input;
 	}
 
+	public static String sanitzieParagraphText(String input){
+		input = input.replaceAll("<br>", "\n");
+		return sanitizeText(input);
+	}
+	
 	public static String sanitizeRoleName(String text) {
 		text = text.trim();
 		if(text.endsWith(".")){
