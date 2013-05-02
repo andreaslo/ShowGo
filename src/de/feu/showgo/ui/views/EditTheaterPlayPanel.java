@@ -149,8 +149,9 @@ public class EditTheaterPlayPanel extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				scene.deleteParagraph(passage);
 				namePanel.removeAll();
+				roleDisplay.updateWordCounter();
 				revalidate();
-				repaint();				
+				repaint();
 			}
 		});
 		namePanel.add(delete, "1,0,l,c");
