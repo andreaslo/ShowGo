@@ -31,6 +31,7 @@ public class EditTheaterPlayPanel extends JPanel{
 	private MainWindow mainWindow;
 	private TheaterPlay play;
 	private static final Logger log = Logger.getLogger(EditTheaterPlayPanel.class);
+	private RolePanel roleDisplay;
 
 	public EditTheaterPlayPanel(MainWindow mainWindow, TheaterPlay play){
 		this.mainWindow = mainWindow;
@@ -40,24 +41,34 @@ public class EditTheaterPlayPanel extends JPanel{
 	
 	
 	
-	private void createComponent(){
-		setLayout(new TableLayout(generateLayoutSize(play)));
+	private void createComponent(){		
+		JPanel theaterDataPanel = new JPanel();
+		theaterDataPanel.setLayout(new TableLayout(generateLayoutSize(play)));
 		int row = 0;
 		
 		for(Act act : play.getActs()){
-			add(createActNamePanel(act), "0," + row);
+			theaterDataPanel.add(createActNamePanel(act), "0," + row);
 			row++;
 			
 			for(Scene scene : act.getScenes()){
-				add(createSceneNamePanel(scene), "0," + row);
+				theaterDataPanel.add(createSceneNamePanel(scene), "0," + row);
 				row++;
 				
 				for(Paragraph paragraph : scene.getParagraphs()){
-					add(createParagraphPanel(paragraph, scene.getAllRole()), "0," + row);
+					theaterDataPanel.add(createParagraphPanel(paragraph, scene.getAllRole()), "0," + row);
 					row++;
 				}
 			}
 		}
+		
+		double size[][] = { { TableLayout.FILL }, { TableLayout.PREFERRED, TableLayout.PREFERRED } };
+		TableLayout layout = new TableLayout(size);
+		setLayout(layout);
+		
+		roleDisplay = new RolePanel(mainWindow, play);
+		add(roleDisplay, "0,0");
+		add(theaterDataPanel, "0,1");
+		
 	}
 	
 	private JPanel createActNamePanel(Act act){
@@ -156,7 +167,7 @@ public class EditTheaterPlayPanel extends JPanel{
 	}
 	
 	private double[][] generateLayoutSize(TheaterPlay play){
-		int numRows = 0;
+		int numRows = 0; 
 		
 		for(Act act : play.getActs()){
 			numRows++;
