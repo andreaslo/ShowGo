@@ -60,6 +60,9 @@ public class Act {
 		} else if (!scenes.equals(other.scenes))
 			return false;
 		return true;
+	}
+	public void deleteScene(Scene scene) {
+		scenes.remove(scene);
 	}	
 	
 }
