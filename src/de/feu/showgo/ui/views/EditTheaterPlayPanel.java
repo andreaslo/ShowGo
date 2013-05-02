@@ -53,13 +53,18 @@ public class EditTheaterPlayPanel extends JPanel{
 			row++;
 			
 			for(Scene scene : act.getScenes()){
-				theaterDataPanel.add(createSceneNamePanel(scene), "0," + row);
-				row++;
+				JPanel scenePanel = new JPanel();
+				scenePanel.setLayout(new TableLayout(generateLayoutSize(scene)));
 				
+				int sceneRow = 0;
 				for(Paragraph paragraph : scene.getParagraphs()){
-					theaterDataPanel.add(createParagraphPanel(paragraph, scene.getAllRole(), scene), "0," + row);
-					row++;
+					scenePanel.add(createParagraphPanel(paragraph, scene.getAllRole(), scene), "0," + sceneRow);
+					sceneRow++;
 				}
+				theaterDataPanel.add(createSceneNamePanel(scene, act), "0," + row);
+				row++;
+				theaterDataPanel.add(scenePanel, "0," + row);
+				row++;
 			}
 		}
 		
@@ -91,8 +96,8 @@ public class EditTheaterPlayPanel extends JPanel{
 		return namePanel;
 	}
 	
-	private JPanel createSceneNamePanel(Scene scene){
-		JPanel namePanel = new JPanel();
+	private JPanel createSceneNamePanel(final Scene scene, final Act act){
+		final JPanel namePanel = new JPanel();
 		double size[][] = { { 20, 80, 80, TableLayout.FILL }, { 30 } };
 		TableLayout layout = new TableLayout(size);
 		namePanel.setLayout(layout);
@@ -103,6 +108,7 @@ public class EditTheaterPlayPanel extends JPanel{
 		namePanel.add(actText, "3,0,f,c");
 
 		JButton delete = new JButton("Löschen");
+
 		namePanel.add(delete, "1,0,l,c");
 		
 		return namePanel;
@@ -201,7 +207,19 @@ public class EditTheaterPlayPanel extends JPanel{
 				}
 			}
 		}
-		
+
+		return generateLayoutSize(numRows);
+	}
+	
+	private double[][] generateLayoutSize(Scene scene){
+		int numRows = 0; 
+		for(Paragraph paragraph : scene.getParagraphs()){
+			numRows++;
+		}
+		return generateLayoutSize(numRows);
+	}
+	
+	private double[][] generateLayoutSize(int numRows){		
 		double[][] size = new double[2][];
 		double[] width = {TableLayout.PREFERRED};
 		size[0] = width;
@@ -214,7 +232,6 @@ public class EditTheaterPlayPanel extends JPanel{
 		
 		return size;
 	}
-	
 	
 	private class RoleComboRederer extends BasicComboBoxRenderer {
 		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
