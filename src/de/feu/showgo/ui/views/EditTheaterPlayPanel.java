@@ -237,7 +237,7 @@ public class EditTheaterPlayPanel extends JPanel{
 	
 	private double[][] generateLayoutSize(int numRows){		
 		double[][] size = new double[2][];
-		double[] width = {TableLayout.PREFERRED};
+		double[] width = {TableLayout.FILL};
 		size[0] = width;
 		double[] height = new double[numRows];
 		size[1] = height;
