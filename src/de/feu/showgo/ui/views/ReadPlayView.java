@@ -42,8 +42,8 @@ public class ReadPlayView extends JPanel {
 	private TheaterPlay model;
 	private MainWindow mainWindow;
 	private static final Logger log = Logger.getLogger(ReadPlayView.class);
-	private List<RolePanelRow> rolePanels;
 	private JLabel currentMessage;
+	private RolePanel roleSelect;
 
 	public ReadPlayView(MainWindow mainWindow) {
 		this.mainWindow = mainWindow;
@@ -53,7 +53,7 @@ public class ReadPlayView extends JPanel {
 
 	private void createComponent() {
 		double size[][] = { { 20, TableLayout.FILL, 20 },
-				{ 20, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, 30 } };
+				{ 20, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, 30 } };
 		setLayout(new TableLayout(size));
 
 		JPanel fileSelectPanel = createFileSelectPanel();
@@ -122,7 +122,15 @@ public class ReadPlayView extends JPanel {
 				JOptionPane.showMessageDialog(mainWindow, "Das Stück " + parsedPlay.getName() + " wurde erfolgreich eingelesen.",
 						parsedPlay.getName() + " erfoglreich eingelesen", JOptionPane.INFORMATION_MESSAGE);
 
-				createAndShowRoleSelect();
+				
+				roleSelect = new RolePanel(mainWindow, model);
+				add(roleSelect, "1,2");
+				
+				JPanel submitPanel = createSubmitPanel();
+				add(submitPanel, "1,3");
+				
+				revalidate();
+				repaint();
 			}
 		});
 
@@ -133,99 +141,7 @@ public class ReadPlayView extends JPanel {
 		return fileSelectPanel;
 	}
 
-	private void createAndShowRoleSelect() {
-		rolePanels = new ArrayList<RolePanelRow>();
-
-		JPanel rolePanel = createRoleSelectTable();
-		add(rolePanel, "1,2");
-
-		JPanel roleAllPanel = createSpecialRoleAllSelectPanel();
-		add(roleAllPanel, "1,3");
-
-		JPanel submitPanel = createSubmitPanel();
-		add(submitPanel, "1,4");
-
-		revalidate();
-		repaint();
-	}
-
-	private JPanel createSpecialRoleAllSelectPanel() {
-		JPanel roleSelectPanel = new JPanel();
-		double size[][] = { { TableLayout.FILL }, { 25 } };
-		TableLayout layout = new TableLayout(size);
-		roleSelectPanel.setLayout(layout);
-
-		for (Act act : model.getActs()) {
-			for (Scene scene : act.getScenes()) {
-				if (scene.getAllRole() != null) {
-					JPanel rolePanel = createRolePanel(scene.getAllRole());
-					layout.insertRow(1, TableLayout.PREFERRED);
-					roleSelectPanel.add(rolePanel, "0,1");
-					layout.insertRow(1, TableLayout.PREFERRED);
-					roleSelectPanel.add(new JLabel(scene.getName()), "0,1");
-				}
-			}
-		}
-
-		return roleSelectPanel;
-	}
-
-	private JPanel createRoleSelectTable() {
-		JPanel roleSelectPanel = new JPanel();
-		double size[][] = { { TableLayout.FILL }, { 25 } };
-		TableLayout layout = new TableLayout(size);
-		roleSelectPanel.setLayout(layout);
-
-		JPanel header = new JPanel();
-		double sizeHeader[][] = { { 85, 270, 100, 10, 80, 10, 110 }, { TableLayout.PREFERRED } };
-		header.setLayout(new TableLayout(sizeHeader));
-		header.add(new JLabel("Pseudorolle"), "0,0");
-		header.add(new JLabel("Name"), "1,0");
-		header.add(new JLabel("Geschlecht"), "2,0");
-		header.add(new JLabel("Wörter"), "4,0");
-		header.add(new JLabel("Alter von bis"), "6,0");
-
-		roleSelectPanel.add(header, "0,0");
-
-		for (Role role : model.getRoles()) {
-			layout.insertRow(1, TableLayout.PREFERRED);
-			JPanel rolePanel = createRolePanel(role);
-			roleSelectPanel.add(rolePanel, "0,1");
-		}
-
-		return roleSelectPanel;
-	}
-
-	private JPanel createRolePanel(final Role role) {
-		log.debug("creating role panel for " + role);
-
-		final JPanel rolePanel = new JPanel();
-		RolePanelRow rolePanelWrapper = new RolePanelRow(mainWindow, this, model, role, rolePanel);
-		rolePanels.add(rolePanelWrapper);
-
-		if (role.isPseudoRole()) {
-			rolePanelWrapper.setToPseudeRole();
-		} else {
-			rolePanelWrapper.setToNormalRole();
-		}
-
-		return rolePanel;
-	}
-
-	/**
-	 * Recalculates the words per role and updates the UI. Should be called
-	 * after changing a role to a pseudo role or back.
-	 */
-	public void updateWordCounter() {
-		RoleWordCounter counter = new RoleWordCounter();
-		counter.updateRoleWords(model);
-
-		for (RolePanelRow panel : rolePanels) {
-			if (!panel.getRole().isPseudoRole()) {
-				panel.setToNormalRole();
-			}
-		}
-	}
+	
 
 	private JPanel createSubmitPanel() {
 		JPanel submitPanel = new JPanel();
@@ -240,6 +156,7 @@ public class ReadPlayView extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				log.debug("validating");
+				List<RolePanelRow> rolePanels = roleSelect.getRolePanelRows();
 				for (RolePanelRow panel : rolePanels) {
 					if(!panel.isValid()){
 						showMessage(panel.getValidationErrorMessage(), WindowColors.ERROR);
@@ -291,7 +208,7 @@ public class ReadPlayView extends JPanel {
 		currentMessage.setHorizontalAlignment( SwingConstants.CENTER );
 		currentMessage.setBackground(background);
 		currentMessage.setOpaque(true);
-		this.add(currentMessage, "1,5");
+		this.add(currentMessage, "1,4");
 		this.revalidate();
 		this.repaint();
 	}

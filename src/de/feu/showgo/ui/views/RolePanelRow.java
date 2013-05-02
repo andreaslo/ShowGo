@@ -23,10 +23,10 @@ import de.feu.showgo.ui.dialogs.RolesSelectDialog;
 public class RolePanelRow {
 
 	private MainWindow mainWindow;
-	private ReadPlayView view;
+	private RolePanel parentView;
 	private TheaterPlay model;
 	private Role role;
-	private JPanel rolePanel;
+	private JPanel rowPanel;
 	private static final Logger log = Logger.getLogger(RolePanelRow.class);
 	private JTextField requiredWords;
 	private JTextField ageFrom;
@@ -35,17 +35,17 @@ public class RolePanelRow {
 	private String errorMessage;
 	
 	
-	public RolePanelRow(MainWindow mainWindow, ReadPlayView view, TheaterPlay model, Role role, JPanel rolePanel){
+	public RolePanelRow(MainWindow mainWindow, RolePanel rolePanel, TheaterPlay model, Role role, JPanel rowContent){
 		this.role = role;
-		this.rolePanel = rolePanel;
+		this.rowPanel = rowContent;
 		this.mainWindow = mainWindow;
 		this.model = model;
-		this.view = view;
+		this.parentView = rolePanel;
 	}
 	
 	
 	public void setToNormalRole() {
-		rolePanel.removeAll();
+		rowPanel.removeAll();
 		JCheckBox pseudoSelect = new JCheckBox();
 
 		pseudoSelect.addActionListener(new ActionListener() {
@@ -66,34 +66,34 @@ public class RolePanelRow {
 		ageTo = new JTextField();
 
 		double size[][] = { { 85, 270, 100, 10, 80, 10, 50, 10, 50 }, { TableLayout.PREFERRED } };
-		rolePanel.setLayout(new TableLayout(size));
+		rowPanel.setLayout(new TableLayout(size));
 
-		rolePanel.add(pseudoSelect, "0,0");
-		rolePanel.add(nameLabel, "1,0");
-		rolePanel.add(genderSelect, "2,0");
-		rolePanel.add(requiredWords, "4,0");
-		rolePanel.add(ageFrom, "6,0");
-		rolePanel.add(ageTo, "8,0");
+		rowPanel.add(pseudoSelect, "0,0");
+		rowPanel.add(nameLabel, "1,0");
+		rowPanel.add(genderSelect, "2,0");
+		rowPanel.add(requiredWords, "4,0");
+		rowPanel.add(ageFrom, "6,0");
+		rowPanel.add(ageTo, "8,0");
 		
-		rolePanel.revalidate();
-		rolePanel.repaint();
+		rowPanel.revalidate();
+		rowPanel.repaint();
 	}
 	
 	
 	private void unsetPseudo(final Role role, JPanel rolePanel) {
 		log.debug("unset pseudo");
 		role.setPseudoRole(false);
-		view.updateWordCounter();
+		parentView.updateWordCounter();
 		setToNormalRole();
 	}
 
 	public void setToPseudeRole() {
 		role.setPseudoRole(true);
 
-		rolePanel.removeAll();
+		rowPanel.removeAll();
 
 		double size[][] = { { 85, 270, 190 }, { 10, TableLayout.PREFERRED, TableLayout.PREFERRED, 10 } };
-		rolePanel.setLayout(new TableLayout(size));
+		rowPanel.setLayout(new TableLayout(size));
 
 		JCheckBox pseudoSelect = new JCheckBox();
 		pseudoSelect.setSelected(true);
@@ -101,7 +101,7 @@ public class RolePanelRow {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				unsetPseudo(role, rolePanel);
+				unsetPseudo(role, rowPanel);
 			}
 		});
 
@@ -122,7 +122,7 @@ public class RolePanelRow {
 				if (dialog.isApproved()) {
 					role.setAssigendRoles(dialog.getSelectedRoles());
 					setAssignedLabelText(assignedRolesDisplay, role);
-					view.updateWordCounter();
+					parentView.updateWordCounter();
 				}
 			}
 		});
@@ -133,15 +133,15 @@ public class RolePanelRow {
 		roleDisplayPanel.add(roleLabel, "0,0,l,t");
 		roleDisplayPanel.add(assignedRolesDisplay, "1,0");
 
-		rolePanel.add(pseudoSelect, "0,1");
-		rolePanel.add(nameLabel, "1,1");
-		rolePanel.add(assignRoles, "2,1,l,f");
-		rolePanel.add(roleDisplayPanel, "1,2,2,2");
+		rowPanel.add(pseudoSelect, "0,1");
+		rowPanel.add(nameLabel, "1,1");
+		rowPanel.add(assignRoles, "2,1,l,f");
+		rowPanel.add(roleDisplayPanel, "1,2,2,2");
 
 		setAssignedLabelText(assignedRolesDisplay, role);
 
-		rolePanel.revalidate();
-		rolePanel.repaint();
+		rowPanel.revalidate();
+		rowPanel.repaint();
 	}
 
 	private void setAssignedLabelText(JLabel roleDisplay, Role pseudoRole) {
