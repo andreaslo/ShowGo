@@ -42,7 +42,7 @@ public class ReadPlayView extends JPanel {
 	private TheaterPlay model;
 	private MainWindow mainWindow;
 	private static final Logger log = Logger.getLogger(ReadPlayView.class);
-	private List<RolePanel> rolePanels;
+	private List<RolePanelRow> rolePanels;
 	private JLabel currentMessage;
 
 	public ReadPlayView(MainWindow mainWindow) {
@@ -134,7 +134,7 @@ public class ReadPlayView extends JPanel {
 	}
 
 	private void createAndShowRoleSelect() {
-		rolePanels = new ArrayList<RolePanel>();
+		rolePanels = new ArrayList<RolePanelRow>();
 
 		JPanel rolePanel = createRoleSelectTable();
 		add(rolePanel, "1,2");
@@ -200,7 +200,7 @@ public class ReadPlayView extends JPanel {
 		log.debug("creating role panel for " + role);
 
 		final JPanel rolePanel = new JPanel();
-		RolePanel rolePanelWrapper = new RolePanel(mainWindow, this, model, role, rolePanel);
+		RolePanelRow rolePanelWrapper = new RolePanelRow(mainWindow, this, model, role, rolePanel);
 		rolePanels.add(rolePanelWrapper);
 
 		if (role.isPseudoRole()) {
@@ -220,7 +220,7 @@ public class ReadPlayView extends JPanel {
 		RoleWordCounter counter = new RoleWordCounter();
 		counter.updateRoleWords(model);
 
-		for (RolePanel panel : rolePanels) {
+		for (RolePanelRow panel : rolePanels) {
 			if (!panel.getRole().isPseudoRole()) {
 				panel.setToNormalRole();
 			}
@@ -240,7 +240,7 @@ public class ReadPlayView extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				log.debug("validating");
-				for (RolePanel panel : rolePanels) {
+				for (RolePanelRow panel : rolePanels) {
 					if(!panel.isValid()){
 						showMessage(panel.getValidationErrorMessage(), WindowColors.ERROR);
 						return;
@@ -248,7 +248,7 @@ public class ReadPlayView extends JPanel {
 				}
 				
 				log.debug("saving roles to backing model");
-				for (RolePanel panel : rolePanels) {
+				for (RolePanelRow panel : rolePanels) {
 					panel.saveRole();
 				}
 

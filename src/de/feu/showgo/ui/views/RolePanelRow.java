@@ -20,14 +20,14 @@ import de.feu.showgo.model.TheaterPlay;
 import de.feu.showgo.ui.MainWindow;
 import de.feu.showgo.ui.dialogs.RolesSelectDialog;
 
-public class RolePanel {
+public class RolePanelRow {
 
 	private MainWindow mainWindow;
 	private ReadPlayView view;
 	private TheaterPlay model;
 	private Role role;
 	private JPanel rolePanel;
-	private static final Logger log = Logger.getLogger(RolePanel.class);
+	private static final Logger log = Logger.getLogger(RolePanelRow.class);
 	private JTextField requiredWords;
 	private JTextField ageFrom;
 	private JTextField ageTo;
@@ -35,7 +35,7 @@ public class RolePanel {
 	private String errorMessage;
 	
 	
-	public RolePanel(MainWindow mainWindow, ReadPlayView view, TheaterPlay model, Role role, JPanel rolePanel){
+	public RolePanelRow(MainWindow mainWindow, ReadPlayView view, TheaterPlay model, Role role, JPanel rolePanel){
 		this.role = role;
 		this.rolePanel = rolePanel;
 		this.mainWindow = mainWindow;
