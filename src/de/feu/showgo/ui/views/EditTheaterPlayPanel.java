@@ -1,6 +1,8 @@
 package de.feu.showgo.ui.views;
 
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import info.clearthought.layout.TableLayout;
 
@@ -55,7 +57,7 @@ public class EditTheaterPlayPanel extends JPanel{
 				row++;
 				
 				for(Paragraph paragraph : scene.getParagraphs()){
-					theaterDataPanel.add(createParagraphPanel(paragraph, scene.getAllRole()), "0," + row);
+					theaterDataPanel.add(createParagraphPanel(paragraph, scene.getAllRole(), scene), "0," + row);
 					row++;
 				}
 			}
@@ -106,18 +108,18 @@ public class EditTheaterPlayPanel extends JPanel{
 		return namePanel;
 	}
 	
-	private JPanel createParagraphPanel(Paragraph paragraph, Role allRole){
+	private JPanel createParagraphPanel(Paragraph paragraph, Role allRole, Scene scene){
 		if(paragraph instanceof StageDirection){
-			return createStageDiection((StageDirection) paragraph);
+			return createStageDiection((StageDirection) paragraph, scene);
 		}else if(paragraph instanceof Passage){
-			return createPassagePanel((Passage) paragraph, allRole);
+			return createPassagePanel((Passage) paragraph, allRole, scene);
 		}else{
 			return null;
 		}
 	}
 
-	private JPanel createPassagePanel(Passage passage, Role allRole) {
-		JPanel namePanel = new JPanel();
+	private JPanel createPassagePanel(final Passage passage, Role allRole, final Scene scene) {
+		final JPanel namePanel = new JPanel();
 		double size[][] = { { 40, 80, 200, TableLayout.FILL }, { TableLayout.PREFERRED } };
 		TableLayout layout = new TableLayout(size);
 		namePanel.setLayout(layout);
@@ -141,6 +143,16 @@ public class EditTheaterPlayPanel extends JPanel{
 		namePanel.add(actText, "3,0,f,c");
 
 		JButton delete = new JButton("Löschen");
+		delete.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				scene.deleteParagraph(passage);
+				namePanel.removeAll();
+				revalidate();
+				repaint();				
+			}
+		});
 		namePanel.add(delete, "1,0,l,c");
 		
 		return namePanel;
@@ -148,8 +160,8 @@ public class EditTheaterPlayPanel extends JPanel{
 
 
 
-	private JPanel createStageDiection(StageDirection stageDirection) {
-		JPanel namePanel = new JPanel();
+	private JPanel createStageDiection(final StageDirection stageDirection, final Scene scene) {
+		final JPanel namePanel = new JPanel();
 		double size[][] = { { 40, 80, 200, TableLayout.FILL }, { TableLayout.PREFERRED } };
 		TableLayout layout = new TableLayout(size);
 		namePanel.setLayout(layout);
@@ -162,6 +174,15 @@ public class EditTheaterPlayPanel extends JPanel{
 		namePanel.add(stageDirectionText, "3,0,f,c");
 
 		JButton delete = new JButton("Löschen");
+		delete.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				scene.deleteParagraph(stageDirection);
+				namePanel.removeAll();
+				revalidate();
+				repaint();
+			}
+		});
 		namePanel.add(delete, "1,0,l,c");
 		
 		return namePanel;

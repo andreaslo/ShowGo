@@ -78,6 +78,9 @@ public class Scene {
 	public void setAllRole(Role allRole) {
 		this.allRole = allRole;
 	}
+	public void deleteParagraph(Paragraph paragraph) {
+		paragraphs.remove(paragraph);
+	}
 	
 	
 	
