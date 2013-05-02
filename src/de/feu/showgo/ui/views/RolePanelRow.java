@@ -60,10 +60,17 @@ public class RolePanelRow {
 		JLabel nameLabel = new JLabel(role.getName());
 		String[] genders = { "Männlich", "Weiblich" };
 		genderSelect = new JComboBox<String>(genders);
+		
+		if(role.getGender() == Gender.MALE){
+			genderSelect.setSelectedIndex(0);
+		}else{
+			genderSelect.setSelectedIndex(1);
+		}
+		
 		requiredWords = new JTextField(role.getWords() + "");
 		requiredWords.setEnabled(false);
-		ageFrom = new JTextField();
-		ageTo = new JTextField();
+		ageFrom = new JTextField(role.getAgeFrom() + "");
+		ageTo = new JTextField(role.getAgeTo() + "");
 
 		double size[][] = { { 85, 270, 100, 10, 80, 10, 50, 10, 50 }, { TableLayout.PREFERRED } };
 		rowPanel.setLayout(new TableLayout(size));
