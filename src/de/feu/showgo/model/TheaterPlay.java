@@ -90,6 +90,9 @@ public class TheaterPlay {
 		} else if (!roles.equals(other.roles))
 			return false;
 		return true;
+	}
+	public void deleteAct(Act act) {
+		acts.remove(act);
 	}	
 	
 	

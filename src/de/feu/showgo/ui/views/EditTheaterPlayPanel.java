@@ -65,7 +65,7 @@ public class EditTheaterPlayPanel extends JPanel{
 				actPanel.add(scenePanel, "0," + actRow);
 				actRow++;
 			}
-			theaterDataPanel.add(createActNamePanel(act), "0," + row);
+			theaterDataPanel.add(createActNamePanel(act, actPanel), "0," + row);
 			row++;
 			theaterDataPanel.add(actPanel, "0," + row);
 			row++;
@@ -82,8 +82,8 @@ public class EditTheaterPlayPanel extends JPanel{
 		
 	}
 	
-	private JPanel createActNamePanel(Act act){
-		JPanel namePanel = new JPanel();
+	private JPanel createActNamePanel(final Act act, final JPanel actPanel){
+		final JPanel namePanel = new JPanel();
 		double size[][] = { { 80, 80, TableLayout.FILL }, { TableLayout.PREFERRED } };
 		TableLayout layout = new TableLayout(size);
 		namePanel.setLayout(layout);
@@ -94,6 +94,18 @@ public class EditTheaterPlayPanel extends JPanel{
 		namePanel.add(actText, "2,0,f,c");
 		
 		JButton delete = new JButton("Löschen");
+		delete.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				play.deleteAct(act);
+				namePanel.removeAll();
+				actPanel.removeAll();
+				roleDisplay.updateWordCounter();
+				revalidate();
+				repaint();
+			}
+		});
 		
 		namePanel.add(delete, "0,0,l,c");
 
