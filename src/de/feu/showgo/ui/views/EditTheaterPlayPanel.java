@@ -41,17 +41,16 @@ public class EditTheaterPlayPanel extends JPanel{
 		createComponent();
 	}
 	
-	
-	
 	private void createComponent(){		
 		JPanel theaterDataPanel = new JPanel();
 		theaterDataPanel.setLayout(new TableLayout(generateLayoutSize(play)));
 		int row = 0;
 		
 		for(Act act : play.getActs()){
-			theaterDataPanel.add(createActNamePanel(act), "0," + row);
-			row++;
+			JPanel actPanel = new JPanel();
+			actPanel.setLayout(new TableLayout(generateLayoutSize(act)));
 			
+			int actRow = 0;
 			for(Scene scene : act.getScenes()){
 				JPanel scenePanel = new JPanel();
 				scenePanel.setLayout(new TableLayout(generateLayoutSize(scene)));
@@ -61,11 +60,15 @@ public class EditTheaterPlayPanel extends JPanel{
 					scenePanel.add(createParagraphPanel(paragraph, scene.getAllRole(), scene), "0," + sceneRow);
 					sceneRow++;
 				}
-				theaterDataPanel.add(createSceneNamePanel(scene, act, scenePanel), "0," + row);
-				row++;
-				theaterDataPanel.add(scenePanel, "0," + row);
-				row++;
+				actPanel.add(createSceneNamePanel(scene, act, scenePanel), "0," + actRow);
+				actRow++;
+				actPanel.add(scenePanel, "0," + actRow);
+				actRow++;
 			}
+			theaterDataPanel.add(createActNamePanel(act), "0," + row);
+			row++;
+			theaterDataPanel.add(actPanel, "0," + row);
+			row++;
 		}
 		
 		double size[][] = { { TableLayout.FILL }, { TableLayout.PREFERRED, TableLayout.PREFERRED } };
@@ -224,11 +227,11 @@ public class EditTheaterPlayPanel extends JPanel{
 	}
 	
 	private double[][] generateLayoutSize(Scene scene){
-		int numRows = 0; 
-		for(Paragraph paragraph : scene.getParagraphs()){
-			numRows++;
-		}
-		return generateLayoutSize(numRows);
+		return generateLayoutSize(scene.getParagraphs().size());
+	}
+	
+	private double[][] generateLayoutSize(Act act){
+		return generateLayoutSize(act.getScenes().size());
 	}
 	
 	private double[][] generateLayoutSize(int numRows){		
