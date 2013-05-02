@@ -125,4 +125,10 @@ public class RolePanel extends JPanel {
 		return rolePanelRows;
 	}
 	
+	public void setChangePseudoEnabled(boolean changePseudoEnabled){
+		for (RolePanelRow panel : rolePanelRows) {
+			panel.setChangePseudoEnabled(changePseudoEnabled);
+		}
+	}
+	
 }

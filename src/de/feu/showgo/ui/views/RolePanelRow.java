@@ -33,7 +33,8 @@ public class RolePanelRow {
 	private JTextField ageTo;
 	private JComboBox<String> genderSelect;
 	private String errorMessage;
-	
+	private JCheckBox pseudoSelect;
+	private boolean changePseudoEnabled;
 	
 	public RolePanelRow(MainWindow mainWindow, RolePanel rolePanel, TheaterPlay model, Role role, JPanel rowContent){
 		this.role = role;
@@ -41,13 +42,14 @@ public class RolePanelRow {
 		this.mainWindow = mainWindow;
 		this.model = model;
 		this.parentView = rolePanel;
+		this.changePseudoEnabled = true;
 	}
 	
 	
 	public void setToNormalRole() {
 		rowPanel.removeAll();
-		JCheckBox pseudoSelect = new JCheckBox();
-
+		pseudoSelect = new JCheckBox();
+		pseudoSelect.setEnabled(changePseudoEnabled);
 		pseudoSelect.addActionListener(new ActionListener() {
 
 			@Override
@@ -102,7 +104,8 @@ public class RolePanelRow {
 		double size[][] = { { 85, 270, 190 }, { 10, TableLayout.PREFERRED, TableLayout.PREFERRED, 10 } };
 		rowPanel.setLayout(new TableLayout(size));
 
-		JCheckBox pseudoSelect = new JCheckBox();
+		pseudoSelect = new JCheckBox();
+		pseudoSelect.setEnabled(changePseudoEnabled);
 		pseudoSelect.setSelected(true);
 		pseudoSelect.addActionListener(new ActionListener() {
 
@@ -249,6 +252,12 @@ public class RolePanelRow {
 		errorMessage = null;
 		performValidation();
 		return errorMessage;
+	}
+
+
+	public void setChangePseudoEnabled(boolean changePseudoEnabled) {
+		pseudoSelect.setEnabled(changePseudoEnabled);
+		this.changePseudoEnabled = changePseudoEnabled;
 	}
 	
 }
