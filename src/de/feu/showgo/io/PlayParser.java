@@ -308,7 +308,7 @@ public class PlayParser {
 			throw new ParsingException("Stage direction element is not defined by a 'regie' tag name. Element: " + paragraphElement);
 		}
 
-		stageDirection.setText(StringUtil.sanitizeText(paragraphElement.getText()));
+		stageDirection.setText(StringUtil.sanitzieParagraphText(paragraphElement.getText()));
 
 		return stageDirection;
 	}
