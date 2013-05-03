@@ -35,6 +35,7 @@ public class RolePanelRow {
 	private String errorMessage;
 	private JCheckBox pseudoSelect;
 	private boolean changePseudoEnabled;
+	private boolean showDeleteButton;
 	
 	public RolePanelRow(MainWindow mainWindow, RolePanel rolePanel, TheaterPlay model, Role role, JPanel rowContent){
 		this.role = role;
@@ -74,7 +75,7 @@ public class RolePanelRow {
 		ageFrom = new JTextField(role.getAgeFrom() + "");
 		ageTo = new JTextField(role.getAgeTo() + "");
 
-		double size[][] = { { 85, 270, 100, 10, 80, 10, 50, 10, 50 }, { TableLayout.PREFERRED } };
+		double size[][] = { { 85, 270, 100, 10, 80, 10, 50, 10, 50, 80 }, { TableLayout.PREFERRED } };
 		rowPanel.setLayout(new TableLayout(size));
 
 		rowPanel.add(pseudoSelect, "0,0");
@@ -83,6 +84,12 @@ public class RolePanelRow {
 		rowPanel.add(requiredWords, "4,0");
 		rowPanel.add(ageFrom, "6,0");
 		rowPanel.add(ageTo, "8,0");
+		
+		JButton deleteButton = new JButton("Löschen");
+		log.debug("show delete button: " + showDeleteButton);
+		if(showDeleteButton){
+			rowPanel.add(deleteButton, "9,0,r,c");
+		}
 		
 		rowPanel.revalidate();
 		rowPanel.repaint();
@@ -101,7 +108,7 @@ public class RolePanelRow {
 
 		rowPanel.removeAll();
 
-		double size[][] = { { 85, 270, 190 }, { 10, TableLayout.PREFERRED, TableLayout.PREFERRED, 10 } };
+		double size[][] = { { 85, 270, 310, 80 }, { 10, TableLayout.PREFERRED, TableLayout.PREFERRED, 10 } };
 		rowPanel.setLayout(new TableLayout(size));
 
 		pseudoSelect = new JCheckBox();
@@ -149,6 +156,12 @@ public class RolePanelRow {
 		rowPanel.add(roleDisplayPanel, "1,2,2,2");
 
 		setAssignedLabelText(assignedRolesDisplay, role);
+		
+		JButton deleteButton = new JButton("Löschen");
+		
+		if(showDeleteButton){
+			rowPanel.add(deleteButton, "3,1,r,c");
+		}
 
 		rowPanel.revalidate();
 		rowPanel.repaint();
@@ -267,6 +280,14 @@ public class RolePanelRow {
 		return rowPanel;
 	}
 	
+	public void setShowDeleteButton(boolean showDeleteButton){
+		this.showDeleteButton = showDeleteButton;
+		if(role.isPseudoRole()){
+			setToPseudeRole();
+		}else{
+			setToNormalRole();
+		}
+	}
 	
 	
 }

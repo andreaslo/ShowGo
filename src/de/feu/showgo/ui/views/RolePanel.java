@@ -26,6 +26,7 @@ public class RolePanel extends JPanel {
 	private JPanel roleSelectPanel;
 	private JPanel specialRoleSelectPanel;
 	private boolean changePseudoEnabled;
+	private boolean showDeleteButton;
 
 	public RolePanel(MainWindow mainWindow, TheaterPlay model) {
 		this.mainWindow = mainWindow;
@@ -99,6 +100,7 @@ public class RolePanel extends JPanel {
 		final JPanel rolePanel = new JPanel();
 		RolePanelRow rolePanelWrapper = new RolePanelRow(mainWindow, this, model, role, rolePanel);
 		rolePanelWrapper.setChangePseudoEnabled(changePseudoEnabled);
+		rolePanelWrapper.setShowDeleteButton(showDeleteButton);
 		rolePanelRows.add(rolePanelWrapper);
 
 		if (role.isPseudoRole()) {
@@ -161,6 +163,15 @@ public class RolePanel extends JPanel {
 		
 		repaint();
 		revalidate();
+	}
+	
+	public void setShowDeleteButton(boolean showDeleteButton){
+		log.debug("updateing show delete button: " + showDeleteButton);
+		
+		for (RolePanelRow panel : rolePanelRows) {
+			panel.setShowDeleteButton(showDeleteButton);
+		}
+		this.showDeleteButton = showDeleteButton;
 	}
 	
 }
