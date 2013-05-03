@@ -68,18 +68,26 @@ public class EditTheaterPlayPanel extends JPanel{
 				scenePanel.setLayout(new TableLayout(generateLayoutSize(scene)));
 				scenePanel.add(createSceneNamePanel(scene, act, scenePanel), "0,0");
 				
+				ScenePanelWrapper sceneWrapper = new ScenePanelWrapper();
+				sceneWrapper.panel = scenePanel;
+				sceneWrapper.scene = scene;
+				
 				int sceneRow = 1;
 				for(Paragraph paragraph : scene.getParagraphs()){
-					scenePanel.add(createParagraphPanel(paragraph, scene.getAllRole(), scene), "0," + sceneRow);
+					JPanel paragraphPanel = createParagraphPanel(paragraph, scene.getAllRole());
+					
+					ParagraphPanelWrapper panelWrapper = new ParagraphPanelWrapper();
+					panelWrapper.panel = paragraphPanel;
+					panelWrapper.paragraph = paragraph;
+					sceneWrapper.children.add(panelWrapper);
+					
+					scenePanel.add(paragraphPanel, "0," + sceneRow);
 					sceneRow++;
 				}
 				
 				actPanel.add(scenePanel, "0," + actRow);
 				actRow++;
 				
-				ScenePanelWrapper sceneWrapper = new ScenePanelWrapper();
-				sceneWrapper.panel = scenePanel;
-				sceneWrapper.scene = scene;
 				actWrapper.children.add(sceneWrapper);
 			}
 
@@ -159,17 +167,17 @@ public class EditTheaterPlayPanel extends JPanel{
 		return namePanel;
 	}
 	
-	private JPanel createParagraphPanel(Paragraph paragraph, Role allRole, Scene scene){
+	private JPanel createParagraphPanel(Paragraph paragraph, Role allRole){
 		if(paragraph instanceof StageDirection){
-			return createStageDiection((StageDirection) paragraph, scene);
+			return createStageDiection((StageDirection) paragraph);
 		}else if(paragraph instanceof Passage){
-			return createPassagePanel((Passage) paragraph, allRole, scene);
+			return createPassagePanel((Passage) paragraph, allRole);
 		}else{
 			return null;
 		}
 	}
 
-	private JPanel createPassagePanel(final Passage passage, Role allRole, final Scene scene) {
+	private JPanel createPassagePanel(final Passage passage, Role allRole) {
 		final JPanel namePanel = new JPanel();
 		double size[][] = { { 40, 80, 200, TableLayout.FILL }, { TableLayout.PREFERRED } };
 		TableLayout layout = new TableLayout(size);
@@ -198,8 +206,7 @@ public class EditTheaterPlayPanel extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				scene.deleteParagraph(passage);
-				namePanel.removeAll();
+				removeParagraph(passage);
 				roleDisplay.updateWordCounter();
 				revalidate();
 				repaint();
@@ -213,7 +220,7 @@ public class EditTheaterPlayPanel extends JPanel{
 
 
 
-	private JPanel createStageDiection(final StageDirection stageDirection, final Scene scene) {
+	private JPanel createStageDiection(final StageDirection stageDirection) {
 		final JPanel namePanel = new JPanel();
 		double size[][] = { { 40, 80, 200, TableLayout.FILL }, { TableLayout.PREFERRED } };
 		TableLayout layout = new TableLayout(size);
@@ -230,8 +237,7 @@ public class EditTheaterPlayPanel extends JPanel{
 		delete.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				scene.deleteParagraph(stageDirection);
-				namePanel.removeAll();
+				removeParagraph(stageDirection);
 				revalidate();
 				repaint();
 			}
@@ -330,6 +336,29 @@ public class EditTheaterPlayPanel extends JPanel{
 		}
 	}
 	
+	private void removeParagraph(Paragraph paragraph){
+		ScenePanelWrapper surroundingSceneWrapper = null;
+		ParagraphPanelWrapper toBeDeleted = null;
+		for(ActPanelWrapper actWrapper : actWrapperList){
+			for(ScenePanelWrapper sceneWrapper : actWrapper.children){
+				for(ParagraphPanelWrapper paragraphWrapper : sceneWrapper.children){
+					if(paragraphWrapper.paragraph == paragraph){
+						toBeDeleted = paragraphWrapper;
+						surroundingSceneWrapper = sceneWrapper;
+						break;
+					}
+				}
+			}
+		}
+		
+		toBeDeleted.panel.removeAll();
+		surroundingSceneWrapper.scene.deleteParagraph(paragraph);			
+		surroundingSceneWrapper.children.remove(toBeDeleted);
+		if(surroundingSceneWrapper.children.isEmpty()){
+			removeScene(surroundingSceneWrapper.scene);
+		}
+	}
+	
 	private class RoleComboRederer extends BasicComboBoxRenderer {
 		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
 			super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
@@ -352,8 +381,12 @@ public class EditTheaterPlayPanel extends JPanel{
 	private class ScenePanelWrapper {
 		JPanel panel;
 		Scene scene;
+		List<ParagraphPanelWrapper> children = new ArrayList<EditTheaterPlayPanel.ParagraphPanelWrapper>();
 	}
 	
-	
+	private class ParagraphPanelWrapper {
+		JPanel panel;
+		Paragraph paragraph;
+	}
 
 }
