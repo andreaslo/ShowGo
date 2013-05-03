@@ -1,4 +1,4 @@
-package de.feu.showgo.ui.views;
+package de.feu.showgo.ui.listener;
 
 import de.feu.showgo.model.Person;
 

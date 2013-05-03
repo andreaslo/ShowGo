@@ -25,6 +25,7 @@ import de.feu.showgo.model.Ensemble;
 import de.feu.showgo.model.Person;
 import de.feu.showgo.ui.MainWindow;
 import de.feu.showgo.ui.WindowColors;
+import de.feu.showgo.ui.listener.PersonEvent;
 
 public class EnsembleView extends JPanel {
 

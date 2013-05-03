@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import de.feu.showgo.model.Gender;
 import de.feu.showgo.model.Person;
+import de.feu.showgo.ui.listener.PersonEvent;
 
 public class PersonsTable extends JPanel {
 
