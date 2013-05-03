@@ -5,6 +5,7 @@ import info.clearthought.layout.TableLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -37,6 +38,7 @@ public class EditTheaterPlayPanel extends JPanel{
 	private TheaterPlay play;
 	private static final Logger log = Logger.getLogger(EditTheaterPlayPanel.class);
 	private RolePanel roleDisplay;
+	private List<ActPanelWrapper> actWrapper;
 
 	public EditTheaterPlayPanel(MainWindow mainWindow, TheaterPlay play){
 		this.mainWindow = mainWindow;
@@ -49,6 +51,7 @@ public class EditTheaterPlayPanel extends JPanel{
 		theaterDataPanel.setLayout(new TableLayout(generateLayoutSize(play)));
 		int row = 0;
 		
+		actWrapper = new ArrayList<EditTheaterPlayPanel.ActPanelWrapper>();
 		for(Act act : play.getActs()){
 			JPanel actPanel = new JPanel();
 			actPanel.setLayout(new TableLayout(generateLayoutSize(act)));
@@ -134,7 +137,7 @@ public class EditTheaterPlayPanel extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				act.deleteScene(scene);
+				act.deleteScene(scene);				
 				namePanel.removeAll();
 				scenePanel.removeAll();
 				roleDisplay.updateWordCounter();
@@ -296,5 +299,18 @@ public class EditTheaterPlayPanel extends JPanel{
 			return this;
 		}
 	}
+	
+	private class ActPanelWrapper {
+		JPanel panel;
+		Act act;
+		List<ScenePanelWrapper> children;
+	}
+	
+	private class ScenePanelWrapper {
+		JPanel panel;
+		Scene scene;
+	}
+	
+	
 
 }
