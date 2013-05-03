@@ -75,9 +75,8 @@ public class EditTheaterPlayPanel extends JPanel {
 				
 				int sceneRow = 1;
 				for(Paragraph paragraph : scene.getParagraphs()){
-					JPanel paragraphPanel = createParagraphPanel(paragraph, scene.getAllRole());
-					
 					ParagraphPanelWrapper panelWrapper = new ParagraphPanelWrapper();
+					JPanel paragraphPanel = createParagraphPanel(paragraph, scene.getAllRole(), panelWrapper);
 					panelWrapper.panel = paragraphPanel;
 					panelWrapper.paragraph = paragraph;
 					sceneWrapper.children.add(panelWrapper);
@@ -167,23 +166,25 @@ public class EditTheaterPlayPanel extends JPanel {
 		return namePanel;
 	}
 	
-	private JPanel createParagraphPanel(Paragraph paragraph, Role allRole){
+	private JPanel createParagraphPanel(Paragraph paragraph, Role allRole, ParagraphPanelWrapper panelWrapper){
 		if(paragraph instanceof StageDirection){
-			return createStageDiection((StageDirection) paragraph);
+			return createStageDiection((StageDirection) paragraph, panelWrapper);
 		}else if(paragraph instanceof Passage){
-			return createPassagePanel((Passage) paragraph, allRole);
+			return createPassagePanel((Passage) paragraph, allRole, panelWrapper);
 		}else{
 			return null;
 		}
 	}
 
-	private JPanel createPassagePanel(final Passage passage, Role allRole) {
+	private JPanel createPassagePanel(final Passage passage, Role allRole, ParagraphPanelWrapper panelWrapper) {
 		final JPanel namePanel = new JPanel();
 		double size[][] = { { 40, 80, 200, TableLayout.FILL }, { TableLayout.PREFERRED } };
 		TableLayout layout = new TableLayout(size);
 		namePanel.setLayout(layout);
 		
 		JComboBox<Role> roleSelect = new JComboBox<Role>();
+		panelWrapper.roleSelect = roleSelect;
+		
 		roleSelect.setRenderer(new RoleComboRederer());
 		for(Role role : play.getRoles()){
 			roleSelect.addItem(role);
@@ -191,6 +192,8 @@ public class EditTheaterPlayPanel extends JPanel {
 		if(allRole != null){
 			roleSelect.addItem(allRole);
 		}
+		
+		
 		roleSelect.setSelectedItem(passage.getRole());
 		namePanel.add(roleSelect, "2,0,l,c");
 
@@ -216,7 +219,7 @@ public class EditTheaterPlayPanel extends JPanel {
 
 
 
-	private JPanel createStageDiection(final StageDirection stageDirection) {
+	private JPanel createStageDiection(final StageDirection stageDirection, ParagraphPanelWrapper panelWrapper) {
 		final JPanel namePanel = new JPanel();
 		double size[][] = { { 40, 80, 200, TableLayout.FILL }, { TableLayout.PREFERRED } };
 		TableLayout layout = new TableLayout(size);
@@ -303,6 +306,7 @@ public class EditTheaterPlayPanel extends JPanel {
 						if(passage.getRole() == toBeDeleted){
 							queuedForDeletion.add(passage);
 						}
+						paragraphWrapper.roleSelect.removeItem(toBeDeleted);						
 					}
 				}
 			}
@@ -416,6 +420,7 @@ public class EditTheaterPlayPanel extends JPanel {
 	private class ParagraphPanelWrapper {
 		JPanel panel;
 		Paragraph paragraph;
+		JComboBox<Role> roleSelect;
 	}
 
 }
