@@ -125,11 +125,6 @@ public class EditTheaterPlayPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				removeAct(act);
-				roleDisplay.updateWordCounter();
-				roleDisplay.refreshPseudoRoles();
-				revalidate();
-				repaint();
-				checkRolesNecessary();
 			}
 		});
 		
@@ -155,11 +150,6 @@ public class EditTheaterPlayPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {	
 				removeScene(scene);
-				roleDisplay.updateWordCounter();
-				roleDisplay.refreshPseudoRoles();
-				revalidate();
-				repaint();
-				checkRolesNecessary();
 			}
 		});
 		namePanel.add(delete, "1,0,l,c");
@@ -207,10 +197,6 @@ public class EditTheaterPlayPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				removeParagraph(passage);
-				roleDisplay.updateWordCounter();
-				revalidate();
-				repaint();
-				checkRolesNecessary();
 			}
 		});
 		namePanel.add(delete, "1,0,l,c");
@@ -238,8 +224,6 @@ public class EditTheaterPlayPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				removeParagraph(stageDirection);
-				revalidate();
-				repaint();
 			}
 		});
 		namePanel.add(delete, "1,0,l,c");
@@ -313,6 +297,8 @@ public class EditTheaterPlayPanel extends JPanel{
 		toBeDeleted.panel.removeAll();
 		actWrapperList.remove(toBeDeleted);
 		play.deleteAct(act);
+		
+		genericAfterDelete();
 	}
 	
 	private void removeScene(Scene scene){
@@ -334,6 +320,8 @@ public class EditTheaterPlayPanel extends JPanel{
 		if(surroundingActWrapper.children.isEmpty()){
 			removeAct(surroundingActWrapper.act);
 		}
+		
+		genericAfterDelete();
 	}
 	
 	private void removeParagraph(Paragraph paragraph){
@@ -357,6 +345,16 @@ public class EditTheaterPlayPanel extends JPanel{
 		if(surroundingSceneWrapper.children.isEmpty()){
 			removeScene(surroundingSceneWrapper.scene);
 		}
+		
+		genericAfterDelete();
+	}
+	
+	private void genericAfterDelete(){
+		roleDisplay.updateWordCounter();
+		roleDisplay.refreshPseudoRoles();
+		revalidate();
+		repaint();
+		checkRolesNecessary();
 	}
 	
 	private class RoleComboRederer extends BasicComboBoxRenderer {
