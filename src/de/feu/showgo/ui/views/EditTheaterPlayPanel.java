@@ -38,7 +38,7 @@ public class EditTheaterPlayPanel extends JPanel{
 	private TheaterPlay play;
 	private static final Logger log = Logger.getLogger(EditTheaterPlayPanel.class);
 	private RolePanel roleDisplay;
-	private List<ActPanelWrapper> actWrapper;
+	private List<ActPanelWrapper> actWrapperList;
 
 	public EditTheaterPlayPanel(MainWindow mainWindow, TheaterPlay play){
 		this.mainWindow = mainWindow;
@@ -51,11 +51,11 @@ public class EditTheaterPlayPanel extends JPanel{
 		theaterDataPanel.setLayout(new TableLayout(generateLayoutSize(play)));
 		int row = 0;
 		
-		actWrapper = new ArrayList<EditTheaterPlayPanel.ActPanelWrapper>();
+		actWrapperList = new ArrayList<EditTheaterPlayPanel.ActPanelWrapper>();
 		for(Act act : play.getActs()){
 			JPanel actPanel = new JPanel();
 			actPanel.setLayout(new TableLayout(generateLayoutSize(act)));
-			actPanel.add(createActNamePanel(act, actPanel), "0,0");
+			actPanel.add(createActNamePanel(act), "0,0");
 			
 			int actRow = 1;
 			for(Scene scene : act.getScenes()){
@@ -76,6 +76,11 @@ public class EditTheaterPlayPanel extends JPanel{
 
 			theaterDataPanel.add(actPanel, "0," + row);
 			row++;
+			
+			ActPanelWrapper actWrapper = new ActPanelWrapper();
+			actWrapper.act = act;
+			actWrapper.panel = actPanel;		
+			actWrapperList.add(actWrapper);
 		}
 		
 		double size[][] = { { TableLayout.FILL }, { TableLayout.PREFERRED, TableLayout.PREFERRED } };
@@ -89,7 +94,7 @@ public class EditTheaterPlayPanel extends JPanel{
 		
 	}
 	
-	private JPanel createActNamePanel(final Act act, final JPanel actPanel){
+	private JPanel createActNamePanel(final Act act){
 		final JPanel namePanel = new JPanel();
 		double size[][] = { { 80, 80, TableLayout.FILL }, { TableLayout.PREFERRED } };
 		TableLayout layout = new TableLayout(size);
@@ -106,8 +111,7 @@ public class EditTheaterPlayPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				play.deleteAct(act);
-				namePanel.removeAll();
-				actPanel.removeAll();
+				removeAct(act);
 				roleDisplay.updateWordCounter();
 				roleDisplay.refreshPseudoRoles();
 				revalidate();
@@ -285,6 +289,20 @@ public class EditTheaterPlayPanel extends JPanel{
 		play.deleteRole(role);
 		roleDisplay.removeRole(role);
 		roleDisplay.refreshPseudoRoles();
+	}
+	
+	
+	private void removeAct(Act act){
+		ActPanelWrapper toBeDeleted = null;
+		for(ActPanelWrapper wrapper : actWrapperList){
+			if(wrapper.act == act){
+				toBeDeleted = wrapper;
+				break;
+			}
+		}
+		
+		toBeDeleted.panel.removeAll();
+		actWrapperList.remove(toBeDeleted);
 	}
 	
 	private class RoleComboRederer extends BasicComboBoxRenderer {
