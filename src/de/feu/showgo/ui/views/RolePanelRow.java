@@ -4,6 +4,8 @@ import info.clearthought.layout.TableLayout;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -19,6 +21,7 @@ import de.feu.showgo.model.Role;
 import de.feu.showgo.model.TheaterPlay;
 import de.feu.showgo.ui.MainWindow;
 import de.feu.showgo.ui.dialogs.RolesSelectDialog;
+import de.feu.showgo.ui.listener.RoleDeleteListener;
 
 public class RolePanelRow {
 
@@ -36,6 +39,7 @@ public class RolePanelRow {
 	private JCheckBox pseudoSelect;
 	private boolean changePseudoEnabled;
 	private boolean showDeleteButton;
+	private List<RoleDeleteListener> roleDeleteListener;
 	
 	public RolePanelRow(MainWindow mainWindow, RolePanel rolePanel, TheaterPlay model, Role role, JPanel rowContent){
 		this.role = role;
@@ -44,6 +48,7 @@ public class RolePanelRow {
 		this.model = model;
 		this.parentView = rolePanel;
 		this.changePseudoEnabled = true;
+		roleDeleteListener = new ArrayList<RoleDeleteListener>();
 	}
 	
 	
@@ -86,7 +91,13 @@ public class RolePanelRow {
 		rowPanel.add(ageTo, "8,0");
 		
 		JButton deleteButton = new JButton("Löschen");
-		log.debug("show delete button: " + showDeleteButton);
+		deleteButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				deleteButtonAction();				
+			}
+		});
 		if(showDeleteButton){
 			rowPanel.add(deleteButton, "9,0,r,c");
 		}
@@ -158,6 +169,13 @@ public class RolePanelRow {
 		setAssignedLabelText(assignedRolesDisplay, role);
 		
 		JButton deleteButton = new JButton("Löschen");
+		deleteButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				deleteButtonAction();				
+			}
+		});
 		
 		if(showDeleteButton){
 			rowPanel.add(deleteButton, "3,1,r,c");
@@ -289,5 +307,14 @@ public class RolePanelRow {
 		}
 	}
 	
+	public void addRoleDeleteEventListener(RoleDeleteListener listener){
+		roleDeleteListener.add(listener);
+	}
+	
+	private void deleteButtonAction(){
+		for(RoleDeleteListener listener : roleDeleteListener){
+			listener.deleteRole(role);
+		}
+	}
 	
 }

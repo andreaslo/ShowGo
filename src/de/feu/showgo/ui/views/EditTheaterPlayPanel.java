@@ -31,8 +31,9 @@ import de.feu.showgo.model.Scene;
 import de.feu.showgo.model.StageDirection;
 import de.feu.showgo.model.TheaterPlay;
 import de.feu.showgo.ui.MainWindow;
+import de.feu.showgo.ui.listener.RoleDeleteListener;
 
-public class EditTheaterPlayPanel extends JPanel{
+public class EditTheaterPlayPanel extends JPanel {
 
 	private MainWindow mainWindow;
 	private TheaterPlay play;
@@ -104,6 +105,13 @@ public class EditTheaterPlayPanel extends JPanel{
 		roleDisplay = new RolePanel(mainWindow, play);
 		roleDisplay.setShowDeleteButton(true);
 		roleDisplay.setChangePseudoEnabled(false);
+		roleDisplay.addRoleDeleteEventListener(new RoleDeleteListener() {
+			
+			@Override
+			public void deleteRole(Role role) {
+				log.debug("event deleting role: " + role);
+			}
+		});
 		add(roleDisplay, "0,0");
 		add(theaterDataPanel, "0,1");
 		

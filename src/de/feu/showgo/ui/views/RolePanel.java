@@ -16,6 +16,7 @@ import de.feu.showgo.model.Role;
 import de.feu.showgo.model.Scene;
 import de.feu.showgo.model.TheaterPlay;
 import de.feu.showgo.ui.MainWindow;
+import de.feu.showgo.ui.listener.RoleDeleteListener;
 
 public class RolePanel extends JPanel {
 
@@ -27,11 +28,13 @@ public class RolePanel extends JPanel {
 	private JPanel specialRoleSelectPanel;
 	private boolean changePseudoEnabled;
 	private boolean showDeleteButton;
+	private List<RoleDeleteListener> roleDeleteListener;
 
 	public RolePanel(MainWindow mainWindow, TheaterPlay model) {
 		this.mainWindow = mainWindow;
 		this.model = model;
 		rolePanelRows = new ArrayList<RolePanelRow>();
+		roleDeleteListener = new ArrayList<RoleDeleteListener>();
 		createComponent();
 	}
 	
@@ -101,6 +104,9 @@ public class RolePanel extends JPanel {
 		RolePanelRow rolePanelWrapper = new RolePanelRow(mainWindow, this, model, role, rolePanel);
 		rolePanelWrapper.setChangePseudoEnabled(changePseudoEnabled);
 		rolePanelWrapper.setShowDeleteButton(showDeleteButton);
+		for(RoleDeleteListener listener : roleDeleteListener){
+			rolePanelWrapper.addRoleDeleteEventListener(listener);
+		}
 		rolePanelRows.add(rolePanelWrapper);
 
 		if (role.isPseudoRole()) {
@@ -172,6 +178,13 @@ public class RolePanel extends JPanel {
 			panel.setShowDeleteButton(showDeleteButton);
 		}
 		this.showDeleteButton = showDeleteButton;
+	}
+	
+	public void addRoleDeleteEventListener(RoleDeleteListener listener){
+		roleDeleteListener.add(listener);
+		for (RolePanelRow panel : rolePanelRows) {
+			panel.addRoleDeleteEventListener(listener);
+		}
 	}
 	
 }
