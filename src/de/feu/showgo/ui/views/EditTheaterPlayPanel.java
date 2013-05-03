@@ -110,6 +110,7 @@ public class EditTheaterPlayPanel extends JPanel {
 			@Override
 			public void deleteRole(Role role) {
 				log.debug("event deleting role: " + role);
+				removeRole(role);
 			}
 		});
 		add(roleDisplay, "0,0");
@@ -286,11 +287,32 @@ public class EditTheaterPlayPanel extends JPanel {
 		}
 	}
 	
-	private void removeRole(Role role){
-		log.debug("delete role " + role);
-		play.deleteRole(role);
-		roleDisplay.removeRole(role);
+	private void removeRole(Role toBeDeleted){
+		log.debug("delete role " + toBeDeleted);
+		play.deleteRole(toBeDeleted);
+		roleDisplay.removeRole(toBeDeleted);
 		roleDisplay.refreshPseudoRoles();
+		
+		List<Paragraph> queuedForDeletion = new LinkedList<Paragraph>();
+		
+		for(ActPanelWrapper actWrapper : actWrapperList){
+			for(ScenePanelWrapper sceneWrapper : actWrapper.children){
+				for(ParagraphPanelWrapper paragraphWrapper : sceneWrapper.children){
+					if(paragraphWrapper.paragraph instanceof Passage){
+						Passage passage = (Passage) paragraphWrapper.paragraph;
+						if(passage.getRole() == toBeDeleted){
+							queuedForDeletion.add(passage);
+						}
+					}
+				}
+			}
+		}
+		
+		for(Paragraph paragraph : queuedForDeletion){
+			removeParagraph(paragraph);
+		}
+		
+		
 	}
 	
 	
