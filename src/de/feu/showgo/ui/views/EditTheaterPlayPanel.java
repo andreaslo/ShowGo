@@ -55,8 +55,9 @@ public class EditTheaterPlayPanel extends JPanel{
 		for(Act act : play.getActs()){
 			JPanel actPanel = new JPanel();
 			actPanel.setLayout(new TableLayout(generateLayoutSize(act)));
+			actPanel.add(createActNamePanel(act, actPanel), "0,0");
 			
-			int actRow = 0;
+			int actRow = 1;
 			for(Scene scene : act.getScenes()){
 				log.debug("adding scene " + scene.getName());
 				JPanel scenePanel = new JPanel();
@@ -72,8 +73,7 @@ public class EditTheaterPlayPanel extends JPanel{
 				actPanel.add(scenePanel, "0," + actRow);
 				actRow++;
 			}
-			theaterDataPanel.add(createActNamePanel(act, actPanel), "0," + row);
-			row++;
+
 			theaterDataPanel.add(actPanel, "0," + row);
 			row++;
 		}
@@ -235,7 +235,7 @@ public class EditTheaterPlayPanel extends JPanel{
 	}
 	
 	private double[][] generateLayoutSize(TheaterPlay play){
-		return generateLayoutSize(play.getActs().size() * 2);
+		return generateLayoutSize(play.getActs().size());
 	}
 	
 	private double[][] generateLayoutSize(Scene scene){
@@ -243,7 +243,7 @@ public class EditTheaterPlayPanel extends JPanel{
 	}
 	
 	private double[][] generateLayoutSize(Act act){
-		return generateLayoutSize(act.getScenes().size() * 2);
+		return generateLayoutSize(act.getScenes().size() * 2 + 1);
 	}
 	
 	private double[][] generateLayoutSize(int numRows){		
