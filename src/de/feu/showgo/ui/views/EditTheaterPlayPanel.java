@@ -57,6 +57,10 @@ public class EditTheaterPlayPanel extends JPanel{
 			actPanel.setLayout(new TableLayout(generateLayoutSize(act)));
 			actPanel.add(createActNamePanel(act), "0,0");
 			
+			ActPanelWrapper actWrapper = new ActPanelWrapper();
+			actWrapper.act = act;
+			actWrapper.panel = actPanel;		
+			
 			int actRow = 1;
 			for(Scene scene : act.getScenes()){
 				log.debug("adding scene " + scene.getName());
@@ -72,14 +76,16 @@ public class EditTheaterPlayPanel extends JPanel{
 				
 				actPanel.add(scenePanel, "0," + actRow);
 				actRow++;
+				
+				ScenePanelWrapper sceneWrapper = new ScenePanelWrapper();
+				sceneWrapper.panel = scenePanel;
+				sceneWrapper.scene = scene;
+				actWrapper.children.add(sceneWrapper);
 			}
 
 			theaterDataPanel.add(actPanel, "0," + row);
 			row++;
 			
-			ActPanelWrapper actWrapper = new ActPanelWrapper();
-			actWrapper.act = act;
-			actWrapper.panel = actPanel;		
 			actWrapperList.add(actWrapper);
 		}
 		
@@ -110,7 +116,6 @@ public class EditTheaterPlayPanel extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				play.deleteAct(act);
 				removeAct(act);
 				roleDisplay.updateWordCounter();
 				roleDisplay.refreshPseudoRoles();
@@ -140,10 +145,8 @@ public class EditTheaterPlayPanel extends JPanel{
 		delete.addActionListener(new ActionListener() {
 			
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				act.deleteScene(scene);				
-				namePanel.removeAll();
-				scenePanel.removeAll();
+			public void actionPerformed(ActionEvent e) {	
+				removeScene(scene);
 				roleDisplay.updateWordCounter();
 				roleDisplay.refreshPseudoRoles();
 				revalidate();
@@ -303,6 +306,28 @@ public class EditTheaterPlayPanel extends JPanel{
 		
 		toBeDeleted.panel.removeAll();
 		actWrapperList.remove(toBeDeleted);
+		play.deleteAct(act);
+	}
+	
+	private void removeScene(Scene scene){
+		ScenePanelWrapper toBeDeleted = null;
+		ActPanelWrapper surroundingActWrapper = null;
+		for(ActPanelWrapper actWrapper : actWrapperList){
+			for(ScenePanelWrapper sceneWrapper : actWrapper.children){
+				if(sceneWrapper.scene == scene){
+					toBeDeleted = sceneWrapper;
+					surroundingActWrapper = actWrapper;
+					break;
+				}
+			}
+		}
+		
+		toBeDeleted.panel.removeAll();
+		surroundingActWrapper.act.deleteScene(scene);			
+		surroundingActWrapper.children.remove(toBeDeleted);
+		if(surroundingActWrapper.children.isEmpty()){
+			removeAct(surroundingActWrapper.act);
+		}
 	}
 	
 	private class RoleComboRederer extends BasicComboBoxRenderer {
@@ -321,7 +346,7 @@ public class EditTheaterPlayPanel extends JPanel{
 	private class ActPanelWrapper {
 		JPanel panel;
 		Act act;
-		List<ScenePanelWrapper> children;
+		List<ScenePanelWrapper> children = new ArrayList<EditTheaterPlayPanel.ScenePanelWrapper>();
 	}
 	
 	private class ScenePanelWrapper {
