@@ -23,6 +23,8 @@ public class RolePanel extends JPanel {
 	private static final Logger log = Logger.getLogger(RolePanel.class);
 	private List<RolePanelRow> rolePanelRows;
 	private TheaterPlay model;
+	private JPanel roleSelectPanel;
+	private JPanel specialRoleSelectPanel;
 
 	public RolePanel(MainWindow mainWindow, TheaterPlay model) {
 		this.mainWindow = mainWindow;
@@ -36,32 +38,32 @@ public class RolePanel extends JPanel {
 		TableLayout layout = new TableLayout(size);
 		setLayout(layout);
 		
-		JPanel rolePanel = createRoleSelectTable();
-		add(rolePanel, "0,0");
+		roleSelectPanel = createRoleSelectTable();
+		add(roleSelectPanel, "0,0");
 
-		JPanel roleAllPanel = createSpecialRoleAllSelectPanel();
-		add(roleAllPanel, "0,1");
+		specialRoleSelectPanel = createSpecialRoleAllSelectPanel();
+		add(specialRoleSelectPanel, "0,1");
 	}
 
 	private JPanel createSpecialRoleAllSelectPanel() {
-		JPanel roleSelectPanel = new JPanel();
+		JPanel specialRoleSelectPanel = new JPanel();
 		double size[][] = { { TableLayout.FILL }, { 25 } };
 		TableLayout layout = new TableLayout(size);
-		roleSelectPanel.setLayout(layout);
+		specialRoleSelectPanel.setLayout(layout);
 
 		for (Act act : model.getActs()) {
 			for (Scene scene : act.getScenes()) {
 				if (scene.getAllRole() != null) {
 					JPanel rolePanel = createRolePanel(scene.getAllRole());
 					layout.insertRow(1, TableLayout.PREFERRED);
-					roleSelectPanel.add(rolePanel, "0,1");
+					specialRoleSelectPanel.add(rolePanel, "0,1");
 					layout.insertRow(1, TableLayout.PREFERRED);
-					roleSelectPanel.add(new JLabel(scene.getName()), "0,1");
+					specialRoleSelectPanel.add(new JLabel(scene.getName()), "0,1");
 				}
 			}
 		}
 
-		return roleSelectPanel;
+		return specialRoleSelectPanel;
 	}
 
 	private JPanel createRoleSelectTable() {
@@ -129,6 +131,33 @@ public class RolePanel extends JPanel {
 		for (RolePanelRow panel : rolePanelRows) {
 			panel.setChangePseudoEnabled(changePseudoEnabled);
 		}
+	}
+	
+	public void removeRole(Role role){
+		for(RolePanelRow row : rolePanelRows){
+			if(row.getRole() == role){
+				log.debug("role panel row found");
+				roleSelectPanel.remove(row.getRowPanel());
+				repaint();
+				revalidate();
+			}
+		}
+	}
+
+	public void refreshPseudoRoles() {
+		for(RolePanelRow row : rolePanelRows){
+			if(row.getRole().isPseudoRole()){
+				log.debug("refreshing pseudo role: " + row.getRole().getName());
+				row.setToPseudeRole();
+			}
+		}
+		
+		remove(specialRoleSelectPanel);
+		specialRoleSelectPanel = createSpecialRoleAllSelectPanel();
+		add(specialRoleSelectPanel, "0,1");
+		
+		repaint();
+		revalidate();
 	}
 	
 }

@@ -1,16 +1,19 @@
 package de.feu.showgo.ui.views;
 
+import info.clearthought.layout.TableLayout;
+
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import info.clearthought.layout.TableLayout;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -103,8 +106,10 @@ public class EditTheaterPlayPanel extends JPanel{
 				namePanel.removeAll();
 				actPanel.removeAll();
 				roleDisplay.updateWordCounter();
+				roleDisplay.refreshPseudoRoles();
 				revalidate();
 				repaint();
+				checkRolesNecessary();
 			}
 		});
 		
@@ -133,8 +138,10 @@ public class EditTheaterPlayPanel extends JPanel{
 				namePanel.removeAll();
 				scenePanel.removeAll();
 				roleDisplay.updateWordCounter();
+				roleDisplay.refreshPseudoRoles();
 				revalidate();
 				repaint();
+				checkRolesNecessary();
 			}
 		});
 		namePanel.add(delete, "1,0,l,c");
@@ -186,6 +193,7 @@ public class EditTheaterPlayPanel extends JPanel{
 				roleDisplay.updateWordCounter();
 				revalidate();
 				repaint();
+				checkRolesNecessary();
 			}
 		});
 		namePanel.add(delete, "1,0,l,c");
@@ -247,6 +255,33 @@ public class EditTheaterPlayPanel extends JPanel{
 		}
 		
 		return size;
+	}
+	
+	
+	private void checkRolesNecessary(){
+		List<Role> toBeDeleted = new LinkedList<Role>();
+		
+		for(Role role : play.getRoles()){
+			if(role.getWords() == 0  && !role.isPseudoRole()){
+				int result = JOptionPane.showConfirmDialog(mainWindow, "Die Rolle \"" + role.getName() + "\" hat keine Sprachtexte mehr. Soll Sie gelöscht werden?", "Rolle löschen", JOptionPane.YES_NO_OPTION);
+				if(result == JOptionPane.OK_OPTION){
+					toBeDeleted.add(role);
+				}
+			}
+		}
+		
+		log.debug("roles queued for deletion: " + toBeDeleted);
+		
+		for(Role role : toBeDeleted){
+			removeRole(role);
+		}
+	}
+	
+	private void removeRole(Role role){
+		log.debug("delete role " + role);
+		play.deleteRole(role);
+		roleDisplay.removeRole(role);
+		roleDisplay.refreshPseudoRoles();
 	}
 	
 	private class RoleComboRederer extends BasicComboBoxRenderer {

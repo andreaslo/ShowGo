@@ -93,6 +93,24 @@ public class TheaterPlay {
 	}
 	public void deleteAct(Act act) {
 		acts.remove(act);
+	}
+	public void deleteRole(Role toBeDeleted) {
+		roles.remove(toBeDeleted);
+		
+		// remove the role from pesudo roles
+		for(Role role : roles){
+			if(role.isPseudoRole()){
+				role.getAssigendRoles().remove(toBeDeleted);
+			}
+		}
+		
+		for(Act act : acts){
+			for(Scene scene : act.getScenes()){
+				if(scene.getAllRole() != null){
+					scene.getAllRole().getAssigendRoles().remove(toBeDeleted);
+				}
+			}
+		}
 	}	
 	
 	

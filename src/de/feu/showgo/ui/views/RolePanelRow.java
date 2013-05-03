@@ -259,5 +259,12 @@ public class RolePanelRow {
 		pseudoSelect.setEnabled(changePseudoEnabled);
 		this.changePseudoEnabled = changePseudoEnabled;
 	}
+
+
+	public JPanel getRowPanel() {
+		return rowPanel;
+	}
+	
+	
 	
 }
