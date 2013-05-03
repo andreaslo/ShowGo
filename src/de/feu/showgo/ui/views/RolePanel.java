@@ -25,6 +25,7 @@ public class RolePanel extends JPanel {
 	private TheaterPlay model;
 	private JPanel roleSelectPanel;
 	private JPanel specialRoleSelectPanel;
+	private boolean changePseudoEnabled;
 
 	public RolePanel(MainWindow mainWindow, TheaterPlay model) {
 		this.mainWindow = mainWindow;
@@ -97,6 +98,7 @@ public class RolePanel extends JPanel {
 
 		final JPanel rolePanel = new JPanel();
 		RolePanelRow rolePanelWrapper = new RolePanelRow(mainWindow, this, model, role, rolePanel);
+		rolePanelWrapper.setChangePseudoEnabled(changePseudoEnabled);
 		rolePanelRows.add(rolePanelWrapper);
 
 		if (role.isPseudoRole()) {
@@ -131,6 +133,7 @@ public class RolePanel extends JPanel {
 		for (RolePanelRow panel : rolePanelRows) {
 			panel.setChangePseudoEnabled(changePseudoEnabled);
 		}
+		this.changePseudoEnabled = changePseudoEnabled;
 	}
 	
 	public void removeRole(Role role){

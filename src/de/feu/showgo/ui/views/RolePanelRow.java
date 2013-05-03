@@ -256,7 +256,9 @@ public class RolePanelRow {
 
 
 	public void setChangePseudoEnabled(boolean changePseudoEnabled) {
-		pseudoSelect.setEnabled(changePseudoEnabled);
+		if(pseudoSelect != null){
+			pseudoSelect.setEnabled(changePseudoEnabled);
+		}
 		this.changePseudoEnabled = changePseudoEnabled;
 	}
 
