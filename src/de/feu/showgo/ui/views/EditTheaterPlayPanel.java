@@ -316,6 +316,21 @@ public class EditTheaterPlayPanel extends JPanel {
 			removeParagraph(paragraph);
 		}
 		
+		// Check whether pseudo roles became
+		List<Role> queuePseudoRolesForDeletion = new LinkedList<Role>();
+		for(Role role : play.getRoles()){
+			if(role.isPseudoRole()){
+				if(role.getAssigendRoles().isEmpty()){
+					int result = JOptionPane.showConfirmDialog(mainWindow, "Der Pseudorolle \"" + role.getName() + "\" sind keine Rollen mehr zugewiesen. Soll diese gelöscht werden?", "Rolle löschen", JOptionPane.YES_NO_OPTION);
+					if(result == JOptionPane.OK_OPTION){
+						queuePseudoRolesForDeletion.add(role);
+					}
+				}
+			}
+		}
+		for(Role role : queuePseudoRolesForDeletion){
+			removeRole(role);
+		}
 		
 	}
 	
