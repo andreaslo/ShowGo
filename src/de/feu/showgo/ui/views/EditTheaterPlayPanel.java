@@ -102,6 +102,7 @@ public class EditTheaterPlayPanel extends JPanel{
 		setLayout(layout);
 		
 		roleDisplay = new RolePanel(mainWindow, play);
+		roleDisplay.setShowDeleteButton(true);
 		roleDisplay.setChangePseudoEnabled(false);
 		add(roleDisplay, "0,0");
 		add(theaterDataPanel, "0,1");
