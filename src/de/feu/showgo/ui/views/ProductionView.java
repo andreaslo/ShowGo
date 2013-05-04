@@ -21,15 +21,18 @@ import org.apache.log4j.Logger;
 
 import de.feu.showgo.ShowGoDAO;
 import de.feu.showgo.io.ParseUtil;
+import de.feu.showgo.model.Ensemble;
 import de.feu.showgo.model.Production;
 import de.feu.showgo.model.TheaterPlay;
 import de.feu.showgo.ui.MainWindow;
+import de.feu.showgo.ui.tree.EnsembleNode;
 
 public class ProductionView extends JPanel {
 
 	private final static Logger log = Logger.getLogger(ProductionView.class);
 	private MainWindow mainWindow;
 	private JTextField productionNameInput;
+	private JComboBox<Ensemble> ensembleSelect;
 	private JComboBox<TheaterPlay> playSelect;
 	private Production model;
 
@@ -48,10 +51,13 @@ public class ProductionView extends JPanel {
 		setLayout(new TableLayout(size));
 
 		JPanel productionNamePanel = createProductionNamePanel();
+		JPanel ensembleSelect = createEnsembleSelectPanel();
 		JPanel playSelectPanel = createPlaySelectPanel();
 
+		
 		add(productionNamePanel, "1,1,f,t");
-		add(playSelectPanel, "1,2");
+		add(ensembleSelect, "1,2,f,t");
+		add(playSelectPanel, "1,3");
 	}
 
 	private JPanel createProductionNamePanel() {
@@ -108,7 +114,7 @@ public class ProductionView extends JPanel {
 					usePlayAction.setEnabled(false);
 					playSelect.setEnabled(false);
 					
-					add(new EditTheaterPlayPanel(mainWindow, copy), "1,3");
+					add(new EditTheaterPlayPanel(mainWindow, copy), "1,4");
 					revalidate();
 					repaint();
 				}
@@ -120,6 +126,37 @@ public class ProductionView extends JPanel {
 
 		return productionNamePanel;
 	}
+	
+	private JPanel createEnsembleSelectPanel() {
+		JPanel ensembleSelectPanel = new JPanel();
+		double size[][] = { { TableLayout.PREFERRED, 20, TableLayout.PREFERRED }, { 30, 30 } };
+		TableLayout layout = new TableLayout(size);
+		ensembleSelectPanel.setLayout(layout);
+
+		ensembleSelectPanel.add(new JLabel("Bitte wählen Sie ein Ensemble aus:"), "0,0");
+
+		ensembleSelect = new JComboBox<Ensemble>();
+		ensembleSelect.setRenderer(new EnsembleComboRederer());
+		for (Ensemble ensemble : ShowGoDAO.getShowGo().getEnsembles()) {
+			log.debug("ading ensemble: " + ensemble.getName());
+			ensembleSelect.addItem(ensemble);
+		}
+
+		final JButton useEnsembleAction = new JButton("Ensemble verwenden");
+		useEnsembleAction.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (ensembleSelect.getSelectedItem() != null) {
+
+				}
+			}
+		});
+
+		ensembleSelectPanel.add(ensembleSelect, "0,1,f,c");
+		ensembleSelectPanel.add(useEnsembleAction, "2,1,c,c");
+
+		return ensembleSelectPanel;
+	}
 
 	private class PlayComboRederer extends BasicComboBoxRenderer {
 		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
@@ -127,6 +164,19 @@ public class ProductionView extends JPanel {
 
 			if (value != null) {
 				TheaterPlay item = (TheaterPlay) value;
+				setText(item.getName());
+			}
+
+			return this;
+		}
+	}
+	
+	private class EnsembleComboRederer extends BasicComboBoxRenderer {
+		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+			super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+
+			if (value != null) {
+				Ensemble item = (Ensemble) value;
 				setText(item.getName());
 			}
 
