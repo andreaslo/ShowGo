@@ -37,19 +37,35 @@ public class CastRowPanel extends JPanel {
 	}
 	
 	private void createComponent(){	
-		double size[][] = { { TableLayout.PREFERRED}, { 30, TableLayout.PREFERRED, 30 } };
+		double size[][] = { { TableLayout.PREFERRED}, { 30, 30 } };
 		final TableLayout layout = new TableLayout(size);
 		setLayout(layout);
 		
 		castsSelects = new ArrayList<JComboBox<Person>>();
 		
 		add(new JLabel(role.getName()+":"), "0,0");
-
 		
-		add(createCastSelectPanel(1), "0,1,f,c");
+		int counter = 1;
+		if(role.getCast() != null && !role.getCast().isEmpty()){
+
+			for(Person selected : role.getCast()){
+				log.debug("adding cast " + selected);
+				layout.insertRow(counter, TableLayout.PREFERRED);
+				add(createCastSelectPanel(counter), "0,"+counter+",f,c");
+				castsSelects.get(counter - 1).setSelectedItem(selected);
+				counter++;
+			}
+			
+		}else{
+			layout.insertRow(counter, TableLayout.PREFERRED);
+			add(createCastSelectPanel(1), "0,1,f,c");
+			counter++;
+		}
 		
 		JButton addCast = new JButton("Weitere Besetzung hinzufügen");
 
+		
+		rowCounter = counter;
 		addCast.addActionListener(new ActionListener() {
 			
 			@Override
@@ -63,7 +79,7 @@ public class CastRowPanel extends JPanel {
 				repaint();
 			}
 		});
-		add(addCast, "0,2,l,c");
+		add(addCast, "0,"+counter+",l,c");
 	}
 	
 	private JPanel createCastSelectPanel(int rankNum){

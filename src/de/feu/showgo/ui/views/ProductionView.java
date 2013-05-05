@@ -87,18 +87,20 @@ public class ProductionView extends JPanel {
 		setLayout(new TableLayout(size));
 
 		TheaterPlay copy = null;
-		try {
-			copy = ParseUtil.copyPlay(model.getPlay());
-		} catch (JAXBException e1) {
-			log.error("", e1);
-		} catch (IOException e1) {
-			log.error("", e1);
-		}
+		copy = model.getPlay();
+//		try {
+//			copy = ParseUtil.copyPlay(model.getPlay());
+//		} catch (JAXBException e1) {
+//			log.error("", e1);
+//		} catch (IOException e1) {
+//			log.error("", e1);
+//		}
 		
 		JPanel productionNamePanel = createProductionNamePanel();
 		JPanel ensembleSelectPanel = createEnsembleSelectPanel();
 		ensembleSelect.setEnabled(false);
 		
+		log.debug("#######"+copy.getRoles().get(1).getCast());
 		castSelectionPanel = new CastSelectionPanel(mainWindow, copy.getRoles(), model.getEnsamble().getMembers(), "Besetzung der Darstellerrollen");
 		
 		editPlayPanel = new EditTheaterPlayPanel(mainWindow, copy);
