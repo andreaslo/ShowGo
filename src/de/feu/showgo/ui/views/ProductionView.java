@@ -87,14 +87,13 @@ public class ProductionView extends JPanel {
 		setLayout(new TableLayout(size));
 
 		TheaterPlay copy = null;
-		copy = model.getPlay();
-//		try {
-//			copy = ParseUtil.copyPlay(model.getPlay());
-//		} catch (JAXBException e1) {
-//			log.error("", e1);
-//		} catch (IOException e1) {
-//			log.error("", e1);
-//		}
+		try {
+			copy = ParseUtil.copyPlay(model.getPlay());
+		} catch (JAXBException e1) {
+			log.error("", e1);
+		} catch (IOException e1) {
+			log.error("", e1);
+		}
 		
 		JPanel productionNamePanel = createProductionNamePanel();
 		JPanel ensembleSelectPanel = createEnsembleSelectPanel();
