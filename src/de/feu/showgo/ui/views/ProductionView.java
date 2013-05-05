@@ -46,6 +46,7 @@ public class ProductionView extends JPanel {
 	private CastSelectionPanel castSelectionPanel;
 	private EditTheaterPlayPanel editPlayPanel;
 	private CastSelectionPanel nonActorSelection;
+	private boolean alreadyExists;
 	
 	public ProductionView(MainWindow mainWindow) {
 		log.debug("showing production view");
@@ -53,6 +54,15 @@ public class ProductionView extends JPanel {
 		setName("Neue Inszenierung anlegen");
 		model = new Production();
 		createComponent();
+	}
+	
+	public ProductionView(MainWindow mainWindow, Production production) {
+		log.debug("showing production view");
+		this.mainWindow = mainWindow;
+		setName("Neue Inszenierung anlegen");
+		model = production;
+		alreadyExists = true;
+		createComponentEditMode();
 	}
 
 	private void createComponent() {
@@ -69,6 +79,42 @@ public class ProductionView extends JPanel {
 		add(productionNamePanel, "1,1,f,t");
 		add(ensembleSelect, "1,2,f,t");
 		add(playSelectPanel, "1,3");
+	}
+	
+	private void createComponentEditMode(){
+		double size[][] = { { 20, TableLayout.FILL, 20 },
+				{ 20, 60, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, 30 } };
+		setLayout(new TableLayout(size));
+
+		TheaterPlay copy = null;
+		try {
+			copy = ParseUtil.copyPlay(model.getPlay());
+		} catch (JAXBException e1) {
+			log.error("", e1);
+		} catch (IOException e1) {
+			log.error("", e1);
+		}
+		
+		JPanel ensembleSelect = createEnsembleSelectPanel();
+		JPanel playSelectPanel = createPlaySelectPanel();
+		
+		ensembleSelect.setEnabled(false);
+		
+		castSelectionPanel = new CastSelectionPanel(mainWindow, copy.getRoles(), model.getEnsamble().getMembers(), "Besetzung der Darstellerrollen");
+		
+		editPlayPanel = new EditTheaterPlayPanel(mainWindow, copy);
+		editPlayPanel.getRoleDisplay().addRoleDeleteEventListener(castSelectionPanel);
+		
+		nonActorSelection = createNonActorPersonAssignment();
+		
+		JPanel submitPanel = createSubmitPanel();
+		
+		add(ensembleSelect, "1,2,f,t");
+		add(playSelectPanel, "1,3");
+		add(castSelectionPanel,"1,4");
+		add(nonActorSelection,"1,5");
+		add(editPlayPanel, "1,6");
+		add(submitPanel, "1,7");
 	}
 
 	private JPanel createProductionNamePanel() {
