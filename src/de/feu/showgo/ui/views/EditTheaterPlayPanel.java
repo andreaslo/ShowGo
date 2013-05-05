@@ -316,7 +316,7 @@ public class EditTheaterPlayPanel extends JPanel {
 			removeParagraph(paragraph);
 		}
 		
-		// Check whether pseudo roles became
+		// Check whether pseudo roles became empty
 		List<Role> queuePseudoRolesForDeletion = new LinkedList<Role>();
 		for(Role role : play.getRoles()){
 			if(role.isPseudoRole()){
