@@ -438,4 +438,10 @@ public class EditTheaterPlayPanel extends JPanel {
 		JComboBox<Role> roleSelect;
 	}
 
+	public RolePanel getRoleDisplay() {
+		return roleDisplay;
+	}
+	
+	
+
 }

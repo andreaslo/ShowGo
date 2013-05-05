@@ -15,8 +15,9 @@ import org.apache.log4j.Logger;
 import de.feu.showgo.model.Person;
 import de.feu.showgo.model.Role;
 import de.feu.showgo.ui.MainWindow;
+import de.feu.showgo.ui.listener.RoleDeleteListener;
 
-public class CastSelectionPanel extends JPanel {
+public class CastSelectionPanel extends JPanel implements RoleDeleteListener {
 
 		private MainWindow mainWindow;
 		private List<Role> roles;
@@ -64,6 +65,11 @@ public class CastSelectionPanel extends JPanel {
 			}
 			
 			return size;
+		}
+
+		@Override
+		public void deleteRole(Role role) {
+			log.debug("cast panel notified abour deleted role: " + role);
 		}
 		
 }

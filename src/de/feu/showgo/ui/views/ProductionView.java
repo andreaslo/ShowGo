@@ -116,8 +116,12 @@ public class ProductionView extends JPanel {
 					
 					Ensemble selectedEnsemble = (Ensemble) ensembleSelect.getSelectedItem();
 					CastSelectionPanel castSelectionPanel = new CastSelectionPanel(mainWindow, copy.getRoles(), selectedEnsemble.getMembers(), "Besetzung der Darstellerrollen");
+					
+					EditTheaterPlayPanel editPlayPanel = new EditTheaterPlayPanel(mainWindow, copy);
+					editPlayPanel.getRoleDisplay().addRoleDeleteEventListener(castSelectionPanel);
+					
 					add(castSelectionPanel,"1,4");
-					add(new EditTheaterPlayPanel(mainWindow, copy), "1,5");
+					add(editPlayPanel, "1,5");
 					revalidate();
 					repaint();
 				}
