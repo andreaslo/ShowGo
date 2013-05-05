@@ -28,6 +28,9 @@ public class Role {
 	@XmlElement(name="gender")
 	private Gender gender;
 	
+	@XmlIDREF
+	private List<Person> cast;
+	
 	
 	@XmlElement(name="pseudoRole")
 	private boolean pseudoRole;
@@ -153,6 +156,21 @@ public class Role {
 
 	public void setGender(Gender gender) {
 		this.gender = gender;
+	}
+
+
+	public List<Person> getCast() {
+		return cast;
+	}
+
+
+	public void setCast(List<Person> cast) {
+		this.cast = cast;
+	}
+
+
+	public String getId() {
+		return id;
 	}
 
 	
