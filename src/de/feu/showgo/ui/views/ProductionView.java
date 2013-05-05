@@ -215,7 +215,6 @@ public class ProductionView extends JPanel {
 		JButton saveButton = new JButton("Inszenierung Speichern");
 		submitPanel.add(saveButton);
 
-		final JPanel viewPanel = this;
 		saveButton.addActionListener(new ActionListener() {
 
 			@Override
