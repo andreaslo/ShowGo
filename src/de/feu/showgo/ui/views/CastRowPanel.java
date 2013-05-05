@@ -5,11 +5,13 @@ import info.clearthought.layout.TableLayout;
 import java.awt.Component;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
 import org.apache.log4j.Logger;
@@ -31,7 +33,7 @@ public class CastRowPanel extends JPanel {
 		createComponent();
 	}
 	
-	private void createComponent(){
+	private void createComponent(){	
 		double size[][] = { { 150, 300 }, { 30, 30, 30 } };
 		TableLayout layout = new TableLayout(size);
 		setLayout(layout);

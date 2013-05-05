@@ -4,9 +4,11 @@ import info.clearthought.layout.TableLayout;
 
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
 
 import org.apache.log4j.Logger;
 
@@ -19,17 +21,24 @@ public class CastSelectionPanel extends JPanel {
 		private MainWindow mainWindow;
 		private List<Role> roles;
 		private List<Person> availablePersons;
+		private String borderTitle;
 		private static final Logger log = Logger.getLogger(CastSelectionPanel.class);
 	
-		public CastSelectionPanel(MainWindow mainWindow, List<Role> roles, List<Person> availablePersons){
+		public CastSelectionPanel(MainWindow mainWindow, List<Role> roles, List<Person> availablePersons, String borderTitle){
 			log.debug("creating cast selection panel");
 			this.mainWindow = mainWindow;
 			this.roles = roles;
 			this.availablePersons = availablePersons;
+			this.borderTitle = borderTitle;
 			createComponent();
 		}
 		
 		private void createComponent(){
+			if(borderTitle != null){
+				TitledBorder titledBorder = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), borderTitle);
+				setBorder(titledBorder);
+			}
+			
 			setLayout(new TableLayout(generateLayoutSize(roles.size())));
 			int rowCounter = 0;
 			for(Role role : roles){
