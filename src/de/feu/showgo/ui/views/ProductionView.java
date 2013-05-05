@@ -231,6 +231,7 @@ public class ProductionView extends JPanel {
 				nonActorSelection.saveCastToBackingModel();
 				
 				model.setPlay(editPlayPanel.getPlay());
+				model.setNonActorRoles(nonActorSelection.getRoles());
 				model.setName(productionNameInput.getText());
 				
 				ShowGoDAO.getShowGo().addProduction(model);

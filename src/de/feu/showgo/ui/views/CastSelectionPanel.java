@@ -91,5 +91,9 @@ public class CastSelectionPanel extends JPanel implements RoleDeleteListener {
 				log.debug("setting cast of " + row.getRole().getName() +" to: " + selectedPersons);
 			}
 		}
+
+		public List<Role> getRoles() {
+			return roles;
+		}
 		
 }
