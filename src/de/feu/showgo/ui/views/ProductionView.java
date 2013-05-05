@@ -278,6 +278,7 @@ public class ProductionView extends JPanel {
 				model.setPlay(editPlayPanel.getPlay());
 				model.setNonActorRoles(nonActorSelection.getRoles());
 				model.setName(productionNameInput.getText());
+				model.setEnsamble((Ensemble) ensembleSelect.getSelectedItem());
 				
 				ShowGoDAO.getShowGo().addProduction(model);
 				
