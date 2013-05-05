@@ -115,6 +115,7 @@ public class ProductionView extends JPanel {
 					
 					usePlayAction.setEnabled(false);
 					playSelect.setEnabled(false);
+					ensembleSelect.setEnabled(false);
 					
 					Ensemble selectedEnsemble = (Ensemble) ensembleSelect.getSelectedItem();
 					CastSelectionPanel castSelectionPanel = new CastSelectionPanel(mainWindow, copy.getRoles(), selectedEnsemble.getMembers(), "Besetzung der Darstellerrollen");
