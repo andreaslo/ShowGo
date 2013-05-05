@@ -25,18 +25,15 @@ public class ProductionNode extends TreeElement{
 		public JPopupMenu getPopupMenu() {
 			JPopupMenu popup = new JPopupMenu();
 			
-			JMenuItem showEnsemble = new JMenuItem("Anzeigen");
+			JMenuItem editProduction = new JMenuItem("Bearbeiten");
+			editProduction.addActionListener(new EditProductionAction(mainWindow, production));
 			
-			JMenuItem editEnsemble = new JMenuItem("Bearbeiten");
-			editEnsemble.addActionListener(new EditProductionAction(mainWindow, production));
+			JMenuItem deleteProduction = new JMenuItem("Löschen");
+			deleteProduction.addActionListener(new DeleteProductionAction(mainWindow, production));
 			
-			JMenuItem deleteEnsemble = new JMenuItem("Löschen");
-			deleteEnsemble.addActionListener(new DeleteProductionAction(mainWindow, production));
-			
-			popup.add(showEnsemble);
-			popup.add(editEnsemble);
+			popup.add(editProduction);
 			popup.addSeparator();
-			popup.add(deleteEnsemble);
+			popup.add(deleteProduction);
 			return popup;
 		}
 
