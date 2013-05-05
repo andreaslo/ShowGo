@@ -105,7 +105,7 @@ public class ProductionView extends JPanel {
 		editPlayPanel.getRoleDisplay().addRoleDeleteEventListener(castSelectionPanel);
 		editPlayPanel.addRoleDeleteListener(castSelectionPanel);
 		
-		nonActorSelection = createNonActorPersonAssignment();
+		nonActorSelection = new CastSelectionPanel(mainWindow, model.getNonActorRoles(), model.getEnsamble().getMembers(), "Besetzung der Nicht-Darstellerrollen");
 		
 		JPanel submitPanel = createSubmitPanel();
 		
