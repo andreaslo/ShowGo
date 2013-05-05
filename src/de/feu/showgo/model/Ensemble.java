@@ -3,19 +3,40 @@ package de.feu.showgo.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlIDREF;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Ensemble {
-
+	
+	@XmlAttribute
+    @XmlID
+	private String id;
 	@XmlElement(name="name")
 	private String name;
 	@XmlIDREF
 	private List<Person> members = new ArrayList<Person>();
+	
+	public Ensemble(){
+		id = UUID.randomUUID().toString();
+	}
+	
+	/**
+	 * Copy constructor
+	 * 
+	 * @param oldEnsemble
+	 */
+	public Ensemble(Ensemble oldEnsemble){
+		id = UUID.randomUUID().toString();
+		setName(oldEnsemble.getName());
+		members = new ArrayList<Person>(oldEnsemble.getMembers());
+	}
 	
 	public String getName() {
 		return name;
@@ -33,18 +54,6 @@ public class Ensemble {
 	
 	public void removePerson(Person person){
 		members.remove(person);
-	}
-	
-	public Ensemble(){}
-	
-	/**
-	 * Copy constructor
-	 * 
-	 * @param oldEnsemble
-	 */
-	public Ensemble(Ensemble oldEnsemble){
-		setName(oldEnsemble.getName());
-		members = new ArrayList<Person>(oldEnsemble.getMembers());
 	}
 	
 	@Override
