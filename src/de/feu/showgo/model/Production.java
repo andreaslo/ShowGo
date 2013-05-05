@@ -17,7 +17,7 @@ public class Production {
 	@XmlElement(name="nonActorRole")
 	private List<Role> nonActorRoles;
 	@XmlIDREF
-	private Ensemble ensamble;
+	private Ensemble ensemble;
 
 	public TheaterPlay getPlay() {
 		return play;
@@ -44,11 +44,11 @@ public class Production {
 	}
 
 	public Ensemble getEnsamble() {
-		return ensamble;
+		return ensemble;
 	}
 
 	public void setEnsamble(Ensemble ensamble) {
-		this.ensamble = ensamble;
+		this.ensemble = ensamble;
 	}
 	
 	
