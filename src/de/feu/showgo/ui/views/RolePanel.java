@@ -92,10 +92,12 @@ public class RolePanel extends JPanel {
 
 		roleSelectPanel.add(header, "0,0");
 
+		int rowCounter = 1;
 		for (Role role : model.getRoles()) {
-			layout.insertRow(1, TableLayout.PREFERRED);
+			layout.insertRow(rowCounter, TableLayout.PREFERRED);
 			JPanel rolePanel = createRolePanel(role);
-			roleSelectPanel.add(rolePanel, "0,1");
+			roleSelectPanel.add(rolePanel, "0,"+rowCounter);
+			rowCounter++;
 		}
 
 		return roleSelectPanel;
