@@ -190,18 +190,7 @@ public class ProductionView extends JPanel {
 			ensembleSelect.addItem(ensemble);
 		}
 
-		final JButton useEnsembleAction = new JButton("Ensemble verwenden");
-		useEnsembleAction.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (ensembleSelect.getSelectedItem() != null) {
-
-				}
-			}
-		});
-
 		ensembleSelectPanel.add(ensembleSelect, "0,1,f,c");
-		ensembleSelectPanel.add(useEnsembleAction, "2,1,c,c");
 
 		return ensembleSelectPanel;
 	}
