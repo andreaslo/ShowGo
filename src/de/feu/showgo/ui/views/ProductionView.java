@@ -219,6 +219,13 @@ public class ProductionView extends JPanel {
 				log.debug("saving production");
 				castSelectionPanel.saveCastToBackingModel();
 				nonActorSelection.saveCastToBackingModel();
+				
+				model.setPlay(editPlayPanel.getPlay());
+				model.setName(productionNameInput.getText());
+				
+				ShowGoDAO.getShowGo().addProduction(model);
+				
+				
 			}
 		});
 
