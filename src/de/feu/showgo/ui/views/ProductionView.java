@@ -96,8 +96,7 @@ public class ProductionView extends JPanel {
 		}
 		
 		JPanel productionNamePanel = createProductionNamePanel();
-		JPanel ensembleSelect = createEnsembleSelectPanel();
-		
+		JPanel ensembleSelectPanel = createEnsembleSelectPanel();
 		ensembleSelect.setEnabled(false);
 		
 		castSelectionPanel = new CastSelectionPanel(mainWindow, copy.getRoles(), model.getEnsamble().getMembers(), "Besetzung der Darstellerrollen");
@@ -110,7 +109,7 @@ public class ProductionView extends JPanel {
 		JPanel submitPanel = createSubmitPanel();
 		
 		add(productionNamePanel, "1,1,f,t");
-		add(ensembleSelect, "1,2,f,t");
+		add(ensembleSelectPanel, "1,2,f,t");
 		add(castSelectionPanel,"1,4");
 		add(nonActorSelection,"1,5");
 		add(editPlayPanel, "1,6");
