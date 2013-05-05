@@ -61,7 +61,7 @@ public class RolePanel extends JPanel {
 			for (Scene scene : act.getScenes()) {
 				if (scene.getAllRole() != null) {
 					layout.insertRow(rowCounter, TableLayout.PREFERRED);
-					specialRoleSelectPanel.add(new JLabel(scene.getName()), "0,"+rowCounter);
+					specialRoleSelectPanel.add(new JLabel(act.getName() + " / " + scene.getName()), "0,"+rowCounter);
 					rowCounter++;
 					
 					JPanel rolePanel = createRolePanel(scene.getAllRole());
