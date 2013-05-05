@@ -117,5 +117,9 @@ public class ShowGo {
 	public List<Production> getProductions() {
 		return productions;
 	}
+
+	public void delteProduction(Production production) {
+		productions.remove(production);
+	}
 	
 }

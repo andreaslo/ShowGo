@@ -157,7 +157,7 @@ public class NavTree {
 		tree.expandRow(ensemblesTreeNode.getLevel());
 	}
 	
-	public void refreshProduction(){
+	public void refreshProductions(){
 		List<Production> productions = ShowGoDAO.getShowGo().getProductions();
 		
 		productionManagementTreeNode.removeAllChildren();
@@ -179,7 +179,7 @@ public class NavTree {
 		refreshPersons();
 		refreshPlays();
 		refreshEnsembles();
-		refreshProduction();
+		refreshProductions();
 	}
 	
 }

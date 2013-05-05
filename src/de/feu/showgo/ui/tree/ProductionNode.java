@@ -5,6 +5,7 @@ import javax.swing.JPopupMenu;
 
 import de.feu.showgo.model.Production;
 import de.feu.showgo.ui.MainWindow;
+import de.feu.showgo.ui.actions.DeleteProductionAction;
 
 public class ProductionNode extends TreeElement{
 
@@ -28,6 +29,7 @@ public class ProductionNode extends TreeElement{
 			JMenuItem editEnsemble = new JMenuItem("Bearbeiten");
 			
 			JMenuItem deleteEnsemble = new JMenuItem("Löschen");
+			deleteEnsemble.addActionListener(new DeleteProductionAction(mainWindow, production));
 			
 			popup.add(showEnsemble);
 			popup.add(editEnsemble);
