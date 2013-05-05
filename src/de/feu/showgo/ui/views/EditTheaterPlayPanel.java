@@ -441,6 +441,10 @@ public class EditTheaterPlayPanel extends JPanel {
 	public RolePanel getRoleDisplay() {
 		return roleDisplay;
 	}
+
+	public TheaterPlay getPlay() {
+		return play;
+	}
 	
 	
 
