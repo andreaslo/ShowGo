@@ -236,6 +236,8 @@ public class ProductionView extends JPanel {
 				
 				ShowGoDAO.getShowGo().addProduction(model);
 				
+				mainWindow.getNavTree().refreshProduction();
+				
 				showMessage("Die Inszenierung " + model.getName() + " wurde erfolgreich gespeichert.", WindowColors.SUCCESS);
 			}
 		});

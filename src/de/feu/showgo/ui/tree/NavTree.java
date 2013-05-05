@@ -16,6 +16,7 @@ import org.apache.log4j.Logger;
 import de.feu.showgo.ShowGoDAO;
 import de.feu.showgo.model.Ensemble;
 import de.feu.showgo.model.Person;
+import de.feu.showgo.model.Production;
 import de.feu.showgo.model.TheaterPlay;
 import de.feu.showgo.ui.MainWindow;
 
@@ -156,10 +157,29 @@ public class NavTree {
 		tree.expandRow(ensemblesTreeNode.getLevel());
 	}
 	
+	public void refreshProduction(){
+		List<Production> productions = ShowGoDAO.getShowGo().getProductions();
+		
+		productionManagementTreeNode.removeAllChildren();
+		for(Production production : productions){
+			productionManagementTreeNode.add(new ProductionNode(production, mainWindow));
+			log.debug("Adding node, childs: " + productionManagementTreeNode.getChildCount());
+		}
+		
+	    DefaultTreeModel dtm = (DefaultTreeModel) tree.getModel();  
+	    dtm.reload(productionManagementTreeNode);
+		
+		tree.revalidate();
+		tree.repaint();
+		
+		tree.expandRow(productionManagementTreeNode.getLevel());
+	}
+	
 	public void refreshTree(){
 		refreshPersons();
 		refreshPlays();
 		refreshEnsembles();
+		refreshProduction();
 	}
 	
 }
