@@ -6,6 +6,7 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -99,6 +100,16 @@ public class CastRowPanel extends JPanel {
 
 	public Role getRole() {
 		return role;
+	}
+	
+	public List<Person> getSelectedPersons(){
+		List<Person> assignedPersons = new LinkedList<Person>();
+		
+		for(JComboBox<Person> select : castsSelects){
+			assignedPersons.add((Person) select.getSelectedItem());
+		}
+		
+		return assignedPersons;
 	}
 
 }

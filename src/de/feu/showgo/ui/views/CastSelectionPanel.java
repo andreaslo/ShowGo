@@ -83,4 +83,13 @@ public class CastSelectionPanel extends JPanel implements RoleDeleteListener {
 			castRows.remove(toBeRemoved);
 		}
 		
+		public void saveCastToBackingModel(){
+			log.debug("saving cast");
+			for(CastRowPanel row : castRows){
+				List<Person> selectedPersons = row.getSelectedPersons();
+				row.getRole().setCast(selectedPersons);
+				log.debug("setting cast of " + row.getRole().getName() +" to: " + selectedPersons);
+			}
+		}
+		
 }

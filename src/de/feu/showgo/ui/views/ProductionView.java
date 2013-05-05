@@ -217,7 +217,8 @@ public class ProductionView extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				log.debug("saving production");
-
+				castSelectionPanel.saveCastToBackingModel();
+				nonActorSelection.saveCastToBackingModel();
 			}
 		});
 
