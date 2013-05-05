@@ -90,7 +90,7 @@ public class ProductionView extends JPanel {
 			playSelect.addItem(play);
 		}
 
-		final JButton usePlayAction = new JButton("Stück verwenden");
+		final JButton usePlayAction = new JButton("Stück und Ensemble verwenden");
 		usePlayAction.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
