@@ -2,11 +2,10 @@ package de.feu.showgo.ui.views;
 
 import info.clearthought.layout.TableLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
@@ -22,6 +21,7 @@ public class CastSelectionPanel extends JPanel implements RoleDeleteListener {
 		private MainWindow mainWindow;
 		private List<Role> roles;
 		private List<Person> availablePersons;
+		private List<CastRowPanel> castRows;
 		private String borderTitle;
 		private static final Logger log = Logger.getLogger(CastSelectionPanel.class);
 	
@@ -35,6 +35,8 @@ public class CastSelectionPanel extends JPanel implements RoleDeleteListener {
 		}
 		
 		private void createComponent(){
+			castRows = new ArrayList<CastRowPanel>();
+			
 			if(borderTitle != null){
 				TitledBorder titledBorder = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), borderTitle);
 				setBorder(titledBorder);
@@ -47,11 +49,11 @@ public class CastSelectionPanel extends JPanel implements RoleDeleteListener {
 					CastRowPanel row = new CastRowPanel(role, availablePersons);
 					add(row,"0,"+rowCounter);
 					rowCounter++;
+					castRows.add(row);
 				}
 			}
 			
 		}
-
 		
 		private double[][] generateLayoutSize(int numRows){		
 			double[][] size = new double[2][];
@@ -70,6 +72,15 @@ public class CastSelectionPanel extends JPanel implements RoleDeleteListener {
 		@Override
 		public void deleteRole(Role role) {
 			log.debug("cast panel notified abour deleted role: " + role);
+			CastRowPanel toBeRemoved = null;
+			for(CastRowPanel rowPanel : castRows){
+				if(rowPanel.getRole() == role){
+					remove(rowPanel);
+					toBeRemoved = rowPanel;
+				}
+			}
+			
+			castRows.remove(toBeRemoved);
 		}
 		
 }

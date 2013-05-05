@@ -97,4 +97,8 @@ public class CastRowPanel extends JPanel {
 		}
 	}
 
+	public Role getRole() {
+		return role;
+	}
+
 }
