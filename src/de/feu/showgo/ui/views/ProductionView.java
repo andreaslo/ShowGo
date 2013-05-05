@@ -285,7 +285,9 @@ public class ProductionView extends JPanel {
 				model.setName(productionNameInput.getText());
 				model.setEnsemble((Ensemble) ensembleSelect.getSelectedItem());
 				
-
+				if(!alreadyExists){
+					ShowGoDAO.getShowGo().addProduction(model);
+				}
 				
 				mainWindow.getNavTree().refreshProductions();
 				
