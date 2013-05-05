@@ -95,8 +95,8 @@ public class ProductionView extends JPanel {
 			log.error("", e1);
 		}
 		
+		JPanel productionNamePanel = createProductionNamePanel();
 		JPanel ensembleSelect = createEnsembleSelectPanel();
-		JPanel playSelectPanel = createPlaySelectPanel();
 		
 		ensembleSelect.setEnabled(false);
 		
@@ -109,8 +109,8 @@ public class ProductionView extends JPanel {
 		
 		JPanel submitPanel = createSubmitPanel();
 		
+		add(productionNamePanel, "1,1,f,t");
 		add(ensembleSelect, "1,2,f,t");
-		add(playSelectPanel, "1,3");
 		add(castSelectionPanel,"1,4");
 		add(nonActorSelection,"1,5");
 		add(editPlayPanel, "1,6");
@@ -125,7 +125,7 @@ public class ProductionView extends JPanel {
 
 		productionNamePanel.add(new JLabel("Name der Inszenierung:"), "0,0");
 
-		productionNameInput = new JTextField();
+		productionNameInput = new JTextField(model.getName());
 		productionNamePanel.add(productionNameInput, "1,0,f,c");
 
 		return productionNamePanel;
