@@ -40,6 +40,7 @@ public class EditTheaterPlayPanel extends JPanel {
 	private static final Logger log = Logger.getLogger(EditTheaterPlayPanel.class);
 	private RolePanel roleDisplay;
 	private List<ActPanelWrapper> actWrapperList;
+	private List<RoleDeleteListener> roleDeleteListener = new LinkedList<RoleDeleteListener>();
 
 	public EditTheaterPlayPanel(MainWindow mainWindow, TheaterPlay play){
 		this.mainWindow = mainWindow;
@@ -287,6 +288,11 @@ public class EditTheaterPlayPanel extends JPanel {
 		
 		for(Role role : toBeDeleted){
 			removeRole(role);
+			log.debug("deleted: " + role);
+			for(RoleDeleteListener listener : roleDeleteListener){
+				log.debug("calling listener");
+				listener.deleteRole(role);
+			}
 		}
 	}
 	
@@ -446,6 +452,8 @@ public class EditTheaterPlayPanel extends JPanel {
 		return play;
 	}
 	
-	
+	public void addRoleDeleteListener(RoleDeleteListener listener){
+		roleDeleteListener.add(listener);
+	}
 
 }

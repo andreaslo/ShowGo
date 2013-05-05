@@ -103,6 +103,7 @@ public class ProductionView extends JPanel {
 		
 		editPlayPanel = new EditTheaterPlayPanel(mainWindow, copy);
 		editPlayPanel.getRoleDisplay().addRoleDeleteEventListener(castSelectionPanel);
+		editPlayPanel.addRoleDeleteListener(castSelectionPanel);
 		
 		nonActorSelection = createNonActorPersonAssignment();
 		
@@ -176,6 +177,7 @@ public class ProductionView extends JPanel {
 					
 					editPlayPanel = new EditTheaterPlayPanel(mainWindow, copy);
 					editPlayPanel.getRoleDisplay().addRoleDeleteEventListener(castSelectionPanel);
+					editPlayPanel.addRoleDeleteListener(castSelectionPanel);
 					
 					nonActorSelection = createNonActorPersonAssignment();
 					
