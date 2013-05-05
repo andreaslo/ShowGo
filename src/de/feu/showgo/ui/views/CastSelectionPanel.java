@@ -1,5 +1,7 @@
 package de.feu.showgo.ui.views;
 
+import info.clearthought.layout.TableLayout;
+
 import java.util.List;
 
 import javax.swing.JButton;
@@ -27,8 +29,32 @@ public class CastSelectionPanel extends JPanel {
 			createComponent();
 		}
 		
-		private void createComponent(){		
-			add(new JButton("asdasdsad"));
+		private void createComponent(){
+			setLayout(new TableLayout(generateLayoutSize(roles.size())));
+			int rowCounter = 0;
+			for(Role role : roles){
+				if(!role.isPseudoRole()){
+					CastRowPanel row = new CastRowPanel(role, availablePersons);
+					add(row,"0,"+rowCounter);
+					rowCounter++;
+				}
+			}
+			
 		}
 
+		
+		private double[][] generateLayoutSize(int numRows){		
+			double[][] size = new double[2][];
+			double[] width = {TableLayout.FILL};
+			size[0] = width;
+			double[] height = new double[numRows];
+			size[1] = height;
+					
+			for(int i = 0; i < height.length; i++){
+				height[i] = TableLayout.PREFERRED;
+			}
+			
+			return size;
+		}
+		
 }
