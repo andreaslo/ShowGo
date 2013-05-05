@@ -55,15 +55,19 @@ public class RolePanel extends JPanel {
 		double size[][] = { { TableLayout.FILL }, { 25 } };
 		TableLayout layout = new TableLayout(size);
 		specialRoleSelectPanel.setLayout(layout);
-
+		
+		int rowCounter = 1;
 		for (Act act : model.getActs()) {
 			for (Scene scene : act.getScenes()) {
 				if (scene.getAllRole() != null) {
+					layout.insertRow(rowCounter, TableLayout.PREFERRED);
+					specialRoleSelectPanel.add(new JLabel(scene.getName()), "0,"+rowCounter);
+					rowCounter++;
+					
 					JPanel rolePanel = createRolePanel(scene.getAllRole());
-					layout.insertRow(1, TableLayout.PREFERRED);
-					specialRoleSelectPanel.add(rolePanel, "0,1");
-					layout.insertRow(1, TableLayout.PREFERRED);
-					specialRoleSelectPanel.add(new JLabel(scene.getName()), "0,1");
+					layout.insertRow(rowCounter, TableLayout.PREFERRED);
+					specialRoleSelectPanel.add(rolePanel, "0,"+rowCounter);
+					rowCounter++;
 				}
 			}
 		}
