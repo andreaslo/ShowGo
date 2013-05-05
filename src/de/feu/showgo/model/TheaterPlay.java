@@ -107,7 +107,13 @@ public class TheaterPlay {
 		for(Act act : acts){
 			for(Scene scene : act.getScenes()){
 				if(scene.getAllRole() != null){
+					// remove from all pseudo roles
 					scene.getAllRole().getAssigendRoles().remove(toBeDeleted);
+					
+					// remove all role
+					if(scene.getAllRole() == toBeDeleted){
+						scene.setAllRole(null);
+					}
 				}
 			}
 		}
