@@ -6,6 +6,8 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -23,9 +25,9 @@ import de.feu.showgo.ShowGoDAO;
 import de.feu.showgo.io.ParseUtil;
 import de.feu.showgo.model.Ensemble;
 import de.feu.showgo.model.Production;
+import de.feu.showgo.model.Role;
 import de.feu.showgo.model.TheaterPlay;
 import de.feu.showgo.ui.MainWindow;
-import de.feu.showgo.ui.tree.EnsembleNode;
 
 public class ProductionView extends JPanel {
 
@@ -120,8 +122,11 @@ public class ProductionView extends JPanel {
 					EditTheaterPlayPanel editPlayPanel = new EditTheaterPlayPanel(mainWindow, copy);
 					editPlayPanel.getRoleDisplay().addRoleDeleteEventListener(castSelectionPanel);
 					
+					CastSelectionPanel nonActorSelection = createNonActorPersonAssignment();
+					
 					add(castSelectionPanel,"1,4");
-					add(editPlayPanel, "1,5");
+					add(nonActorSelection,"1,5");
+					add(editPlayPanel, "1,6");
 					revalidate();
 					repaint();
 				}
@@ -132,6 +137,42 @@ public class ProductionView extends JPanel {
 		productionNamePanel.add(usePlayAction, "2,1,c,c");
 
 		return productionNamePanel;
+	}
+	
+	private CastSelectionPanel createNonActorPersonAssignment(){
+		List<Role> roles = new ArrayList<Role>();
+		
+		Role r = new Role();
+		r.setName("Regie");
+		roles.add(r);
+		
+		r = new Role();
+		r.setName("Regieassistenz");
+		roles.add(r);
+		
+		r = new Role();
+		r.setName("Kostüme");
+		roles.add(r);
+		
+		r = new Role();
+		r.setName("Requisite");
+		roles.add(r);
+		
+		r = new Role();
+		r.setName("Bühnenbild");
+		roles.add(r);
+		
+		r = new Role();
+		r.setName("Techniker");
+		roles.add(r);
+		
+		r = new Role();
+		r.setName("Helfer");
+		roles.add(r);
+		
+		Ensemble selectedEnsemble = (Ensemble) ensembleSelect.getSelectedItem();
+		CastSelectionPanel selectionPanel = new CastSelectionPanel(mainWindow, roles, selectedEnsemble.getMembers(), "Besetzung der Nicht-Darstellerrollen");
+		return selectionPanel;		
 	}
 	
 	private JPanel createEnsembleSelectPanel() {
