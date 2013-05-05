@@ -221,11 +221,16 @@ public class ProductionView extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				log.debug("saving production");
+				
+				if(productionNameInput.getText().equals("")){
+					showMessage("Bitte geben Sie einen Namen für die Inszenierung an.", WindowColors.ERROR);
+					return;
+				}
+				
 				castSelectionPanel.saveCastToBackingModel();
 				nonActorSelection.saveCastToBackingModel();
 				
 				model.setPlay(editPlayPanel.getPlay());
-				//TODO: validate name
 				model.setName(productionNameInput.getText());
 				
 				ShowGoDAO.getShowGo().addProduction(model);
