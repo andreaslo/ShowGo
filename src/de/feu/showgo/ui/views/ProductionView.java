@@ -47,7 +47,7 @@ public class ProductionView extends JPanel {
 	private void createComponent() {
 
 		double size[][] = { { 20, TableLayout.FILL, 20 },
-				{ 20, 60, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, 30, 30 } };
+				{ 20, 60, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, 30, 30 } };
 		setLayout(new TableLayout(size));
 
 		JPanel productionNamePanel = createProductionNamePanel();
@@ -114,7 +114,9 @@ public class ProductionView extends JPanel {
 					usePlayAction.setEnabled(false);
 					playSelect.setEnabled(false);
 					
-					add(new EditTheaterPlayPanel(mainWindow, copy), "1,4");
+					Ensemble selectedEnsemble = (Ensemble) ensembleSelect.getSelectedItem();
+					add(new CastSelectionPanel(mainWindow, copy.getRoles(), selectedEnsemble.getMembers()), "1,4");
+					add(new EditTheaterPlayPanel(mainWindow, copy), "1,5");
 					revalidate();
 					repaint();
 				}

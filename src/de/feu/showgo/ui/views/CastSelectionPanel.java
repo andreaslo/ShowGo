@@ -2,6 +2,8 @@ package de.feu.showgo.ui.views;
 
 import java.util.List;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.apache.log4j.Logger;
@@ -18,6 +20,7 @@ public class CastSelectionPanel extends JPanel {
 		private static final Logger log = Logger.getLogger(CastSelectionPanel.class);
 	
 		public CastSelectionPanel(MainWindow mainWindow, List<Role> roles, List<Person> availablePersons){
+			log.debug("creating cast selection panel");
 			this.mainWindow = mainWindow;
 			this.roles = roles;
 			this.availablePersons = availablePersons;
@@ -25,7 +28,7 @@ public class CastSelectionPanel extends JPanel {
 		}
 		
 		private void createComponent(){		
-			
+			add(new JButton("asdasdsad"));
 		}
 
 }
