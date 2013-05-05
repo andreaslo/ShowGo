@@ -13,6 +13,7 @@ import javax.swing.border.TitledBorder;
 
 import de.feu.showgo.model.Ensemble;
 import de.feu.showgo.model.Person;
+import de.feu.showgo.model.Production;
 import de.feu.showgo.ui.actions.LoadAction;
 import de.feu.showgo.ui.actions.NewAction;
 import de.feu.showgo.ui.actions.SaveAction;
@@ -168,6 +169,10 @@ public class MainWindow extends JFrame {
 
 	public void showProductionView() {
 		displayView(new ProductionView(this));		
+	}
+
+	public void showEditProduction(Production production) {
+		displayView(new ProductionView(this, production));
 	}
 	
 }
