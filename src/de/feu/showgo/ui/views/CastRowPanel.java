@@ -36,7 +36,7 @@ public class CastRowPanel extends JPanel {
 	}
 	
 	private void createComponent(){	
-		double size[][] = { { TableLayout.PREFERRED}, { 30, 30, 30 } };
+		double size[][] = { { TableLayout.PREFERRED}, { 30, TableLayout.PREFERRED, 30 } };
 		final TableLayout layout = new TableLayout(size);
 		setLayout(layout);
 		
