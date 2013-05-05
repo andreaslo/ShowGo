@@ -47,7 +47,7 @@ public class Production {
 		return ensemble;
 	}
 
-	public void setEnsamble(Ensemble ensamble) {
+	public void setEnsemble(Ensemble ensamble) {
 		this.ensemble = ensamble;
 	}
 	
