@@ -248,6 +248,10 @@ public class ProductionView extends JPanel {
 			log.debug("ading ensemble: " + ensemble.getName());
 			ensembleSelect.addItem(ensemble);
 		}
+		
+		if(model.getEnsamble() != null){
+			ensembleSelect.setSelectedItem(model.getEnsamble());
+		}
 
 		ensembleSelectPanel.add(ensembleSelect, "0,1,f,c");
 
