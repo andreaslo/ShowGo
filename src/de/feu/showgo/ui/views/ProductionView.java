@@ -2,6 +2,7 @@ package de.feu.showgo.ui.views;
 
 import info.clearthought.layout.TableLayout;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -10,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -17,6 +19,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import javax.xml.bind.JAXBException;
 
@@ -38,6 +41,7 @@ public class ProductionView extends JPanel {
 	private JTextField productionNameInput;
 	private JComboBox<Ensemble> ensembleSelect;
 	private JComboBox<TheaterPlay> playSelect;
+	private JLabel currentMessage;
 	private Production model;
 	private CastSelectionPanel castSelectionPanel;
 	private EditTheaterPlayPanel editPlayPanel;
@@ -221,15 +225,38 @@ public class ProductionView extends JPanel {
 				nonActorSelection.saveCastToBackingModel();
 				
 				model.setPlay(editPlayPanel.getPlay());
+				//TODO: validate name
 				model.setName(productionNameInput.getText());
 				
 				ShowGoDAO.getShowGo().addProduction(model);
 				
-				
+				showMessage("Die Inszenierung " + model.getName() + " wurde erfolgreich gespeichert.", WindowColors.SUCCESS);
 			}
 		});
 
 		return submitPanel;
+	}
+	
+	private void showMessage(String message, Color background){
+		removeMessage();
+		
+		log.debug("showing message " + message);
+		currentMessage = new JLabel(message);
+		currentMessage.setBorder(BorderFactory.createEtchedBorder());
+		currentMessage.setHorizontalAlignment( SwingConstants.CENTER );
+		currentMessage.setBackground(background);
+		currentMessage.setOpaque(true);
+		this.add(currentMessage, "1,8");
+		this.revalidate();
+		this.repaint();
+	}
+	
+	private void removeMessage(){
+		if(currentMessage != null){
+			this.remove(currentMessage);
+			this.revalidate();
+			this.repaint();
+		}
 	}
 
 	private class PlayComboRederer extends BasicComboBoxRenderer {
