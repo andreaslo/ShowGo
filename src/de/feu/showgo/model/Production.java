@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Production {
 
+	private String name;
 	private TheaterPlay play;
 	private List<Role> nonActorRoles;
 
@@ -21,6 +22,14 @@ public class Production {
 
 	public void setNonActorRoles(List<Role> nonActorRoles) {
 		this.nonActorRoles = nonActorRoles;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	
