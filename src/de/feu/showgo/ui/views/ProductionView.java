@@ -3,6 +3,7 @@ package de.feu.showgo.ui.views;
 import info.clearthought.layout.TableLayout;
 
 import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -28,6 +29,7 @@ import de.feu.showgo.model.Production;
 import de.feu.showgo.model.Role;
 import de.feu.showgo.model.TheaterPlay;
 import de.feu.showgo.ui.MainWindow;
+import de.feu.showgo.ui.WindowColors;
 
 public class ProductionView extends JPanel {
 
@@ -49,7 +51,7 @@ public class ProductionView extends JPanel {
 	private void createComponent() {
 
 		double size[][] = { { 20, TableLayout.FILL, 20 },
-				{ 20, 60, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, 30, 30 } };
+				{ 20, 60, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, 30 } };
 		setLayout(new TableLayout(size));
 
 		JPanel productionNamePanel = createProductionNamePanel();
@@ -125,9 +127,12 @@ public class ProductionView extends JPanel {
 					
 					CastSelectionPanel nonActorSelection = createNonActorPersonAssignment();
 					
+					JPanel submitPanel = createSubmitPanel();
+					
 					add(castSelectionPanel,"1,4");
 					add(nonActorSelection,"1,5");
 					add(editPlayPanel, "1,6");
+					add(submitPanel, "1,7");
 					revalidate();
 					repaint();
 				}
@@ -194,6 +199,26 @@ public class ProductionView extends JPanel {
 		ensembleSelectPanel.add(ensembleSelect, "0,1,f,c");
 
 		return ensembleSelectPanel;
+	}
+	
+	private JPanel createSubmitPanel() {
+		JPanel submitPanel = new JPanel();
+		submitPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+		JButton saveButton = new JButton("Inszenierung Speichern");
+		submitPanel.add(saveButton);
+
+		final JPanel viewPanel = this;
+		saveButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				log.debug("saving production");
+
+			}
+		});
+
+		return submitPanel;
 	}
 
 	private class PlayComboRederer extends BasicComboBoxRenderer {
