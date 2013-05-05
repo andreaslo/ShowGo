@@ -35,7 +35,9 @@ public class ParseUtil {
 		 */
 		for (int i = 0; i < play.getRoles().size(); i++) {
 			Role role = play.getRoles().get(i);
-			play2.getRoles().get(i).setCast(new ArrayList<Person>(role.getCast()));
+			if(role.getCast() != null){
+				play2.getRoles().get(i).setCast(new ArrayList<Person>(role.getCast()));
+			}
 		}
 
 		return play2;
