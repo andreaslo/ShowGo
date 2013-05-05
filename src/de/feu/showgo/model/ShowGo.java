@@ -24,6 +24,8 @@ public class ShowGo {
 	@XmlElement(name="ensemble")
 	private List<Ensemble> ensembles = new ArrayList<Ensemble>();
 	
+	private List<Production> productions = new ArrayList<Production>();
+	
 	private final static Logger log = Logger.getLogger(ShowGo.class);
 
 	public List<Person> getPersons() {
@@ -107,7 +109,12 @@ public class ShowGo {
 		}
 	}
 	
-	
-	
+	public void addProduction(Production production){
+		productions.add(production);
+	}
+
+	public List<Production> getProductions() {
+		return productions;
+	}
 	
 }
