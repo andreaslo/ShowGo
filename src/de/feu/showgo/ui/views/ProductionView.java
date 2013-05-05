@@ -39,7 +39,10 @@ public class ProductionView extends JPanel {
 	private JComboBox<Ensemble> ensembleSelect;
 	private JComboBox<TheaterPlay> playSelect;
 	private Production model;
-
+	private CastSelectionPanel castSelectionPanel;
+	private EditTheaterPlayPanel editPlayPanel;
+	private CastSelectionPanel nonActorSelection;
+	
 	public ProductionView(MainWindow mainWindow) {
 		log.debug("showing production view");
 		this.mainWindow = mainWindow;
@@ -120,12 +123,12 @@ public class ProductionView extends JPanel {
 					ensembleSelect.setEnabled(false);
 					
 					Ensemble selectedEnsemble = (Ensemble) ensembleSelect.getSelectedItem();
-					CastSelectionPanel castSelectionPanel = new CastSelectionPanel(mainWindow, copy.getRoles(), selectedEnsemble.getMembers(), "Besetzung der Darstellerrollen");
+					castSelectionPanel = new CastSelectionPanel(mainWindow, copy.getRoles(), selectedEnsemble.getMembers(), "Besetzung der Darstellerrollen");
 					
-					EditTheaterPlayPanel editPlayPanel = new EditTheaterPlayPanel(mainWindow, copy);
+					editPlayPanel = new EditTheaterPlayPanel(mainWindow, copy);
 					editPlayPanel.getRoleDisplay().addRoleDeleteEventListener(castSelectionPanel);
 					
-					CastSelectionPanel nonActorSelection = createNonActorPersonAssignment();
+					nonActorSelection = createNonActorPersonAssignment();
 					
 					JPanel submitPanel = createSubmitPanel();
 					
