@@ -24,6 +24,7 @@ public class ShowGo {
 	@XmlElement(name="ensemble")
 	private List<Ensemble> ensembles = new ArrayList<Ensemble>();
 	
+	@XmlElement(name="production")
 	private List<Production> productions = new ArrayList<Production>();
 	
 	private final static Logger log = Logger.getLogger(ShowGo.class);

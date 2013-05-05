@@ -2,10 +2,18 @@ package de.feu.showgo.model;
 
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Production {
 
+	@XmlElement(name="name")
 	private String name;
+	@XmlElement(name="play")
 	private TheaterPlay play;
+	@XmlElement(name="nonActorRole")
 	private List<Role> nonActorRoles;
 
 	public TheaterPlay getPlay() {
