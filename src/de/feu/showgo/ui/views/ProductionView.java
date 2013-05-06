@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
+import javax.swing.text.html.HTMLEditorKit.Parser;
 import javax.xml.bind.JAXBException;
 
 import org.apache.log4j.Logger;
@@ -281,7 +282,16 @@ public class ProductionView extends JPanel {
 				nonActorSelection.saveCastToBackingModel();
 				editPlayPanel.saveToBackingModel();
 				
-				model.setPlay(editPlayPanel.getPlay());
+				TheaterPlay copy = null;
+				try {
+					copy = ParseUtil.copyPlay(editPlayPanel.getPlay());
+				} catch (JAXBException e) {
+					log.error("",e);
+				} catch (IOException e) {
+					log.error("",e);
+				}
+				
+				model.setPlay(copy);
 				model.setNonActorRoles(nonActorSelection.getRoles());
 				model.setName(productionNameInput.getText());
 				model.setEnsemble((Ensemble) ensembleSelect.getSelectedItem());
