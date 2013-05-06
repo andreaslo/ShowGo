@@ -279,6 +279,7 @@ public class ProductionView extends JPanel {
 				
 				castSelectionPanel.saveCastToBackingModel();
 				nonActorSelection.saveCastToBackingModel();
+				editPlayPanel.saveToBackingModel();
 				
 				model.setPlay(editPlayPanel.getPlay());
 				model.setNonActorRoles(nonActorSelection.getRoles());

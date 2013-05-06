@@ -198,12 +198,13 @@ public class EditTheaterPlayPanel extends JPanel {
 		roleSelect.setSelectedItem(passage.getRole());
 		namePanel.add(roleSelect, "2,0,l,c");
 
-		JTextArea actText = new JTextArea(passage.getText());
+		JTextArea paragraphText = new JTextArea(passage.getText());
+		panelWrapper.text = paragraphText;
 		
 		Border border = BorderFactory.createEtchedBorder();
-		actText.setBorder(border);
+		paragraphText.setBorder(border);
 
-		namePanel.add(actText, "3,0,f,c");
+		namePanel.add(paragraphText, "3,0,f,c");
 
 		JButton delete = new JButton("Löschen");
 		delete.addActionListener(new ActionListener() {
@@ -229,6 +230,7 @@ public class EditTheaterPlayPanel extends JPanel {
 		namePanel.add(new JLabel("Regieanweisung:"), "2,0");
 
 		JTextArea stageDirectionText = new JTextArea(stageDirection.getText());
+		panelWrapper.text = stageDirectionText;
 		Border border = BorderFactory.createEtchedBorder();
 		stageDirectionText.setBorder(border);
 		namePanel.add(stageDirectionText, "3,0,f,c");
@@ -442,6 +444,7 @@ public class EditTheaterPlayPanel extends JPanel {
 		JPanel panel;
 		Paragraph paragraph;
 		JComboBox<Role> roleSelect;
+		JTextArea text;
 	}
 
 	public RolePanel getRoleDisplay() {
@@ -454,6 +457,25 @@ public class EditTheaterPlayPanel extends JPanel {
 	
 	public void addRoleDeleteListener(RoleDeleteListener listener){
 		roleDeleteListener.add(listener);
+	}
+
+	public void saveToBackingModel() {
+		for(ActPanelWrapper actWrapper : actWrapperList){
+			for(ScenePanelWrapper sceneWrapper : actWrapper.children){
+				for(ParagraphPanelWrapper paragraphWrapper : sceneWrapper.children){
+					if(paragraphWrapper.paragraph instanceof Passage){
+						Passage passage = (Passage) paragraphWrapper.paragraph;
+						passage.setRole((Role) paragraphWrapper.roleSelect.getSelectedItem());
+						passage.setText(paragraphWrapper.text.getText());
+					}
+					
+					if(paragraphWrapper.paragraph instanceof StageDirection){
+						StageDirection direction = (StageDirection) paragraphWrapper.paragraph;
+						direction.setText(paragraphWrapper.text.getText());
+					}
+				}
+			}
+		}
 	}
 
 }
