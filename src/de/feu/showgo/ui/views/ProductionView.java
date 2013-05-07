@@ -34,6 +34,7 @@ import de.feu.showgo.model.Role;
 import de.feu.showgo.model.TheaterPlay;
 import de.feu.showgo.ui.MainWindow;
 import de.feu.showgo.ui.WindowColors;
+import de.feu.showgo.util.CastingGenerator;
 
 public class ProductionView extends JPanel {
 
@@ -174,6 +175,7 @@ public class ProductionView extends JPanel {
 					ensembleSelect.setEnabled(false);
 					
 					Ensemble selectedEnsemble = (Ensemble) ensembleSelect.getSelectedItem();
+					CastingGenerator.generateCasting(selectedEnsemble, copy);
 					castSelectionPanel = new CastSelectionPanel(mainWindow, copy.getRoles(), selectedEnsemble.getMembers(), "Besetzung der Darstellerrollen");
 					
 					editPlayPanel = new EditTheaterPlayPanel(mainWindow, copy);
