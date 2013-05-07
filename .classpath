@@ -10,5 +10,6 @@
 	<classpathentry kind="lib" path="lib/jgoodies-common-1.6.0.jar"/>
 	<classpathentry kind="lib" path="lib/TableLayout-bin-jdk1.5-2009-08-26.jar"/>
 	<classpathentry kind="lib" path="lib/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="lib/joda-time-2.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
