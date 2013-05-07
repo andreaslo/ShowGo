@@ -2,6 +2,11 @@ package de.feu.showgo.ui;
 
 import info.clearthought.layout.TableLayout;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -10,6 +15,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
+
+import org.apache.log4j.Logger;
 
 import de.feu.showgo.model.Ensemble;
 import de.feu.showgo.model.Person;
@@ -36,6 +43,8 @@ public class MainWindow extends JFrame {
 	private JPanel currentView;
 	private JScrollPane scrolledView;
 	private NavTree navTree;
+	private static final Logger log = Logger.getLogger(MainWindow.class);
+	private JFrame mainWindow = this;
 
 	public MainWindow() {
 
@@ -51,12 +60,20 @@ public class MainWindow extends JFrame {
 		this.setTitle(TITLE);
 		this.setJMenuBar(createMenu());
 
-		double size[][] = { { 10, 350, 10, TableLayout.FILL, 10 }, { 10, TableLayout.FILL, 10 } };
+		double size[][] = { { 10, 350, 10, TableLayout.FILL, 10 },
+				{ 10, TableLayout.FILL, 10 } };
 		this.setLayout(new TableLayout(size));
 
 		this.add(navTree.getTree(), "1,1");
 
 		displayView(new StartupView());
+
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				handleClose();
+			}
+		});
 
 		this.setVisible(true);
 	}
@@ -72,6 +89,7 @@ public class MainWindow extends JFrame {
 		JMenuItem saveAs = new JMenuItem("Speichern unter");
 		saveAs.addActionListener(new SaveAsAction(this));
 		JMenuItem close = new JMenuItem("Schließen");
+
 		fileMenu.add(newTheater);
 		fileMenu.add(load);
 		fileMenu.addSeparator();
@@ -89,7 +107,7 @@ public class MainWindow extends JFrame {
 		createEnsemble.addActionListener(new ShowEnsembleViewAction(this));
 		JMenuItem createProduction = new JMenuItem("Inszeierung anlegen");
 		createProduction.addActionListener(new ShowProductionViewAction(this));
-		
+
 		actionMenu.add(addPerson);
 		actionMenu.add(readPlay);
 		actionMenu.add(createEnsemble);
@@ -108,14 +126,16 @@ public class MainWindow extends JFrame {
 		}
 		currentView = newView;
 
-		TitledBorder titledBorder = BorderFactory.createTitledBorder(BorderFactory.createLoweredBevelBorder(), currentView.getName());
+		TitledBorder titledBorder = BorderFactory
+				.createTitledBorder(BorderFactory.createLoweredBevelBorder(),
+						currentView.getName());
 		titledBorder.setTitlePosition(TitledBorder.ABOVE_TOP);
 
 		currentView.setBorder(titledBorder);
-		
+
 		scrolledView = new JScrollPane(currentView);
 		scrolledView.setBorder(null);
-		
+
 		this.add(scrolledView, "3,1");
 		this.revalidate();
 		this.repaint();
@@ -142,37 +162,41 @@ public class MainWindow extends JFrame {
 		return currentView;
 	}
 
-	
-	public void showStartupView(){
+	public void showStartupView() {
 		displayView(new StartupView());
 	}
 
 	/**
 	 * Displays the current save file in the title bar.
+	 * 
 	 * @param filename
 	 */
-	public void setTitleFilename(String filename){
-		if(filename == null){
+	public void setTitleFilename(String filename) {
+		if (filename == null) {
 			setTitle(TITLE);
-		}else{
+		} else {
 			setTitle(TITLE + " - " + filename);
 		}
 	}
 
 	public void showEnsembleView() {
-		displayView(new EnsembleView(this));		
+		displayView(new EnsembleView(this));
 	}
 
 	public void showEditEnsemble(Ensemble ensemble, boolean editable) {
-		displayView(new EnsembleView(this, ensemble, editable));		
+		displayView(new EnsembleView(this, ensemble, editable));
 	}
 
 	public void showProductionView() {
-		displayView(new ProductionView(this));		
+		displayView(new ProductionView(this));
 	}
 
 	public void showEditProduction(Production production) {
 		displayView(new ProductionView(this, production));
 	}
 	
+	private void handleClose(){
+		log.debug("closing window");
+	}
+
 }
