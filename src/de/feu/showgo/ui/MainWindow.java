@@ -89,7 +89,12 @@ public class MainWindow extends JFrame {
 		JMenuItem saveAs = new JMenuItem("Speichern unter");
 		saveAs.addActionListener(new SaveAsAction(this));
 		JMenuItem close = new JMenuItem("Schließen");
-
+		close.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				mainWindow.dispatchEvent(new WindowEvent(mainWindow, WindowEvent.WINDOW_CLOSING));
+			}
+		});
 		fileMenu.add(newTheater);
 		fileMenu.add(load);
 		fileMenu.addSeparator();
