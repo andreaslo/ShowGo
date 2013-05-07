@@ -6,6 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Properties;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -18,6 +22,7 @@ import javax.swing.border.TitledBorder;
 
 import org.apache.log4j.Logger;
 
+import de.feu.showgo.ShowGoDAO;
 import de.feu.showgo.model.Ensemble;
 import de.feu.showgo.model.Person;
 import de.feu.showgo.model.Production;
@@ -92,7 +97,8 @@ public class MainWindow extends JFrame {
 		close.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				mainWindow.dispatchEvent(new WindowEvent(mainWindow, WindowEvent.WINDOW_CLOSING));
+				mainWindow.dispatchEvent(new WindowEvent(mainWindow,
+						WindowEvent.WINDOW_CLOSING));
 			}
 		});
 		fileMenu.add(newTheater);
@@ -199,9 +205,28 @@ public class MainWindow extends JFrame {
 	public void showEditProduction(Production production) {
 		displayView(new ProductionView(this, production));
 	}
-	
-	private void handleClose(){
+
+	private void handleClose() {
 		log.debug("closing window");
+		if (ShowGoDAO.getSaveFile() == null) {
+			// TODO: Ask user if is sure to quit without saving
+		}
+
+		if (ShowGoDAO.getSaveFile() != null) {
+			Properties prop = new Properties();
+			try {
+				log.debug("writing .showgo.properties");
+				log.debug("last saved file: " + ShowGoDAO.getSaveFile().getCanonicalPath());
+				prop.setProperty("lastSaveFile", ShowGoDAO.getSaveFile().getCanonicalPath());
+				
+				String userHome = System.getProperty("user.home");
+				File f = new File(userHome, ".showgo.properties");
+				log.debug("Saving to file " + f);
+				prop.store(new FileOutputStream(f), null);
+			} catch (IOException e) {
+				log.error("",e);
+			}
+		}
 	}
 
 }
