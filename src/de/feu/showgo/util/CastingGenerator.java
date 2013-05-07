@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+import org.joda.time.Interval;
 
 import de.feu.showgo.model.Ensemble;
 import de.feu.showgo.model.Person;
@@ -24,6 +27,9 @@ public class CastingGenerator {
 			
 			log.debug("generating cast matches for role: " + role);
 			
+			DateTime startRange = DateTime.now().minusYears(role.getAgeTo());
+			DateTime endRange = DateTime.now().minusYears(role.getAgeFrom());
+			Interval ageRange = new Interval(startRange, endRange);
 			List<PersonScorePair> scores = new ArrayList<PersonScorePair>();
 			for(Person person : ensemble.getMembers()){
 				double score = 0;
@@ -33,6 +39,15 @@ public class CastingGenerator {
 				if(person.getGender() == role.getGender()){
 					score++;
 				}
+				
+				DateTime personAge = new DateTime(person.getBirthday());
+				boolean ageInRange = ageRange.contains(personAge);
+				
+				if(ageInRange){
+					score++;
+				}
+				
+				log.debug("start: " +startRange + " end : " + endRange + " range: " + ageRange + " contained: " + ageInRange);
 				
 				PersonScorePair result = new PersonScorePair();
 				result.person = person;
