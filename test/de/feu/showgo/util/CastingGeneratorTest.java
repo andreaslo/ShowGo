@@ -66,7 +66,7 @@ public class CastingGeneratorTest {
 		person = new Person();
 		person.setGender(Gender.FEMALE);
 		person.setName("Kristin Nüsslein");
-		person.setWordsRetention(2000);
+		person.setWordsRetention(400);
 		c.set(1982, 10, 20);
 		person.setBirthday(c.getTime());
 		ensemble.assignPerson(person);
