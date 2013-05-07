@@ -3,10 +3,13 @@ package de.feu.showgo.io;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
+
+import de.feu.showgo.ShowGoDAO;
 
 public class LastSaveProperties {
 
@@ -42,5 +45,20 @@ public class LastSaveProperties {
 		return null;
 	}
 
+	public static void writeLastSaveFile(File saveFile){
+		Properties prop = new Properties();
+		try {
+			log.debug("writing .showgo.properties");
+			log.debug("last saved file: " + saveFile.getCanonicalPath());
+			prop.setProperty("lastSaveFile", saveFile.getCanonicalPath());
+			
+			String userHome = System.getProperty("user.home");
+			File f = new File(userHome, ".showgo.properties");
+			log.debug("Saving to file " + f);
+			prop.store(new FileOutputStream(f), null);
+		} catch (IOException e) {
+			log.error("",e);
+		}
+	}
 	
 }
