@@ -16,6 +16,7 @@ import com.jgoodies.looks.plastic.Plastic3DLookAndFeel;
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.plastic.theme.DesertBlue;
 
+import de.feu.showgo.io.LastSaveProperties;
 import de.feu.showgo.io.ShowGoIO;
 import de.feu.showgo.model.ShowGo;
 import de.feu.showgo.ui.MainWindow;
@@ -36,7 +37,7 @@ public class Main {
 		}
 		Locale.setDefault(Locale.GERMAN);
 		
-		String lastSaved = getLastSaved();
+		String lastSaved = LastSaveProperties.getLastSaveFile();
 		String windowTitle = null;
 		if(lastSaved != null){
 			try{
@@ -55,37 +56,6 @@ public class Main {
 		window.getNavTree().refreshTree();
 		window.setTitleFilename(windowTitle);
 	}
-	
-	private static String getLastSaved(){
-		String userHome = System.getProperty("user.home");
-		File f = new File(userHome, ".showgo.properties");
-		log.debug("Loading Properties file " + f);
-		if(!f.exists()){
-			log.debug("properties file does not exists");
-			return null;
-		}
-		log.debug("properties file exists");
 		
-		Properties defaultProps = new Properties();
-		FileInputStream in;
-		
-		try {
-			in = new FileInputStream(f);
-			defaultProps.load(in);
-			String lastSave = defaultProps.getProperty("lastSaveFile");
-			if(lastSave != null){
-				log.debug("last save file: "+lastSave);
-				return lastSave;
-			}
-		} catch (FileNotFoundException e) {
-			log.error("",e);
-		} catch (IOException e) {
-			log.error("",e);
-		}
-		
-		return null;
-	}
-
-	
 
 }
