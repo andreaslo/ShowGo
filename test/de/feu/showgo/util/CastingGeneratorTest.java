@@ -10,12 +10,15 @@ import org.apache.log4j.BasicConfigurator;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import de.feu.showgo.ShowGoDAO;
 import de.feu.showgo.io.ParsingException;
 import de.feu.showgo.io.PlayParser;
+import de.feu.showgo.io.ShowGoIO;
 import de.feu.showgo.model.Ensemble;
 import de.feu.showgo.model.Gender;
 import de.feu.showgo.model.Person;
 import de.feu.showgo.model.Role;
+import de.feu.showgo.model.ShowGo;
 import de.feu.showgo.model.TheaterPlay;
 
 public class CastingGeneratorTest {
@@ -27,19 +30,10 @@ public class CastingGeneratorTest {
 	
 	@Test
 	public void test() {
+		File inputFile = new File("testData" + System.getProperty("file.separator") + "macshort_filled.showgo");
+		ShowGo showgo = ShowGoIO.loadShowGo(inputFile);
+		TheaterPlay play = showgo.getPlays().get(0);
 		
-		PlayParser parser = new PlayParser();
-		File inputFile = new File("testData" + System.getProperty("file.separator") + "Macshort.html");
-		TheaterPlay play = null;
-		try {
-			play = parser.generatePlay(inputFile);
-		} catch (IOException e) {
-			e.printStackTrace();
-			fail();
-		} catch (ParsingException e) {
-			e.printStackTrace();
-			fail();
-		}
 		assertNotNull(play);
 		
 		Ensemble ensemble = new Ensemble();

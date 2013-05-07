@@ -1,0 +1,1349 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<showGo>
+    <play>
+        <name>Macshort</name>
+        <role id="e796d097-659f-47bf-9cdc-9d874d72b214">
+            <name>1. HEXE</name>
+            <words>446</words>
+            <ageFrom>20</ageFrom>
+            <ageTo>40</ageTo>
+            <gender>FEMALE</gender>
+            <pseudoRole>false</pseudoRole>
+        </role>
+        <role id="6379fdd0-40e2-4646-bbb3-65e4c1d6505f">
+            <name>FLEANCE</name>
+            <words>17</words>
+            <ageFrom>20</ageFrom>
+            <ageTo>40</ageTo>
+            <gender>FEMALE</gender>
+            <pseudoRole>false</pseudoRole>
+        </role>
+        <role id="4e062a74-5af8-4199-b9fb-d29c30a85d12">
+            <name>LADY MACBETH</name>
+            <words>861</words>
+            <ageFrom>20</ageFrom>
+            <ageTo>40</ageTo>
+            <gender>FEMALE</gender>
+            <pseudoRole>false</pseudoRole>
+        </role>
+        <role id="daef824e-8623-445c-9cb2-58a487b90397">
+            <name>3. HEXE</name>
+            <words>141</words>
+            <ageFrom>20</ageFrom>
+            <ageTo>40</ageTo>
+            <gender>FEMALE</gender>
+            <pseudoRole>false</pseudoRole>
+        </role>
+        <role id="deef395c-707c-462e-be23-a0bb7f9a7642">
+            <name>MACBETH</name>
+            <words>2107</words>
+            <ageFrom>20</ageFrom>
+            <ageTo>40</ageTo>
+            <gender>MALE</gender>
+            <pseudoRole>false</pseudoRole>
+        </role>
+        <role id="88e88043-4d38-49b2-bb77-7f6892a77710">
+            <name>2. HEXE</name>
+            <words>140</words>
+            <ageFrom>20</ageFrom>
+            <ageTo>40</ageTo>
+            <gender>FEMALE</gender>
+            <pseudoRole>false</pseudoRole>
+        </role>
+        <role id="1fe59043-d266-4022-b9c6-4c7ee69899c1">
+            <name>ERSCHEINUNG</name>
+            <words>130</words>
+            <ageFrom>40</ageFrom>
+            <ageTo>100</ageTo>
+            <gender>MALE</gender>
+            <pseudoRole>false</pseudoRole>
+        </role>
+        <role id="1386cb74-c9e0-4fc3-aa8d-a66df4a0d583">
+            <name>1., 2. UND 3. HEXE</name>
+            <words>0</words>
+            <ageFrom>0</ageFrom>
+            <ageTo>0</ageTo>
+            <pseudoRole>true</pseudoRole>
+            <assigendRoles>e796d097-659f-47bf-9cdc-9d874d72b214</assigendRoles>
+            <assigendRoles>88e88043-4d38-49b2-bb77-7f6892a77710</assigendRoles>
+            <assigendRoles>daef824e-8623-445c-9cb2-58a487b90397</assigendRoles>
+        </role>
+        <role id="49caea66-be2d-4127-bd75-aaa8a19d2d1b">
+            <name>BANQUO</name>
+            <words>548</words>
+            <ageFrom>10</ageFrom>
+            <ageTo>20</ageTo>
+            <gender>MALE</gender>
+            <pseudoRole>false</pseudoRole>
+        </role>
+        <role id="19437d81-d710-4e79-b6db-9e947f1ab2ac">
+            <name>BEDIENTER</name>
+            <words>11</words>
+            <ageFrom>10</ageFrom>
+            <ageTo>20</ageTo>
+            <gender>MALE</gender>
+            <pseudoRole>false</pseudoRole>
+        </role>
+        <act>
+            <name>Erster Aufzug.</name>
+            <scene>
+                <name>ERSTE SCENE.</name>
+                <paragraph>
+                    <stageDirection>
+                        <direction>Ein offner Plaz.
+
+Donner und Bliz. Die drei Hexen treten auf.</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>e796d097-659f-47bf-9cdc-9d874d72b214</role>
+                        <text>Wenn kommen wir drey uns wieder entgegen,
+In Donner, Blizen oder Regen?</text>
+                    </passage>
+                    <passage>
+                        <role>88e88043-4d38-49b2-bb77-7f6892a77710</role>
+                        <text>Wenn das Mordgetümmel schweigt,
+Und der Sieg den Aufruhr beugt.</text>
+                    </passage>
+                    <passage>
+                        <role>daef824e-8623-445c-9cb2-58a487b90397</role>
+                        <text>Also, eh der Tag sich neigt.</text>
+                    </passage>
+                    <passage>
+                        <role>e796d097-659f-47bf-9cdc-9d874d72b214</role>
+                        <text>Nennt den Ort!</text>
+                    </passage>
+                    <passage>
+                        <role>88e88043-4d38-49b2-bb77-7f6892a77710</role>
+                        <text>Die Heide dort.</text>
+                    </passage>
+                    <passage>
+                        <role>daef824e-8623-445c-9cb2-58a487b90397</role>
+                        <text>Dort gehn wir Macbeths wegen hin.</text>
+                    </passage>
+                    <passage>
+                        <role>e796d097-659f-47bf-9cdc-9d874d72b214</role>
+                        <text>Ich komm, ich komme, Grimalkin - -</text>
+                    </passage>
+                    <passage>
+                        <role>88e88043-4d38-49b2-bb77-7f6892a77710</role>
+                        <text>Padok ruft - - wir kommen schon.</text>
+                    </passage>
+                    <passage>
+                        <role>508eb468-6a68-4d4d-84fd-8a27ca8d4ace</role>
+                        <text>Auf, und durch die Nebel-Luft davon!</text>
+                    </passage>
+                </paragraph>
+                <allRole id="508eb468-6a68-4d4d-84fd-8a27ca8d4ace">
+                    <name>ALLE</name>
+                    <words>0</words>
+                    <ageFrom>0</ageFrom>
+                    <ageTo>0</ageTo>
+                    <pseudoRole>true</pseudoRole>
+                    <assigendRoles>e796d097-659f-47bf-9cdc-9d874d72b214</assigendRoles>
+                    <assigendRoles>88e88043-4d38-49b2-bb77-7f6892a77710</assigendRoles>
+                    <assigendRoles>daef824e-8623-445c-9cb2-58a487b90397</assigendRoles>
+                </allRole>
+            </scene>
+            <scene>
+                <name>DRITTE SCENE.</name>
+                <paragraph>
+                    <stageDirection>
+                        <direction>Verwandelt sich in die Heide.
+
+Donner und Bliz. Die drey Hexen treten auf.</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>e796d097-659f-47bf-9cdc-9d874d72b214</role>
+                        <text>Wo bist du gewesen, Schwester?</text>
+                    </passage>
+                    <passage>
+                        <role>88e88043-4d38-49b2-bb77-7f6892a77710</role>
+                        <text>Ich brachte Schweine um.</text>
+                    </passage>
+                    <passage>
+                        <role>daef824e-8623-445c-9cb2-58a487b90397</role>
+                        <text>Schwester, wo du?</text>
+                    </passage>
+                    <passage>
+                        <role>e796d097-659f-47bf-9cdc-9d874d72b214</role>
+                        <text>Ein Schiffers-Weib fand ich, das saß,
+Und hatte Castanien im Schooß,
+Und fraß und schmazt' und fraß;
+Gieb mir auch, sagt ich;
+Pak dich, Hexe, pak dich - -
+Schrie das voll-wampige Aas.
+Ihr Mann ist nach Aleppo gefahren,
+Allein den Weg will ich ihm ersparen;
+In einem Sieb, in Razengestalt,
+Doch ohne Schwanz, erreich ich ihn bald!
+Das thu' ich, das thu' ich, das thu' ich.</text>
+                    </passage>
+                    <passage>
+                        <role>88e88043-4d38-49b2-bb77-7f6892a77710</role>
+                        <text>Das thu!
+Ich geb' dir einen Wind dazu.</text>
+                    </passage>
+                    <passage>
+                        <role>e796d097-659f-47bf-9cdc-9d874d72b214</role>
+                        <text>Ich danke dir.</text>
+                    </passage>
+                    <passage>
+                        <role>daef824e-8623-445c-9cb2-58a487b90397</role>
+                        <text>Und ich den andern.</text>
+                    </passage>
+                    <passage>
+                        <role>e796d097-659f-47bf-9cdc-9d874d72b214</role>
+                        <text>Ich habe selbst schon alle andern,
+Und wenn und wie ein jeder weht,
+Woher er kommt, wohin er geht;
+Das muß mir keine Carte sagen.
+Neunmal neun die Zeit von sieben Tagen
+Will ich ihn durch alle Meere jagen.
+Dürr wie Heu will ich ihn machen;
+Angst und Kummer,
+Ohne Rast und ohne Schlummer,
+Soll auf seinem Augdach wachen,
+Nacht und Tag, und Tag und Nacht;
+Und so soll er in der Acht
+Siech und elend sich verzehren;
+Und ists gleich in meiner Willkuhr nicht,
+Sein Schiff an Klippen zu zerstören;
+So soll's doch übel zugericht
+Von Sturm und Wetter wiederkehren.
+Sieh, was ich habe - -</text>
+                    </passage>
+                    <passage>
+                        <role>88e88043-4d38-49b2-bb77-7f6892a77710</role>
+                        <text>Zeig es mir.</text>
+                    </passage>
+                    <passage>
+                        <role>e796d097-659f-47bf-9cdc-9d874d72b214</role>
+                        <text>Sieh eines Schiffers Daumen hier;
+Ich brach sein Schiff nicht weit vom Land,
+Und ließ ihn hingestrekt im Sand.</text>
+                    </passage>
+                    <passage>
+                        <role>daef824e-8623-445c-9cb2-58a487b90397</role>
+                        <text>Trummeln, Trummeln! Macbeth kommt!</text>
+                    </passage>
+                    <passage>
+                        <role>0bfa90e0-b561-475e-bfed-90043cbdef74</role>
+                        <text>Die Schiksals-Schwestern, Hand in Hand,
+Schwärmen über See und Land,
+Drehen so im Cirkel sich
+Dreymal für dich,
+Und dreymal für mich;
+Und dreymal, daß es neune macht.
+Halt! der Zauber ist vollbracht.</text>
+                    </passage>
+                </paragraph>
+                <allRole id="0bfa90e0-b561-475e-bfed-90043cbdef74">
+                    <name>ALLE</name>
+                    <words>0</words>
+                    <ageFrom>0</ageFrom>
+                    <ageTo>0</ageTo>
+                    <pseudoRole>true</pseudoRole>
+                    <assigendRoles>e796d097-659f-47bf-9cdc-9d874d72b214</assigendRoles>
+                    <assigendRoles>88e88043-4d38-49b2-bb77-7f6892a77710</assigendRoles>
+                    <assigendRoles>daef824e-8623-445c-9cb2-58a487b90397</assigendRoles>
+                </allRole>
+            </scene>
+            <scene>
+                <name>VIERTE SCENE.</name>
+                <paragraph>
+                    <stageDirection>
+                        <direction>Macbeth und Banquo, mit Soldaten und Gefolge.</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Einen solchen Tag, so schlimm und so schön zugleich, hab' ich noch nie gesehn.</text>
+                    </passage>
+                    <passage>
+                        <role>49caea66-be2d-4127-bd75-aaa8a19d2d1b</role>
+                        <text>Wie weit ist es noch nach Foris? - - Wer sind diese hier, so grau von Haaren,
+und so wild in ihrem Anzug? Sie sehen keinen Einwohnern unsrer Erde gleich, und
+sind doch da. Lebt ihr, oder seyd ihr etwas, dem ein Sterblicher Fragen
+vorlegen kan? Ihr scheint mich zu verstehen, indem jede zugleich ihren
+verkürzten Finger an ihre hautigen Lippen legt - - Ihr solltet Weibsbilder
+seyn, und doch verbieten mir eure Bärte, euch dafür zu halten.</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Redet, wenn ihr könnt; wer seyd ihr?</text>
+                    </passage>
+                    <passage>
+                        <role>e796d097-659f-47bf-9cdc-9d874d72b214</role>
+                        <text>Heil dir, Macbeth! Heil dir, Than von Glamis!</text>
+                    </passage>
+                    <passage>
+                        <role>88e88043-4d38-49b2-bb77-7f6892a77710</role>
+                        <text>Heil dir, Macbeth; Heil dir, Than von Cawdor!</text>
+                    </passage>
+                    <passage>
+                        <role>daef824e-8623-445c-9cb2-58a487b90397</role>
+                        <text>Heil dir, Macbeth; der einst König seyn wird!</text>
+                    </passage>
+                    <passage>
+                        <role>49caea66-be2d-4127-bd75-aaa8a19d2d1b</role>
+                        <text>Warum bebt ihr so zurük, und scheint euch vor Dingen zu entsezen, die so schön
+klingen? - -</text>
+                    </passage>
+                    <stageDirection>
+                        <direction>(Zu den Hexen.)</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>49caea66-be2d-4127-bd75-aaa8a19d2d1b</role>
+                        <text>Beym Namen der Wahrheit, redet! Seyd ihr Geister,
+oder würklich das, was ihr von aussen scheint? Ihr grüßt meinen edeln
+Gefährten, mit gegenwärtigem Glük und grossen Weissagungen von edler Befördrung
+und von königlicher Hoffnung, wovon er ganz ausser sich selbst gesezt scheint;
+zu mir sagt ihr nichts. Wenn ihr in die Saat der Zeit schauen, und sagen könnt,
+welches Saamen-Korn wachsen wird, und welches nicht; so redet zu mir, der weder
+um eure Gunst bittet, noch euern Haß fürchtet.</text>
+                    </passage>
+                    <passage>
+                        <role>1386cb74-c9e0-4fc3-aa8d-a66df4a0d583</role>
+                        <text>,</text>
+                    </passage>
+                    <stageDirection>
+                        <direction>eine nach der andern:</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>1386cb74-c9e0-4fc3-aa8d-a66df4a0d583</role>
+                        <text>Heil dir!</text>
+                    </passage>
+                    <passage>
+                        <role>e796d097-659f-47bf-9cdc-9d874d72b214</role>
+                        <text>Kleiner als Macbeth, und grösser!</text>
+                    </passage>
+                    <passage>
+                        <role>88e88043-4d38-49b2-bb77-7f6892a77710</role>
+                        <text>Nicht so glüklich, aber weit glükseliger.</text>
+                    </passage>
+                    <passage>
+                        <role>daef824e-8623-445c-9cb2-58a487b90397</role>
+                        <text>Du wirst kein König seyn, aber Könige zeugen, und so, Heil euch, Macbeth und
+Banquo!</text>
+                    </passage>
+                    <passage>
+                        <role>e796d097-659f-47bf-9cdc-9d874d72b214</role>
+                        <text>Banquo und Macbeth, Heil euch!</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Harret, ihr geheimnisvolle Sprecher, und sagt mir mehr; durch Sinels Tod (diß
+weiß ich) bin ich Than von Glamis; aber wie von Cawdor? Der Than von Cawdor
+lebt, und lebt im Schoos des Glüks; und daß ich einst König seyn werde, ist
+eben so unglaublich. Sagt, von wem habt ihr diese wunderbare Vorhersicht? Oder
+warum haltet ihr auf dieser dürren Heide unsre Reise durch solche prophetische
+Grüsse auf? -Redet, ich beschwöre euch!</text>
+                    </passage>
+                    <stageDirection>
+                        <direction>(Die Hexen verschwinden.)</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>49caea66-be2d-4127-bd75-aaa8a19d2d1b</role>
+                        <text>Die Erde hat Blasen, wie das Wasser, und diese sind welche davon; wo sind sie
+hingekommen?</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>In die Luft; und was körperlich schien, zerfloß wie Athem, in den Wind - - Ich
+wollte, sie wären noch da.</text>
+                    </passage>
+                    <passage>
+                        <role>49caea66-be2d-4127-bd75-aaa8a19d2d1b</role>
+                        <text>Waren diese Dinge würklich hier, wovon wir reden; oder haben wir von der tollen
+Wurzel gegessen, die die Vernunft gefangen nimmt?</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Eure Kinder sollen Könige werden - -</text>
+                    </passage>
+                    <passage>
+                        <role>49caea66-be2d-4127-bd75-aaa8a19d2d1b</role>
+                        <text>Ihr selbst sollt König seyn!</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Und Than von Cawdor dazu; hieß es nicht so?</text>
+                    </passage>
+                    <passage>
+                        <role>49caea66-be2d-4127-bd75-aaa8a19d2d1b</role>
+                        <text>Das waren ihre Worte - - Wer kommt hier?</text>
+                    </passage>
+                </paragraph>
+            </scene>
+            <scene>
+                <name>NEUNTE SCENE.</name>
+                <paragraph>
+                    <stageDirection>
+                        <direction>Ein Zimmer in Macbeths Schloß.
+
+Hautbois, Fakeln. Verschiedene Bediente gehen mit Tellern und Speisen über den
+Schauplaz. Nach einer Weile erscheint Macbeth.</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text></text>
+                    </passage>
+                    <stageDirection>
+                        <direction>(allein.)</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Wenn alles vorbey wäre, wenn es gethan ist, so wär's gut, wenn's schnell gethan
+würde; wenn der Meuchelmord zugleich die Folgen auffischen könnte, und dieser
+einzige Streich hier alles enden würde - - so möchten wir Muth haben hier auf
+diesem Sandbank der Zeit über das künftige Leben wegzuspringen. Aber in solchen
+Fällen empfangen wir gemeiniglich unser Urtheil schon hier, indem wir andern
+einen blutigen Unterricht geben, der zulezt auf des Erfinders eignen Kopf zurük
+fällt. Die gleich-messende Gerechtigkeit nöthigt uns, die Hefen unsers eignen
+Gift-Kelchs auszutrinken - - Er sollte gedoppelt sicher seyn; einmal weil ich
+sein Verwandter und Vasall bin, beydes starke Beweggründe gegen die That:
+Hernach als sein Wirth, der, anstatt den Streich selbst zu führen, die Thüre
+vor seinem Mörder verschliessen sollte. Ueberdem hat dieser Duncan so milde
+regiert, hat sein grosses Amt so untadelich verwaltet, daß seine Tugenden, wie
+Engel, mit Trompeten-Zungen tiefe Verdammniß über seine Wegraffung ausruffen
+werden; und Mitleiden, gleich einem nakten neugebohrnen Kind, oder wie des
+Himmels Cherubim, auf den unsichtbaren Rossen der Luft reitend, die entsezliche
+That in jedes Antliz blasen wird, bis Thränen den Wind ersäuffen - - Ich habe
+keinen Sporn, der den Lauf meines Vorhabens treibt, als allein den Ehrgeiz, der
+sich selbst überspringt, und auf einen andern einstürzt - -</text>
+                    </passage>
+                </paragraph>
+            </scene>
+            <scene>
+                <name>ZEHNTE SCENE.</name>
+                <paragraph>
+                    <stageDirection>
+                        <direction>Lady Macbeth tritt auf.</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Wie steht's? Was giebt's Neues?</text>
+                    </passage>
+                    <passage>
+                        <role>4e062a74-5af8-4199-b9fb-d29c30a85d12</role>
+                        <text>Er hat beynahe abgespeist; warum habt ihr das Zimmer verlassen?</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Fragte er nach mir?</text>
+                    </passage>
+                    <passage>
+                        <role>4e062a74-5af8-4199-b9fb-d29c30a85d12</role>
+                        <text>Ich dachte, man hätt' es euch gesagt.</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Wir wollen nicht weiter in dieser Sache gehen. Er hat mich kürzlich mit
+Ehren-Zeichen überhäuft; und ich habe goldne Meynungen von allen Arten von
+Leuten gekauft, die nun in ihrem neuesten Glanz getragen, und nicht so früh bey
+Seite geworfen seyn wollen.</text>
+                    </passage>
+                    <passage>
+                        <role>4e062a74-5af8-4199-b9fb-d29c30a85d12</role>
+                        <text>War die Hoffnung trunken, die euch vor kurzem so entschlossen machte? Hat sie
+seitdem geschlaffen, und erwachte sie nun, um so bleich und grün beym Anblik
+dessen, was sie vorher liebte auszusehen? Wie? fürchtest du derjenige in der
+That zu seyn, der du zu seyn wünschest? Strebest du nach dem, was du für die
+Zierde des Lebens ansiehst, und willst in deinen eignen Augen als eine Memme
+leben? - - Ich habe das Herz nicht, (armseliger Gedanke!) ob ich gleich gerne
+wollte; gleich der armen Kaze im Sprüchwort, (die gerne Fische fienge, wenn sie
+nur die Füsse nicht naß machen müßte.)</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Ich bitte dich, halt ein. Ich habe zu allem Muth, was einem Mann anständig ist;
+wer mehr hat, ist keiner.</text>
+                    </passage>
+                    <passage>
+                        <role>4e062a74-5af8-4199-b9fb-d29c30a85d12</role>
+                        <text>Was für ein Thier war denn das, das euch antrieb, mir die erste Eröffnung von
+diesem Vorhaben zu thun? Als ihr den Muth hattet es auszuführen, da war't ihr
+ein Mann; und wenn ihr mehr wäret was ihr waret, so würdet ihr um so viel mehr
+Mann seyn. Damals bot sich euch weder Zeit noch Ort an, und ihr wolltet beyde
+machen; sie haben sich selbst gemacht, und ihre Bereitwilligkeit schrekt euch
+ab - - Ich habe Kinder gesäugt, und weiß wie zärtlich die Liebe zu dem Säugling
+ist, der an meiner Brust trinkt; aber ich wollte - -ja Macbeth! indem er mich
+liebkosend angelächelt hätte, wollt' ich meine Warze aus seinem beinlosen
+Kiefer gezogen, und ihm das Hirn ausgeschlagen haben, wenn ich es so geschworen
+hätte, wie ihr das geschworen habt.</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Wenn es uns mißlünge - -</text>
+                    </passage>
+                    <passage>
+                        <role>4e062a74-5af8-4199-b9fb-d29c30a85d12</role>
+                        <text>Mißlingen? Führt es nur mit Standhaftigkeit aus, so kan es nicht mißlingen.
+Wenn Duncan schläft,</text>
+                    </passage>
+                    <stageDirection>
+                        <direction>(und die starke Tagreise wird seinen Schlaf befördern;)</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>4e062a74-5af8-4199-b9fb-d29c30a85d12</role>
+                        <text>so
+will ich seine beyden Kammer-Herren mit Wein und Gesundheiten so zurichten, daß
+ihr Gedächtniß, der Wächter des Gehirns, ein Dunst seyn soll, und ihre Vernunft
+ein blosser Distillier-Kolbe; wenn in schweinischem Schlaf ihre ertränkten
+Kräfte wie im Tode ligen, was können nicht ihr und ich mit dem unbewachten
+Duncan anfangen? Was können wir nicht seinen vollen Bedienten thun, welche die
+Schuld unsrer That tragen sollen?</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Welch ein Weib! bringe mir keine Töchter! aus deinem Metall müssen nur Männer
+gebildet werden! - Glaubst du nicht, sie werden für die Thäter angesehen
+werden, wenn wir sie, indem sie schlafen, mit Blute beschmieren, und ihre eigne
+Dolche zu der That gebrauchen?</text>
+                    </passage>
+                    <passage>
+                        <role>4e062a74-5af8-4199-b9fb-d29c30a85d12</role>
+                        <text>Wer wird, bey dem Geschrey und Wehklagen, das wir erheben wollen, sich
+unterstehen anders zu denken?</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Ich bin entschlossen, Weib, und alle meine Sehnen strengen zu dieser
+furchtbaren That sich an. Komm, und laß uns unser Vorhaben unter die schönste
+Larve verbergen!</text>
+                    </passage>
+                    <stageDirection>
+                        <direction>(Sie gehen ab.)</direction>
+                    </stageDirection>
+                </paragraph>
+            </scene>
+        </act>
+        <act>
+            <name>Zweyter Aufzug.</name>
+            <scene>
+                <name>ERSTE SCENE.</name>
+                <paragraph>
+                    <stageDirection>
+                        <direction>Ein Saal in Macbeths Schlosse.
+
+Banquo und Fleance, der ihm eine Fakel vorträgt.</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>49caea66-be2d-4127-bd75-aaa8a19d2d1b</role>
+                        <text>Wie weit ists schon in der Nacht? Junge?</text>
+                    </passage>
+                    <passage>
+                        <role>6379fdd0-40e2-4646-bbb3-65e4c1d6505f</role>
+                        <text>Der Mond ist unter: ich habe die Gloke nicht gehört.</text>
+                    </passage>
+                    <passage>
+                        <role>49caea66-be2d-4127-bd75-aaa8a19d2d1b</role>
+                        <text>Sie geht auf Zwölfe.</text>
+                    </passage>
+                    <passage>
+                        <role>6379fdd0-40e2-4646-bbb3-65e4c1d6505f</role>
+                        <text>Ich denk' es ist später, Gnädiger Herr.</text>
+                    </passage>
+                    <passage>
+                        <role>49caea66-be2d-4127-bd75-aaa8a19d2d1b</role>
+                        <text>Hier, nimm mein Schwert. Man ist häuslich im Himmel; ihre Lichter sind alle aus
+- - Nimm das auch dazu. Eine schwere Schläfrigkeit ligt wie Bley auf mir, und
+doch möcht ich nicht gerne schlafen. Ihr wohlthätigen Mächte! entfernt die
+bösen Gedanken von mir, denen die schlummernde Natur wehrlos ausgesezt ist - -</text>
+                    </passage>
+                    <stageDirection>
+                        <direction>Macbeth und ein Bedienter mit einer Fakel.</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>49caea66-be2d-4127-bd75-aaa8a19d2d1b</role>
+                        <text>Gieb mir mein Schwert - - Wer ist hier?</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Ein Freund.</text>
+                    </passage>
+                    <passage>
+                        <role>49caea66-be2d-4127-bd75-aaa8a19d2d1b</role>
+                        <text>Wie, Sir, noch nicht zu Bette? Der König ruht schon. Er ist diese Nacht
+ausserordentlich frölich gewesen, und hat euern Haus-Officianten grosse
+Geschenke gemacht; diesen Diamant sandte er eurer Gemalin, die er seine
+angenehmste Wirthin grüssen ließ, und zog sich über die massen vergnügt in sein
+Schlafgemach zurük.</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Da wir keine Zeit hatten, Zubereitungen zu machen, so sind wir kaum vermögend
+gewesen, unsern guten Willen zu zeigen - -</text>
+                    </passage>
+                    <passage>
+                        <role>49caea66-be2d-4127-bd75-aaa8a19d2d1b</role>
+                        <text>Es war alles wohl. Vergangne Nacht träumte mir von den drey Zauber-Schwestern:
+Euch haben sie doch etwas Wahres gesagt.</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Ich denke nicht an sie; und doch, wenn wir eine gelegne Stunde finden könnten,
+so möchte ich ein paar Worte von dieser Sache mit euch reden. Nennet nur die
+Zeit.</text>
+                    </passage>
+                    <passage>
+                        <role>49caea66-be2d-4127-bd75-aaa8a19d2d1b</role>
+                        <text>Nach eurer Gelegenheit.</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Wenn ihr meine Maaßnehmungen, nachdem ich sie bey mir selbst festgesezt haben
+werde, unterstüzen wollt, so sollt ihr Ehre dabey gewinnen.</text>
+                    </passage>
+                    <passage>
+                        <role>49caea66-be2d-4127-bd75-aaa8a19d2d1b</role>
+                        <text>In so fern ich sie nicht verliere, indem ich sie zu vermehren suche, und mein
+Herz und meine Pflicht dabey frey behalte, so bin ich zu euern Diensten.</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Gute Nacht indessen.</text>
+                    </passage>
+                    <passage>
+                        <role>49caea66-be2d-4127-bd75-aaa8a19d2d1b</role>
+                        <text>Ich danke euch, Sir; ebenmäßig - -</text>
+                    </passage>
+                    <stageDirection>
+                        <direction>(Banquo und Fleance gehen ab.)</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>zum Bedienten.
+Geh, sage deiner Gebieterin, wenn mein Trank fertig sey, solle sie die Gloke
+ziehen lassen, und geh zu Bette - - Ist diß ein Dolch was ich vor mir seh, der
+Griff gegen meine Hand gekehrt? Komm, laß mich dich fassen. Ich habe dich
+nicht, und sehe dich doch immer. Bist du, fatales Gesichte, nicht eben so
+fühlbar wie du sichtbar bist? Oder bist du nur ein Dolch meiner Seele, ein
+täuschendes Geschöpfe des fiebrisch-erhizten Gehirns? Immer seh ich dich, in
+eben so körperlicher Gestalt als dieser den ich hier ziehe. Du zeigst mir den
+Weg den ich gehen wollte, und ein solches Werkzeug wie du bist, wollt' ich
+gebrauchen. Entweder sind meine Augen die Narren meiner übrigen Sinne, oder die
+andern alle werth - - Ich seh dich immer, und auf deiner Klinge Bluts-Tropfen,
+die zuvor noch nicht waren - - Es ist nichts würkliches - - es ist das blutige
+Werk meiner Seele, das sich so in meinen Augen mahlt - - Izt scheint auf der
+Hälfte der Welt die Natur todt, und schlimme Träume mißbrauchen den
+eingehüllten Schlaf; izt begeht die Zauberey den furchtbaren Dienst der blassen
+Hecate, und der gräßliche Mord,</text>
+                    </passage>
+                    <stageDirection>
+                        <direction>(von seinem heulenden Wächter, dem Wolf,
+aufgewekt,)</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>geht mit Tarquins räuberischem Schritte, wie ein Gespenste, seinem
+Werk entgegen. Du feste, unbewegliche Erde, höre meine Tritte nicht, wohin sie
+gehen, damit nicht deine Steine selbst dieses schrekliche Stillschweigen
+unterbrechen, das sich so wol zu meinem Vorhaben schikt, und verrathen, warum
+Macbeth wacht - - Ich drohe hier, und er lebt indessen - -</text>
+                    </passage>
+                    <stageDirection>
+                        <direction>(Die Gloke schlägt
+an.)</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Ich gehe, und es ist gethan; die Gloke ruft mir. Höre sie nicht, Duncan,
+denn es ist die Gloke, die dich gen Himmel oder zur Hölle citiert.</text>
+                    </passage>
+                    <stageDirection>
+                        <direction>(Er geht ab.)</direction>
+                    </stageDirection>
+                </paragraph>
+            </scene>
+            <scene>
+                <name>DRITTE SCENE.</name>
+                <paragraph>
+                    <stageDirection>
+                        <direction>Lady Macbeth tritt auf.</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>4e062a74-5af8-4199-b9fb-d29c30a85d12</role>
+                        <text>Das, was sie trunken machte, hat mich kühn gemacht; was ihr Feuer auslöschte,
+fachte das meinige an. Horch! Stille! es war eine Eule, die schrie, der fatale
+Nachtwächter, der uns die gräßlichste gute Nacht giebt - - Er hat es vollbracht
+- - die Thüren sind offen, und die überfüllten Kämmerer spotten ihres Amts mit
+Schnarchen. Ich habe ihnen einen so kräftigen Schlaftrunk zubereitet, daß Tod
+und Natur sich um sie zanken, ob sie leben oder gestorben seyen.</text>
+                    </passage>
+                    <stageDirection>
+                        <direction>Macbeth tritt auf.</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Wer ist hier? - - he!</text>
+                    </passage>
+                    <passage>
+                        <role>4e062a74-5af8-4199-b9fb-d29c30a85d12</role>
+                        <text>O weh! ich fürchte, sie sind aufgewacht, und es ist nicht gethan; der Vorsaz,
+nicht die That wird uns zu Grunde richten - - horch! ich legte ihre Dolche
+neben sie, er mußte sie finden - - Hätte er nicht, wie ich ihn schlaffen sah,
+meinem Vater gleich gesehen, ich hätt' es selbst gethan - - Mein Gemahl!</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Sie ist gethan, die That! - - Hörtest du kein Getöse?</text>
+                    </passage>
+                    <passage>
+                        <role>4e062a74-5af8-4199-b9fb-d29c30a85d12</role>
+                        <text>Ich hörte die Eule heulen, und die Feldgrillen schreyen - - Sagtet ihr nicht
+was?</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Wenn?</text>
+                    </passage>
+                    <passage>
+                        <role>4e062a74-5af8-4199-b9fb-d29c30a85d12</role>
+                        <text>Eben izt.</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Wie ich herab kam?</text>
+                    </passage>
+                    <passage>
+                        <role>4e062a74-5af8-4199-b9fb-d29c30a85d12</role>
+                        <text>Ja.</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Horcht! wer ligt im andern Zimmer?</text>
+                    </passage>
+                    <passage>
+                        <role>4e062a74-5af8-4199-b9fb-d29c30a85d12</role>
+                        <text>Donalbain.</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text></text>
+                    </passage>
+                    <stageDirection>
+                        <direction>(sieht seine Hände an.)</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Das ist ein trauriger Anblik!</text>
+                    </passage>
+                    <passage>
+                        <role>4e062a74-5af8-4199-b9fb-d29c30a85d12</role>
+                        <text>Ein närrischer Gedanke, es einen traurigen Anblik zu heissen.</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Der eine lachte in seinem Schlaf, und einer schrie: Mörder! Sie wekten einander
+auf; und ich stuhnd und hörte ihnen zu; aber sie sagten ihr Nacht-Gebett her,
+und schlieffen wieder ein.</text>
+                    </passage>
+                    <passage>
+                        <role>4e062a74-5af8-4199-b9fb-d29c30a85d12</role>
+                        <text>Es sind zween, die beysammen ligen.</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Der eine schrie: Gott helf uns! und Amen; der andre, wie sie mich mit diesen
+Henkers-Händen sahen: Ich hörte zu, aber ich konnte nicht Amen! sagen, wie sie
+sagten: Gott helf uns!</text>
+                    </passage>
+                    <passage>
+                        <role>4e062a74-5af8-4199-b9fb-d29c30a85d12</role>
+                        <text>Denkt ihm nicht so tief nach.</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Aber warum konnt' ich nicht Amen! sagen? Es war als ob es mir im Hals steken
+bliebe - -</text>
+                    </passage>
+                    <passage>
+                        <role>4e062a74-5af8-4199-b9fb-d29c30a85d12</role>
+                        <text>Man muß solchen Thaten nicht auf eine solche Art nachdenken; das würde uns
+unsinnig machen.</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Es war mir auch nicht anders, als hörte ich eine Stimme, die dem Schlafenden
+zurief. Schlafe nicht länger! Macbeth ermordet den Schlaf, den unschuldigen
+Schlaf; den Schlaf, der die Stirne des Kummers entrunzelt, die Geburt von jedes
+folgenden Tages Leben, den Balsam verwundeter Gemüther, die heilsamste
+Erquikung der Natur, und die nahrhafteste Speise im Gastmahl des Lebens - -</text>
+                    </passage>
+                    <passage>
+                        <role>4e062a74-5af8-4199-b9fb-d29c30a85d12</role>
+                        <text>Was wollt ihr mit allem dem?</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Es war immer als ob es im ganzen Hause schreye: Wacht auf, schlaft nicht mehr;
+Glamis hat den Schlaf ermordet, und dafür soll Cawdor nicht mehr schlafen;
+Macbeth soll nicht mehr schlaffen!</text>
+                    </passage>
+                    <passage>
+                        <role>4e062a74-5af8-4199-b9fb-d29c30a85d12</role>
+                        <text>Wer rief denn so? Wie, mein edler Than, was für fieberhafte, euers Helden-Muths
+unwürdige Einbildungen sind das? Geht, nehmt ein wenig Wasser, und waschet
+diese garstige Zeugschaft von euern Händen. Warum brachtet ihr diese Dolche mit
+euch; sie müssen dort ligen bleiben. Geht, tragt sie wieder hin, und beschmiert
+die schlaffenden Kämmerer mit Blut.</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Ich gehe nicht; ich erschreke vor dem Gedanken was ich gethan habe; seht ihr
+dazu, ich habe das Herz nicht.</text>
+                    </passage>
+                    <passage>
+                        <role>4e062a74-5af8-4199-b9fb-d29c30a85d12</role>
+                        <text>Schwache Seele! Gebt mir die Dolche; Schlaffende und Todte sind nur Gemählde;
+nur Kinder fürchten sich vor einem gemahlten Teufel. Wenn er blutet, so will
+ich die Gesichter der Kämmerlinge damit übergülden; denn sie müssen für die
+Thäter angesehen werden.</text>
+                    </passage>
+                    <stageDirection>
+                        <direction>(Sie geht ab.)</direction>
+                    </stageDirection>
+                    <stageDirection>
+                        <direction>(Man hört ein Klopfen hinter der Scene.)</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text></text>
+                    </passage>
+                    <stageDirection>
+                        <direction>(auffahrend.)</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Woher dieses Klopfen! - - Was wird aus mir werden, wenn jeder Laut mir zu
+ruffen scheint: Was für Hände sind das? Ha! Sie reissen mir meine Augen aus!
+Kan des grossen Neptuns ganzer Ocean dieses Blut von meiner Hand waschen? Nein,
+eh würde diese meine Hand deine unermeßliche See zu Purpur machen - -</text>
+                    </passage>
+                    <stageDirection>
+                        <direction>Lady Macbeth kommt zurük.</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>4e062a74-5af8-4199-b9fb-d29c30a85d12</role>
+                        <text>Meine Hände haben die Farbe der eurigen, aber ich schäme mich, ein so weisses
+Herz zu tragen - -</text>
+                    </passage>
+                    <stageDirection>
+                        <direction>(Ein Klopfen.)</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>4e062a74-5af8-4199-b9fb-d29c30a85d12</role>
+                        <text>Ich hör' ein Klopfen, von der südlichen
+Pforte her. Wir wollen uns in unser Gemach zurük ziehn; ein wenig Wasser wird
+uns von dieser That reinigen. Wie leicht ist sie also? Eure Standhaftigkeit hat
+euch ganz verlassen - - Horcht, es klopft schon wieder! Geht und hüllt euch in
+euern Schlafrok ein, sonst möcht' uns die Gelegenheit ruffen, und zeigen daß
+wir gewacht haben; verliehrt euch nicht so armselig in euern Gedanken.</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Wollte der Himmel, ich könnte das Bewußtseyn dieser That oder meiner selbst
+verliehren! Erwache, Duncan, von diesem Klopfen: Wie wollt' ich, du könntest!</text>
+                    </passage>
+                    <stageDirection>
+                        <direction>(Sie gehen ab.)</direction>
+                    </stageDirection>
+                </paragraph>
+            </scene>
+        </act>
+        <act>
+            <name>Dritter Aufzug.</name>
+            <scene>
+                <name>ERSTE SCENE.</name>
+                <paragraph>
+                    <stageDirection>
+                        <direction>Ein Zimmer im Palast.
+
+Banquo tritt auf.</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>49caea66-be2d-4127-bd75-aaa8a19d2d1b</role>
+                        <text>So hast du's also? Glamis, Cawdor, König, alles was dir die Zauberinnen
+versprochen haben; ich fürchte sehr, du bist auf keine gute Art dazu gekommen;
+und doch wurde gesagt, es sollte nicht bey deinen Nachkommen bleiben, sondern
+ich selbst sollte die Wurzel und der Stammvater vieler Könige seyn. Wenn
+Wahrheit von ihnen kommen kan, (wie ihre Anrede an dich, Macbeth, zu beweisen
+scheint) warum können sie nicht eben so wohl meine Orakel seyn, und mich zu
+Hoffnung anfrischen? - - Doch stille! nichts mehr hievon.</text>
+                    </passage>
+                    <stageDirection>
+                        <direction>Trompeten. Macbeth als König, Lady Macbeth, Lenox, Rosse, Lords und Hofdiener.</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Hier ist unser vornehmster Gast.</text>
+                    </passage>
+                    <passage>
+                        <role>4e062a74-5af8-4199-b9fb-d29c30a85d12</role>
+                        <text>Wenn er vergessen worden wäre, so hätte es wie eine gähnende Lüke in unserm
+Fest ausgesehen, und alles andre entstellt.</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Wir haben auf die Nacht ein festliches Gastmal, Sir, und ersuchen euch um eure
+Gegenwart.</text>
+                    </passage>
+                    <passage>
+                        <role>49caea66-be2d-4127-bd75-aaa8a19d2d1b</role>
+                        <text>Nach eurer Hoheit Befehl; an deren jeden meine Pflicht durch ein unauflößliches
+Band auf ewig geknüpft ist.</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Ihr verreiset diesen Nachmittag?</text>
+                    </passage>
+                    <passage>
+                        <role>49caea66-be2d-4127-bd75-aaa8a19d2d1b</role>
+                        <text>Ja, mein gnädigster Herr.</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Wir wollten uns sonst euren guten Rath (der allezeit weise und glüklich war) in
+der heutigen Raths-Versammlung ausgebetten haben, doch es ist morgen früh genug
+dazu. Geht die Reise weit?</text>
+                    </passage>
+                    <passage>
+                        <role>49caea66-be2d-4127-bd75-aaa8a19d2d1b</role>
+                        <text>So weit, daß ich die ganze Zeit zwischen izt und dem Nachtessen dazu gebrauchen
+werde. Wenn mein Pferd nicht das beste thut, so werd' ich noch eine oder zwoo
+dunkle Stunden von der Nacht entlehnen müssen.</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Bleibet ja nicht von unserm Gastmal aus.</text>
+                    </passage>
+                    <passage>
+                        <role>49caea66-be2d-4127-bd75-aaa8a19d2d1b</role>
+                        <text>Mein gebietender Herr, ich will nicht fehlen.</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Wir hören, unsre blutigen Vettern haben sich nach England und Irland gemacht,
+läugnen ihren grausamen Vater-Mord, erfüllen ihre Hörer mit seltsamen
+Erfindungen - - Doch, hievon morgen, mit andern Angelegenheiten, die den Staat
+betreffen, und unsre vereinigte Aufmerksamkeit fodern. Geht ihr zu Pferde!
+Adieu, bis auf die Nacht. Geht Fleance mit euch?</text>
+                    </passage>
+                    <passage>
+                        <role>49caea66-be2d-4127-bd75-aaa8a19d2d1b</role>
+                        <text>Ja, gnädigster Herr, wir können nicht länger verweilen - -</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Ich wünsche euern Pferden schnelle und sichre Füsse, und hiemit empfehl' ich
+euch ihrem Rüken. Lebet wohl.</text>
+                    </passage>
+                    <stageDirection>
+                        <direction>(Banquo geht ab.)</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Laßt bis Abends um sieben Uhr,
+jedermann Meister von seiner Zeit seyn; das Vergnügen der Gesellschaft desto
+besser zu schmeken, wollen wir selbst bis zum Abendessen allein seyn; bis
+dahin, sey Gott mit euch!</text>
+                    </passage>
+                    <stageDirection>
+                        <direction>(Lady Macbeth und Lords gehen ab.)</direction>
+                    </stageDirection>
+                </paragraph>
+            </scene>
+            <scene>
+                <name>DRITTE SCENE.</name>
+                <paragraph>
+                    <stageDirection>
+                        <direction>Ein andres Zimmer im Palast.
+
+Lady Macbeth und ein Bedienter.</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>4e062a74-5af8-4199-b9fb-d29c30a85d12</role>
+                        <text>Ist Banquo schon abgereist?</text>
+                    </passage>
+                    <passage>
+                        <role>19437d81-d710-4e79-b6db-9e947f1ab2ac</role>
+                        <text>Ja, Gnädigste Frau, aber er kommt auf die Nacht wieder zurük.</text>
+                    </passage>
+                    <passage>
+                        <role>4e062a74-5af8-4199-b9fb-d29c30a85d12</role>
+                        <text>Sage dem Könige, ich möchte, wenn's ihm gelegen ist, ein paar Worte mit ihm
+sprechen.</text>
+                    </passage>
+                    <stageDirection>
+                        <direction>(Der Bediente geht.)</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>4e062a74-5af8-4199-b9fb-d29c30a85d12</role>
+                        <text>Alles ist verlohren, und nichts gewonnen, wenn wir das Ziel unsrer Wünsche
+nicht mit unsrer Zufriedenheit erkauft haben - -</text>
+                    </passage>
+                    <stageDirection>
+                        <direction>Macbeth tritt auf.</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>4e062a74-5af8-4199-b9fb-d29c30a85d12</role>
+                        <text>Wie steht's, Milord? warum so viel allein? wozu soll es dienen, daß ihr die
+verdrieslichsten Einbildungen zu eurer Gesellschaft macht, und euch mit
+Gedanken unterhaltet, die mit denen, an welche sie denken, gestorben seyn
+sollten? An Dinge die nicht zu ändern sind, sollt' auch nicht gedacht werden;
+was gethan ist, ist gethan.</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Wir haben die Schlange zerstükt, nicht getödtet - - Sie wird wieder
+zusammenwachsen, und sie selbst seyn; indeß daß unsre arme einfältige Boßheit
+der Gefahr ihrer vorigen Zähne ausgesezt bleibt. Aber ehe sollen beyde Welten
+aus ihren Angeln fallen, und alle Wesen unter ihrem Gewicht zertrümmern, eh wir
+unser Brod mit Zittern essen, und in der Beängstigung dieser schreklichen
+Träume schlafen wollen, die uns bey nächtlicher Weil' erschüttern. Besser bey
+dem Todten seyn, (den wir, diesen Plaz zu erhalten, in seine Ruhe gesandt
+haben,) als auf dieser Folter des Gemüths in rastloser Pein zu ligen - - Duncan
+ligt in seinem Grabe; auf das unruhvolle Fieber des Lebens, schläft er wohl;
+Verrätherey hat ihr ärgstes gethan; nun kan weder Gift, noch Stahl, weder
+einheimische Boßheit, noch auswärtiger Anfall, nichts kan ihn mehr berühren.</text>
+                    </passage>
+                    <passage>
+                        <role>4e062a74-5af8-4199-b9fb-d29c30a85d12</role>
+                        <text>Kommt, kommt, mein liebster Lord, heitert diese finstern Blike auf; seyd munter
+und Jovialisch, unter euern Gästen, auf die Nacht.</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Das will ich, meine Liebe, und ich bitte, seyd es auch. Sonderheitlich habt
+eine immer geschäftige Achtung für Banquo; thut ihm mit Bliken und Worten, alle
+ersinnliche Ehre an; noch erheischt es die Zeit, daß wir unsre Würde vergessen,
+uns zu Schmeicheleyen herablassen, und unsre Gesichter zu lächelnden Masken
+unsrer Herzen machen.</text>
+                    </passage>
+                    <passage>
+                        <role>4e062a74-5af8-4199-b9fb-d29c30a85d12</role>
+                        <text>Denkt nicht an das.</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>O, mein Gemüth ist mit Scorpionen angefüllt, theures Weib! du weißt, daß Banquo
+und sein Fleance leben!</text>
+                    </passage>
+                    <passage>
+                        <role>4e062a74-5af8-4199-b9fb-d29c30a85d12</role>
+                        <text>Aber in beyden ist der Abdruk der Natur nicht unsterblich.</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Das ist noch der Trost, daß sie zerstörbar sind; also, sey du gutes Muths. Eh
+noch die Fledermaus ihren einsiedlerischen Flug beginnen wird, eh auf der
+schwarzen Hecate Ruf, der Scherben-gebohrne Käfer, mit seinem schläfrigen
+Sumsen die gähnende Nacht einläutet, soll eine That von furchtbarem Inhalt
+gethan seyn.</text>
+                    </passage>
+                    <passage>
+                        <role>4e062a74-5af8-4199-b9fb-d29c30a85d12</role>
+                        <text>Was soll dann geschehen?</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Sey lieber unwissend, mein liebstes Hühnchen, bis du der vollbrachten That
+zujauchzen kanst. Komm, blendende Nacht, schliesse das zärtliche Auge des
+mitleidigen Tags, durchstreiche mit deiner blutigen und unsichtbaren Hand, und
+zerreiß in Stüken diesen grossen Schuldbrief, der mich so bleich aussehen
+macht. - - Die Nacht wird diker, und die Krähe fliegt dem dohlen-vollen Gehölze
+zu; alle guten Tag-Geschöpfe fangen an zu niken und einzuschlummern, indeß daß
+die schwarzen Hausgenossen der Nacht auf ihren Raub ausgehen. Du erstaunst über
+meine Reden; aber sey ruhig; Dinge, die einen bösen Anfang haben, können nur
+durch Uebelthaten fortgeführt werden. Begnüge dich hiemit, und folge mir.</text>
+                    </passage>
+                    <stageDirection>
+                        <direction>(Sie gehen ab.)</direction>
+                    </stageDirection>
+                </paragraph>
+            </scene>
+            <scene>
+                <name>SECHSTE SCENE.</name>
+                <paragraph>
+                    <stageDirection>
+                        <direction>Verwandelt sich in die Heide.
+
+Donner und Bliz. Die drey Hexen treten auf, und begegnen der Hecate.
+
+Hecate beschilt die drey Schwestern, daß sie sich eigenmächtig unterfangen, den
+Macbeth durch räthselhafte Vorhersagungen zu verführen, ohne sie, als ihre
+Vorsteherin, daran Antheil nehmen zu lassen. Sie bestellt sie hierauf auf
+Morgen an den Acherontischen Brunnen, und befiehlt ihnen, alle ihre Gefässe und
+Zauber-Materialien bereit zu halten; sie selbst, sagt sie, sey im Begriff
+gewisse Dünste aus dem Mond zu hohlen, durch deren magische Zubereitung sie
+gesonnen sey, so künstliche Phantomen vor Macbeths Augen zu bringen, daß er, zu
+seinem Verderben von ihnen betrogen, in tollkühner Sicherheit, sich über alle
+Zufälle des Glücks und den Tod selbst hinweggesezt glauben werde. Hierauf hört
+man eine Musik und einen Gesang. Hecate sagt, daß ihr kleiner Spiritus
+familiaris sie abruffe, und die Zauberinnen fliegen allerseits davon.</direction>
+                    </stageDirection>
+                </paragraph>
+            </scene>
+        </act>
+        <act>
+            <name>Vierter Aufzug.</name>
+            <scene>
+                <name>ERSTE SCENE.</name>
+                <paragraph>
+                    <stageDirection>
+                        <direction>Eine finstre Höle; in deren Mitte ein grosser Kessel über einem Feuer steht.
+
+Donner und Blize. Die drey Hexen treten auf, und ermuntern sich zu ihrem
+Vorhaben; alsdann gehen sie unter einem seltsamen Zauber-Spruch rund um den
+Kessel herum, und werfen die mancherley Ingredienzien zu ihrer Bezauberung, (z.
+ex. Frosch-Zehen, Otter-Zungen, Eidexen-Beine, Fledermaus-Haar, Wolfs-Zahn,
+Schierlings-Wurzeln, Ziegen-Galle, die Leber von einem Juden, die Nase von
+einem Türken, und die Lippe von einem Tartar u.s.w.) in den Kessel; nachdem
+alles genug gekocht hat, wird das Decoctum mit eines Säuglings Blut abgekühlt,
+und das Zauberwerk ist fertig. Hierauf erscheint Hecate mit drey andern Hexen,
+giebt ihren Beyfall zu dem was gemacht worden, und befiehlt ihnen, einen Tanz
+und Gesang um den Kessel anzufangen; dieses geschieht mit Musik, und hierauf
+erscheint in der</direction>
+                    </stageDirection>
+                </paragraph>
+            </scene>
+            <scene>
+                <name>ZWEYTEN SCENE</name>
+                <paragraph>
+                    <stageDirection>
+                        <direction>Macbeth.</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Wie geht's, ihr geheimnißreichen, schwarzen, mitternächtlichen Unholden? Was
+macht ihr da?</text>
+                    </passage>
+                    <passage>
+                        <role>1bf68738-9bf1-400d-b3ea-53ba61da8eb6</role>
+                        <text>Ein Werk ohne Namen.</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Ich beschwöre euch bey dem, den ihr verehrt, antwortet mir, durch was für
+Mittel ihr auch dazu gelangen möget; müßtet ihr gleich die Winde entfesseln,
+und sie gegen Kirchen kämpfen lassen; müßten gleich die schäumenden Wellen im
+allgemeinen Sturm die ganze Schiffahrt verschlingen, Schlösser über die Häupter
+ihrer Hüter einstürzen, und Paläste und Pyramiden ihren Gipfel bis zu ihrem
+Grund niederbeugen; ja müßte die ganze Natur darüber zusammenfallen. Antwortet
+mir auf das, was ich euch frage.</text>
+                    </passage>
+                    <passage>
+                        <role>e796d097-659f-47bf-9cdc-9d874d72b214</role>
+                        <text>Rede!</text>
+                    </passage>
+                    <passage>
+                        <role>88e88043-4d38-49b2-bb77-7f6892a77710</role>
+                        <text>Frage!</text>
+                    </passage>
+                    <passage>
+                        <role>daef824e-8623-445c-9cb2-58a487b90397</role>
+                        <text>Wir wollen antworten.</text>
+                    </passage>
+                    <passage>
+                        <role>e796d097-659f-47bf-9cdc-9d874d72b214</role>
+                        <text>Sag, ob du die Antwort lieber aus unserm Mund, oder von unsern Meistern hören
+willt?</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Ruft sie, ich will sie sehen.</text>
+                    </passage>
+                    <passage>
+                        <role>e796d097-659f-47bf-9cdc-9d874d72b214</role>
+                        <text>Nehmt Blut von einer Sau, die ihre neun Ferkel gefressen hat, und Fett, das vom
+Galgen eines Mörders getrieft, und werft es in die Flamme.</text>
+                    </passage>
+                    <passage>
+                        <role>1bf68738-9bf1-400d-b3ea-53ba61da8eb6</role>
+                        <text>Komm, wer du auch seyst, und zeige dich und deine Schuldigkeit.</text>
+                    </passage>
+                    <stageDirection>
+                        <direction>(Donner und Bliz.)</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>1bf68738-9bf1-400d-b3ea-53ba61da8eb6</role>
+                        <text>Eine Erscheinung von einem bewafneten Haupt steigt aus dem Boden empor.</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Sage mir, du unbekannte Macht - -</text>
+                    </passage>
+                    <passage>
+                        <role>e796d097-659f-47bf-9cdc-9d874d72b214</role>
+                        <text>Er weiß schon deine Gedanken; höre was er sagt, aber du rede nichts.</text>
+                    </passage>
+                    <passage>
+                        <role>1fe59043-d266-4022-b9c6-4c7ee69899c1</role>
+                        <text>Macbeth! Macbeth! Macbeth! Hüte dich vor Macduff ! Hüte dich vor dem Than von
+Fife! - - Entlaßt mich - - Genug!</text>
+                    </passage>
+                    <stageDirection>
+                        <direction>(Die Erscheinung steigt wieder herab.)</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Wer du auch seyn magst, ich danke dir für deine Warnung. Du hast meiner
+ungewissen Furcht eine Richtung gegeben. Aber nur noch ein Wort - -</text>
+                    </passage>
+                    <passage>
+                        <role>e796d097-659f-47bf-9cdc-9d874d72b214</role>
+                        <text>Er läßt sich nicht befehlen; hier ist ein andrer mächtigerer, als der erste.</text>
+                    </passage>
+                    <stageDirection>
+                        <direction>(Donner.)</direction>
+                    </stageDirection>
+                    <stageDirection>
+                        <direction>Eine Erscheinung von einem blutigen Kinde steigt empor.</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>1fe59043-d266-4022-b9c6-4c7ee69899c1</role>
+                        <text>Macbeth, Macbeth! Macbeth!</text>
+                    </passage>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Hätt' ich drey Ohren, ich wollte dir aufhorchen.</text>
+                    </passage>
+                    <passage>
+                        <role>1fe59043-d266-4022-b9c6-4c7ee69899c1</role>
+                        <text>Sey blutig, kühn und entschlossen; verlache was ein Mensch gegen dich vermag:
+denn von niemand, der von einem Weibe geboren ward, soll Macbeth jemals Harm
+empfangen.</text>
+                    </passage>
+                    <stageDirection>
+                        <direction>(Die Erscheinung steigt herab.)</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>So lebe, Macduff! Was hab' ich nöthig, dich zu fürchten? Und doch will ich die
+Sicherheit doppelt sicher machen, und ein Pfand vom Schiksal nehmen; du sollt
+nicht leben, damit ich der bleichsüchtigen Furcht sagen könne, sie lüge, und
+mitten im Donnerwetter schlafe.</text>
+                    </passage>
+                    <stageDirection>
+                        <direction>(Donner.)</direction>
+                    </stageDirection>
+                    <stageDirection>
+                        <direction>Eine Erscheinung von einem gekrönten Kinde, mit einem Baum in der Hand, steigt
+empor.</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Was ist diß, das gleich dem Abkömling eines Königs emporsteigt, und um seine
+kindliche Stirne den Cirkel der Majestät trägt?</text>
+                    </passage>
+                    <passage>
+                        <role>1bf68738-9bf1-400d-b3ea-53ba61da8eb6</role>
+                        <text>Horch, aber rede nicht!</text>
+                    </passage>
+                    <passage>
+                        <role>1fe59043-d266-4022-b9c6-4c7ee69899c1</role>
+                        <text>Sey muthig wie ein Löwe, stolz und unbekümmert, wer murre, wer sich auflehne,
+wer sich gegen dich verschwöre. Macbeth soll niemals bezwungen werden, bis der
+grosse Birnam-Wald auf Dunsinans Hügel gegen ihn angezogen kommen wird.</text>
+                    </passage>
+                    <stageDirection>
+                        <direction>(Steigt herab.)</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Das wird niemals geschehen. Wer kan den Bäumen von Birnam befehlen, daß sie
+ihre tiefen Wurzeln entfesseln? Angenehmes Orakel! Gut! Wenn die Empörung ihr
+Haupt nicht erheben soll, bis der Wald von Birnam von seinem Plaz aufsteht, so
+wird unser Macbeth die Dauer der Natur ausleben - - und doch pocht mein Herz
+noch, ein einziges Ding zu wissen; sagt mir, (wenn eure Wissenschaft so weit
+reicht) wird Banquos Nachkommenschaft jemals in diesem Reiche herrschen?</text>
+                    </passage>
+                    <passage>
+                        <role>1bf68738-9bf1-400d-b3ea-53ba61da8eb6</role>
+                        <text>Verlange nicht mehr zu wissen.</text>
+                    </passage>
+                    <stageDirection>
+                        <direction>(Der Kessel sinkt in den Grund.)</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Ich will befriedigt seyn. Versagt ihr mir's, so fall' ein ewiger Fluch auf
+euch! Laßt michs wissen. Warum sinkt der Kessel? und was für ein Getön ist das?</text>
+                    </passage>
+                    <stageDirection>
+                        <direction>(Man hört einen Marsch von Hautbois.)</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>e796d097-659f-47bf-9cdc-9d874d72b214</role>
+                        <text>Erscheint!</text>
+                    </passage>
+                    <passage>
+                        <role>88e88043-4d38-49b2-bb77-7f6892a77710</role>
+                        <text>Erscheint!</text>
+                    </passage>
+                    <passage>
+                        <role>daef824e-8623-445c-9cb2-58a487b90397</role>
+                        <text>Erscheint!</text>
+                    </passage>
+                    <passage>
+                        <role>1bf68738-9bf1-400d-b3ea-53ba61da8eb6</role>
+                        <text>Erscheint vor ihm, und härmt sein Herz!
+Kommt wie Schatten, und verschwindet wieder.</text>
+                    </passage>
+                    <stageDirection>
+                        <direction>Acht Könige, von Banquo geführt, erscheinen einer nach dem andern, und gehen
+langsam bey Macbeth vorbey; der lezte hält einen Spiegel in der Hand.</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text></text>
+                    </passage>
+                    <stageDirection>
+                        <direction>(während daß sie vorbeygehen.)</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Du gleichst zu sehr dem Geist des Banquo; hinab! - - deine Crone verwundet
+meine Augäpfel - - Du gleichst dem ersten - - und du dem vorigen - - Ihr
+garstigen Unholden, wofür zeigt ihr mir das? ein Vierter! - - Erstarre, mein
+Auge! Wie? wird sich dieser verdammte Zug bis an den jüngsten Tag erstreken?
+Noch einer? - - Ein Siebenter! Ich will nicht mehr sehen - - aber da kommt noch
+der Achte, und trägt einen Spiegel, worinn er mir noch viele andre zeigt; ja
+ich sehe einige, welche doppelte Reichs-Aepfel und dreyfache Scepter tragen.
+Abscheuliches Gesichte! Nein, nun, seh ich, ist's wahr; denn der wundenvolle
+Banquo lächelt auf mich, und deutet mit der Hand auf diese hier - wie, ist es
+so?</text>
+                    </passage>
+                    <passage>
+                        <role>e796d097-659f-47bf-9cdc-9d874d72b214</role>
+                        <text>Ja, Sir, alles ist so. Aber warum steht Macbeth so erstaunt da? Kommt,
+Schwestern, laßt uns, seine Geister aufzumuntern, ihm die beste unsrer
+Lustbarkeiten zeigen; ich will die Luft bezaubern, Musik zu unserm grotesken
+Rundtanz zu machen, damit dieser grosse König sagen könne, daß wir ihm Ehre
+angethan haben.</text>
+                    </passage>
+                    <stageDirection>
+                        <direction>(Musik. Die Hexen machen einen Tanz und verschwinden.)</direction>
+                    </stageDirection>
+                    <passage>
+                        <role>deef395c-707c-462e-be23-a0bb7f9a7642</role>
+                        <text>Wo sind sie? Weg? - - Laß diese verderbliche Stunde auf ewig verflucht im
+Calender stehen! - - Komm herein, du draussen!</text>
+                    </passage>
+                </paragraph>
+                <allRole id="1bf68738-9bf1-400d-b3ea-53ba61da8eb6">
+                    <name>ALLE</name>
+                    <words>0</words>
+                    <ageFrom>0</ageFrom>
+                    <ageTo>0</ageTo>
+                    <pseudoRole>true</pseudoRole>
+                    <assigendRoles>deef395c-707c-462e-be23-a0bb7f9a7642</assigendRoles>
+                    <assigendRoles>e796d097-659f-47bf-9cdc-9d874d72b214</assigendRoles>
+                    <assigendRoles>88e88043-4d38-49b2-bb77-7f6892a77710</assigendRoles>
+                    <assigendRoles>daef824e-8623-445c-9cb2-58a487b90397</assigendRoles>
+                    <assigendRoles>1fe59043-d266-4022-b9c6-4c7ee69899c1</assigendRoles>
+                </allRole>
+            </scene>
+        </act>
+    </play>
+</showGo>
