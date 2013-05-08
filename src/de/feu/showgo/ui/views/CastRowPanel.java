@@ -3,6 +3,7 @@ package de.feu.showgo.ui.views;
 import info.clearthought.layout.TableLayout;
 
 import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class CastRowPanel extends JPanel {
 	private Role role;
 	private List<Person> availablePersons;
 	private List<JComboBox<Person>> castsSelects;
+	private List<JPanel> castPanels;
 	private static final Logger log = Logger.getLogger(CastSelectionPanel.class);
 	private int rowCounter = 2;
 	
@@ -42,6 +44,7 @@ public class CastRowPanel extends JPanel {
 		setLayout(layout);
 		
 		castsSelects = new ArrayList<JComboBox<Person>>();
+		castPanels = new ArrayList<JPanel>();
 		
 		add(new JLabel(role.getName()+":"), "0,0");
 		
@@ -62,8 +65,10 @@ public class CastRowPanel extends JPanel {
 			counter++;
 		}
 		
+		JPanel controlPanel = new JPanel();
+		controlPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+		
 		JButton addCast = new JButton("Weitere Besetzung hinzufügen");
-
 		
 		rowCounter = counter;
 		addCast.addActionListener(new ActionListener() {
@@ -79,7 +84,29 @@ public class CastRowPanel extends JPanel {
 				repaint();
 			}
 		});
-		add(addCast, "0,"+counter+",l,c");
+		
+		JButton removeCast = new JButton("Besetzung entfernen");
+		removeCast.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if(castsSelects.size() > 1){
+					log.debug("removing cast for " + role.getName());
+					log.debug("num rows: " + layout.getNumRow());
+					castsSelects.remove(castsSelects.size()-1);
+					JPanel castPanel = castPanels.get(castPanels.size() - 1);
+					castPanel.removeAll();
+					castPanels.remove(castPanel);
+					log.debug("castSelects: " + castsSelects);
+					revalidate();
+					repaint();
+				}
+			}
+		});
+		
+		controlPanel.add(addCast);
+		controlPanel.add(removeCast);
+		add(controlPanel, "0,"+counter+",l,c");
 	}
 	
 	private JPanel createCastSelectPanel(int rankNum){
@@ -98,6 +125,8 @@ public class CastRowPanel extends JPanel {
 		castsSelects.add(personSelect);
 		
 		castPanel.add(personSelect,"1,0");
+		
+		castPanels.add(castPanel);
 		return castPanel;
 	}
 	
