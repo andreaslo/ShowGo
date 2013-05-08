@@ -118,7 +118,7 @@ public class MainWindow extends JFrame {
 		readPlay.addActionListener(new ShowReadPlayAction(this));
 		JMenuItem createEnsemble = new JMenuItem("Ensemble anlegen");
 		createEnsemble.addActionListener(new ShowEnsembleViewAction(this));
-		JMenuItem createProduction = new JMenuItem("Inszeierung anlegen");
+		JMenuItem createProduction = new JMenuItem("Inszenierung anlegen");
 		createProduction.addActionListener(new ShowProductionViewAction(this));
 
 		actionMenu.add(addPerson);
