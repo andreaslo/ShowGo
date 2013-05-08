@@ -24,8 +24,6 @@ public class DeleteProductionAction implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		// TODO: Check whether ensembles are part of an production. If it is, don't delete it
-		
 		int choice = JOptionPane.showConfirmDialog(mainWindow, "Möchten Sie wirklich die Inszenierung " + production.getName() + " löschen?", production.getName()
 				+ " löschen", JOptionPane.YES_NO_OPTION);
 		if (choice == JOptionPane.YES_OPTION) {
