@@ -27,8 +27,6 @@ public class DeleteEnsembleAction implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		// TODO: Check whether ensembles are part of an production. If it is, don't delete it
-		
 		for(Production production : ShowGoDAO.getShowGo().getProductions()){
 			if(production.getEnsamble() == ensemble){
 				JOptionPane.showMessageDialog(mainWindow, "Das Ensemble " + ensemble.getName() + " ist der Inszenierung " + production.getName()
