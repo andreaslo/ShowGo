@@ -10,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -29,10 +28,6 @@ import org.apache.log4j.Logger;
 import de.feu.showgo.ShowGoDAO;
 import de.feu.showgo.io.ParsingException;
 import de.feu.showgo.io.PlayParser;
-import de.feu.showgo.io.RoleWordCounter;
-import de.feu.showgo.model.Act;
-import de.feu.showgo.model.Role;
-import de.feu.showgo.model.Scene;
 import de.feu.showgo.model.TheaterPlay;
 import de.feu.showgo.ui.MainWindow;
 import de.feu.showgo.ui.WindowColors;
