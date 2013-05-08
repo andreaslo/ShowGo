@@ -146,6 +146,9 @@ public class ProductionView extends JPanel {
 		for (TheaterPlay play : ShowGoDAO.getShowGo().getPlays()) {
 			playSelect.addItem(play);
 		}
+		for (Production production : ShowGoDAO.getShowGo().getProductions()) {
+			playSelect.addItem(production.getPlay());
+		}
 
 		final JButton usePlayAction = new JButton("Stück und Ensemble verwenden");
 		usePlayAction.addActionListener(new ActionListener() {
