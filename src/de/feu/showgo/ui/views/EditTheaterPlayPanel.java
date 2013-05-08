@@ -40,6 +40,7 @@ public class EditTheaterPlayPanel extends JPanel {
 	private static final Logger log = Logger.getLogger(EditTheaterPlayPanel.class);
 	private RolePanel roleDisplay;
 	private List<ActPanelWrapper> actWrapperList;
+	private JTextField playNameInput;
 	private List<RoleDeleteListener> roleDeleteListener = new LinkedList<RoleDeleteListener>();
 
 	public EditTheaterPlayPanel(MainWindow mainWindow, TheaterPlay play){
@@ -51,8 +52,8 @@ public class EditTheaterPlayPanel extends JPanel {
 	private void createComponent(){		
 		JPanel theaterDataPanel = new JPanel();
 		theaterDataPanel.setLayout(new TableLayout(generateLayoutSize(play)));
-		int row = 0;
 		
+		int row = 0;	
 		actWrapperList = new ArrayList<EditTheaterPlayPanel.ActPanelWrapper>();
 		for(Act act : play.getActs()){
 			JPanel actPanel = new JPanel();
@@ -98,7 +99,7 @@ public class EditTheaterPlayPanel extends JPanel {
 			actWrapperList.add(actWrapper);
 		}
 		
-		double size[][] = { { TableLayout.FILL }, { TableLayout.PREFERRED, TableLayout.PREFERRED } };
+		double size[][] = { { TableLayout.FILL }, { TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED } };
 		TableLayout layout = new TableLayout(size);
 		setLayout(layout);
 		
@@ -113,9 +114,12 @@ public class EditTheaterPlayPanel extends JPanel {
 				removeRole(role);
 			}
 		});
-		add(roleDisplay, "0,0");
-		add(theaterDataPanel, "0,1");
 		
+		JPanel playNamePanel = createPlayNamePanel();
+		
+		add(playNamePanel, "0,0");
+		add(roleDisplay, "0,1");
+		add(theaterDataPanel, "0,2");
 	}
 	
 	private JPanel createActNamePanel(final Act act){
@@ -245,6 +249,22 @@ public class EditTheaterPlayPanel extends JPanel {
 		namePanel.add(delete, "1,0,l,c");
 		
 		return namePanel;
+	}
+	
+	private JPanel createPlayNamePanel() {
+		log.debug("creating play name panel");
+		
+		JPanel playNamePanel = new JPanel();
+		double size[][] = { { 180, TableLayout.FILL }, { 30 } };
+		TableLayout layout = new TableLayout(size);
+		playNamePanel.setLayout(layout);
+
+		playNamePanel.add(new JLabel("Name des Stückes:"), "0,0");
+
+		playNameInput = new JTextField(play.getName());
+		playNamePanel.add(playNameInput, "1,0,f,c");
+
+		return playNamePanel;
 	}
 	
 	private double[][] generateLayoutSize(TheaterPlay play){
@@ -460,6 +480,8 @@ public class EditTheaterPlayPanel extends JPanel {
 	}
 
 	public void saveToBackingModel() {
+		play.setName(playNameInput.getText());
+		
 		for(ActPanelWrapper actWrapper : actWrapperList){
 			for(ScenePanelWrapper sceneWrapper : actWrapper.children){
 				for(ParagraphPanelWrapper paragraphWrapper : sceneWrapper.children){
