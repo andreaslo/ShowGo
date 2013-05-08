@@ -102,6 +102,7 @@ public class EnsembleView extends JPanel {
 				}
 				
 				mainWindow.getNavTree().refreshEnsembles();
+				ShowGoDAO.autosave();
 				
 				showMessage("Das Ensemble " + model.getName() + " wurde erfolgreich gespeichert.", WindowColors.SUCCESS);
 			}

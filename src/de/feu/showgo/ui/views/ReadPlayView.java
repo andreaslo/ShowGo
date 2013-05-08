@@ -175,6 +175,7 @@ public class ReadPlayView extends JPanel {
 				enableComponents(viewPanel, false);
 				
 				mainWindow.getNavTree().refreshPlays();
+				ShowGoDAO.autosave();
 				
 				showMessage("Das Stück " + model.getName() + " wurde erfolgreich angelegt.", WindowColors.SUCCESS);
 			}

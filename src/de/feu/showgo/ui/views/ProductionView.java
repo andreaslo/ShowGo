@@ -303,6 +303,7 @@ public class ProductionView extends JPanel {
 				}
 				
 				mainWindow.getNavTree().refreshProductions();
+				ShowGoDAO.autosave();
 				
 				showMessage("Die Inszenierung " + model.getName() + " wurde erfolgreich gespeichert.", WindowColors.SUCCESS);
 			}

@@ -200,6 +200,7 @@ public class PersonManagementView extends JPanel implements ActionListener {
 		}
 		
 		mainWindow.getNavTree().refreshPersons();
+		ShowGoDAO.autosave();
 	}
 	
 	private void fillPerson(Person newPerson){
