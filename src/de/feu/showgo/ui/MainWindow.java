@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
@@ -62,7 +63,7 @@ public class MainWindow extends JFrame {
 
 		this.setSize(1150, 800);
 		this.setLocationByPlatform(true);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setTitle(TITLE);
 		this.setJMenuBar(createMenu());
 
@@ -209,12 +210,12 @@ public class MainWindow extends JFrame {
 
 	private void handleClose() {
 		log.debug("closing window");
-		if (ShowGoDAO.getSaveFile() == null) {
-			// TODO: Ask user if is sure to quit without saving
-		}
-
-		if (ShowGoDAO.getSaveFile() != null) {
-			LastSaveProperties.writeLastSaveFile(ShowGoDAO.getSaveFile());
+		int choice = JOptionPane.showConfirmDialog(mainWindow, "Möchten Sie ShowGo wirklich beenden? Nicht gespeicherte Änderungen gehen verloren.", "ShowGo beenden", JOptionPane.YES_NO_OPTION);
+		if (choice == JOptionPane.YES_OPTION) {
+			if (ShowGoDAO.getSaveFile() != null) {
+				LastSaveProperties.writeLastSaveFile(ShowGoDAO.getSaveFile());
+			}
+			dispose();
 		}
 	}
 
