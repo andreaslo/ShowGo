@@ -39,6 +39,7 @@ import de.feu.showgo.ui.actions.ShowReadPlayAction;
 import de.feu.showgo.ui.tree.NavTree;
 import de.feu.showgo.ui.views.EnsembleView;
 import de.feu.showgo.ui.views.PersonManagementView;
+import de.feu.showgo.ui.views.PlaybillView;
 import de.feu.showgo.ui.views.ProductionView;
 import de.feu.showgo.ui.views.ReadPlayView;
 import de.feu.showgo.ui.views.StartupView;
@@ -217,6 +218,10 @@ public class MainWindow extends JFrame {
 			}
 			dispose();
 		}
+	}
+
+	public void showPlaybillView(Production production) {
+		displayView(new PlaybillView(this, production));
 	}
 
 }

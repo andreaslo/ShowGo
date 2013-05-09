@@ -7,6 +7,7 @@ import de.feu.showgo.model.Production;
 import de.feu.showgo.ui.MainWindow;
 import de.feu.showgo.ui.actions.DeleteProductionAction;
 import de.feu.showgo.ui.actions.EditProductionAction;
+import de.feu.showgo.ui.actions.ShowPlaybillAction;
 
 public class ProductionNode extends TreeElement{
 
@@ -28,10 +29,17 @@ public class ProductionNode extends TreeElement{
 			JMenuItem editProduction = new JMenuItem("Bearbeiten");
 			editProduction.addActionListener(new EditProductionAction(mainWindow, production));
 			
+			JMenuItem showPlaybill = new JMenuItem("Programmheft anzeigen");
+			showPlaybill.addActionListener(new ShowPlaybillAction(mainWindow, production));
+			
 			JMenuItem deleteProduction = new JMenuItem("Löschen");
 			deleteProduction.addActionListener(new DeleteProductionAction(mainWindow, production));
 			
+
+			
 			popup.add(editProduction);
+			popup.addSeparator();
+			popup.add(showPlaybill);
 			popup.addSeparator();
 			popup.add(deleteProduction);
 			return popup;
