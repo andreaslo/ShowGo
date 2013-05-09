@@ -131,7 +131,7 @@ public class PlaybillView extends JPanel {
 		playbill.append("\n");
 		
 		for(Role role : prod.getPlay().getRoles()){
-			if(role.isPseudoRole()){
+			if(role.isPseudoRole() || role.getCast() == null || role.getCast().isEmpty()){
 				continue;
 			}
 			playbill.append(printCast(role));
@@ -142,7 +142,7 @@ public class PlaybillView extends JPanel {
 		playbill.append("\n");
 		playbill.append("\n");
 		for(Role role : prod.getNonActorRoles()){
-			if(role.isPseudoRole()){
+			if(role.isPseudoRole() || role.getCast() == null || role.getCast().isEmpty()){
 				continue;
 			}
 			playbill.append(printCast(role));
@@ -153,7 +153,7 @@ public class PlaybillView extends JPanel {
 		return playbill.toString();
 	}
 	
-	private String printCast(Role role){
+	private String printCast(Role role){		
 		StringBuilder roleOutput = new StringBuilder();
 		roleOutput .append(role.getName());
 		roleOutput.append(": ");

@@ -23,14 +23,16 @@ public class CastSelectionPanel extends JPanel implements RoleDeleteListener {
 		private List<Person> availablePersons;
 		private List<CastRowPanel> castRows;
 		private String borderTitle;
+		private boolean mayBeEmpty;
 		private static final Logger log = Logger.getLogger(CastSelectionPanel.class);
 	
-		public CastSelectionPanel(MainWindow mainWindow, List<Role> roles, List<Person> availablePersons, String borderTitle){
+		public CastSelectionPanel(MainWindow mainWindow, List<Role> roles, List<Person> availablePersons, String borderTitle, boolean mayBeEmpty){
 			log.debug("creating cast selection panel");
 			this.mainWindow = mainWindow;
 			this.roles = roles;
 			this.availablePersons = availablePersons;
 			this.borderTitle = borderTitle;
+			this.mayBeEmpty = mayBeEmpty;
 			createComponent();
 		}
 		
@@ -46,7 +48,7 @@ public class CastSelectionPanel extends JPanel implements RoleDeleteListener {
 			int rowCounter = 0;
 			for(Role role : roles){
 				if(!role.isPseudoRole()){
-					CastRowPanel row = new CastRowPanel(role, availablePersons);
+					CastRowPanel row = new CastRowPanel(role, availablePersons, mayBeEmpty);
 					add(row,"0,"+rowCounter);
 					rowCounter++;
 					castRows.add(row);

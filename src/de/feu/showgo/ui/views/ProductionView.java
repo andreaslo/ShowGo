@@ -101,13 +101,13 @@ public class ProductionView extends JPanel {
 		JPanel ensembleSelectPanel = createEnsembleSelectPanel();
 		ensembleSelect.setEnabled(false);
 		
-		castSelectionPanel = new CastSelectionPanel(mainWindow, copy.getRoles(), model.getEnsemble().getMembers(), "Besetzung der Darstellerrollen");
+		castSelectionPanel = new CastSelectionPanel(mainWindow, copy.getRoles(), model.getEnsemble().getMembers(), "Besetzung der Darstellerrollen", false);
 		
 		editPlayPanel = new EditTheaterPlayPanel(mainWindow, copy);
 		editPlayPanel.getRoleDisplay().addRoleDeleteEventListener(castSelectionPanel);
 		editPlayPanel.addRoleDeleteListener(castSelectionPanel);
 		
-		nonActorSelection = new CastSelectionPanel(mainWindow, model.getNonActorRoles(), model.getEnsemble().getMembers(), "Besetzung der Nicht-Darstellerrollen");
+		nonActorSelection = new CastSelectionPanel(mainWindow, model.getNonActorRoles(), model.getEnsemble().getMembers(), "Besetzung der Nicht-Darstellerrollen", true);
 		
 		JPanel submitPanel = createSubmitPanel();
 		
@@ -179,7 +179,7 @@ public class ProductionView extends JPanel {
 					
 					Ensemble selectedEnsemble = (Ensemble) ensembleSelect.getSelectedItem();
 					CastingGenerator.generateCasting(selectedEnsemble, copy);
-					castSelectionPanel = new CastSelectionPanel(mainWindow, copy.getRoles(), selectedEnsemble.getMembers(), "Besetzung der Darstellerrollen");
+					castSelectionPanel = new CastSelectionPanel(mainWindow, copy.getRoles(), selectedEnsemble.getMembers(), "Besetzung der Darstellerrollen", false);
 					
 					editPlayPanel = new EditTheaterPlayPanel(mainWindow, copy);
 					editPlayPanel.getRoleDisplay().addRoleDeleteEventListener(castSelectionPanel);
@@ -237,7 +237,7 @@ public class ProductionView extends JPanel {
 		roles.add(r);
 		
 		Ensemble selectedEnsemble = (Ensemble) ensembleSelect.getSelectedItem();
-		CastSelectionPanel selectionPanel = new CastSelectionPanel(mainWindow, roles, selectedEnsemble.getMembers(), "Besetzung der Nicht-Darstellerrollen");
+		CastSelectionPanel selectionPanel = new CastSelectionPanel(mainWindow, roles, selectedEnsemble.getMembers(), "Besetzung der Nicht-Darstellerrollen", true);
 		return selectionPanel;		
 	}
 	

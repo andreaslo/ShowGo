@@ -24,21 +24,27 @@ import de.feu.showgo.model.Role;
 
 public class CastRowPanel extends JPanel {
 
+	private Person emptySelection;
 	private Role role;
 	private List<Person> availablePersons;
 	private List<JComboBox<Person>> castsSelects;
 	private List<JPanel> castPanels;
 	private static final Logger log = Logger.getLogger(CastSelectionPanel.class);
 	private int rowCounter = 2;
+	private boolean mayBeEmpty;
 	
-	public CastRowPanel(Role role, List<Person> availablePersons) {
+	public CastRowPanel(Role role, List<Person> availablePersons, boolean mayBeEmpty) {
 		this.role = role;
 		this.availablePersons = availablePersons;
+		this.mayBeEmpty = mayBeEmpty;
 		log.debug("creating cast row panel for " + role);
 		createComponent();
 	}
 	
 	private void createComponent(){	
+		emptySelection = new Person();
+		emptySelection.setName("---");
+		
 		double size[][] = { { TableLayout.PREFERRED}, { 30, 30 } };
 		final TableLayout layout = new TableLayout(size);
 		setLayout(layout);
@@ -119,6 +125,10 @@ public class CastRowPanel extends JPanel {
 		
 		JComboBox<Person> personSelect = new JComboBox<Person>();
 		personSelect.setRenderer(new PersonComboRederer());
+		
+		if(mayBeEmpty){
+			personSelect.addItem(emptySelection);
+		}
 		for(Person person : availablePersons){
 			personSelect.addItem(person);
 		}
@@ -151,7 +161,9 @@ public class CastRowPanel extends JPanel {
 		List<Person> assignedPersons = new LinkedList<Person>();
 		
 		for(JComboBox<Person> select : castsSelects){
-			assignedPersons.add((Person) select.getSelectedItem());
+			if(select.getSelectedItem() != emptySelection){
+				assignedPersons.add((Person) select.getSelectedItem());
+			}
 		}
 		
 		return assignedPersons;
