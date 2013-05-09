@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -51,8 +52,8 @@ public class PlaybillView extends JPanel {
 					@Override
 					public void approveSelection() {
 						File f = getSelectedFile();
-						if (!f.getName().endsWith(".showgo")) {
-							f = new File(f.getParentFile(), f.getName() + ".showgo");
+						if (!f.getName().endsWith(".txt")) {
+							f = new File(f.getParentFile(), f.getName() + ".txt");
 						}
 						if (f.exists() && getDialogType() == SAVE_DIALOG) {
 							int result = JOptionPane.showConfirmDialog(this, "Die Datei \"" + f.getName() + "\" existiert bereits. Überschreiben?",
@@ -90,6 +91,11 @@ public class PlaybillView extends JPanel {
 						}
 
 						log.debug("Saving: " + file.getCanonicalPath());
+						
+						PrintWriter out = new PrintWriter(file);
+						out.println(playbillArea.getText());
+						out.flush();
+						out.close();
 					} catch (IOException e1) {
 						log.error("", e1);
 						JOptionPane.showMessageDialog(mainWindow, "Die Datei konnte leider nicht geschrieben werden.", "Fehler beim Speichern",
