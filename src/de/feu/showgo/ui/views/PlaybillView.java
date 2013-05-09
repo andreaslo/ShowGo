@@ -27,6 +27,7 @@ public class PlaybillView extends JPanel {
 	private final static Logger log = Logger.getLogger(EnsembleView.class);
 	private MainWindow mainWindow;
 	private Production production;
+	private JTextArea playbillArea;
 	
 	public PlaybillView(MainWindow mainWindow, Production production) {
 		log.debug("showing playbill view for " + production);
@@ -98,7 +99,7 @@ public class PlaybillView extends JPanel {
 			}
 		});
 		
-		JTextArea playbillArea = new JTextArea();
+		playbillArea = new JTextArea();
 		playbillArea.setBorder(BorderFactory.createEtchedBorder());
 		playbillArea.setText(generatePlaybillText(production));
 		
