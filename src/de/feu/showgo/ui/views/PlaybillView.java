@@ -2,10 +2,19 @@ package de.feu.showgo.ui.views;
 
 import info.clearthought.layout.TableLayout;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.log4j.Logger;
 
@@ -33,7 +42,61 @@ public class PlaybillView extends JPanel {
 		setLayout(new TableLayout(size));
 		
 		JButton saveButton = new JButton("In Datei speichern");
-		
+		saveButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser fc = new JFileChooser() {
+					@Override
+					public void approveSelection() {
+						File f = getSelectedFile();
+						if (!f.getName().endsWith(".showgo")) {
+							f = new File(f.getParentFile(), f.getName() + ".showgo");
+						}
+						if (f.exists() && getDialogType() == SAVE_DIALOG) {
+							int result = JOptionPane.showConfirmDialog(this, "Die Datei \"" + f.getName() + "\" existiert bereits. Überschreiben?",
+									"Datei existiert bereits", JOptionPane.YES_NO_CANCEL_OPTION);
+							switch (result) {
+							case JOptionPane.YES_OPTION:
+								super.approveSelection();
+								return;
+							case JOptionPane.NO_OPTION:
+								return;
+							case JOptionPane.CLOSED_OPTION:
+								return;
+							case JOptionPane.CANCEL_OPTION:
+								cancelSelection();
+								return;
+							}
+						}
+						super.approveSelection();
+					}
+				};
+				
+				fc.setDialogType(JFileChooser.SAVE_DIALOG);
+				FileFilter filter = new FileNameExtensionFilter("Textdatei", "txt");
+				fc.addChoosableFileFilter(filter);
+				
+				int returnVal = fc.showSaveDialog(mainWindow);
+
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					File file = fc.getSelectedFile();
+
+					try {
+						String path = file.getCanonicalPath();
+						if (!path.endsWith(".txt")) {
+							file = new File(path + ".txt");
+						}
+
+						log.debug("Saving: " + file.getCanonicalPath());
+					} catch (IOException e1) {
+						log.error("", e1);
+						JOptionPane.showMessageDialog(mainWindow, "Die Datei konnte leider nicht geschrieben werden.", "Fehler beim Speichern",
+								JOptionPane.ERROR_MESSAGE);
+					}
+				}
+			}
+		});
 		
 		JTextArea playbillArea = new JTextArea();
 		playbillArea.setBorder(BorderFactory.createEtchedBorder());
