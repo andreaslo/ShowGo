@@ -61,7 +61,7 @@ public class ProductionView extends JPanel {
 	public ProductionView(MainWindow mainWindow, Production production) {
 		log.debug("showing production view");
 		this.mainWindow = mainWindow;
-		setName("Neue Inszenierung anlegen");
+		setName(production.getName() + " bearbeiten");
 		model = production;
 		alreadyExists = true;
 		createComponentEditMode();
