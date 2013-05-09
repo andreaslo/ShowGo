@@ -64,28 +64,7 @@ public class PlaybillView extends JPanel {
 			if(role.isPseudoRole()){
 				continue;
 			}
-			playbill.append(role.getName());
-			playbill.append(": ");
-			if(role.getCast().size() == 1){
-				playbill.append(role.getCast().get(0).getName());
-			}else if(role.getCast().size() == 2){
-				playbill.append(role.getCast().get(0).getName());
-				playbill.append(" und ");
-				playbill.append(role.getCast().get(1).getName());
-				playbill.append(" als zweite Besetzung");
-			}else{
-				playbill.append(role.getCast().get(0).getName());
-				playbill.append("\nWeitere Besetzugen: ");
-				for(int i = 1; i < role.getCast().size(); i++){
-					playbill.append(role.getCast().get(i).getName());
-					if(i == role.getCast().size() - 2){
-						playbill.append(" und ");
-					}else{
-						playbill.append(", ");
-					}
-				}
-			}
-			
+			playbill.append(printCast(role));
 			playbill.append("\n");
 			playbill.append("\n");
 		}
@@ -93,5 +72,30 @@ public class PlaybillView extends JPanel {
 		return playbill.toString();
 	}
 	
+	private String printCast(Role role){
+		StringBuilder roleOutput = new StringBuilder();
+		roleOutput .append(role.getName());
+		roleOutput.append(": ");
+		if(role.getCast().size() == 1){
+			roleOutput.append(role.getCast().get(0).getName());
+		}else if(role.getCast().size() == 2){
+			roleOutput.append(role.getCast().get(0).getName());
+			roleOutput.append(" und ");
+			roleOutput.append(role.getCast().get(1).getName());
+			roleOutput.append(" als zweite Besetzung");
+		}else{
+			roleOutput.append(role.getCast().get(0).getName());
+			roleOutput.append("\nWeitere Besetzugen: ");
+			for(int i = 1; i < role.getCast().size(); i++){
+				roleOutput.append(role.getCast().get(i).getName());
+				if(i == role.getCast().size() - 2){
+					roleOutput.append(" und ");
+				}else{
+					roleOutput.append(", ");
+				}
+			}
+		}
+		return roleOutput.toString();
+	}
 	
 }
