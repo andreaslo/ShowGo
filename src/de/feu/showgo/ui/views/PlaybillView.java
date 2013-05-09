@@ -68,6 +68,17 @@ public class PlaybillView extends JPanel {
 			playbill.append("\n");
 			playbill.append("\n");
 		}
+		playbill.append("Besetzung der Nicht-Darstellerrollen:");
+		playbill.append("\n");
+		playbill.append("\n");
+		for(Role role : prod.getNonActorRoles()){
+			if(role.isPseudoRole()){
+				continue;
+			}
+			playbill.append(printCast(role));
+			playbill.append("\n");
+			playbill.append("\n");
+		}
 		
 		return playbill.toString();
 	}
