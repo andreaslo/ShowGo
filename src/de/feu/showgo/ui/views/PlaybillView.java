@@ -2,7 +2,10 @@ package de.feu.showgo.ui.views;
 
 import info.clearthought.layout.TableLayout;
 
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 import org.apache.log4j.Logger;
 
@@ -25,9 +28,17 @@ public class PlaybillView extends JPanel {
 	
 	private void createComponent(){
 		double size[][] = { { 20, TableLayout.FILL, 20 },
-				{ 20, 60, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, 30, 30 } };
+				{ 20, TableLayout.PREFERRED, 10, TableLayout.PREFERRED } };
 		setLayout(new TableLayout(size));
 		
+		JButton saveButton = new JButton("In Datei speichern");
+		
+		
+		JTextArea playbillArea = new JTextArea();
+		playbillArea.setBorder(BorderFactory.createEtchedBorder());
+		
+		add(saveButton,"1,1,l,c");
+		add(playbillArea, "1,3");
 		
 		revalidate();
 		repaint();
