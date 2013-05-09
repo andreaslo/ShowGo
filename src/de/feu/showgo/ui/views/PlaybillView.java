@@ -23,7 +23,7 @@ public class PlaybillView extends JPanel {
 		log.debug("showing playbill view for " + production);
 		this.mainWindow = mainWindow;
 		this.production = production;
-		setName("Programmheft");
+		setName("Programmheft für " + production.getName());
 		createComponent();
 	}
 	
