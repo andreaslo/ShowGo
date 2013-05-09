@@ -28,7 +28,7 @@ public class DeleteEnsembleAction implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		
 		for(Production production : ShowGoDAO.getShowGo().getProductions()){
-			if(production.getEnsamble() == ensemble){
+			if(production.getEnsemble() == ensemble){
 				JOptionPane.showMessageDialog(mainWindow, "Das Ensemble " + ensemble.getName() + " ist der Inszenierung " + production.getName()
 						+ " zugeordnet und kann daher nicht gelöscht werden.", "Ensemble Inszenierung zugeordnet", JOptionPane.INFORMATION_MESSAGE);
 				return;

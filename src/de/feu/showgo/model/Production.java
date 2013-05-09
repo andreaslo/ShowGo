@@ -43,7 +43,7 @@ public class Production {
 		this.name = name;
 	}
 
-	public Ensemble getEnsamble() {
+	public Ensemble getEnsemble() {
 		return ensemble;
 	}
 

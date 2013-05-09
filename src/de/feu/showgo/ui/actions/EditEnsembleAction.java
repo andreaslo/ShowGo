@@ -24,7 +24,7 @@ public class EditEnsembleAction implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		for(Production production : ShowGoDAO.getShowGo().getProductions()){
-			if(production.getEnsamble() == ensemble){
+			if(production.getEnsemble() == ensemble){
 				JOptionPane.showMessageDialog(mainWindow, "Das Ensemble " + ensemble.getName() + " ist der Inszenierung " + production.getName()
 						+ " zugeordnet und kann daher nicht bearbeitet werden.", "Ensemble Inszenierung zugeordnet", JOptionPane.INFORMATION_MESSAGE);
 				return;

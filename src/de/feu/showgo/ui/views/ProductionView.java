@@ -101,13 +101,13 @@ public class ProductionView extends JPanel {
 		JPanel ensembleSelectPanel = createEnsembleSelectPanel();
 		ensembleSelect.setEnabled(false);
 		
-		castSelectionPanel = new CastSelectionPanel(mainWindow, copy.getRoles(), model.getEnsamble().getMembers(), "Besetzung der Darstellerrollen");
+		castSelectionPanel = new CastSelectionPanel(mainWindow, copy.getRoles(), model.getEnsemble().getMembers(), "Besetzung der Darstellerrollen");
 		
 		editPlayPanel = new EditTheaterPlayPanel(mainWindow, copy);
 		editPlayPanel.getRoleDisplay().addRoleDeleteEventListener(castSelectionPanel);
 		editPlayPanel.addRoleDeleteListener(castSelectionPanel);
 		
-		nonActorSelection = new CastSelectionPanel(mainWindow, model.getNonActorRoles(), model.getEnsamble().getMembers(), "Besetzung der Nicht-Darstellerrollen");
+		nonActorSelection = new CastSelectionPanel(mainWindow, model.getNonActorRoles(), model.getEnsemble().getMembers(), "Besetzung der Nicht-Darstellerrollen");
 		
 		JPanel submitPanel = createSubmitPanel();
 		
@@ -256,8 +256,8 @@ public class ProductionView extends JPanel {
 			ensembleSelect.addItem(ensemble);
 		}
 		
-		if(model.getEnsamble() != null){
-			ensembleSelect.setSelectedItem(model.getEnsamble());
+		if(model.getEnsemble() != null){
+			ensembleSelect.setSelectedItem(model.getEnsemble());
 		}
 
 		ensembleSelectPanel.add(ensembleSelect, "0,1,f,c");
