@@ -21,7 +21,7 @@ public class ShowGoLoadFile {
 	
 	public ShowGoLoadFile(MainWindow mainWindow){
 		this.mainWindow = mainWindow;
-		fc = new JFileChooser() {
+		fc = new JFileChooser(new File(System.getProperty("user.dir"))) {
 			@Override
 			public void approveSelection() {
 				File f = getSelectedFile();

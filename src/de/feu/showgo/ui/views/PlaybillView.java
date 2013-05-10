@@ -48,7 +48,7 @@ public class PlaybillView extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JFileChooser fc = new JFileChooser() {
+				JFileChooser fc = new JFileChooser(new File(System.getProperty("user.dir"))) {
 					@Override
 					public void approveSelection() {
 						File f = getSelectedFile();
