@@ -14,10 +14,21 @@ import de.feu.showgo.model.Role;
 import de.feu.showgo.model.Scene;
 import de.feu.showgo.model.TheaterPlay;
 
+/**
+ * A class containing logic for recognizing pseudo-roles in a TheaterPlay object
+ * in the role name. Currently it recognizes roles combined with und (german for
+ * and) like "MAC BETH und LADY MAC BETH", enumerations
+ * "HEXE 1, HEXE 2 und HEXE 3" and the all roles a scene are filled.
+ * 
+ */
 public class PseudoRoleRecognition {
 
 	private static final Logger log = Logger.getLogger(PseudoRoleRecognition.class);
 
+	/**
+	 * This method recognizes pseudo roles in a TheaterPlay object. It sets the
+	 * isPseudo flag of the roles to true and assigns the child roles.
+	 */
 	public void recognizePseudoRoles(TheaterPlay play) {
 		log.debug("recognizing pseudo roles");
 
@@ -104,7 +115,7 @@ public class PseudoRoleRecognition {
 		return false;
 	}
 
-	private void fillAllRoles(TheaterPlay play){
+	private void fillAllRoles(TheaterPlay play) {
 		for (Act act : play.getActs()) {
 			for (Scene scene : act.getScenes()) {
 				Role allRole = scene.getAllRole();
@@ -123,5 +134,5 @@ public class PseudoRoleRecognition {
 			}
 		}
 	}
-	
+
 }

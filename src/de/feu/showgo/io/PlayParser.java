@@ -23,10 +23,98 @@ import de.feu.showgo.model.Scene;
 import de.feu.showgo.model.StageDirection;
 import de.feu.showgo.model.TheaterPlay;
 
+/**
+ * This class provides methods for parsing theater play files in the format
+ * described in the requirements into TheaterPlay objects. It is a structured
+ * html file with xml like tags in html comments. For example:
+ * 
+ * <pre>
+ * {@code
+ * <html>
+ *  <head>
+ *   <title>Macshort</title>
+ *  </head>
+ *  <body>
+ * <!--stueck-->
+ * Macshort
+ * <!--aufzug-->
+ * Erster Aufzug.<br>
+ * <br>
+ * <!--szene-->
+ * ERSTE SCENE.
+ * <i><!--regie-->
+ * <br>
+ * <br>
+ * Ein offner Plaz.<br>
+ * <br>
+ * Donner und Bliz. Die drei Hexen treten auf.<br>
+ * <br>
+ * <!--/regie--></i>
+ * <!--/szene-->
+ * <!--/aufzug-->
+ * <!--/stueck-->
+ * }
+ * </pre>
+ * 
+ * The parsing requires three steps. In the first step, the structure is
+ * validated. Thereby it is checked, that every tag is closed and a file only
+ * contains one root element.
+ * 
+ * In the second step a dom tree is generated. This dom tree is build using
+ * ParseElement objects. Each object has a tag-name and may contain a text and
+ * children.
+ * 
+ * In the third step the dom tree is parsed into a TheaterPlay object.
+ * 
+ * In each step a parsing exception may be thrown.
+ * 
+ * A TheaterPlay object can be created using the following code:
+ * 
+ * <pre>
+ * {@code
+ * try {
+ *  PlayParser parser = new PlayParser();
+ * 	String data = FileUtil.readFile(new File("filename.html"));
+ * 	ParseElement root = parser.parse(testData);
+ * 	TheaterPlay play = parser.generatePlay(root);
+ * } catch (IOException e) {
+ * 	log.error("",e);
+ * } catch (ParsingException e) {
+ * 	log.error("",e);
+ * }
+ * }
+ * </pre>
+ * 
+ * Or a shortcut:
+ * 
+ * <pre
+ * {@code
+ * 
+ * try {
+ * 	PlayParser parser = new PlayParser();
+ * 	TheaterPlay macBeth = macBeth = parser.generatePlay(new File("Macbeth.html"));
+ * } catch (IOException e) {
+ * 	log.error("",e);
+ * } catch (ParsingException e) {
+ * 	log.error("",e);
+ * } 
+ * }
+ * </pre>
+ * 
+ */
 public class PlayParser {
 
 	private static final Logger log = Logger.getLogger(PlayParser.class);
 
+	/**
+	 * This method validates an input string. It makes sure that every tag is
+	 * closed and one root tag is contained. It returns a ParseResult tag
+	 * containing whether the file is valid. If it is invalid, the object
+	 * contains an error message and line number.
+	 * 
+	 * @param input
+	 * @return
+	 */
 	public ParseResult validate(String input) {
 
 		log.debug("validating");
@@ -98,6 +186,14 @@ public class PlayParser {
 		return result;
 	}
 
+	/**
+	 * This method parses an input string into a dom tree of ParseElement
+	 * objects. See the class description for more information.
+	 * 
+	 * @param play
+	 * @return
+	 * @throws ParsingException
+	 */
 	public ParseElement parse(String play) throws ParsingException {
 		ParseResult parseResult = validate(play);
 		if (!parseResult.isValid()) {
@@ -205,11 +301,26 @@ public class PlayParser {
 		return output;
 	}
 
+	/**
+	 * A shortcut for creating a TheaterPlay object from a file.
+	 * 
+	 * @param inputFile
+	 * @return
+	 * @throws IOException
+	 * @throws ParsingException
+	 */
 	public TheaterPlay generatePlay(File inputFile) throws IOException, ParsingException {
 		String input = FileUtil.readFile(inputFile);
 		return generatePlay(parse(input));
 	}
 
+	/**
+	 * This method parses a dom tree of ParseElement objects into a TheaterPlay object.
+	 * 
+	 * @param rootElement
+	 * @return
+	 * @throws ParsingException The exception message on a parsing error.
+	 */
 	public TheaterPlay generatePlay(ParseElement rootElement) throws ParsingException {
 		TheaterPlay play = new TheaterPlay();
 
@@ -358,6 +469,5 @@ public class PlayParser {
 
 		return role;
 	}
-
 
 }

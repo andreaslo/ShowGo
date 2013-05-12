@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.xml.bind.JAXB;
 import javax.xml.bind.JAXBContext;
@@ -15,8 +14,19 @@ import de.feu.showgo.model.Person;
 import de.feu.showgo.model.Role;
 import de.feu.showgo.model.TheaterPlay;
 
+/**
+ * A utility class providing methods for parsing plays.
+ */
 public class ParseUtil {
 
+	/**
+	 * This method creates a copy of a TheaterPlay object by marshalling and unamrshalling it using JAXB.
+	 * 
+	 * @param play
+	 * @return
+	 * @throws JAXBException
+	 * @throws IOException
+	 */
 	public static TheaterPlay copyPlay(TheaterPlay play) throws JAXBException, IOException {
 		StringWriter sw = new StringWriter();
 		JAXBContext context = JAXBContext.newInstance(TheaterPlay.class);
