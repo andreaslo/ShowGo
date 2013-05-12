@@ -179,7 +179,7 @@ public class MainWindow extends JFrame {
 	 *
 	 * @param person the person
 	 */
-	public void showEditPerson(Person person) {
+	public void showEditPersonView(Person person) {
 		displayView(new PersonManagementView(this, person));
 	}
 

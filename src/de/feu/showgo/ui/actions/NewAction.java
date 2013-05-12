@@ -9,14 +9,25 @@ import de.feu.showgo.ShowGoDAO;
 import de.feu.showgo.model.ShowGo;
 import de.feu.showgo.ui.MainWindow;
 
+/**
+ * This action creates a new showgo singleton, discarding the current one.
+ */
 public class NewAction implements ActionListener {
 
 	private MainWindow mainWindow;
 
+	/**
+	 * Instantiates a new new action.
+	 *
+	 * @param mainWindow the main window
+	 */
 	public NewAction(MainWindow mainWindow) {
 		this.mainWindow = mainWindow;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		int result = JOptionPane.showConfirmDialog(mainWindow,

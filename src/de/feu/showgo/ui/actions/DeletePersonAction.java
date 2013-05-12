@@ -12,16 +12,30 @@ import de.feu.showgo.model.Person;
 import de.feu.showgo.ui.MainWindow;
 import de.feu.showgo.ui.views.PersonManagementView;
 
+/**
+ * This action deletes the provided person from the showgo singleton. Only persons that are not assigned
+ * to an ensemble may be deleted.
+ * 
+ */
 public class DeletePersonAction implements ActionListener {
 
 	private Person person;
 	private MainWindow mainWindow;
 
+	/**
+	 * Instantiates a new delete person action.
+	 *
+	 * @param mainWindow the main window
+	 * @param person the person
+	 */
 	public DeletePersonAction(MainWindow mainWindow, Person person) {
 		this.mainWindow = mainWindow;
 		this.person = person;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		for (Ensemble ensemble : ShowGoDAO.getShowGo().getEnsembles()) {
@@ -33,7 +47,7 @@ public class DeletePersonAction implements ActionListener {
 				}
 			}
 		}
-		
+
 		int choice = JOptionPane.showConfirmDialog(mainWindow, "Möchten Sie wirklich die Person " + person.getName() + " löschen?", person.getName()
 				+ " löschen", JOptionPane.YES_NO_OPTION);
 		if (choice == JOptionPane.YES_OPTION) {
