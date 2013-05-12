@@ -12,6 +12,10 @@ import org.apache.log4j.Logger;
 
 import de.feu.showgo.ui.MainWindow;
 
+/**
+ * A customized JFileChooser save dialog. The class displays a JFileDialog that asks
+ * for confirmation on saving a file if it already exists. The dialog only accepts .showgo files.
+ */
 public class ShowGoSaveFileChooser {
 
 	private final static Logger log = Logger.getLogger(ShowGoSaveFileChooser.class);
@@ -20,9 +24,16 @@ public class ShowGoSaveFileChooser {
 	private File selectedFile;
 	private boolean approved;
 	
+	/**
+	 * Instantiates a new show go save file chooser.
+	 *
+	 * @param mainWindow the main window
+	 */
 	public ShowGoSaveFileChooser(MainWindow mainWindow){
 		this.mainWindow = mainWindow;
 		fc = new JFileChooser(new File(System.getProperty("user.dir"))) {
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public void approveSelection() {
 				File f = getSelectedFile();
@@ -57,6 +68,9 @@ public class ShowGoSaveFileChooser {
 		fc.addChoosableFileFilter(filter);
 	}
 
+	/**
+	 * Opens the dialog.
+	 */
 	public void showDialog() {
 		int returnVal = fc.showSaveDialog(mainWindow);
 
@@ -80,11 +94,21 @@ public class ShowGoSaveFileChooser {
 		}
 	}
 	
+	/**
+	 * Checks if it is approved.
+	 *
+	 * @return true, if approved
+	 */
 	public boolean isApproved(){
 		return approved;
 		
 	}
 
+	/**
+	 * Gets the selected file.
+	 *
+	 * @return the selected file
+	 */
 	public File getSelectedFile(){
 		return selectedFile;
 		
