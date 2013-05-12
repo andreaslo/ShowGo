@@ -5,6 +5,9 @@ import java.awt.event.ActionListener;
 
 import de.feu.showgo.ui.MainWindow;
 
+/**
+ * This action displays to the ensemble view.
+ */
 public class ShowEnsembleViewAction  implements ActionListener {
 
 	private MainWindow mainWindow;
