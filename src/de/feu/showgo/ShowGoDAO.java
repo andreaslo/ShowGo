@@ -21,10 +21,20 @@ public class ShowGoDAO {
 	private static File saveFile;
 	private static ShowGo showGo = new ShowGo();
 
+	/**
+	 * Gets the ShowGo singleton.
+	 *
+	 * @return the show go
+	 */
 	public static ShowGo getShowGo() {
 		return showGo;
 	}
 
+	/**
+	 * Gets the save file.
+	 *
+	 * @return the save file
+	 */
 	public static File getSaveFile() {
 		return saveFile;
 	}
@@ -34,22 +44,27 @@ public class ShowGoDAO {
 	 * set automatically by saveToDisc. The information is used by the save
 	 * action in the menu bar. If the save file exists, the user may save into
 	 * it. If not, a file select dialog is displayed.
-	 * 
-	 * @param saveFile
+	 *
+	 * @param saveFile the new save file
 	 */
 	public static void setSaveFile(File saveFile) {
 		ShowGoDAO.saveFile = saveFile;
 	}
 
+	/**
+	 * Sets the ShowGo singleton.
+	 *
+	 * @param showGo the new show go
+	 */
 	public static void setShowGo(ShowGo showGo) {
 		ShowGoDAO.showGo = showGo;
 	}
 
 	/**
 	 * This method saves the ShowGo singleton to the provided file.
-	 * 
-	 * @param file
-	 * @throws JAXBException
+	 *
+	 * @param file the file
+	 * @throws JAXBException the jAXB exception
 	 */
 	public static void saveToDisc(File file) throws JAXBException {
 		ShowGoIO.saveShowGo(showGo, file);

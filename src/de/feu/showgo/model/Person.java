@@ -9,6 +9,10 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlID;
 
+/**
+ * This class represents a person in a theater.
+ *
+ */
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Person {
 	
@@ -24,39 +28,97 @@ public class Person {
 	@XmlElement(name="words")
 	private int wordsRetention;
 	
+	/**
+	 * Instantiates a new person.
+	 */
 	public Person() {
 		id = UUID.randomUUID().toString();
 	}
 	
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
 	public String getName() {
 		return name;
 	}
+	
+	/**
+	 * Sets the name.
+	 *
+	 * @param name the new name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	/**
+	 * Gets the birthday.
+	 *
+	 * @return the birthday
+	 */
 	public Date getBirthday() {
 		return birthday;
 	}
+	
+	/**
+	 * Sets the birthday.
+	 *
+	 * @param birthday the new birthday
+	 */
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
+	
+	/**
+	 * Gets the gender.
+	 *
+	 * @return the gender
+	 */
 	public Gender getGender() {
 		return gender;
 	}
+	
+	/**
+	 * Sets the gender.
+	 *
+	 * @param gender the new gender
+	 */
 	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Person [name=" + name + ", birthday=" + birthday + ", gender="
 				+ gender + ", wordsRetention=" + wordsRetention + "]";
 	}
+	
+	/**
+	 * Gets the words retention.
+	 *
+	 * @return the words retention
+	 */
 	public int getWordsRetention() {
 		return wordsRetention;
 	}
+	
+	/**
+	 * Sets the words retention.
+	 *
+	 * @param wordsRetention the new words retention
+	 */
 	public void setWordsRetention(int wordsRetention) {
 		this.wordsRetention = wordsRetention;
 	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -67,6 +129,10 @@ public class Person {
 		result = prime * result + wordsRetention;
 		return result;
 	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
