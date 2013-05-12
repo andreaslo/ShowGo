@@ -16,86 +16,91 @@ import de.feu.showgo.model.Role;
 import de.feu.showgo.ui.MainWindow;
 import de.feu.showgo.ui.listener.RoleDeleteListener;
 
+/**
+ * 
+ */
 public class CastSelectionPanel extends JPanel implements RoleDeleteListener {
 
-		private MainWindow mainWindow;
-		private List<Role> roles;
-		private List<Person> availablePersons;
-		private List<CastRowPanel> castRows;
-		private String borderTitle;
-		private boolean mayBeEmpty;
-		private static final Logger log = Logger.getLogger(CastSelectionPanel.class);
-	
-		public CastSelectionPanel(MainWindow mainWindow, List<Role> roles, List<Person> availablePersons, String borderTitle, boolean mayBeEmpty){
-			log.debug("creating cast selection panel");
-			this.mainWindow = mainWindow;
-			this.roles = roles;
-			this.availablePersons = availablePersons;
-			this.borderTitle = borderTitle;
-			this.mayBeEmpty = mayBeEmpty;
-			createComponent();
-		}
-		
-		private void createComponent(){
-			castRows = new ArrayList<CastRowPanel>();
-			
-			if(borderTitle != null){
-				TitledBorder titledBorder = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), borderTitle);
-				setBorder(titledBorder);
-			}
-			
-			setLayout(new TableLayout(generateLayoutSize(roles.size())));
-			int rowCounter = 0;
-			for(Role role : roles){
-				if(!role.isPseudoRole()){
-					CastRowPanel row = new CastRowPanel(role, availablePersons, mayBeEmpty);
-					add(row,"0,"+rowCounter);
-					rowCounter++;
-					castRows.add(row);
-				}
-			}
-			
-		}
-		
-		private double[][] generateLayoutSize(int numRows){		
-			double[][] size = new double[2][];
-			double[] width = {TableLayout.FILL};
-			size[0] = width;
-			double[] height = new double[numRows];
-			size[1] = height;
-					
-			for(int i = 0; i < height.length; i++){
-				height[i] = TableLayout.PREFERRED;
-			}
-			
-			return size;
+	private static final long serialVersionUID = -4563301479407385455L;
+	@SuppressWarnings("unused")
+	private MainWindow mainWindow;
+	private List<Role> roles;
+	private List<Person> availablePersons;
+	private List<CastRowPanel> castRows;
+	private String borderTitle;
+	private boolean mayBeEmpty;
+	private static final Logger log = Logger.getLogger(CastSelectionPanel.class);
+
+	public CastSelectionPanel(MainWindow mainWindow, List<Role> roles, List<Person> availablePersons, String borderTitle, boolean mayBeEmpty) {
+		log.debug("creating cast selection panel");
+		this.mainWindow = mainWindow;
+		this.roles = roles;
+		this.availablePersons = availablePersons;
+		this.borderTitle = borderTitle;
+		this.mayBeEmpty = mayBeEmpty;
+		createComponent();
+	}
+
+	private void createComponent() {
+		castRows = new ArrayList<CastRowPanel>();
+
+		if (borderTitle != null) {
+			TitledBorder titledBorder = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), borderTitle);
+			setBorder(titledBorder);
 		}
 
-		@Override
-		public void deleteRole(Role role) {
-			log.debug("cast panel notified abour deleted role: " + role);
-			CastRowPanel toBeRemoved = null;
-			for(CastRowPanel rowPanel : castRows){
-				if(rowPanel.getRole() == role){
-					remove(rowPanel);
-					toBeRemoved = rowPanel;
-				}
-			}
-			
-			castRows.remove(toBeRemoved);
-		}
-		
-		public void saveCastToBackingModel(){
-			log.debug("saving cast");
-			for(CastRowPanel row : castRows){
-				List<Person> selectedPersons = row.getSelectedPersons();
-				row.getRole().setCast(selectedPersons);
-				log.debug("setting cast of " + row.getRole().getName() +" to: " + selectedPersons);
+		setLayout(new TableLayout(generateLayoutSize(roles.size())));
+		int rowCounter = 0;
+		for (Role role : roles) {
+			if (!role.isPseudoRole()) {
+				CastRowPanel row = new CastRowPanel(role, availablePersons, mayBeEmpty);
+				add(row, "0," + rowCounter);
+				rowCounter++;
+				castRows.add(row);
 			}
 		}
 
-		public List<Role> getRoles() {
-			return roles;
+	}
+
+	private double[][] generateLayoutSize(int numRows) {
+		double[][] size = new double[2][];
+		double[] width = { TableLayout.FILL };
+		size[0] = width;
+		double[] height = new double[numRows];
+		size[1] = height;
+
+		for (int i = 0; i < height.length; i++) {
+			height[i] = TableLayout.PREFERRED;
 		}
-		
+
+		return size;
+	}
+
+	@Override
+	public void deleteRole(Role role) {
+		log.debug("cast panel notified abour deleted role: " + role);
+		CastRowPanel toBeRemoved = null;
+		for (CastRowPanel rowPanel : castRows) {
+			if (rowPanel.getRole() == role) {
+				remove(rowPanel);
+				toBeRemoved = rowPanel;
+			}
+		}
+
+		castRows.remove(toBeRemoved);
+	}
+
+	public void saveCastToBackingModel() {
+		log.debug("saving cast");
+		for (CastRowPanel row : castRows) {
+			List<Person> selectedPersons = row.getSelectedPersons();
+			row.getRole().setCast(selectedPersons);
+			log.debug("setting cast of " + row.getRole().getName() + " to: " + selectedPersons);
+		}
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
 }
