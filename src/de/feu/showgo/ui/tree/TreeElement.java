@@ -11,11 +11,6 @@ public abstract class TreeElement extends DefaultMutableTreeNode {
 		super(customObject);
 	}
 	
-	public JPopupMenu getPopupMenu(){
-		JPopupMenu popup = new JPopupMenu();
-		return popup;
-	}
-	
-
+	public abstract JPopupMenu getPopupMenu();
 	
 }
