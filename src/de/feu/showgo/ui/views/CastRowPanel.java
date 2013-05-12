@@ -24,6 +24,7 @@ import de.feu.showgo.model.Role;
 
 public class CastRowPanel extends JPanel {
 
+	private static final long serialVersionUID = 1L;
 	private Person emptySelection;
 	private Role role;
 	private List<Person> availablePersons;
@@ -115,6 +116,7 @@ public class CastRowPanel extends JPanel {
 		add(controlPanel, "0,"+counter+",l,c");
 	}
 	
+	@SuppressWarnings("unchecked")
 	private JPanel createCastSelectPanel(int rankNum){
 		JPanel castPanel = new JPanel();
 		double size[][] = { { 150, 400 }, { TableLayout.PREFERRED } };
@@ -141,7 +143,9 @@ public class CastRowPanel extends JPanel {
 	}
 	
 	private class PersonComboRederer extends BasicComboBoxRenderer {
-		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+		private static final long serialVersionUID = 1L;
+
+		public Component getListCellRendererComponent(@SuppressWarnings("rawtypes") JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
 			super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 
 			if (value != null) {
