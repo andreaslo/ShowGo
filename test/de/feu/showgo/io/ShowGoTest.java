@@ -40,8 +40,6 @@ public class ShowGoTest {
 	
 	@Test
 	public void equalsTestPlays() {
-		Date birthday = new Date();
-		
 		ShowGo equal1 = new ShowGo();
 		ShowGo equal2 = new ShowGo();
 		ShowGo different = new ShowGo();

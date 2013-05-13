@@ -1,7 +1,5 @@
 package de.feu.showgo.io;
 
-import static org.junit.Assert.*;
-
 import java.io.File;
 import java.io.IOException;
 

@@ -1,18 +1,15 @@
 package de.feu.showgo.util;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Calendar;
 
 import org.apache.log4j.BasicConfigurator;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import de.feu.showgo.ShowGoDAO;
-import de.feu.showgo.io.ParsingException;
-import de.feu.showgo.io.PlayParser;
 import de.feu.showgo.io.ShowGoIO;
 import de.feu.showgo.model.Ensemble;
 import de.feu.showgo.model.Gender;

@@ -1,6 +1,7 @@
 package de.feu.showgo.io;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,7 +9,6 @@ import java.util.Date;
 
 import javax.xml.bind.JAXBException;
 
-import org.apache.log4j.Logger;
 import org.junit.Test;
 
 import de.feu.showgo.model.Ensemble;
@@ -19,8 +19,6 @@ import de.feu.showgo.model.TheaterPlay;
 
 public class ShowGoIOTest {
 
-	private static final Logger log = Logger.getLogger(PlayParserValidationTest.class);
-	
 	@Test
 	public void simpleLoadStore() {
 		ShowGo saveObj = new ShowGo();
