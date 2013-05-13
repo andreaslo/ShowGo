@@ -24,7 +24,10 @@ import de.feu.showgo.ui.dialogs.RolesSelectDialog;
 import de.feu.showgo.ui.listener.RoleDeleteListener;
 
 /**
- * 
+ * This class represents a single row in the RowPanel table. A user may change
+ * the gender, age from and age to requirements or switch to pseudo role and
+ * back. The switch pseudo checkbox can be disabled. Optionally a delete button
+ * may be displayed, firing a RoleDeleteListener event.
  */
 public class RolePanelRow {
 
@@ -43,8 +46,22 @@ public class RolePanelRow {
 	private boolean changePseudoEnabled;
 	private boolean showDeleteButton;
 	private List<RoleDeleteListener> roleDeleteListener;
-	
-	public RolePanelRow(MainWindow mainWindow, RolePanel rolePanel, TheaterPlay model, Role role, JPanel rowContent){
+
+	/**
+	 * Instantiates a new role panel row.
+	 * 
+	 * @param mainWindow
+	 *            the main window
+	 * @param rolePanel
+	 *            the role panel
+	 * @param model
+	 *            the model
+	 * @param role
+	 *            the role
+	 * @param rowContent
+	 *            the row content
+	 */
+	public RolePanelRow(MainWindow mainWindow, RolePanel rolePanel, TheaterPlay model, Role role, JPanel rowContent) {
 		this.role = role;
 		this.rowPanel = rowContent;
 		this.mainWindow = mainWindow;
@@ -53,8 +70,11 @@ public class RolePanelRow {
 		this.changePseudoEnabled = true;
 		roleDeleteListener = new ArrayList<RoleDeleteListener>();
 	}
-	
-	
+
+	/**
+	 * Sets the role to normale role, creating all necessary components. Calling
+	 * this method on a normale role updates it.
+	 */
 	public void setToNormalRole() {
 		rowPanel.removeAll();
 		pseudoSelect = new JCheckBox();
@@ -71,13 +91,13 @@ public class RolePanelRow {
 		JLabel nameLabel = new JLabel(role.getName());
 		String[] genders = { "Männlich", "Weiblich" };
 		genderSelect = new JComboBox<String>(genders);
-		
-		if(role.getGender() == Gender.MALE){
+
+		if (role.getGender() == Gender.MALE) {
 			genderSelect.setSelectedIndex(0);
-		}else{
+		} else {
 			genderSelect.setSelectedIndex(1);
 		}
-		
+
 		requiredWords = new JTextField(role.getWords() + "");
 		requiredWords.setEnabled(false);
 		ageFrom = new JTextField(role.getAgeFrom() + "");
@@ -92,24 +112,23 @@ public class RolePanelRow {
 		rowPanel.add(requiredWords, "4,0");
 		rowPanel.add(ageFrom, "6,0");
 		rowPanel.add(ageTo, "8,0");
-		
+
 		JButton deleteButton = new JButton("Löschen");
 		deleteButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				deleteButtonAction();				
+				deleteButtonAction();
 			}
 		});
-		if(showDeleteButton){
+		if (showDeleteButton) {
 			rowPanel.add(deleteButton, "9,0,r,c");
 		}
-		
+
 		rowPanel.revalidate();
 		rowPanel.repaint();
 	}
-	
-	
+
 	private void unsetPseudo(final Role role, JPanel rolePanel) {
 		log.debug("unset pseudo");
 		role.setPseudoRole(false);
@@ -117,6 +136,10 @@ public class RolePanelRow {
 		setToNormalRole();
 	}
 
+	/**
+	 * Sets the to pseude role, creating all necessary components. Calling this
+	 * method on a pseudo role updates it.
+	 */
 	public void setToPseudeRole() {
 		role.setPseudoRole(true);
 
@@ -170,17 +193,17 @@ public class RolePanelRow {
 		rowPanel.add(roleDisplayPanel, "1,2,2,2");
 
 		setAssignedLabelText(assignedRolesDisplay, role);
-		
+
 		JButton deleteButton = new JButton("Löschen");
 		deleteButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				deleteButtonAction();				
+				deleteButtonAction();
 			}
 		});
-		
-		if(showDeleteButton){
+
+		if (showDeleteButton) {
 			rowPanel.add(deleteButton, "3,1,r,c");
 		}
 
@@ -202,85 +225,91 @@ public class RolePanelRow {
 													// line-breaks
 	}
 
-
+	/**
+	 * Gets the role.
+	 * 
+	 * @return the role
+	 */
 	public Role getRole() {
 		return role;
 	}
 
-
 	/**
-	 * This methods stores the ui fields into the backing model. The method is only applicable for non-pseudo roles. It will do nothing
-	 * called on a pseudo-role.
+	 * This methods stores the ui fields into the backing model. The method is
+	 * only applicable for non-pseudo roles. It will do nothing called on a
+	 * pseudo-role.
 	 */
 	public void saveRole() {
-		if(!role.isPseudoRole()){
+		if (!role.isPseudoRole()) {
 			role.setAgeFrom(Integer.valueOf(ageFrom.getText()));
 			role.setAgeTo(Integer.valueOf(ageTo.getText()));
-			if(genderSelect.getSelectedIndex() == 0){
+			if (genderSelect.getSelectedIndex() == 0) {
 				role.setGender(Gender.MALE);
-			}else if(genderSelect.getSelectedIndex() == 1){
+			} else if (genderSelect.getSelectedIndex() == 1) {
 				role.setGender(Gender.FEMALE);
-			}else{
+			} else {
 				log.error("unknown gender");
 			}
 		}
 	}
 
 	/**
-	 * This methode validates the role panel. For regular roles both age fields must be set, contain an integer and the from age
-	 * must not be higher than the to age. Pseudo Roles need a least one child role assigned.
+	 * This methode validates the role panel. For regular roles both age fields
+	 * must be set, contain an integer and the from age must not be higher than
+	 * the to age. Pseudo Roles need a least one child role assigned.
 	 * 
-	 * @return
+	 * @return true, if is valid
 	 */
-	public boolean isValid(){
+	public boolean isValid() {
 		return performValidation();
 	}
-	
-	private boolean performValidation(){
-		if(role.isPseudoRole()){
-			if(role.getAssigendRoles().isEmpty()){
+
+	private boolean performValidation() {
+		if (role.isPseudoRole()) {
+			if (role.getAssigendRoles().isEmpty()) {
 				errorMessage = "Der Pseudorolle " + role.getName() + " sind keine Rollen zugewiesen.";
 				return false;
 			}
-		}else{
-			if(ageFrom.getText().equals("")){
+		} else {
+			if (ageFrom.getText().equals("")) {
 				errorMessage = "Das \"Alter von\" Feld ist nicht gesetzt für Rolle " + role.getName();
 				return false;
 			}
-			if(ageTo.getText().equals("")){
+			if (ageTo.getText().equals("")) {
 				errorMessage = "Das \"Alter bis\" Feld ist nicht gesetzt für Rolle " + role.getName();
 				return false;
 			}
-			
+
 			int ageFromInt = 0;
 			int ageToInt = 0;
-			try{
+			try {
 				ageFromInt = Integer.valueOf(ageFrom.getText());
-			}catch(NumberFormatException notUsed){
-				errorMessage = "Das \"Alter von\" Feld der Rolle " + role.getName()+ " enthält keine ganze Zahl.";
+			} catch (NumberFormatException notUsed) {
+				errorMessage = "Das \"Alter von\" Feld der Rolle " + role.getName() + " enthält keine ganze Zahl.";
 				return false;
 			}
-			
-			try{
+
+			try {
 				ageToInt = Integer.valueOf(ageTo.getText());
-			}catch(NumberFormatException notUsed){
-				errorMessage = "Das \"Alter bis\" Feld der Rolle " + role.getName()+ " enthält keine ganze Zahl.";
+			} catch (NumberFormatException notUsed) {
+				errorMessage = "Das \"Alter bis\" Feld der Rolle " + role.getName() + " enthält keine ganze Zahl.";
 				return false;
 			}
-			
-			if(ageFromInt > ageToInt){
-				errorMessage = "Das \"Alter von\" Feld der Rolle " + role.getName()+ " ist größer als das \"Alter bis\" Feld.";
+
+			if (ageFromInt > ageToInt) {
+				errorMessage = "Das \"Alter von\" Feld der Rolle " + role.getName() + " ist größer als das \"Alter bis\" Feld.";
 				return false;
 			}
 		}
-		
-		
+
 		return true;
 	}
 
 	/**
-	 * This method returns the validation error message. If there is no error it returns null. The method internally performs a validation.
-	 * @return
+	 * This method returns the validation error message. If there is no error it
+	 * returns null. The method internally performs a validation.
+	 * 
+	 * @return the validation error message
 	 */
 	public String getValidationErrorMessage() {
 		errorMessage = null;
@@ -288,36 +317,55 @@ public class RolePanelRow {
 		return errorMessage;
 	}
 
-
+	/**
+	 * If true a the change pseudo checkbox is enabled.
+	 * 
+	 * @param changePseudoEnabled
+	 */
 	public void setChangePseudoEnabled(boolean changePseudoEnabled) {
-		if(pseudoSelect != null){
+		if (pseudoSelect != null) {
 			pseudoSelect.setEnabled(changePseudoEnabled);
 		}
 		this.changePseudoEnabled = changePseudoEnabled;
 	}
 
-
+	/**
+	 * Gets the row panel.
+	 * 
+	 * @return the row panel
+	 */
 	public JPanel getRowPanel() {
 		return rowPanel;
 	}
-	
-	public void setShowDeleteButton(boolean showDeleteButton){
+
+	/**
+	 * If true, a delete button is displayed next to the role.
+	 * 
+	 * @param showDeleteButton
+	 */
+	public void setShowDeleteButton(boolean showDeleteButton) {
 		this.showDeleteButton = showDeleteButton;
-		if(role.isPseudoRole()){
+		if (role.isPseudoRole()) {
 			setToPseudeRole();
-		}else{
+		} else {
 			setToNormalRole();
 		}
 	}
-	
-	public void addRoleDeleteEventListener(RoleDeleteListener listener){
+
+	/**
+	 * Adds a role delete event listener.
+	 * 
+	 * @param listener
+	 *            the listener
+	 */
+	public void addRoleDeleteEventListener(RoleDeleteListener listener) {
 		roleDeleteListener.add(listener);
 	}
-	
-	private void deleteButtonAction(){
-		for(RoleDeleteListener listener : roleDeleteListener){
+
+	private void deleteButtonAction() {
+		for (RoleDeleteListener listener : roleDeleteListener) {
 			listener.deleteRole(role);
 		}
 	}
-	
+
 }
