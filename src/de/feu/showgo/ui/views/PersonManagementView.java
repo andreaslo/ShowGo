@@ -29,8 +29,13 @@ import de.feu.showgo.model.Role;
 import de.feu.showgo.ui.MainWindow;
 import de.feu.showgo.ui.WindowColors;
 
+/**
+ * This view enables the user to create or edit a person. He can select a name,
+ * the birthday, gender and number of words the user can learn.
+ */
 public class PersonManagementView extends JPanel implements ActionListener {
 
+	private static final long serialVersionUID = 1L;
 	private JTextField nameInput;
 	private JTextField wordRetentionInput;
 	private JCalendar birthdayInput;
@@ -43,6 +48,11 @@ public class PersonManagementView extends JPanel implements ActionListener {
 
 	private final static Logger log = Logger.getLogger(PersonManagementView.class);
 
+	/**
+	 * Instantiates a new person management view creating a new person.
+	 *
+	 * @param mainWindow the main window
+	 */
 	public PersonManagementView(MainWindow mainWindow) {
 		log.debug("showing create person view");
 		this.mainWindow = mainWindow;
@@ -51,6 +61,12 @@ public class PersonManagementView extends JPanel implements ActionListener {
 		createComponent();
 	}
 
+	/**
+	 * Instantiates a new person management view editing an existing person.
+	 *
+	 * @param mainWindow the main window
+	 * @param person the person
+	 */
 	public PersonManagementView(MainWindow mainWindow, Person person) {
 		log.debug("showing edit person view");
 		this.mainWindow = mainWindow;
@@ -176,7 +192,7 @@ public class PersonManagementView extends JPanel implements ActionListener {
 		}
 
 		try {
-			int words = Integer.parseInt(wordRetentionInput.getText());
+			Integer.parseInt(wordRetentionInput.getText());
 		} catch (NumberFormatException notUsed) {
 			log.debug("word input not a number");
 			wordRetentionInput.setBackground(WindowColors.ERROR);
@@ -187,6 +203,9 @@ public class PersonManagementView extends JPanel implements ActionListener {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (!valid()) {
@@ -254,10 +273,20 @@ public class PersonManagementView extends JPanel implements ActionListener {
 		wordRetentionInput.setEnabled(false);
 	}
 
+	/**
+	 * Gets the model.
+	 *
+	 * @return the model
+	 */
 	public Person getModel() {
 		return model;
 	}
 
+	/**
+	 * Sets the model.
+	 *
+	 * @param model the new model
+	 */
 	public void setModel(Person model) {
 		this.model = model;
 	}
@@ -301,9 +330,9 @@ public class PersonManagementView extends JPanel implements ActionListener {
 
 				}
 			}
-		}else{
+		} else {
 			log.debug("not assigned to any roles");
-			roleAssignmentPanel.add(new JLabel(person.getName() + " ist derzeit keinen Rollen zugewiesen."),"0,0,1,0");
+			roleAssignmentPanel.add(new JLabel(person.getName() + " ist derzeit keinen Rollen zugewiesen."), "0,0,1,0");
 		}
 
 		return roleAssignmentPanel;

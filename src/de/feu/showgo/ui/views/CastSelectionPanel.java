@@ -17,7 +17,8 @@ import de.feu.showgo.ui.MainWindow;
 import de.feu.showgo.ui.listener.RoleDeleteListener;
 
 /**
- * 
+ * This class is a JPanel for assigning a list of people to a list of roles. For
+ * each role a CastRowPanel is created that shows the actual select.
  */
 public class CastSelectionPanel extends JPanel implements RoleDeleteListener {
 
@@ -31,6 +32,15 @@ public class CastSelectionPanel extends JPanel implements RoleDeleteListener {
 	private boolean mayBeEmpty;
 	private static final Logger log = Logger.getLogger(CastSelectionPanel.class);
 
+	/**
+	 * Instantiates a new cast selection panel.
+	 *
+	 * @param mainWindow the main window
+	 * @param roles the roles
+	 * @param availablePersons the available persons
+	 * @param borderTitle The title of the panel
+	 * @param mayBeEmpty If true, an empty person selection is available.
+	 */
 	public CastSelectionPanel(MainWindow mainWindow, List<Role> roles, List<Person> availablePersons, String borderTitle, boolean mayBeEmpty) {
 		log.debug("creating cast selection panel");
 		this.mainWindow = mainWindow;
@@ -76,6 +86,9 @@ public class CastSelectionPanel extends JPanel implements RoleDeleteListener {
 		return size;
 	}
 
+	/* (non-Javadoc)
+	 * @see de.feu.showgo.ui.listener.RoleDeleteListener#deleteRole(de.feu.showgo.model.Role)
+	 */
 	@Override
 	public void deleteRole(Role role) {
 		log.debug("cast panel notified abour deleted role: " + role);
@@ -90,6 +103,9 @@ public class CastSelectionPanel extends JPanel implements RoleDeleteListener {
 		castRows.remove(toBeRemoved);
 	}
 
+	/**
+	 * Save cast to backing model.
+	 */
 	public void saveCastToBackingModel() {
 		log.debug("saving cast");
 		for (CastRowPanel row : castRows) {
@@ -99,6 +115,11 @@ public class CastSelectionPanel extends JPanel implements RoleDeleteListener {
 		}
 	}
 
+	/**
+	 * Gets the roles.
+	 *
+	 * @return the roles
+	 */
 	public List<Role> getRoles() {
 		return roles;
 	}

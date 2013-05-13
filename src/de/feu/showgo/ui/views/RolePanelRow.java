@@ -23,6 +23,9 @@ import de.feu.showgo.ui.MainWindow;
 import de.feu.showgo.ui.dialogs.RolesSelectDialog;
 import de.feu.showgo.ui.listener.RoleDeleteListener;
 
+/**
+ * 
+ */
 public class RolePanelRow {
 
 	private MainWindow mainWindow;

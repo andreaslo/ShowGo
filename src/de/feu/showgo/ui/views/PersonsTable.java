@@ -16,25 +16,48 @@ import de.feu.showgo.model.Gender;
 import de.feu.showgo.model.Person;
 import de.feu.showgo.ui.listener.PersonEvent;
 
+/**
+ * This panel represents a table of persons in the EnsembleView. It displays a
+ * row for each person containing the data and a button. PersonEvent listener
+ * may be registered to be notified about the button action event.
+ */
 public class PersonsTable extends JPanel {
 
+	private static final long serialVersionUID = 1L;
+	@SuppressWarnings("unused")
 	private JPanel parentView;
 	private List<Person> persons;
 	private List<PersonEvent> personEvents = new LinkedList<PersonEvent>();
 	private String roleActionName;
 
+	/**
+	 * Instantiates a new persons table.
+	 * 
+	 * @param parentView
+	 *            the parent view
+	 * @param persons
+	 *            the persons
+	 * @param roleActionName
+	 *            the label of the button next to each person
+	 */
 	public PersonsTable(JPanel parentView, List<Person> persons, String roleActionName) {
 		this.parentView = parentView;
 		this.persons = persons;
 		this.roleActionName = roleActionName;
 		createComponent();
 	}
-	
-	public void addPersonEvent(PersonEvent event){
+
+	/**
+	 * Adds the person event.
+	 * 
+	 * @param event
+	 *            the event
+	 */
+	public void addPersonEvent(PersonEvent event) {
 		personEvents.add(event);
 	}
-	
-	private void createComponent(){
+
+	private void createComponent() {
 		double size[][] = { { TableLayout.FILL }, { 25 } };
 		TableLayout layout = new TableLayout(size);
 		setLayout(layout);
@@ -55,39 +78,45 @@ public class PersonsTable extends JPanel {
 			add(row, "0,1");
 		}
 	}
-	
-	private JPanel createRow(final Person person){
+
+	private JPanel createRow(final Person person) {
 		JPanel row = new JPanel();
 		double size[][] = { { 100, TableLayout.FILL, 120, 100, 150 }, { 25 } };
 		row.setLayout(new TableLayout(size));
 
 		JButton roleActionButton = new JButton(roleActionName);
 		roleActionButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				for(PersonEvent event : personEvents){
+				for (PersonEvent event : personEvents) {
 					event.personEvent(person);
 				}
 			}
 		});
-		
+
 		row.add(roleActionButton, "0,0,l,c");
 		row.add(new JLabel(person.getName()), "1,0");
 		SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
-		
+
 		row.add(new JLabel(formatter.format(person.getBirthday())), "2,0");
-		if(person.getGender() == Gender.MALE){
+		if (person.getGender() == Gender.MALE) {
 			row.add(new JLabel("Männlich"), "3,0");
-		}else if(person.getGender() == Gender.FEMALE){
+		} else if (person.getGender() == Gender.FEMALE) {
 			row.add(new JLabel("Weiblich"), "3,0");
 		}
-		
+
 		row.add(new JLabel(person.getWordsRetention() + ""), "4,0");
-		
+
 		return row;
 	}
 
+	/**
+	 * Updates the person information.
+	 * 
+	 * @param persons
+	 *            the persons
+	 */
 	public void update(List<Person> persons) {
 		this.persons = persons;
 		removeAll();
@@ -95,5 +124,5 @@ public class PersonsTable extends JPanel {
 		revalidate();
 		repaint();
 	}
-	
+
 }

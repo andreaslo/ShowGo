@@ -27,8 +27,14 @@ import de.feu.showgo.ui.MainWindow;
 import de.feu.showgo.ui.WindowColors;
 import de.feu.showgo.ui.listener.PersonEvent;
 
+/**
+ * This view allows the user to assign persons to an ensemble. It shows a list
+ * of available persons and a list of assigned persons with actions to assign or
+ * remove persons. The available persons are read from the ShowGo singleton.
+ */
 public class EnsembleView extends JPanel {
 
+	private static final long serialVersionUID = 3519159201063532362L;
 	private final static Logger log = Logger.getLogger(EnsembleView.class);
 	private MainWindow mainWindow;
 	private Ensemble model;
@@ -36,7 +42,12 @@ public class EnsembleView extends JPanel {
 	private PersonsTable availablePersonsTable;
 	private JLabel currentMessage;
 	private JTextField ensembleNameInput;
-	
+
+	/**
+	 * Instantiates a new ensemble view.
+	 *
+	 * @param mainWindow the main window
+	 */
 	public EnsembleView(MainWindow mainWindow) {
 		log.debug("showing ensemble view");
 		this.mainWindow = mainWindow;
@@ -45,13 +56,20 @@ public class EnsembleView extends JPanel {
 		createComponent();
 	}
 
+	/**
+	 * Instantiates a new ensemble view.
+	 *
+	 * @param mainWindow the main window
+	 * @param ensemble the ensemble
+	 * @param editable the editable
+	 */
 	public EnsembleView(MainWindow mainWindow, Ensemble ensemble, boolean editable) {
 		log.debug("showing ensemble view");
 		this.mainWindow = mainWindow;
 		setName("Ensemble " + ensemble.getName() + " bearbeiten");
 		model = ensemble;
 		createComponent();
-		
+
 		enableComponents(this, editable);
 	}
 
@@ -59,55 +77,53 @@ public class EnsembleView extends JPanel {
 		double size[][] = { { 20, TableLayout.FILL, 20 },
 				{ 20, 60, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, 30, 30 } };
 		setLayout(new TableLayout(size));
-	
+
 		JPanel ensembleNamePanel = createEnsembleNamePanel();
 		assignedPersonsTable = createAssignedPersonsPanel();
 		availablePersonsTable = createAvailablePersonsPanel();
-		
 
 		JLabel assignedRolesLabel = new JLabel("Zugewiesene Rollen");
-		Font boldFont=new Font(assignedRolesLabel.getFont().getName(),Font.BOLD,assignedRolesLabel.getFont().getSize());
+		Font boldFont = new Font(assignedRolesLabel.getFont().getName(), Font.BOLD, assignedRolesLabel.getFont().getSize());
 		assignedRolesLabel.setFont(boldFont);
 		JLabel availableRolesLabel = new JLabel("Verfügbare Rollen");
 		availableRolesLabel.setFont(boldFont);
-		
+
 		add(ensembleNamePanel, "1,1,f,t");
 		add(assignedRolesLabel, "1,2");
 		add(assignedPersonsTable, "1,3");
 		add(availableRolesLabel, "1,4");
 		add(availablePersonsTable, "1,5");
-		
-		
+
 		JButton saveButton = new JButton("Speichern");
 		add(saveButton, "1,6,l,c");
-		
+
 		saveButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if(ensembleNameInput.getText().equals("")){
+				if (ensembleNameInput.getText().equals("")) {
 					showMessage("Bitte geben Sie dem Ensemble einen Namen.", WindowColors.ERROR);
 					return;
 				}
-				
-				if(model.getMembers().isEmpty()){
+
+				if (model.getMembers().isEmpty()) {
 					showMessage("Einem Ensemble muss mindestens eine Person zugewisen sein.", WindowColors.ERROR);
 					return;
 				}
-				
+
 				model.setName(ensembleNameInput.getText());
-				
-				if(!ShowGoDAO.getShowGo().getEnsembles().contains(model)){
+
+				if (!ShowGoDAO.getShowGo().getEnsembles().contains(model)) {
 					ShowGoDAO.getShowGo().addEnsemble(model);
 				}
-				
+
 				mainWindow.getNavTree().refreshEnsembles();
 				ShowGoDAO.autosave();
-				
+
 				showMessage("Das Ensemble " + model.getName() + " wurde erfolgreich gespeichert.", WindowColors.SUCCESS);
 			}
 		});
-		
+
 		revalidate();
 		repaint();
 	}
@@ -167,14 +183,14 @@ public class EnsembleView extends JPanel {
 		}
 		return avaiblablePersons;
 	}
-	
-	private void showMessage(String message, Color background){
+
+	private void showMessage(String message, Color background) {
 		removeMessage();
-		
+
 		log.debug("showing message " + message);
 		currentMessage = new JLabel(message);
 		currentMessage.setBorder(BorderFactory.createEtchedBorder());
-		currentMessage.setHorizontalAlignment( SwingConstants.CENTER );
+		currentMessage.setHorizontalAlignment(SwingConstants.CENTER);
 		currentMessage.setBackground(background);
 		currentMessage.setOpaque(true);
 		this.add(currentMessage, "1,7");
@@ -182,14 +198,14 @@ public class EnsembleView extends JPanel {
 		this.repaint();
 	}
 
-	private void removeMessage(){
-		if(currentMessage != null){
+	private void removeMessage() {
+		if (currentMessage != null) {
 			this.remove(currentMessage);
 			this.revalidate();
 			this.repaint();
 		}
 	}
-	
+
 	private void enableComponents(Container container, boolean enable) {
 		Component[] components = container.getComponents();
 		for (Component component : components) {
@@ -200,6 +216,11 @@ public class EnsembleView extends JPanel {
 		}
 	}
 
+	/**
+	 * Gets the model.
+	 *
+	 * @return the model
+	 */
 	public Ensemble getModel() {
 		return model;
 	}

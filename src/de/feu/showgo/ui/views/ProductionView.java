@@ -21,7 +21,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
-import javax.swing.text.html.HTMLEditorKit.Parser;
 import javax.xml.bind.JAXBException;
 
 import org.apache.log4j.Logger;
@@ -36,8 +35,15 @@ import de.feu.showgo.ui.MainWindow;
 import de.feu.showgo.ui.WindowColors;
 import de.feu.showgo.util.CastingGenerator;
 
+/**
+ * This view allows the user to create or edit a production. The user must
+ * select a name, an ensemble and a theater play. Afterwards he may edit the
+ * play and assign a cast to the actor and non-actor roles. A cast is created
+ * automatically based on the roles requirements and skills of the persons.
+ */
 public class ProductionView extends JPanel {
 
+	private static final long serialVersionUID = 1L;
 	private final static Logger log = Logger.getLogger(ProductionView.class);
 	private MainWindow mainWindow;
 	private JTextField productionNameInput;
@@ -49,7 +55,12 @@ public class ProductionView extends JPanel {
 	private EditTheaterPlayPanel editPlayPanel;
 	private CastSelectionPanel nonActorSelection;
 	private boolean alreadyExists;
-	
+
+	/**
+	 * Instantiates a new production view creating a new production.
+	 *
+	 * @param mainWindow the main window
+	 */
 	public ProductionView(MainWindow mainWindow) {
 		log.debug("showing production view");
 		this.mainWindow = mainWindow;
@@ -57,7 +68,13 @@ public class ProductionView extends JPanel {
 		model = new Production();
 		createComponent();
 	}
-	
+
+	/**
+	 * Instantiates a new production view editing a production.
+	 *
+	 * @param mainWindow the main window
+	 * @param production the production
+	 */
 	public ProductionView(MainWindow mainWindow, Production production) {
 		log.debug("showing production view");
 		this.mainWindow = mainWindow;
@@ -69,23 +86,26 @@ public class ProductionView extends JPanel {
 
 	private void createComponent() {
 
-		double size[][] = { { 20, TableLayout.FILL, 20 },
-				{ 20, 60, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, 30 } };
+		double size[][] = {
+				{ 20, TableLayout.FILL, 20 },
+				{ 20, 60, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED,
+						TableLayout.PREFERRED, 30 } };
 		setLayout(new TableLayout(size));
 
 		JPanel productionNamePanel = createProductionNamePanel();
 		JPanel ensembleSelect = createEnsembleSelectPanel();
 		JPanel playSelectPanel = createPlaySelectPanel();
 
-		
 		add(productionNamePanel, "1,1,f,t");
 		add(ensembleSelect, "1,2,f,t");
 		add(playSelectPanel, "1,3");
 	}
-	
-	private void createComponentEditMode(){
-		double size[][] = { { 20, TableLayout.FILL, 20 },
-				{ 20, 60, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, 30 } };
+
+	private void createComponentEditMode() {
+		double size[][] = {
+				{ 20, TableLayout.FILL, 20 },
+				{ 20, 60, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED,
+						TableLayout.PREFERRED, 30 } };
 		setLayout(new TableLayout(size));
 
 		TheaterPlay copy = null;
@@ -96,25 +116,27 @@ public class ProductionView extends JPanel {
 		} catch (IOException e1) {
 			log.error("", e1);
 		}
-		
+
 		JPanel productionNamePanel = createProductionNamePanel();
 		JPanel ensembleSelectPanel = createEnsembleSelectPanel();
 		ensembleSelect.setEnabled(false);
-		
-		castSelectionPanel = new CastSelectionPanel(mainWindow, copy.getRoles(), model.getEnsemble().getMembers(), "Besetzung der Darstellerrollen", false);
-		
+
+		castSelectionPanel = new CastSelectionPanel(mainWindow, copy.getRoles(), model.getEnsemble().getMembers(), "Besetzung der Darstellerrollen",
+				false);
+
 		editPlayPanel = new EditTheaterPlayPanel(mainWindow, copy);
 		editPlayPanel.getRoleDisplay().addRoleDeleteEventListener(castSelectionPanel);
 		editPlayPanel.addRoleDeleteListener(castSelectionPanel);
-		
-		nonActorSelection = new CastSelectionPanel(mainWindow, model.getNonActorRoles(), model.getEnsemble().getMembers(), "Besetzung der Nicht-Darstellerrollen", true);
-		
+
+		nonActorSelection = new CastSelectionPanel(mainWindow, model.getNonActorRoles(), model.getEnsemble().getMembers(),
+				"Besetzung der Nicht-Darstellerrollen", true);
+
 		JPanel submitPanel = createSubmitPanel();
-		
+
 		add(productionNamePanel, "1,1,f,t");
 		add(ensembleSelectPanel, "1,2,f,t");
-		add(castSelectionPanel,"1,4");
-		add(nonActorSelection,"1,5");
+		add(castSelectionPanel, "1,4");
+		add(nonActorSelection, "1,5");
 		add(editPlayPanel, "1,6");
 		add(submitPanel, "1,7");
 	}
@@ -133,6 +155,7 @@ public class ProductionView extends JPanel {
 		return productionNamePanel;
 	}
 
+	@SuppressWarnings("unchecked")
 	private JPanel createPlaySelectPanel() {
 		JPanel productionNamePanel = new JPanel();
 		double size[][] = { { TableLayout.PREFERRED, 20, TableLayout.PREFERRED }, { 30, 30 } };
@@ -172,25 +195,26 @@ public class ProductionView extends JPanel {
 					}
 
 					model.setPlay(copy);
-					
+
 					usePlayAction.setEnabled(false);
 					playSelect.setEnabled(false);
 					ensembleSelect.setEnabled(false);
-					
+
 					Ensemble selectedEnsemble = (Ensemble) ensembleSelect.getSelectedItem();
 					CastingGenerator.generateCasting(selectedEnsemble, copy);
-					castSelectionPanel = new CastSelectionPanel(mainWindow, copy.getRoles(), selectedEnsemble.getMembers(), "Besetzung der Darstellerrollen", false);
-					
+					castSelectionPanel = new CastSelectionPanel(mainWindow, copy.getRoles(), selectedEnsemble.getMembers(),
+							"Besetzung der Darstellerrollen", false);
+
 					editPlayPanel = new EditTheaterPlayPanel(mainWindow, copy);
 					editPlayPanel.getRoleDisplay().addRoleDeleteEventListener(castSelectionPanel);
 					editPlayPanel.addRoleDeleteListener(castSelectionPanel);
-					
+
 					nonActorSelection = createNonActorPersonAssignment();
-					
+
 					JPanel submitPanel = createSubmitPanel();
-					
-					add(castSelectionPanel,"1,4");
-					add(nonActorSelection,"1,5");
+
+					add(castSelectionPanel, "1,4");
+					add(nonActorSelection, "1,5");
 					add(editPlayPanel, "1,6");
 					add(submitPanel, "1,7");
 					revalidate();
@@ -204,43 +228,45 @@ public class ProductionView extends JPanel {
 
 		return productionNamePanel;
 	}
-	
-	private CastSelectionPanel createNonActorPersonAssignment(){
+
+	private CastSelectionPanel createNonActorPersonAssignment() {
 		List<Role> roles = new ArrayList<Role>();
-		
+
 		Role r = new Role();
 		r.setName("Regie");
 		roles.add(r);
-		
+
 		r = new Role();
 		r.setName("Regieassistenz");
 		roles.add(r);
-		
+
 		r = new Role();
 		r.setName("Kostüme");
 		roles.add(r);
-		
+
 		r = new Role();
 		r.setName("Requisite");
 		roles.add(r);
-		
+
 		r = new Role();
 		r.setName("Bühnenbild");
 		roles.add(r);
-		
+
 		r = new Role();
 		r.setName("Techniker");
 		roles.add(r);
-		
+
 		r = new Role();
 		r.setName("Helfer");
 		roles.add(r);
-		
+
 		Ensemble selectedEnsemble = (Ensemble) ensembleSelect.getSelectedItem();
-		CastSelectionPanel selectionPanel = new CastSelectionPanel(mainWindow, roles, selectedEnsemble.getMembers(), "Besetzung der Nicht-Darstellerrollen", true);
-		return selectionPanel;		
+		CastSelectionPanel selectionPanel = new CastSelectionPanel(mainWindow, roles, selectedEnsemble.getMembers(),
+				"Besetzung der Nicht-Darstellerrollen", true);
+		return selectionPanel;
 	}
-	
+
+	@SuppressWarnings("unchecked")
 	private JPanel createEnsembleSelectPanel() {
 		JPanel ensembleSelectPanel = new JPanel();
 		double size[][] = { { TableLayout.PREFERRED, 20, TableLayout.PREFERRED }, { 30, 30 } };
@@ -255,8 +281,8 @@ public class ProductionView extends JPanel {
 			log.debug("ading ensemble: " + ensemble.getName());
 			ensembleSelect.addItem(ensemble);
 		}
-		
-		if(model.getEnsemble() != null){
+
+		if (model.getEnsemble() != null) {
 			ensembleSelect.setSelectedItem(model.getEnsemble());
 		}
 
@@ -264,7 +290,7 @@ public class ProductionView extends JPanel {
 
 		return ensembleSelectPanel;
 	}
-	
+
 	private JPanel createSubmitPanel() {
 		JPanel submitPanel = new JPanel();
 		submitPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -277,60 +303,60 @@ public class ProductionView extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				log.debug("saving production");
-				
-				if(productionNameInput.getText().equals("")){
+
+				if (productionNameInput.getText().equals("")) {
 					showMessage("Bitte geben Sie einen Namen für die Inszenierung an.", WindowColors.ERROR);
 					return;
 				}
-				
+
 				castSelectionPanel.saveCastToBackingModel();
 				nonActorSelection.saveCastToBackingModel();
 				editPlayPanel.saveToBackingModel();
-				
+
 				TheaterPlay copy = null;
 				try {
 					copy = ParseUtil.copyPlay(editPlayPanel.getPlay());
 				} catch (JAXBException e) {
-					log.error("",e);
+					log.error("", e);
 				} catch (IOException e) {
-					log.error("",e);
+					log.error("", e);
 				}
-				
+
 				model.setPlay(copy);
 				model.setNonActorRoles(nonActorSelection.getRoles());
 				model.setName(productionNameInput.getText());
 				model.setEnsemble((Ensemble) ensembleSelect.getSelectedItem());
-				
-				if(!alreadyExists){
+
+				if (!alreadyExists) {
 					ShowGoDAO.getShowGo().addProduction(model);
 				}
-				
+
 				mainWindow.getNavTree().refreshProductions();
 				ShowGoDAO.autosave();
-				
+
 				showMessage("Die Inszenierung " + model.getName() + " wurde erfolgreich gespeichert.", WindowColors.SUCCESS);
 			}
 		});
 
 		return submitPanel;
 	}
-	
-	private void showMessage(String message, Color background){
+
+	private void showMessage(String message, Color background) {
 		removeMessage();
-		
+
 		log.debug("showing message " + message);
 		currentMessage = new JLabel(message);
 		currentMessage.setBorder(BorderFactory.createEtchedBorder());
-		currentMessage.setHorizontalAlignment( SwingConstants.CENTER );
+		currentMessage.setHorizontalAlignment(SwingConstants.CENTER);
 		currentMessage.setBackground(background);
 		currentMessage.setOpaque(true);
 		this.add(currentMessage, "1,8");
 		this.revalidate();
 		this.repaint();
 	}
-	
-	private void removeMessage(){
-		if(currentMessage != null){
+
+	private void removeMessage() {
+		if (currentMessage != null) {
 			this.remove(currentMessage);
 			this.revalidate();
 			this.repaint();
@@ -338,7 +364,10 @@ public class ProductionView extends JPanel {
 	}
 
 	private class PlayComboRederer extends BasicComboBoxRenderer {
-		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+		private static final long serialVersionUID = 1L;
+
+		public Component getListCellRendererComponent(@SuppressWarnings("rawtypes") JList list, Object value, int index, boolean isSelected,
+				boolean cellHasFocus) {
 			super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 
 			if (value != null) {
@@ -349,9 +378,12 @@ public class ProductionView extends JPanel {
 			return this;
 		}
 	}
-	
+
 	private class EnsembleComboRederer extends BasicComboBoxRenderer {
-		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+		private static final long serialVersionUID = 1L;
+
+		public Component getListCellRendererComponent(@SuppressWarnings("rawtypes") JList list, Object value, int index, boolean isSelected,
+				boolean cellHasFocus) {
 			super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 
 			if (value != null) {
@@ -363,6 +395,11 @@ public class ProductionView extends JPanel {
 		}
 	}
 
+	/**
+	 * Gets the model.
+	 *
+	 * @return the model
+	 */
 	public Production getModel() {
 		return model;
 	}
