@@ -70,7 +70,7 @@ public class ReadPlayView extends JPanel {
 		double size[][] = { { TableLayout.FILL, 20, TableLayout.PREFERRED }, { 30, 30 } };
 		fileSelectPanel.setLayout(new TableLayout(size));
 
-		final JTextField fileInput = new JTextField("/home/andreas/Macshort.html");
+		final JTextField fileInput = new JTextField("");
 		JButton selectFileButton = new JButton("Durchsuchen");
 
 		selectFileButton.addActionListener(new ActionListener() {
