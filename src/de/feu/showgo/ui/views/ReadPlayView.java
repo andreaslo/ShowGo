@@ -127,6 +127,7 @@ public class ReadPlayView extends JPanel {
 						parsedPlay.getName() + " erfoglreich eingelesen", JOptionPane.INFORMATION_MESSAGE);
 
 				roleSelect = new RolePanel(mainWindow, model);
+				roleSelect.setChangePseudoEnabled(true);
 				add(roleSelect, "1,2");
 
 				JPanel submitPanel = createSubmitPanel();
