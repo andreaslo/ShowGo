@@ -71,7 +71,7 @@ public class ReadPlayView extends JPanel {
 		fileSelectPanel.setLayout(new TableLayout(size));
 
 		final JTextField fileInput = new JTextField("");
-		JButton selectFileButton = new JButton("Durchsuchen");
+		final JButton selectFileButton = new JButton("Durchsuchen");
 
 		selectFileButton.addActionListener(new ActionListener() {
 
@@ -97,7 +97,7 @@ public class ReadPlayView extends JPanel {
 			}
 		});
 
-		JButton doReadPlayButton = new JButton("Stück einlesen");
+		final JButton doReadPlayButton = new JButton("Stück einlesen");
 
 		doReadPlayButton.addActionListener(new ActionListener() {
 
@@ -133,6 +133,10 @@ public class ReadPlayView extends JPanel {
 				JPanel submitPanel = createSubmitPanel();
 				add(submitPanel, "1,3");
 
+				doReadPlayButton.setEnabled(false);
+				fileInput.setEnabled(false);
+				selectFileButton.setEnabled(false);
+				
 				revalidate();
 				repaint();
 			}
